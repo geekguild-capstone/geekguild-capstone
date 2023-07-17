@@ -2,7 +2,6 @@ package com.geekguild.services;
 
 import com.geekguild.models.User;
 import com.geekguild.models.UserWithRoles;
-import com.geekguild.models.UserWithRoles;
 import com.geekguild.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
