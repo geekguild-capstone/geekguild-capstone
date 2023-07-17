@@ -1,4 +1,4 @@
-package com.example.geekguildcapstone;
+package com.geekguild;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
