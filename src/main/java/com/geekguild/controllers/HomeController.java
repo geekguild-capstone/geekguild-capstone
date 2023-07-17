@@ -13,7 +13,10 @@ public class HomeController {
         return "users/home";
     }
 
-
+    @GetMapping("/about-us")
+    public String showGroups() {
+        return "/partials/about";
+    }
 
 
 }

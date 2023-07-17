@@ -12,15 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-//    private UserRepository userDao;
-//    private PasswordEncoder passwordEncoder;
-//
-//    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
-//        this.userDao = userDao;
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
-
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
 
