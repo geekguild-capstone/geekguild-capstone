@@ -11,13 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table (name = "users")
+@Table (name = "geekuser")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "user_name", length = 50, nullable = false, unique = true)
+    @Column(name = "username",nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false, unique = true)

@@ -11,12 +11,12 @@ import lombok.*;
 @ToString
 
 @Entity
-@Table(name = "posts")
+@Table(name = "geekpost")
 public class Post {
-    @Column(nullable = false)
-    private String title;
+    @Column(name = "image")
+    private String image;
 
-    @Column(length = 1024, nullable = false)
+    @Column(nullable = false)
     private String body;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
