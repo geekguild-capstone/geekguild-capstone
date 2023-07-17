@@ -18,8 +18,8 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    List<User> users = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+//    List<User> users = new ArrayList<>();
 
     public Group() {
     }
@@ -44,12 +44,12 @@ public class Group {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
 
-    public void setTasks(List<User> users) {
-        this.users = users;
-    }
+//    public void setTasks(List<User> users) {
+//        this.users = users;
+//    }
 
 }
