@@ -44,35 +44,6 @@ public class UserController {
     }
 
 
-    @GetMapping("/filestack")
-    public String fileStack(Model model) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.getReferenceById(loggedInUser.getId());
-        model.addAttribute("user", user);
-        String imageUrl = user.getImage();
-        System.out.println(user.getImage());
-
-
-//        loggedInUser.setImage(imageUrl);
-//        userDao.save(loggedInUser);
-
-        return "partials/filestack";
-    }
-
-    @PostMapping("/filestack/upload")
-    @ResponseBody
-    public ResponseEntity<String> uploadFile(@RequestParam("fileURL") String fileURL) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(fileURL);
-        User user = userDao.getReferenceById(loggedInUser.getId());
-
-        user.setImage(fileURL);
-        userDao.save(user);
-
-        return ResponseEntity.ok("Image URL saved successfully.");
-    }
-
-
     @PostMapping("/profile/{id}/delete")
     public String deleteProfile(@PathVariable long id) {
         userDao.deleteById(id);
