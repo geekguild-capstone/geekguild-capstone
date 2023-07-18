@@ -2,16 +2,24 @@ package com.geekguild.controllers;
 
 import com.geekguild.models.User;
 import com.geekguild.repositories.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class UserController {
+
 
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
@@ -40,6 +48,38 @@ public class UserController {
 
 
     }
+
+  
+    @GetMapping("/filestack")
+    public String fileStack(Model model){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        model.addAttribute("user", user);
+        String imageUrl = user.getImage();
+        System.out.println(user.getImage());
+
+
+//        loggedInUser.setImage(imageUrl);
+//        userDao.save(loggedInUser);
+
+        return "partials/filestack";
+    }
+
+    @PostMapping("/filestack/upload")
+    @ResponseBody
+    public ResponseEntity<String> uploadFile(@RequestParam("fileURL") String fileURL) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(fileURL);
+        User user = userDao.getReferenceById(loggedInUser.getId());
+
+        user.setImage(fileURL);
+        userDao.save(user);
+
+        return ResponseEntity.ok("Image URL saved successfully.");
+    }
+
+
+
 
     @PostMapping("/profile/{id}/delete")
     public String deleteProfile(@PathVariable long id) {
