@@ -38,6 +38,7 @@ public class ProfileController {
         return "/users/profile";
     }
 
+
     @GetMapping("/profile/{id}/edit")
     public String editProfile(@PathVariable long id, Model model) {
         Long userId = id;
@@ -48,8 +49,28 @@ public class ProfileController {
             return "redirect:/error"; // Example: redirect to an error page
         }
         model.addAttribute("user", user);
+
         return "/users/edit";
     }
+
+    @GetMapping("/profile/{id}")
+    public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
+        // Retrieve the user with the given userId from the database
+        User user = userDao.getReferenceById(userId);
+
+
+        // Check if the user exists
+        if (user == null) {
+            // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
+            return "redirect:/error"; // Example: redirect to an error page
+        }
+
+        // Add the user to the model so it can be accessed in the view
+        model.addAttribute("user", user);
+
+        return "/users/profile";
+    }
+
 
 
 }
