@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8" />
     <title>Log In</title>
+    <link th:include="partials/header">
+
+    <style>
+        .centered-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust the height as needed */
+        }
+
+        .login-form {
+            text-align: center;
+            width: 300px; /* Adjust the width as needed */
+            padding: 20px;
+            border: 3px solid #ccc;
+            border-radius: 5px;
+        }
+
+    </style>
+
 
 </head>
 <body>
-<h1>Log In</h1>
+<h2>GeekGuild Login</h2>
 <div th:if="${param.error}">
     Invalid Username and Password.
 </div>
@@ -14,13 +34,15 @@
     You have been logged out.
 </div>
 
-<form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" value="admin"/>
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" value="admin"/>
-    <input type="submit" value="Log In" />
-</form>
+<div class="centered-column">
+    <form th:action="@{/login}" method="post" class="login-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" value="admin"/>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" value="admin"/>
+        <input type="submit" value="Log In" />
+    </form>
+</div>
 
 <!--script files-->
 </body>
