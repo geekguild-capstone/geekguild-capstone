@@ -31,8 +31,24 @@
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
+
+
             </form>
+                <form th:action="@{/login}" th:method="post" id="logout">
+                    <button class="btn btn-outline-success" type="submit">Logout</button>
+                </form>
+                <script>
+                    const link = document.querySelector("#logout-link");
+                    if(link !== null) {
+                        link.addEventListener("click", function (event) {
+                            document.getElementById("logout").submit();
+                        });
+                    }
+                </script>
+
+
         </div>
     </div>
 </nav>
 </div>
+
