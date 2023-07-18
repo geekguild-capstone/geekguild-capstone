@@ -11,8 +11,21 @@
 <div th:include="partials/navbar :: navbar"></div>
 
 <body>
+<h1>Hello <span th:text="${user.username}"></span></h1>
 
 <h1>Profile Photo</h1>
+<div>
+    <button class="upload">Upload file</button>
+</div>
+<div>
+    <img th:src="${user.image}" width="200" height="200" class="logo" />
+</div>
+
+<!-- Add a form to submit the uploaded image URL -->
+<form id="imageForm" method="post" action="/profile/upload">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <input type="hidden" name="fileURL" id="fileURLInput" />
+</form>
 
 <h1>About Me</h1>
 
@@ -47,7 +60,29 @@
 
 <!--</script>-->
 
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script>
+    const button = document.querySelector('.upload');
+    const image = document.querySelector('.logo');
 
+    button.addEventListener('click', () => {
+        const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
+        const client = filestack.init(apiKey);
+        const options = {
+            onUploadDone: (uploadResponse) => {
+                console.log('onUploadDone', uploadResponse);
+                const fileURL = uploadResponse.filesUploaded[0].url;
+                image.setAttribute('src', fileURL);
+
+                // Submit the fileURL to the server via the form
+                const fileURLInput = document.querySelector('#fileURLInput');
+                fileURLInput.value = fileURL;
+                document.getElementById('imageForm').submit();
+            }
+        };
+        client.picker(options).open();
+    });
+</script>
 <!--BootStrap JS-->
 <script th:include="partials/footer"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E" ></script>
