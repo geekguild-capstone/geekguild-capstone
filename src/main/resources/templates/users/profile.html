@@ -6,11 +6,83 @@
     <title>Profile</title>
     <!--BootStrap CSS-->
     <link th:include="partials/header">
+
+    <style>
+        /* Custom CSS styles */
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-skills {
+            margin-top: 20px;
+        }
+        .profile-skills span {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <!--navbar.html-->
 <div th:include="partials/navbar :: navbar"></div>
 
 <body>
+
+<div class="container">
+    <div class="text-center">
+        <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
+        <h1>John Doe</h1>
+        <h2>Software Developer</h2>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Contact Information</h2>
+            <ul class="list-unstyled">
+                <li><strong>Location:</strong> San Francisco, CA</li>
+                <li><strong>Email:</strong> johndoe@example.com</li>
+                <li><strong>Phone:</strong> (123) 456-7890</li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="col-sm-6">
+            <h2>Summary</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet facilisis felis ac interdum.</p>
+        </div>
+    </div>
+
+    <br>
+
+    <h2>Skills</h2>
+    <div class="profile-skills">
+        <span>Java</span>
+        <span>C++</span>
+        <span>Python</span>
+        <span>HTML</span>
+        <span>CSS</span>
+    </div>
+</div>
+<!--<h1>Profile Photo</h1>-->
+
+<!--<h1>About Me</h1>-->
+
+<!--<h1>Languages</h1>-->
+
+<!--<h1>Interests</h1>-->
+
+<!--<h1>Hobbies</h1>-->
+
+<!-- Delete Profile Form -->
+
 <h1>Hello <span th:text="${user.username}"></span></h1>
 
 <h1>Profile Photo</h1>
@@ -36,6 +108,7 @@
 <h1>Hobbies</h1>
 
 <!-- Delete Task Form -->
+
 <form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${id})}" th:method="post">
     <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
 </form>
