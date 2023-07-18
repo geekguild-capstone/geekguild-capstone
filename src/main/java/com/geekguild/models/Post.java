@@ -13,15 +13,20 @@ import lombok.*;
 @Entity
 @Table(name = "post")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @Column(name = "image")
     private String image;
 
     @Column(nullable = false)
     private String body;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
+
+
+
+//    USER RELATIONSHIPS
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
