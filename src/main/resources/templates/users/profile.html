@@ -4,13 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <!--BootStrap CSS-->
     <link th:include="partials/header">
 </head>
-
+<!--navbar.html-->
 <div th:include="partials/navbar :: navbar"></div>
 
 <body>
-<h1>Profile</h1>
+
+<h1>Profile Photo</h1>
+
+<h1>About Me</h1>
+
+<h1>Languages</h1>
+
+<h1>Interests</h1>
+
+<h1>Hobbies</h1>
+
+<!-- Delete Task Form -->
+<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${id})}" th:method="post">
+    <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
+</form>
+
+
+
+
+
+
+<!--<script>-->
+
+<!--    $(document).ready(function() {-->
+<!--        $('#delete-btn').on('click', function(event) {-->
+<!--            event.preventDefault();-->
+
+<!--            if (confirm('Are you sure you want to delete your profile?')) {-->
+<!--                $('#delete-user-form').submit();-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+
+<!--</script>-->
+
+
+<!--BootStrap JS-->
 <script th:include="partials/footer"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E" ></script>
+
 </body>
 </html>

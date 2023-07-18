@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 
 @Entity
-@Table(name = "geekpost")
+@Table(name = "post")
 public class Post {
     @Column(name = "image")
     private String image;
