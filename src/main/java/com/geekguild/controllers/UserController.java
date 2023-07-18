@@ -2,9 +2,6 @@ package com.geekguild.controllers;
 
 import com.geekguild.models.User;
 import com.geekguild.repositories.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,9 +43,9 @@ public class UserController {
 
     }
 
-  
+
     @GetMapping("/filestack")
-    public String fileStack(Model model){
+    public String fileStack(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
@@ -76,13 +73,10 @@ public class UserController {
     }
 
 
-
-
     @PostMapping("/profile/{id}/delete")
     public String deleteProfile(@PathVariable long id) {
         userDao.deleteById(id);
         return "redirect:/users/register";
     }
-
 
 }
