@@ -30,10 +30,14 @@ public class User {
     private String image;
 
 
+    public User(long id, String userName, String email, String password) {
+        this.id = id;
+        this.username = userName;
+        this.email = email;
+        this.password = password;
+    }
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Post> posts;
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
@@ -41,4 +45,20 @@ public class User {
         username = copy.username;
         password = copy.password;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Post> posts;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+//    public List<Comments> comments;
+//
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Portfolio portfolio;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Work work;
+
+
+
+
 }
