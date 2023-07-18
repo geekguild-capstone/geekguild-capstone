@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -36,7 +36,9 @@
 </form>
 
 
-<button type="submit" for="edit" action="post">Submit Changes</button>
+<form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}" th:method="post">
+  <button id="edit-btn" class="waves-effect waves-light btn">Edit Profile</button>
+</form>
 
 </body>
 </html>
