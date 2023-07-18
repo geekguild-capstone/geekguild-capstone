@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link th:include="partials/header">
 </head>
+
+<div th:include="partials/navbar :: navbar"></div>
+
 <body>
 <h1>Profile</h1>
+<script th:include="partials/footer"></script>
 </body>
 </html>
