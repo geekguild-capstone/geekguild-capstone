@@ -29,23 +29,27 @@ public class ProfileController {
         return ResponseEntity.ok("Image URL saved successfully.");
     }
 
-        @GetMapping("/profile")
-        public String viewProfile(Model model) {
-            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userDao.getReferenceById(loggedInUser.getId());
-            model.addAttribute("user", user);
+    @GetMapping("/profile")
+    public String viewProfile(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        model.addAttribute("user", user);
 
-            return "/users/profile";
-        }
-
-        @GetMapping("/profile/edit")
-        public String editProfile() {
-            return "/users/edit";
-        }
-
-
-
-
-
-
+        return "/users/profile";
     }
+
+    @GetMapping("/profile/{id}/edit")
+    public String editProfile(@PathVariable long id, Model model) {
+        Long userId = id;
+        User user = userDao.getReferenceById(userId);
+        // Check if the user exists
+        if (user == null) {
+            // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
+            return "redirect:/error"; // Example: redirect to an error page
+        }
+        model.addAttribute("user", user);
+        return "/users/edit";
+    }
+
+
+}
