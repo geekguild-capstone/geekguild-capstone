@@ -109,7 +109,7 @@
 
 <!-- Delete Task Form -->
 
-<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${id})}" th:method="post">
+<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
     <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
 </form>
 
