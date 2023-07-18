@@ -26,6 +26,23 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
+        .edit-icon-container {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            height: 100px;
+        }
+        /* Change the color of the icon to red */
+        .fas {
+            color: rebeccapurple;
+        }
+        /* Optionally adjust the icon size */
+        .fas {
+            font-size: 24px;
+        }
+
+
     </style>
 </head>
 <!--navbar.html-->
@@ -98,6 +115,13 @@
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <input type="hidden" name="fileURL" id="fileURLInput" />
 </form>
+
+<!--EDIT ICON-->
+<a th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+    <div class="edit-icon-container">
+        <i class="fas fa-edit"></i>
+    </div>
+</a>
 
 <h1>About Me</h1>
 
