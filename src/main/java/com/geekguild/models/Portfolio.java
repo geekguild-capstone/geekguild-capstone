@@ -17,28 +17,28 @@ public class Portfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "about")
     private String about;
 
-    @Column(nullable = false)
+    @Column(name = "proj1")
     private String proj1;
 
-    @Column(nullable = false)
+    @Column(name = "proj2")
     private String proj2;
 
-    @Column(nullable = false)
+    @Column(name = "proj3")
     private String proj3;
 
-    @Column(nullable = false)
+    @Column(name = "linkedin")
     private String linkedin;
 
-    @Column(nullable = false)
+    @Column(name = "facebook")
     private String facebook;
 
-    @Column(nullable = false)
+    @Column(name = "github")
     private String github;
 
-    @Column(nullable = false)
+    @Column(name = "misclink")
     private String misclink;
 
 

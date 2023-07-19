@@ -17,19 +17,19 @@ public class Work {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "working")
     private String working;
 
-    @Column(nullable = false)
+    @Column(name = "ask")
     private String ask;
 
-    @Column(nullable = false)
+    @Column(name = "learn")
     private String learn;
 
-    @Column(nullable = false)
+    @Column(name = "fact")
     private String fact;
 
-    @Column(nullable = false)
+    @Column(name = "help")
     private String help;
 
     public Work(long id, String working, String ask, String learn, String fact, String help) {
