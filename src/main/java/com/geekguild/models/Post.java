@@ -4,6 +4,8 @@ import com.geekguild.repositories.PostRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,5 +33,8 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comments> comments;
 
 }

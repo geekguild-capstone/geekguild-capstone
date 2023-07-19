@@ -10,14 +10,18 @@
     <style>
         /* Custom CSS styles */
         .profile-picture {
-            width: 150px;
-            height: 150px;
+            position: relative;
+            margin-top: 2rem;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
         }
+
         .profile-skills {
             margin-top: 20px;
         }
+
         .profile-skills span {
             display: inline-block;
             margin-right: 10px;
@@ -27,16 +31,25 @@
             border-radius: 4px;
         }
 
+        .edit-icon {
+
+            position: absolute;
+            top: 340px;
+            right: 350px;
+        }
+
         .edit-icon-container {
             display: flex;
             justify-content: start;
             align-items: center;
             height: 100px;
         }
+
         /* Change the color of the icon to red */
         .fas {
             color: rebeccapurple;
         }
+
         /* Optionally adjust the icon size */
         .fas {
             font-size: 24px;
@@ -52,8 +65,8 @@
 
 <div class="container">
     <div class="text-center">
-        <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
-        <h1>John Doe</h1>
+        <img th:src="${user.image}" alt="Profile Picture" class="profile-picture">
+        <h1 th:text="${user.username}"></h1>
         <h2>Software Developer</h2>
     </div>
 
@@ -63,30 +76,43 @@
         <div class="col-sm-6">
             <h2>Contact Information</h2>
             <ul class="list-unstyled">
-                <li><strong>Location:</strong> San Francisco, CA</li>
-                <li><strong>Email:</strong> johndoe@example.com</li>
-                <li><strong>Phone:</strong> (123) 456-7890</li>
+                <li th:text="${portfolio.linkedin ?: ''}"><strong>LinkedIn:</strong></li>
+                <li th:text="${user.email}"><strong>Email:</strong></li>
             </ul>
         </div>
 
         <br>
 
         <div class="col-sm-6">
-            <h2>Summary</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet facilisis felis ac interdum.</p>
+            <h2>About Me</h2>
+            <p th:text="${portfolio.about ?: ''}"></p>
         </div>
     </div>
 
     <br>
 
-    <h2>Skills</h2>
-    <div class="profile-skills">
-        <span>Java</span>
-        <span>C++</span>
-        <span>Python</span>
-        <span>HTML</span>
-        <span>CSS</span>
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Skills</h2>
+            <div class="profile-skills">
+                <span>Java</span>
+                <span>C++</span>
+                <span>Python</span>
+                <span>HTML</span>
+                <span>CSS</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h1>Work</h1>
+            <p>Working on <span th:text="${work.working ?: ''}"></span></p>
+            <p>Ask me <span th:text="${work.ask ?: ''}"></span></p>
+            <p>I am learning <span th:text="${work.learn ?: ''}"></span></p>
+            <p>Fun fact: <span th:text="${work.fact ?: ''}"></span></p>
+            <p>I need help with <span th:text="${work.help ?: ''}"></span></p>
+        </div>
+
     </div>
+
 </div>
 <!--<h1>Profile Photo</h1>-->
 
@@ -100,46 +126,46 @@
 
 <!-- Delete Profile Form -->
 
-<h1>Hello <span th:text="${user.username}"></span></h1>
+<!--<h1>Hello <span th:text="${user.username}"></span></h1>-->
 
-<h1>Profile Photo</h1>
-<div>
-    <button class="upload">Upload file</button>
-</div>
-<div>
-    <img th:src="${user.image}" width="200" height="200" class="logo" />
-</div>
+<!--<h1>Profile Photo</h1>-->
+<!--<div>-->
+<!--    <button class="upload">Upload file</button>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <img th:src="${user.image}" width="200" height="200" class="logo" />-->
+<!--</div>-->
 
 <!-- Add a form to submit the uploaded image URL -->
-<form id="imageForm" method="post" action="/profile/upload">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <input type="hidden" name="fileURL" id="fileURLInput" />
-</form>
+<!--<form id="imageForm" method="post" action="/profile/upload">-->
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<!--    <input type="hidden" name="fileURL" id="fileURLInput" />-->
+<!--</form>-->
+
 
 <!--EDIT ICON-->
-<a th:href="@{/profile/{id}/edit(id=${user.getId()})}">
-    <div class="edit-icon-container">
-        <i class="fas fa-edit"></i>
-    </div>
+<a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+    <svg width="50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+         stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+    </svg>
+    <!--    <div class="edit-icon-container">-->
+    <!--        <i class="fas fa-edit"></i>-->
+    <!--    </div>-->
 </a>
 
-<h1>About Me</h1>
 
-<h1>Languages</h1>
-
-<h1>Interests</h1>
-
-<h1>Hobbies</h1>
+<h1>Projects</h1>
+<ul>
+    <li><a th:href="@{${portfolio.proj1} ?: ''}">Project 1</a></li>
+</ul>
 
 <!-- Delete Task Form -->
 
-<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
-    <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
-</form>
-
-
-
-
+<!--<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">-->
+<!--    <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>-->
+<!--</form>-->
 
 
 <!--<script>-->
@@ -182,7 +208,7 @@
 </script>
 <!--BootStrap JS-->
 <script th:include="partials/footer"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E" ></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
 
 </body>
 </html>
