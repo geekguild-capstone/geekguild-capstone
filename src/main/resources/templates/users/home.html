@@ -4,13 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="/css/home.css">
+
     <link th:include="partials/header">
 </head>
 <body>
 <div th:include="partials/navbar :: navbar"></div>
-
 <h1>News Feed</h1>
-
+<body>
+<div class="grid-container">
+    <div class="left-section">Left Section</div>
+    <div class="middle-section">Middle Section</div>
+    <div class="right-section">
+        <div class="top-right-section">Top Right Section</div>
+        <div class="bottom-right-section">Bottom Right Section</div>
+    </div>
+</div>
+</body>
 
 
 <script th:include="partials/footer"></script>
