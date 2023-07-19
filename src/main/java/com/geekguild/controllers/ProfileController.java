@@ -64,8 +64,6 @@ public class ProfileController {
             return "redirect:/error"; // Example: redirect to an error page
         }
         model.addAttribute("user", user);
-
-
         return "/users/edit";
     }
 
