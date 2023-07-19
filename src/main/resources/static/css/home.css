@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr; /* Left, Middle, Right proportions */
+    grid-template-rows: 100vh; /* Set the height to be the full height of the viewport */
+    gap: 20px; /* Gap between sections */
+}
+
+/* Styling for the left, middle, and right sections */
+.left-section, .middle-section, .top-right-section, .bottom-right-section {
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.left-section {
+    background-color: #f0f0f0;
+}
+
+.middle-section, .top-right-section, .bottom-right-section {
+    background-color: #e0e0e0;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column; /* Stack the top-right and bottom-right sections vertically */
+    justify-content: space-between; /* Vertically distribute the space between the sections */
+}
+
+.top-right-section {
+    flex: 3; /* Top-right section takes up 30% of the available height */
+    border-radius: 25px;
+}
+
+.bottom-right-section {
+    flex: 7; /* Bottom-right section takes up 70% of the available height */
+    border-radius: 25px;
+    margin-top: 25px; /* Add a margin between the top and bottom sections */
+}
