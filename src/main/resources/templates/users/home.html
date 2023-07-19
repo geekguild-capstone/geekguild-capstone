@@ -16,16 +16,19 @@
         <div class="create-post-container">
             <div class="profile-picture"
                  th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
-            <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
-                <div class="post-content">
+            <div class="post-content">
+                <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
                     <textarea th:field="*{body}" placeholder="What's on your mind?"></textarea>
                     <div class="post-actions">
                         <button type="submit">Submit</button>
                         <!-- Add any post actions (e.g., add photos, tag friends, etc.) -->
                         <!-- You can use <button> elements or icons here -->
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+        </div>
+        <div class="view-post-container">
+
         </div>
     </div>
     <div class="right-section">
