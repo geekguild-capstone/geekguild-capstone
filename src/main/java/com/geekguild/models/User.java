@@ -20,13 +20,13 @@ public class User {
     @Column(name = "username",nullable = false, unique = true)
     private String username;
 
-    @Column(name = "firstname",nullable = false)
+    @Column(name = "firstname")
     private String firstname;
 
-    @Column(name = "lastname",nullable = false)
+    @Column(name = "lastname")
     private String lastname;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
@@ -59,11 +59,11 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-//    public List<Comments> comments;
-//
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
+
+    
+
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;

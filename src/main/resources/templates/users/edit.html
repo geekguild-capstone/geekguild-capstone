@@ -11,7 +11,7 @@
 
 <h3>Profile Photo</h3>
 
-<form th:action="@{/profile/{id}/edit(id=${user.getId()})}" method="POST">
+<form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}" th:method="post">
   <label for="username">Username</label>
   <input id="username" name="username" th:value="${user.username}" />
   <br>
@@ -36,12 +36,9 @@
 <!--  <label for="social_face_book">Social Media(Facebook)</label>-->
 <!--  <input id="social_face_book" name="social_face_book" th:value="${user.socialFacebook}" />-->
   <br>
-  <button type="submit">Save Profile</button>
-</form>
+<!--  <button type="submit">Save Profile</button>-->
 
-
-<form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}" th:method="post">
-  <button id="edit-btn" class="waves-effect waves-light btn">Edit Profile</button>
+  <button id="edit-btn" class="waves-effect waves-light btn">Save Edit</button>
 </form>
 
 </body>
