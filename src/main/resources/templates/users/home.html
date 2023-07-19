@@ -14,14 +14,18 @@
     <div class="left-section">Left Section</div>
     <div class="middle-section">
         <div class="create-post-container">
-            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
-            <div class="post-content">
-                <textarea placeholder="What's on your mind?"></textarea>
-                <div class="post-actions">
-                    <!-- Add any post actions (e.g., add photos, tag friends, etc.) -->
-                    <!-- You can use <button> elements or icons here -->
+            <div class="profile-picture"
+                 th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
+            <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
+                <div class="post-content">
+                    <textarea th:field="*{body}" placeholder="What's on your mind?"></textarea>
+                    <div class="post-actions">
+                        <button type="submit">Submit</button>
+                        <!-- Add any post actions (e.g., add photos, tag friends, etc.) -->
+                        <!-- You can use <button> elements or icons here -->
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="right-section">

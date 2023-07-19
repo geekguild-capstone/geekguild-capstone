@@ -53,6 +53,27 @@
 
     <button id="edit-btn" class="waves-effect waves-light btn">Save Edit</button>
 </form>
+
+<!-- Delete Task Form -->
+
+<form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
+    <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
+</form>
+
+
+<!--<script>-->
+
+<!--    $(document).ready(function() {-->
+<!--        $('#delete-btn').on('click', function(event) {-->
+<!--            event.preventDefault();-->
+
+<!--            if (confirm('Are you sure you want to delete your profile?')) {-->
+<!--                $('#delete-user-form').submit();-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script>
     const button = document.querySelector('.upload');
@@ -75,6 +96,9 @@
         };
         client.picker(options).open();
     });
+
+
+
 </script>
 </body>
 </html>
