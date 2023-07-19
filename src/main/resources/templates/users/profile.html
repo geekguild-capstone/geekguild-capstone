@@ -64,7 +64,7 @@
             <h2>Contact Information</h2>
             <ul class="list-unstyled">
                 <li><strong>Location:</strong> San Francisco, CA</li>
-                <li><strong>Email:</strong> johndoe@example.com</li>
+                <li th:text="${user.email}" ><strong>Email:</strong> </li>
                 <li><strong>Phone:</strong> (123) 456-7890</li>
             </ul>
         </div>
@@ -73,7 +73,8 @@
 
         <div class="col-sm-6">
             <h2>Summary</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet facilisis felis ac interdum.</p>
+<!--            <span th:text="${user.username}"></span>-->
+            <p th:text="${portfolio.about ?: 'No summary available'}"></p>
         </div>
     </div>
 
