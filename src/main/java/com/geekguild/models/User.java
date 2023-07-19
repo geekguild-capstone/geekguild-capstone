@@ -20,6 +20,12 @@ public class User {
     @Column(name = "username",nullable = false, unique = true)
     private String username;
 
+    @Column(name = "firstname",nullable = false)
+    private String firstname;
+
+    @Column(name = "lastname",nullable = false)
+    private String lastname;
+
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -33,6 +39,8 @@ public class User {
     public User(long id, String userName, String email, String password) {
         this.id = id;
         this.username = userName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
@@ -42,6 +50,8 @@ public class User {
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
+        firstname = copy.firstname;
+        lastname = copy.lastname;
         username = copy.username;
         password = copy.password;
     }
