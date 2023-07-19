@@ -1,6 +1,6 @@
-
-
 <div th:fragment="navbar">
+<link rel="stylesheet" href="/css/custom.css">
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="border: rebeccapurple solid 1px">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar scroll</a>
@@ -31,7 +31,10 @@
                 </li>
             </ul>
 
-            <img src="/img/gglogo.png" alt="GeekGuild Logo">
+
+            <div class="logo">
+            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">
+            </div>
 
 
             <form class="d-flex" role="search">

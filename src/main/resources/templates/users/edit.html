@@ -11,31 +11,32 @@
 
 <h3>Profile Photo</h3>
 
-<form action="/register" method="POST">
+<form th:action="@{/profile/{id}/edit(id=${user.getId()})}" method="POST">
   <label for="username">Username</label>
-  <input id="username" name="username" />
-<br>
+  <input id="username" name="username" th:value="${user.username}" />
+  <br>
   <label for="email">Email</label>
-  <input id="email" name="email" />
+  <input id="email" name="email" th:value="${user.email}" />
   <br>
-  <label for="about_me">About Me</label>
-  <input id="about_me" name="about_me" />
+<!--  <label for="about_me">About Me</label>-->
+<!--  <input id="about_me" name="about_me" th:value="${user.aboutMe}" />-->
+<!--  <br>-->
+<!--  <label for="hobbies">Hobbies</label>-->
+<!--  <input id="hobbies" name="hobbies" th:value="${user.hobbies}" />-->
+<!--  <br>-->
+<!--  <label for="languages">Languages</label>-->
+<!--  <input id="languages" name="languages" th:value="${user.languages}" />-->
+<!--  <br>-->
+<!--  <label for="social_linked_in">Social Media(LinkedIn)</label>-->
+<!--  <input id="social_linked_in" name="social_linked_in" th:value="${user.socialLinkedIn}" />-->
+<!--  <br>-->
+<!--  <label for="social_git">Social Media(Git)</label>-->
+<!--  <input id="social_git" name="social_git" th:value="${user.socialGit}" />-->
+<!--  <br>-->
+<!--  <label for="social_face_book">Social Media(Facebook)</label>-->
+<!--  <input id="social_face_book" name="social_face_book" th:value="${user.socialFacebook}" />-->
   <br>
-  <label for="hobbies">Hobbies</label>
-  <input id="hobbies" name="hobbies" />
-  <br>
-  <label for="languages">Languages</label>
-  <input id="languages" name="languages" />
-  <br>
-  <label for="social_linked_in">Social Media(LinkedIn)</label>
-  <input id="social_linked_in" name="social_linked_in" />
-  <br>
-  <label for="social_git">Social Media(Git)</label>
-  <input id="social_git" name="social_git" />
-  <br>
-  <label for="social_face_book">Social Media(FaceBook)</label>
-  <input id="social_face_book" name="social_face_book" />
-
+  <button type="submit">Save Profile</button>
 </form>
 
 
