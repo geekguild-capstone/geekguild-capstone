@@ -59,11 +59,11 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-//    public List<Comments> comments;
-//
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
+
+    
+
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
