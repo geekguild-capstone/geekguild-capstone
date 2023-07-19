@@ -7,6 +7,7 @@ import com.geekguild.repositories.PortfolioRepository;
 import com.geekguild.repositories.UserRepository;
 import com.geekguild.repositories.WorkRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.config.Task;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -66,6 +67,17 @@ public class ProfileController {
 
 
         return "/users/edit";
+    }
+
+    // This method handles the POST request to save the edited profile
+    @PostMapping("/profile/{id}/edit")
+    public String editProfile(@PathVariable long id, @RequestParam String username, @RequestParam String email) {
+        User user = userDao.getReferenceById(id);
+        user.setUsername(username);
+        user.setEmail(email);
+        userDao.save(user);
+        System.out.println(user);
+        return "redirect:/profile/" + id;
     }
 
     @GetMapping("/profile/{id}")

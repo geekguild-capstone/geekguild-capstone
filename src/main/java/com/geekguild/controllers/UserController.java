@@ -51,6 +51,9 @@ public class UserController {
         return "redirect:/register";
     }
 
+
+}
+
 //    @DeleteMapping("/profile/{id}/delete")
 //    String deleteUser(@PathVariable Long id) {
 //        userDao.deleteById(id);
@@ -59,4 +62,3 @@ public class UserController {
 
 
 
-}

@@ -9,6 +9,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     default User getReferenceById(Long userId) {
         return findById(userId).orElse(null);
     }
+
 }
 
 
