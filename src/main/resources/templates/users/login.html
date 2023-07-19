@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Log In</title>
     <link th:include="partials/header">
-
+    <link rel="stylesheet" href="/css/custom.css">
     <style>
         body {
             background-color: #f0f2f5;
@@ -21,9 +21,9 @@
         }
 
         .login-form {
-            background-color: #fff;
+            background-color: transparent;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);*/
             padding: 40px;
             width: 300px;
         }
@@ -67,12 +67,21 @@
             background-color: #8e09e7;
         }
 
+        /*.logo-container {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    align-items: center;*/
+        /*    justify-content: center;*/
+        /*    text-align: center;*/
+        /*    margin-top: 16px;*/
+        /*}*/
+
     </style>
 
 
 </head>
 <body>
-<h2>GeekGuild</h2>
+
 <div th:if="${param.error}">
     Invalid Username and Password.
 </div>
@@ -80,8 +89,22 @@
     You have been logged out.
 </div>
 
+
+
+
+
 <div class="centered-column">
     <form th:action="@{/login}" method="post" class="login-form">
+
+        <div class="logo-container">
+            <div class="logo">
+                <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">
+                <h4>Unite, Collaborate, Geek Out: Join the Ultimate Tech Enthusiast Community!</h4>
+
+            </div>
+        </div>
+
+
         <h2>GeekGuild Login</h2>
         <label for="username">Username</label>
         <input id="username" name="username" type="text" value="admin"/>
@@ -90,9 +113,10 @@
         <input type="submit" value="Log In" />
         <a href="/forgot-password">Forgot Password?</a>
         <br>
-        <a href="/create-account">Create Account</a>
+        <a th:href="@{/register}"><div>Create Account</div></a>
     </form>
 </div>
+
 
 <!--script files-->
 </body>
