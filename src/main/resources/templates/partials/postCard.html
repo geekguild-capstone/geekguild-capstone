@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--BOOTSTRAP CSS-->
+    <link th:include="partials/header">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!--CUSTOM CSS -->
+<!--    <link rel="stylesheet" href="/css/postCard.css">-->
+
+
+    <style>
+        /* CSS styles for the post card */
+        .post-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-profile .username {
+            font-weight: bold;
+        }
+
+        .post-content {
+            margin-bottom: 10px;
+        }
+
+        /* CSS for the like button and emojis container */
+        .like-container {
+            display: inline-block;
+            position: relative;
+        }
+        .like-container:hover .like-emojis {
+            display: block;
+        }
+        /* CSS for the emojis container */
+        .like-emojis {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .like-emojis span {
+            display: block;
+            cursor: pointer;
+            padding: 2px 8px;
+        }
+        .like-emojis span:hover {
+            background-color: #F2F2F2;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="post-card">
+    <div class="user-profile">
+        <img src="/static/img/gglogo.png" alt="User Profile Image">
+        <div class="username">JohnDoe</div>
+    </div>
+    <div class="post-content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus consequat velit id massa placerat, sed efficitur arcu gravida.
+    </div>
+    <div id="post_image" style="width: 100%; height: 100px; border: #8e09e7 solid 1px">image
+    </div>
+
+
+    <div class="interactions">
+        <button>
+            <div class="like-container">
+                <i class="far fa-thumbs-up like-icon">Like</i>
+                <div class="like-emojis">
+                    <span class="like-emoji" onclick="likeAction('👍')">👍 Like</span>
+                    <span class="like-emoji" onclick="likeAction('❤️')">❤️ Love</span>
+                    <span class="like-emoji" onclick="likeAction('😂')">😂 Laugh</span>
+                </div>
+            </div>
+        </button>
+        <button class="comment-button"><i class="fas fa-comment">Comment</i>
+        </button>
+        <button class="share-button"><i class="fas fa-envelope">Message</i>
+        </button>
+    </div>
+</div>
+
+
+<script th:include="partials/footer"></script>
+</body>
+</html>
