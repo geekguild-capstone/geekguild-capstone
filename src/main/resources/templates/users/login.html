@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="/css/custom.css">
     <style>
         body {
-            background-color: #f0f2f5;
+            background-color: #333333;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            color: #8e09e7 ;
         }
 
         .centered-column {
@@ -23,14 +24,21 @@
         .login-form {
             background-color: transparent;
             border-radius: 8px;
-            /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);*/
             padding: 40px;
             width: 300px;
         }
 
-        .login-form h2 {
-            font-size: 1.6rem;
-            margin-bottom: 24px;
+        .login-form h3 {
+            display: flex;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #aefc4f;
+            font-weight: bold;
+        }
+
+
+        a{
+            color: #aefc4f;
         }
 
         .login-form label {
@@ -48,6 +56,7 @@
             border-radius: 4px;
             margin-bottom: 16px;
             font-size: 1rem;
+            /*background-color: #ee8631;*/
         }
 
         .login-form input[type="submit"] {
@@ -67,17 +76,7 @@
             background-color: #8e09e7;
         }
 
-        /*.logo-container {*/
-        /*    display: flex;*/
-        /*    flex-direction: column;*/
-        /*    align-items: center;*/
-        /*    justify-content: center;*/
-        /*    text-align: center;*/
-        /*    margin-top: 16px;*/
-        /*}*/
-
     </style>
-
 
 </head>
 <body>
@@ -89,23 +88,19 @@
     You have been logged out.
 </div>
 
-
-
-
-
 <div class="centered-column">
     <form th:action="@{/login}" method="post" class="login-form">
-
         <div class="logo-container">
             <div class="logo">
                 <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">
-                <h4>Unite, Collaborate, Geek Out: Join the Ultimate Tech Enthusiast Community!</h4>
 
             </div>
+            <h3>Unite, Collaborate, Geek Out: Join the Ultimate Tech Enthusiast Community!</h3>
         </div>
 
 
-        <h2>GeekGuild Login</h2>
+
+
         <label for="username">Username</label>
         <input id="username" name="username" type="text" value="admin"/>
         <label for="password">Password</label>
@@ -115,6 +110,8 @@
         <br>
         <a th:href="@{/register}"><div>Create Account</div></a>
     </form>
+
+
 </div>
 
 
