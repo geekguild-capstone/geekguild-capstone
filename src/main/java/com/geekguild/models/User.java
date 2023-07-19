@@ -58,7 +58,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Comments> comments;
 
 
 }

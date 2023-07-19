@@ -26,6 +26,17 @@ public class Comments {
     }
 
 //    Many to One Users
-//    Many to One Posts
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
+
+    //    Many to One Posts
+    @ManyToOne
+    @JoinColumn (name = "post_id")
+    private Post post;
+
+
+
 
 }
