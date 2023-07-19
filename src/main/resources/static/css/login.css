@@ -29,7 +29,7 @@ body {
 
 
 .login-form h3 {
-    animation: colorWaterfall 50s infinite;
+    animation: colorWaterfall 15s infinite;
 }
 
 @keyframes colorWaterfall {
