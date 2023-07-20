@@ -18,16 +18,26 @@
                  th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
             <div class="post-content">
                 <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
-                    <textarea th:field="*{body}" placeholder="What's on your mind?"></textarea>
-                    <div class="post-actions">
-                        <button type="submit">Submit</button>
-                        <!-- Add any post actions (e.g., add photos, tag friends, etc.) -->
-                        <!-- You can use <button> elements or icons here -->
+                    <!-- Post image upload section -->
+                    <div>
+                        <button type="button" class="upload-post-image">Upload Post Image</button>
                     </div>
+                    <div>
+                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage" />
+                    </div>
+
+                    <!-- Post body input section -->
+                    <textarea th:field="*{body}" id="postBodyTextarea" placeholder="What's on your mind?" required></textarea>
+
+                    <div class="post-actions">
+                        <button type="submit" class="submit-post" disabled>Submit</button>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" name="image" id="postImageURLInput" />
                 </form>
             </div>
         </div>
-        <div class="view-post-container">
+        <div class="view-post-container" th:include="partials/postCard">
 
         </div>
     </div>
@@ -36,6 +46,40 @@
         <div class="bottom-right-section">Bottom Right Section</div>
     </div>
 </div>
+
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script>
+    const postImageButton = document.querySelector('.upload-post-image');
+    const postImage = document.querySelector('.post-image');
+    const postImageURLInput = document.querySelector('#postImageURLInput');
+    const postBodyTextarea = document.querySelector('#postBodyTextarea');
+    const submitButton = document.querySelector('.submit-post');
+
+    postImageButton.addEventListener('click', () => {
+        const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
+        const client = filestack.init(apiKey);
+        const options = {
+            onUploadDone: (uploadResponse) => {
+                console.log('onUploadDone', uploadResponse);
+                const postImageURL = uploadResponse.filesUploaded[0].url;
+                postImage.setAttribute('src', postImageURL);
+                postImageURLInput.value = postImageURL; // Store the postImageURL in the hidden input field.
+                enableSubmitButton();
+            }
+        };
+        client.picker(options).open();
+    });
+
+    function enableSubmitButton() {
+        if (postImageURLInput.value && postBodyTextarea.value.trim() !== '') {
+            submitButton.disabled = false;
+        }
+    }
+
+    postBodyTextarea.addEventListener('input', () => {
+        enableSubmitButton();
+    });
+</script>
 <script th:include="partials/footer"></script>
 </body>
 </html>
