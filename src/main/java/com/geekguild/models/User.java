@@ -2,7 +2,9 @@ package com.geekguild.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.scheduling.config.Task;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -58,12 +60,16 @@ public class User {
         password = copy.password;
     }
 
+
+
+
+//    Relationships
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
-
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
@@ -71,12 +77,14 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    List<Friends> friends = new ArrayList<>();
 
 //    Working Group to User Relationship
-    @ManyToMany
-    @JoinTable(name = "user_group",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private Set<Group> groups = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(name = "user_group",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    private Set<Group> groups = new HashSet<>();
 
 }
