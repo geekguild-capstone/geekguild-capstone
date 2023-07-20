@@ -4,11 +4,14 @@ import com.geekguild.models.Post;
 import com.geekguild.models.User;
 import com.geekguild.repositories.PostRepository;
 import com.geekguild.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -20,12 +23,15 @@ public class HomeController {
         this.userDao = userDao;
         this.postDao = postDao;
     }
+
     @GetMapping("/home")
     public String landingPage(Model model) {
         model.addAttribute("post", new Post());
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
+        List<Post> posts = postDao.findAll();
+        model.addAttribute("posts", posts);
 
 
         return "users/home";
@@ -37,14 +43,16 @@ public class HomeController {
         return "/partials/about";
     }
 
-
     @PostMapping("/home")
-    public String showCreatePostForm(@ModelAttribute Post post) {
+    public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(loggedInUser);
-        postDao.save(post);
-        return "redirect:home";
-    }
 
+        // Set the image URL from the request parameter directly in the post entity
+        post.setImage(image);
+
+        postDao.save(post);
+        return "redirect:/home";
+    }
 
 }
