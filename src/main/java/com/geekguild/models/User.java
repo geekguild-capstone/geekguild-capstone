@@ -74,6 +74,7 @@ public class User {
 
 
 
+
 //    Working Group to User Relationship
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")

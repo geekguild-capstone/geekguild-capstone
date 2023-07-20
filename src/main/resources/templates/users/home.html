@@ -11,8 +11,9 @@
 <div th:include="partials/navbar :: navbar"></div>
 <h1>News Feed</h1>
 <div class="grid-container">
+
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
-    <div class="middle-section">
+    <div class="middle-section scroll-bar">
         <div class="create-post-container">
             <div class="profile-picture"
                  th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
@@ -39,21 +40,12 @@
             </div>
         </div>
         <div class="view-post-container" th:include="partials/postCard">
-
         </div>
     </div>
     <div class="right-section">
         <div class="top-right-section">Top Right Section</div>
-        <div class="bottom-right-section">
-            <div th:each="user : ${users}">
-                <h3 th:text="${user.username}" class="username"></h3>
-                <button class="circular-button">
-                    <span class="plus-symbol">+</span>
-                </button>
+        <div class="bottom-right-section" th:include="partials/suggested-friend">Bottom Right Section</div>
 
-
-            </div>
-        </div>
     </div>
 </div>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>

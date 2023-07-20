@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Suggested Friend Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/suggested-friends.css">
+    <style>
+
+    </style>
+
+
+</head>
+<body>
+<div class="card-container">
+    <!--BANNER-->
+    <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+
+    <!--PROFILE PIC-->
+    <img src="/img/logo-no-txt.jpeg" alt="Profile Picture" class="profile-img">
+<!--        <div class="profile-img"-->
+<!--             th:style="'background-image: url(' + ${post.user} + '); background-size: cover;'"></div>-->
+<!--        <div class="post-content">-->
+
+    <!--USER NAME-->
+    <div class="name">John Doe</div>
+    <!--    <div th:each="user : ${users}">-->
+    <!--        <h2 th:text="${user.username}" class="username"></h2>-->
+    <!--    </div>-->
+
+    <!--TITLE-->
+    <div class="headline">Software Engineer</div>
+    <a href="#" class="connect-btn">
+        <i class="icon fas fa-user-plus"></i> Connect
+    </a>
+
+</div>
+</body>
+</html>
