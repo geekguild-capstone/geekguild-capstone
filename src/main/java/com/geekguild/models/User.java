@@ -3,7 +3,9 @@ package com.geekguild.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -62,8 +64,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
 
-    
-
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
@@ -71,5 +71,12 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
+
+//    Working Group to User Relationship
+    @ManyToMany
+    @JoinTable(name = "user_group",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<Group> groups = new HashSet<>();
 
 }

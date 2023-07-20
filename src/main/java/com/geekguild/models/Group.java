@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import org.springframework.scheduling.config.Task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="groups")
@@ -18,8 +20,6 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-//    List<User> users = new ArrayList<>();
 
     public Group() {
     }
@@ -44,6 +44,13 @@ public class Group {
         this.name = name;
     }
 
+
+
+    //    Working Group to User Relationship
+    @ManyToMany(mappedBy = "groups")
+    private Set<User> members = new HashSet<>();
+
+
 //    public List<User> getUsers() {
 //        return users;
 //    }
@@ -51,5 +58,10 @@ public class Group {
 //    public void setTasks(List<User> users) {
 //        this.users = users;
 //    }
+
+    //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+//    List<User> users = new ArrayList<>();
+
+
 
 }
