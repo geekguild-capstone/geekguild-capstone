@@ -72,24 +72,13 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
+
+
+//    Working Group to User Relationship
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
     List<FriendRequest> friends = new ArrayList<>();
 
-    // Add @JsonIgnore to break the circular reference during serialization
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    //    Working Group to User Relationship
-//    @ManyToMany
-//    @JoinTable(name = "user_group",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "group_id"))
-//    private Set<Group> groups = new HashSet<>();
-// Add @JsonIgnore to the getter method for the user field
-    @JsonIgnore
-    public User getUser() {
-        return user;
-    }
+
 }
