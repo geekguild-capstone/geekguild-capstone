@@ -1,11 +1,11 @@
 package com.geekguild.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -13,13 +13,13 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table (name = "users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "username",nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "firstname")
@@ -48,7 +48,6 @@ public class User {
     }
 
 
-
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
@@ -58,12 +57,14 @@ public class User {
         password = copy.password;
     }
 
+
+//    Relationships
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
-
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
@@ -72,11 +73,12 @@ public class User {
     private List<Comments> comments;
 
 
+
 //    Working Group to User Relationship
-//    @ManyToMany
-//    @JoinTable(name = "user_group",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "group_id"))
-//    private Set<Group> groups = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    List<FriendRequest> friends = new ArrayList<>();
+
+
 
 }
