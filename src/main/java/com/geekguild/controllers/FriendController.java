@@ -5,12 +5,15 @@ import com.geekguild.models.User;
 import com.geekguild.repositories.FriendRequestRepository;
 import com.geekguild.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/friends")
 public class FriendController {
 
@@ -22,44 +25,52 @@ public class FriendController {
         this.userRepository = userRepository;
     }
 
+
+
     // Endpoint to get all friend requests for a specific user
-    @GetMapping("/{userId}/friend-requests")
-    public ResponseEntity<List<FriendRequest>> getFriendRequests(@PathVariable Long userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            List<FriendRequest> friendRequests = friendRequestRepository.findByReceiverAndStatus(user, "pending");
-            return ResponseEntity.ok(friendRequests);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("")
+    public String getFriendRequests(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Long userId = loggedInUser.getId();
+//        optionalUser = userRepository.findById(userId);
+//        if (lo.isPresent()) {
+//            User user = optionalUser.get();
+            List<FriendRequest> friendRequests = friendRequestRepository.findByReceiverAndStatus(loggedInUser, "pending");
+            System.out.println(friendRequests);
+            model.addAttribute("requests", friendRequests);
+//
+//            return "partials/friendRequest";
+//        } else {
+//            return "partials/userNotFound";
+//        }
+        return "partials/friendRequest";
     }
 
     // Endpoint to accept a friend request
     @PostMapping("/{requestId}/accept")
-    public ResponseEntity<Void> acceptFriendRequest(@PathVariable Long requestId) {
+    public String acceptFriendRequest(@PathVariable Long requestId) {
         Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
         if (optionalFriendRequest.isPresent()) {
             FriendRequest friendRequest = optionalFriendRequest.get();
             friendRequest.setStatus("accepted");
             friendRequestRepository.save(friendRequest);
-            return ResponseEntity.ok().build();
+            return "redirect:/friends";
         } else {
-            return ResponseEntity.notFound().build();
+            return "redirect:/userNotFound";
         }
     }
 
     // Endpoint to reject a friend request
     @PostMapping("/{requestId}/reject")
-    public ResponseEntity<Void> rejectFriendRequest(@PathVariable Long requestId) {
+    public String rejectFriendRequest(@PathVariable Long requestId) {
         Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
         if (optionalFriendRequest.isPresent()) {
             FriendRequest friendRequest = optionalFriendRequest.get();
             friendRequest.setStatus("rejected");
             friendRequestRepository.save(friendRequest);
-            return ResponseEntity.ok().build();
+            return "redirect:/friends";
         } else {
-            return ResponseEntity.notFound().build();
+            return "redirect:/userNotFound";
         }
     }
 }

@@ -28,8 +28,8 @@ public class TestController {
 //        }
 //    }
 
-    @GetMapping("/friends")
-    public String index() {
-        return "partials/friendRequest"; // Assuming that your HTML file is named "index.html" and located in the "resources" folder.
-    }
+//    @GetMapping("/friends")
+//    public String index() {
+//        return "partials/friendRequest"; // Assuming that your HTML file is named "index.html" and located in the "resources" folder.
+//    }
 }

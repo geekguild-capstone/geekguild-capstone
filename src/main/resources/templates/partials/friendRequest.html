@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Friend Requests</title>
-  <style>
-    /* Add your custom CSS styles here */
-  </style>
+    <title>Friend Requests</title>
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
 </head>
 <body>
 <h1>Friend Requests</h1>
 <div id="friendRequestsContainer">
-  <!-- Friend requests will be dynamically added here -->
+    <div th:each="request : ${requests}">
+        <p th:text="${request.sender.username}"></p>
+        <p th:text="${request.receiver.username}"></p>
+        <p th:text="${request.status}"></p>
+        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">
+            <button type="submit">Accept</button>
+        </form>
+        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">
+            <button type="submit" >Reject</button>
+        </form>
+
+
+
+    </div>
+    <!-- Friend requests will be dynamically added here -->
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  // Sample friend requests data (replace this with data from your backend)
-  const friendRequests = [
-    { requestId: 1, sender: { userId: 101, username: 'user1' }, status: 'pending' },
-    { requestId: 2, sender: { userId: 102, username: 'user2' }, status: 'pending' },
-    { requestId: 3, sender: { userId: 103, username: 'user3' }, status: 'pending' }
-  ];
+<!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>-->
+<!--<script>-->
+<!--  // Sample friend requests data (replace this with data from your backend)-->
+<!--  const friendRequests = [-->
+<!--    { requestId: 1, sender: { userId: 101, username: 'user1' }, status: 'pending' },-->
+<!--    { requestId: 2, sender: { userId: 102, username: 'user2' }, status: 'pending' },-->
+<!--    { requestId: 3, sender: { userId: 103, username: 'user3' }, status: 'pending' }-->
+<!--  ];-->
 
-  const friendRequestsContainer = document.getElementById('friendRequestsContainer');
+<!--  const friendRequestsContainer = document.getElementById('friendRequestsContainer');-->
 
-  function createFriendRequestElement(request) {
-    const friendRequestDiv = document.createElement('div');
-    friendRequestDiv.innerHTML = `
-        <p>${request.sender.username} wants to be your friend</p>
-        <button onclick="acceptFriendRequest(${request.requestId})">Accept</button>
-        <button onclick="rejectFriendRequest(${request.requestId})">Reject</button>
-    `;
-    return friendRequestDiv;
-  }
+<!--  function createFriendRequestElement(request) {-->
+<!--    const friendRequestDiv = document.createElement('div');-->
+<!--    friendRequestDiv.innerHTML = `-->
+<!--        <p>${request.sender.username} wants to be your friend</p>-->
+<!--        <button onclick="acceptFriendRequest(${request.requestId})">Accept</button>-->
+<!--        <button onclick="rejectFriendRequest(${request.requestId})">Reject</button>-->
+<!--    `;-->
+<!--    return friendRequestDiv;-->
+<!--  }-->
 
-  function displayFriendRequests(requests) {
-    friendRequestsContainer.innerHTML = '';
-    requests.forEach(request => {
-      if (request.status === 'pending') {
-        friendRequestsContainer.appendChild(createFriendRequestElement(request));
-      }
-    });
-  }
+<!--  function displayFriendRequests(requests) {-->
+<!--    friendRequestsContainer.innerHTML = '';-->
+<!--    requests.forEach(request => {-->
+<!--      if (request.status === 'pending') {-->
+<!--        friendRequestsContainer.appendChild(createFriendRequestElement(request));-->
+<!--      }-->
+<!--    });-->
+<!--  }-->
 
-  function acceptFriendRequest(requestId) {
-    console.log('Accepted friend request with ID:', requestId);
-    // Here, you should send an API request to your /friends/{requestId}/accept endpoint to accept the friend request.
-    // After a successful response, you can remove the friend request element from the UI.
-    // You can use JavaScript's DOM manipulation to remove the element from the container.
-  }
+<!--  function acceptFriendRequest(requestId) {-->
+<!--    console.log('Accepted friend request with ID:', requestId);-->
+<!--    // Here, you should send an API request to your /friends/{requestId}/accept endpoint to accept the friend request.-->
+<!--    // After a successful response, you can remove the friend request element from the UI.-->
+<!--    // You can use JavaScript's DOM manipulation to remove the element from the container.-->
+<!--  }-->
 
-  function rejectFriendRequest(requestId) {
-    console.log('Rejected friend request with ID:', requestId);
-    // Here, you should send an API request to your /friends/{requestId}/reject endpoint to reject the friend request.
-    // After a successful response, you can remove the friend request element from the UI.
-    // You can use JavaScript's DOM manipulation to remove the element from the container.
-  }
+<!--  function rejectFriendRequest(requestId) {-->
+<!--    console.log('Rejected friend request with ID:', requestId);-->
+<!--    // Here, you should send an API request to your /friends/{requestId}/reject endpoint to reject the friend request.-->
+<!--    // After a successful response, you can remove the friend request element from the UI.-->
+<!--    // You can use JavaScript's DOM manipulation to remove the element from the container.-->
+<!--  }-->
 
-  // Initial display of friend requests
-  displayFriendRequests(friendRequests);
+<!--  // Initial display of friend requests-->
+<!--  displayFriendRequests(friendRequests);-->
 
-</script>
+<!--</script>-->
 <!--<script>-->
 
 

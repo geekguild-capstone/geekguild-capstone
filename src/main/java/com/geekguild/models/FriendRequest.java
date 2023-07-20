@@ -33,11 +33,6 @@ public class FriendRequest {
     @Column(name = "status")
     private String status;
 
-    // Add @JsonIgnore to break the circular reference during serialization
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
 
 //    public FriendRequest(long id) {
 //        this.id = id;
