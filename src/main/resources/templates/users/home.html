@@ -11,7 +11,9 @@
 <div th:include="partials/navbar :: navbar"></div>
 <h1>News Feed</h1>
 <div class="grid-container">
+
     <div class="left-section">Left Section</div>
+
     <div class="middle-section">
         <div class="create-post-container">
             <div class="profile-picture"
@@ -38,11 +40,10 @@
             </div>
         </div>
         <div class="view-post-container" th:include="partials/postCard">
-
         </div>
     </div>
     <div class="right-section">
-        <div class="top-right-section">Top Right Section</div>
+        <div class="top-right-section" th:include="partials/suggested-friend">Top Right Section</div>
         <div class="bottom-right-section">Bottom Right Section</div>
     </div>
 </div>
