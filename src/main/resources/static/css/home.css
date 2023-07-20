@@ -23,31 +23,35 @@ h1 {
 /* Styling for the left, middle, and right sections */
 .left-section, .middle-section, .top-right-section, .bottom-right-section {
     padding: 20px;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
 .left-section{
-    background-color: #f0f0f0;
+    background-color: #708090;
+    /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
 
 
 /*MIDDLE SECTION*/
 .middle-section {
+    background-color: #708090;
     overflow-y: auto;
-    margin: 0 0 15px 0; /* top, right, bottom, left */
+    border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
+    margin: 0 5px 15px 0; /* top, right, bottom, left */
 
 }
 
 .middle-section::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar track */
-    background-color: #e0e0e0; /* Track color */
-    border: #8e09e7 solid 2px;
+    background-color: #708090; /* Track color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    /*border: #708090 solid 2px;*/
 }
 
 .middle-section::-webkit-scrollbar-thumb {
-    background-color: #323232; /* Thumb color */
-    border-radius: 8px; /* Rounded corners for the thumb */
+    background-color: #8e09e7; /* Thumb color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
 }
 
 .middle-section::-webkit-scrollbar-thumb:hover {
@@ -55,9 +59,9 @@ h1 {
 }
 
 
-.middle-section, .top-right-section, .bottom-right-section {
-    background-color: #e0e0e0;
-}
+/*.middle-section, .top-right-section, .bottom-right-section {*/
+/*    background-color: #e0e0e0;*/
+/*}*/
 
 
 /*RIGHT COLUMNS*/
@@ -70,8 +74,9 @@ h1 {
 }
 
 .top-right-section {
+    background-color: #708090;
     flex: 3; /* Top-right section takes up 30% of the available height */
-    border-radius: 25px;
+    border-radius: 20px;
     margin: 0 0 15px 0; /* top, right, bottom, left */
 
 
@@ -79,7 +84,8 @@ h1 {
 
 .bottom-right-section {
     flex: 7; /* Bottom-right section takes up 70% of the available height */
-    border-radius: 25px;
+    background-color: #708090;
+    border-radius: 20px;
 
 }
 
