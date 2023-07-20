@@ -5,24 +5,245 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <link th:include="partials/header">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        form {
+            max-width: 600px; /* Adjust the width as per your preference */
+            margin: 30px auto;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 5px;
+            box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #8e09e7;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+        /*.terms-and-conditions {*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    margin-bottom: 15px;*/
+        /*}*/
+
+        /*.terms-and-conditions input[type="checkbox"] {*/
+        /*    margin-right: 10px;*/
+        /*}*/
+
+        input[type="submit"] {
+            background-color: #ee8631;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #8e09e7;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logo {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        h5 {
+            animation: colorWaterfall 10s infinite;
+        }
+
+        @keyframes colorWaterfall {
+            0% { color: #8e09e7; } /* Purple shade */
+            25% { color: #ffb74d; } /* Orange shade */
+            50% { color: #aefc4f; } /* Green shade */
+            75% { color: #ee8631; } /* Orange shade */
+            100% { color: #8e09e7;} /* Purple shade */
+        }
+
+
+
+        h2 {
+            color: #aefc4f;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logo img {
+            width: 200px; /* Adjust the width as per your preference */
+            height: auto; /* This will maintain the aspect ratio of the logo */
+        }
+
+        .name-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .form-group:last-child {
+            margin-right: 0;
+        }
+
+        @media (max-width: 600px) {
+            .name-container {
+                flex-direction: column;
+            }
+
+            .form-group {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        .outer-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw; /* Set the width to the full viewport width */
+            height: 100vh; /* Set the height to the full viewport height */
+            overflow: hidden; /* Clip the rotating images outside the container */
+        }
+
+        .rotating-profile-pics {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* This prevents the profile pics from capturing click events */
+        }
+
+        .rotating-profile-pics img {
+            width: 80px; /* Adjust the width as per your preference */
+            height: auto; /* This will maintain the aspect ratio of the image */
+            border-radius: 50%; /* To make the profile pic circular */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional shadow effect */
+            position: absolute;
+            animation-timing-function: linear; /* Use linear timing function for a consistent rotation speed */
+        }
+
+        /* Keyframes for rotating and circling the images */
+        @keyframes rotateProfile1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateY(-50vh) rotate(360deg);
+            }
+        }
+
+        @keyframes rotateProfile2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg) translateY(-50vh) rotate(-360deg);
+            }
+        }
+
+        /* Add more keyframes for additional profiles if needed */
+
+        /* Applying animations to the profile pictures */
+        .rotating-profile-pics img:nth-child(1) {
+            animation: rotateProfile1 20s linear infinite; /* Adjust the duration (e.g., 20s) to control the rotation pace */
+        }
+
+        .rotating-profile-pics img:nth-child(2) {
+            animation: rotateProfile2 30s linear infinite; /* Adjust the duration (e.g., 30s) to control the rotation pace */
+        }
+
+        /* Add more CSS rules for additional profiles if needed */
+
+        /* Additional styles to ensure the form is accessible */
+        form {
+            position: relative;
+            z-index: 1; /* Ensures the form is above the rotating profile pictures */
+        }
+
+
+    </style>
 </head>
+
 <body>
-<h1>Create an account</h1>
+<div class="logo-container">
+    <div class="logo">
+        <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">
+
+    </div>
+    <h5>Unite, Collaborate, Geek Out: Join the Ultimate Tech Enthusiast Community!</h5>
+</div>
+
+<h2>Create an Account</h2>
+
 <form th:action="@{/register}" method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
+    <div class="name-container">
+    <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input id="firstname" type="text" th:field="*{firstname}" />
+    </div>
+    <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input id="lastname" type="text" th:field="*{lastname}" />
+    </div>
+    </div>
+
+    <label for="username" >Username</label>
+    <input id="username" type="text" th:field="*{username}" />
 
     <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
+    <input id="email" type="text" th:field="*{email}" />
 
     <label for="password">Password</label>
     <input id="password" type="password" th:field="*{password}" />
 
-    <input value="Sign me up!" type="submit" />
+<!--    <div class="terms-and-conditions">-->
+<!--        <input type="checkbox" id="agreeTerms" th:field="*{agreeTerms}" required />-->
+<!--        <label for="agreeTerms">I agree with the Terms and Conditions</label>-->
+<!--    </div>-->
+
+    <input value="Sign me up!" type="submit"/>
 
 </form>
 
+<div class="outer-container">
+<div class="rotating-profile-pics">
+    <img src="/img/gglogo.png" alt="Profile Picture 1">
+    <img src="/img/gghelp.png" alt="Profile Picture 2">
+    <!-- Add more profile pictures here -->
+</div>
+</div>
 
 <script th:include="partials/footer"></script>
 </body>
+
 </html>
