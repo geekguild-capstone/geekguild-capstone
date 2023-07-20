@@ -72,11 +72,11 @@ public class User {
     private List<Comments> comments;
 
 
-//    Working Group to User Relationship
-    @ManyToMany
-    @JoinTable(name = "user_group",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private Set<Group> groups = new HashSet<>();
+////    Working Group to User Relationship
+//    @ManyToMany
+//    @JoinTable(name = "user_group",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    private Set<Group> groups = new HashSet<>();
 
 }
