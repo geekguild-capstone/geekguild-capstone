@@ -32,6 +32,9 @@ public class HomeController {
         model.addAttribute("user", user);
         List<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
+        List<User> users = userDao.findAll();
+        model.addAttribute("users", users);
+
 
 
         return "users/home";
