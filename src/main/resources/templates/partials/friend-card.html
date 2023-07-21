@@ -154,22 +154,63 @@
 <body>
 
 <main>
-    <div class="connection container-background">
-        <div class="profile-picture-placeholder">JD</div>
-        <div class="profile-info">
-            <a href="profile_page_john_doe.html" class="name">John Doe</a>
-            <div class="headline">Software Engineer</div>
+    <div th:each="friend : ${sentFriends}">
+
+        <div class="connection container-background">
+            <div class="profile-picture-placeholder">JD</div>
+            <div class="profile-info">
+
+                <a th:text="${friend.receiver.username}" th:href="@{/profile/{id}(id=${friend.receiver.getId()})}" class="name"></a>
+                <div class="headline">Software Engineer</div>
+            </div>
+            <button class="message-button"
+                    th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-current-user-id=${user.id},
+            data-current-user-username=${user.username}"
+
+                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'))">
+                <i class="fas fa-comment-alt message-icon"></i> Message
+            </button>
+<!--            <button class="message-button">-->
+<!--                <i class="fas fa-comment-alt message-icon"></i>-->
+<!--            </button>-->
+            <div class="ellipsis" onclick="toggleDropdown(this)">
+                <i class="fas fa-ellipsis-h"></i>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="removeFriend(this)">
+                        <i class="fas fa-trash trash-icon"></i>
+                        Remove friend
+                    </a>
+                </div>
+            </div>
         </div>
-        <button class="message-button">
-            <i class="fas fa-comment-alt message-icon"></i>
-        </button>
-        <div class="ellipsis" onclick="toggleDropdown(this)">
-            <i class="fas fa-ellipsis-h"></i>
-            <div class="dropdown-menu">
-                <a href="#" onclick="removeFriend(this)">
-                    <i class="fas fa-trash trash-icon"></i>
-                    Remove friend
-                </a>
+    </div>
+    <div th:each="friend : ${receiveFriends}">
+
+        <div class="connection container-background">
+            <div class="profile-picture-placeholder">JD</div>
+            <div class="profile-info">
+
+                <a th:text="${friend.sender.username}" th:href="@{/profile/{id}(id=${friend.sender.getId()})}" class="name"></a>
+                <div class="headline">Software Engineer</div>
+            </div>
+            <button class="message-button"
+                    th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-current-user-id=${user.id},
+            data-current-user-username=${user.username}"
+
+                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'))">
+                <i class="fas fa-comment-alt message-icon"></i> Message
+            </button>
+            <!--            <button class="message-button">-->
+            <!--                <i class="fas fa-comment-alt message-icon"></i>-->
+            <!--            </button>-->
+            <div class="ellipsis" onclick="toggleDropdown(this)">
+                <i class="fas fa-ellipsis-h"></i>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="removeFriend(this)">
+                        <i class="fas fa-trash trash-icon"></i>
+                        Remove friend
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -185,6 +226,8 @@
         const connectionDiv = link.closest(".connection");
         connectionDiv.remove();
     }
+
+
 </script>
 
 </body>

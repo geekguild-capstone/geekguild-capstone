@@ -11,28 +11,32 @@
 
 </head>
 <body>
-<div class="card-container">
-    <!--BANNER-->
-    <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+<div th:each="user : ${users}">
+    <div class="card-container">
+        <!--BANNER-->
+        <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
 
-    <!--PROFILE PIC-->
-    <img src="/img/logo-no-txt.jpeg" alt="Profile Picture" class="profile-img">
-<!--        <div class="profile-img"-->
-<!--             th:style="'background-image: url(' + ${post.user} + '); background-size: cover;'"></div>-->
-<!--        <div class="post-content">-->
+        <!--PROFILE PIC-->
+        <img th:src="${user.image}" alt="Profile Picture" class="profile-img">
+        <!--        <div class="profile-img"-->
+        <!--             th:style="'background-image: url(' + ${post.user} + '); background-size: cover;'"></div>-->
+        <!--        <div class="post-content">-->
 
-    <!--USER NAME-->
-    <div class="name">John Doe</div>
-    <!--    <div th:each="user : ${users}">-->
-    <!--        <h2 th:text="${user.username}" class="username"></h2>-->
-    <!--    </div>-->
+        <!--USER NAME-->
+        <div class="name">
+            <h3 th:text="${user.username}"></h3>
+        </div>
+        <!--    <div th:each="user : ${users}">-->
+        <!--        <h2 th:text="${user.username}" class="username"></h2>-->
+        <!--    </div>-->
 
-    <!--TITLE-->
-    <div class="headline">Software Engineer</div>
-    <a href="#" class="connect-btn">
-        <i class="icon fas fa-user-plus"></i> Connect
-    </a>
+        <!--TITLE-->
+        <div class="headline">Software Engineer</div>
+        <a href="#" class="connect-btn">
+            <i class="icon fas fa-user-plus"></i> Connect
+        </a>
 
+    </div>
 </div>
 </body>
 </html>
