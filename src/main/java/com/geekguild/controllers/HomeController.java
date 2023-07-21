@@ -1,10 +1,11 @@
 package com.geekguild.controllers;
 
+import com.geekguild.models.FriendRequest;
 import com.geekguild.models.Post;
 import com.geekguild.models.User;
+import com.geekguild.repositories.FriendRequestRepository;
 import com.geekguild.repositories.PostRepository;
 import com.geekguild.repositories.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
@@ -18,10 +19,13 @@ public class HomeController {
 
     private UserRepository userDao;
     private PostRepository postDao;
+    private FriendRequestRepository friendDao;
 
-    public HomeController(UserRepository userDao, PostRepository postDao) {
+
+    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao) {
         this.userDao = userDao;
         this.postDao = postDao;
+        this.friendDao = friendDao;
     }
 
     @GetMapping("/home")
@@ -34,6 +38,11 @@ public class HomeController {
         model.addAttribute("posts", posts);
         List<User> users = userDao.findAll();
         model.addAttribute("users", users);
+        List<FriendRequest> receiveFriends = friendDao.findByReceiverAndStatus(user, "accepted");
+        model.addAttribute("receiveFriends", receiveFriends);
+        List<FriendRequest> sentFriends = friendDao.findBySenderAndStatus(user, "accepted");
+        model.addAttribute("sentFriends", sentFriends);
+
 
 
 

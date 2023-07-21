@@ -6,6 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="/css/home.css">
     <link th:include="partials/header">
+
 </head>
 <body>
 <div th:include="partials/navbar :: navbar"></div>
@@ -43,9 +44,14 @@
         </div>
     </div>
     <div class="right-section">
-        <div class="top-right-section">Top Right Section</div>
-        <div class="bottom-right-section" th:include="partials/suggested-friend">Bottom Right Section</div>
-
+        <div class="top-right-section">
+            <!-- container element in which TalkJS will display a chat UI -->
+            <div id="talkjs-container" style="width: 90%; margin: 30px; height: 500px">
+                <i>Loading chat...</i>
+            </div>
+        </div>
+        <div class="bottom-right-section" >Bottom Right Section</div>
+<!--    th:include="partials/suggested-friend"-->
     </div>
 </div>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
@@ -81,6 +87,72 @@
         enableSubmitButton();
     });
 </script>
+<!-- minified snippet to load TalkJS without delaying your page -->
+<script>
+    (function(t,a,l,k,j,s){
+        s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
+        ;k=t.Promise;t.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e])});l
+                    .push([f])},catch:function(){return k&&new k()},c:l}};})(window,document,[]);
+</script>
+<!--<script>-->
+<!--    function openTalkJSChat(friendUsername) {-->
+<!--        Talk.ready.then(function () {-->
+<!--            const currentUser = new Talk.User({-->
+<!--                id: '${user.id}', // Replace with the actual logged-in user ID-->
+<!--                name: '${user.username}', // Replace with the logged-in user's name-->
+<!--            });-->
+
+<!--            const friend = new Talk.User({-->
+<!--                id: '${friend.sender.id}', // Replace with the actual friend user ID-->
+<!--                name: '${friend.sender.username}', // Use the friend's username-->
+<!--            });-->
+
+<!--            const conversationId = Talk.oneOnOneId(currentUser, friend);-->
+<!--            const conversation = window.talkSession.getOrCreateConversation(conversationId);-->
+
+<!--            // Set the participants of the conversation-->
+<!--            conversation.setParticipant(currentUser);-->
+<!--            conversation.setParticipant(friend);-->
+
+<!--            const chatbox = window.talkSession.createChatbox(conversation);-->
+<!--            chatbox.mount(document.getElementById('talkjs-container'));-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+<script>
+  function openTalkJSChat(friendID, friendUsername, userID, userUsername) {
+      Talk.ready.then(function () {
+          var me = new Talk.User({
+              id: userID,
+              name: userUsername,
+              email: 'alice@example.com',
+              photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
+              welcomeMessage: 'Hey there! How are you? :-)',
+          });
+          window.talkSession = new Talk.Session({
+              appId: 'tUloHvfB',
+              me: me,
+          });
+          var other = new Talk.User({
+              id: friendID,
+              name: friendUsername,
+              email: 'Sebastian@example.com',
+              photoUrl: 'https://talkjs.com/images/avatar-5.jpg',
+              welcomeMessage: 'Hey, how can I help?',
+          });
+
+          var conversation = talkSession.getOrCreateConversation(
+              Talk.oneOnOneId(me, other)
+          );
+          conversation.setParticipant(me);
+          conversation.setParticipant(other);
+
+          var inbox = talkSession.createInbox({ selected: conversation });
+          inbox.mount(document.getElementById('talkjs-container'));
+      });
+  }
+</script>
 <script th:include="partials/footer"></script>
 </body>
+
 </html>

@@ -84,7 +84,7 @@
 
     <div class="post-card">
         <div class="user-profile">
-            <img th:style="'background-image: url(' + ${post.user.image} + '); background-size: cover;'"
+            <img th:src="${post.user.image}"
                  alt="User Profile Image">
             <div th:text="${post.user.username}" class="username"></div>
         </div>
