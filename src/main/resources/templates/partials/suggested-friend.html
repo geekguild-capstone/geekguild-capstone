@@ -33,15 +33,17 @@
         <!--TITLE-->
         <div class="headline">Software Engineer</div>
         <!-- CONNECT BUTTON -->
-        <form th:action="@{/home/add}" method="post">
-            <input type="hidden" name="receiverId" th:value="${user.id}" />
-            <button type="submit" class="connect-btn">
-                <i class="icon fas fa-user-plus"></i> Connect
-            </button>
-        </form>
-<!--        <a href="#" class="connect-btn">-->
-<!--            <i class="icon fas fa-user-plus"></i> Connect-->
-<!--        </a>-->
+<!--        <form th:action="@{/home/add}" method="post">-->
+<!--            <input type="hidden" name="receiverId" th:value="${user.id}" />-->
+<!--            <button type="submit" class="connect-btn">-->
+<!--                <i class="icon fas fa-user-plus"></i> Connect-->
+<!--            </button>-->
+<!--        </form>-->
+        <button th:attr="data-username=${user.username}, data-userid=${user.id}"
+                onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
+                class="connect-btn">
+            <i class="icon fas fa-user-plus"></i> Connect
+        </button>
 
     </div>
 </div>

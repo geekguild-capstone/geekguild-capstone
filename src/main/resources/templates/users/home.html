@@ -11,6 +11,24 @@
 <body>
 <div th:include="partials/navbar :: navbar"></div>
 <div class="grid-container">
+    <!-- MODAL -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Send friend request?</h2>
+            <p id="friendUsername"></p>
+            <p id="friendId"></p>
+            <form th:action="@{/home/add}" method="post" id="friendRequestForm">
+                <input type="hidden" name="receiverId" id="receiverIdInput" />
+                <button type="submit" >Confirm</button>
+            </form>
+            <div class="modal-buttons">
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
     <div class="middle-section scroll-bar">
@@ -52,6 +70,30 @@
         <div th:include="partials/suggested-friend" class="bottom-right-section">Bottom Right Section</div>
     </div>
 </div>
+<script>
+    function openConfirmationModal(username, userId) {
+        const modal = document.getElementById("confirmationModal");
+        const friendUsername = document.getElementById("friendUsername");
+        const friendId = document.getElementById("friendId");
+        const receiverIdInput = document.getElementById("receiverIdInput");
+        receiverIdInput.value = userId;
+        friendUsername.textContent = username;
+        friendId.textContent = userId;
+        modal.style.display = "block";
+
+        // Store the user ID in a hidden input field inside the modal
+        const hiddenUserIdInput = document.createElement("input");
+        hiddenUserIdInput.type = "hidden";
+        hiddenUserIdInput.name = "receiverId";
+        hiddenUserIdInput.value = userId;
+        modal.appendChild(hiddenUserIdInput);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("confirmationModal");
+        modal.style.display = "none";
+    }
+</script>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script>
     const postImageButton = document.querySelector('.upload-post-image');
