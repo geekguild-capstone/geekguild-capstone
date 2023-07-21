@@ -67,4 +67,23 @@ public class HomeController {
         return "redirect:/home";
     }
 
+    @PostMapping("/home/add")
+    public String sendFriendRequest(@RequestParam("receiverId") Long receiverId) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User receiver = userDao.findById(receiverId).orElse(null);
+
+        if (receiver != null) {
+            // Create a new FriendRequest and set the sender, receiver, and status
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.setSender(loggedInUser);
+            friendRequest.setReceiver(receiver);
+            friendRequest.setStatus("pending"); // You can set the initial status as "pending" or any other value
+
+            // Save the friend request to the database
+            friendDao.save(friendRequest);
+        }
+
+        return "redirect:/home"; // Redirect back to the home page after sending the friend request
+    }
+
 }
