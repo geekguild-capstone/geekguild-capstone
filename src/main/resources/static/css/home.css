@@ -86,9 +86,9 @@ h1 {
     flex: 7; /* Bottom-right section takes up 70% of the available height */
     background-color: #708090;
     border-radius: 20px;
+    overflow-y: auto;
 
 }
-
 
 
 .view-post-container{
