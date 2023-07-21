@@ -1,7 +1,10 @@
 <div th:fragment="navbar">
-<link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" th:href="@{/css/friend-request-modal.css}" />
+    <script th:src="@{/js/friend-request-modal.js}"></script>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="border: rebeccapurple solid 1px">
+    <!--    <link rel="stylesheet" href="/../modals/friend-request-modal.css">-->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="border: rebeccapurple solid 1px">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
             <img width="60" src="https://cdn.filestackcontent.com/xajY09uFTyOwyLdR6SLl">
@@ -34,6 +37,10 @@
             </ul>
 
 
+            <button id="modalTriggerButton">Open Modal</button>
+            <div id="myModalContainer"></div>
+
+
 <!--            <div class="logo">-->
 <!--            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">-->
 <!--            </div>-->
@@ -48,6 +55,7 @@
                 <form th:action="@{/login}" th:method="post" id="logout">
                     <button class="btn btn-outline-success" type="submit">Logout</button>
                 </form>
+
                 <script>
                     const link = document.querySelector("#logout-link");
                     if(link !== null) {
@@ -55,11 +63,12 @@
                             document.getElementById("logout").submit();
                         });
                     }
-                </script>
 
+                </script>
 
         </div>
     </div>
 </nav>
 </div>
+<script src="/static/js/friend-request-modal.js"></script>
 
