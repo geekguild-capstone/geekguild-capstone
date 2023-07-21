@@ -81,5 +81,7 @@ public class User {
     List<FriendRequest> friends = new ArrayList<>();
 
 
+    // try to add a many to many relationship to keep the db from duplicating new columns.
+//@ManyToMany
 
 }
