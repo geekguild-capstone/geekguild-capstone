@@ -32,9 +32,16 @@
 
         <!--TITLE-->
         <div class="headline">Software Engineer</div>
-        <a href="#" class="connect-btn">
-            <i class="icon fas fa-user-plus"></i> Connect
-        </a>
+        <!-- CONNECT BUTTON -->
+        <form th:action="@{/home/add}" method="post">
+            <input type="hidden" name="receiverId" th:value="${user.id}" />
+            <button type="submit" class="connect-btn">
+                <i class="icon fas fa-user-plus"></i> Connect
+            </button>
+        </form>
+<!--        <a href="#" class="connect-btn">-->
+<!--            <i class="icon fas fa-user-plus"></i> Connect-->
+<!--        </a>-->
 
     </div>
 </div>
