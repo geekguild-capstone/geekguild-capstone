@@ -41,6 +41,8 @@ public class Portfolio {
     @Column(name = "misclink")
     private String misclink;
 
+    @Column(name = "headline")
+    private String headline;
 
     public Portfolio(long id, String about, String proj1, String proj2, String proj3, String linkedin, String facebook, String github, String misclink) {
         this.id = id;
@@ -52,6 +54,7 @@ public class Portfolio {
         this.facebook = facebook;
         this.github = github;
         this.misclink = misclink;
+        this.headline = headline;
     }
 
     @OneToOne
