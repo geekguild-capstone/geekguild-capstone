@@ -44,7 +44,7 @@ public class Portfolio {
     @Column(name = "headline")
     private String headline;
 
-    public Portfolio(long id, String about, String proj1, String proj2, String proj3, String linkedin, String facebook, String github, String misclink) {
+    public Portfolio(long id, String about, String proj1, String proj2, String proj3, String linkedin, String facebook, String github, String misclink, String headline) {
         this.id = id;
         this.about = about;
         this.proj1 = proj1;
