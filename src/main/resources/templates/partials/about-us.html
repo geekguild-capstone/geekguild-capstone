@@ -52,7 +52,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center; /* Center items horizontally */
-            border: 2px solid #8e09e7;
+            border: 1px solid #8e09e7;
             /*box-shadow: -2px -5px 6px rgba(142, 9, 231, 0.5); !* Add the specified shadow effect to the border *!*/
             border-radius: 10px; /* Add border-radius for a rounded look */
 
@@ -91,7 +91,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            animation: scroll-left 30s linear infinite, stop-scroll 1s forwards; /* Add stop-scroll animation */
+            animation: scroll-left 30s linear infinite, stop-scroll 1s forwards, pause-scroll 5s 31s; /* Add stop-scroll animation */
         }
         @keyframes scroll-left {
             0% {
@@ -108,6 +108,16 @@
             100% {
                 animation-play-state: paused; /* Pause the animation when it's complete */
             }
+        }
+
+        @keyframes pause-scroll {
+            0%, 100% {
+                animation-play-state: paused; /* Keep the container paused at the start and end */
+            }
+            50% {
+                animation-play-state: running; /* Resume the animation at 50% for the pause duration */
+            }
+
         }
         /* Increase the size of the placeholder icon */
         .member-card i {
