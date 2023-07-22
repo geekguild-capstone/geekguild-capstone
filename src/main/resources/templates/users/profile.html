@@ -30,9 +30,9 @@
             overflow-y: scroll;
             scrollbar-width: thin;
             scrollbar-color: #8fd93f #333333;
-            height: 800px;
-        }
+            max-height: 700px;
 
+        }
 
         .container::-webkit-scrollbar-track {
             background-color: #333333; /* Set the track color */
@@ -322,7 +322,7 @@
     <div class="section-container">
         <h2 class="section-header">Projects</h2>
         <ul>
-            <li><a th:href="@{${portfolio.proj1} ?: ''}" class="project-link">Project 1</a></li>
+            <li><a th:href="${portfolio.proj1 ?: ''}" class="project-link">Project 1</a></li>
             <!-- Add more projects here if needed -->
         </ul>
     </div>
