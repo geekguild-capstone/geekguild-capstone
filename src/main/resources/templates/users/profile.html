@@ -79,15 +79,15 @@
         }
 
         .edit-icon {
-            position: absolute;
-            top: 1px;
-            right: 1px;
+            position: relative;
+            top: 10px;
+            right: 10px;
             z-index: 999; /* Adjust the z-index as needed */
         }
 
         .fas {
-            color: #ee8631;
-            font-size: 24px;
+            color: #ffb74d;
+            font-size: 32px;
         }
 
         .fas:hover{
@@ -186,8 +186,8 @@
         .icon-link {
             display: inline-flex;
             align-items: center; /* Center the icon and text vertically */
-            font-size: 24px; /* Adjust the icon size as needed */
-            margin: 10px; /* Add spacing between the icons */
+            font-size: 32px; /* Adjust the icon size as needed */
+            margin: 40px; /* Add spacing between the icons */
             color: #fff; /* Make the icons white */
             text-decoration: none;
             transition: color 0.3s; /* Add smooth transition for color change on hover */
@@ -216,15 +216,15 @@
             <!-- Move the edit icon inside the profile-info container -->
             <div class="edit-icon"><!--EDIT ICON-->
                 <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
-                    <svg width="50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="limegreen" class="w-4 h-4">
+                    <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="limegreen" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
                     </svg>
                 </a>
             </div>
-            <h1 th:text="${user.username}" class="profile-name"></h1>
-            <h2 class="profile-title">Software Developer</h2>
+            <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
+            <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
         </div>
     </div>
 
@@ -232,7 +232,7 @@
     <hr>
 
     <div class="icon-container">
-        <a href="mailto:youremail@example.com" class="icon-link">
+        <a th:href="${user.email ?: ''}" class="icon-link">
             <i class="fas fa-envelope" ></i>
             <span class="icon-text"></span>
         </a>
@@ -240,15 +240,15 @@
             <i class="fab fa-linkedin"></i>
             <span class="icon-text"></span>
         </a>
-        <a href="https://github.com/" class="icon-link">
+        <a th:href="${portfolio.github ?: ''}" class="icon-link">
             <i class="fab fa-github"></i>
             <span class="icon-text"></span>
         </a>
-        <a href="https://www.facebook.com/" class="icon-link">
+        <a th:href="${portfolio.facebook ?: ''}" class="icon-link">
             <i class="fab fa-facebook"></i>
             <span class="icon-text"></span>
         </a>
-        <a href="https://www.yourwebsite.com/" class="icon-link">
+        <a th:href="${portfolio.misclink ?: ''}" class="icon-link">
             <i class="fas fa-globe"></i>
             <span class="icon-text"></span>
         </a>
