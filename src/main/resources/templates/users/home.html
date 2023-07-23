@@ -5,11 +5,26 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <!-- BOOTSTRAP -->
     <link th:include="partials/header">
+
+
+
+
+
 
 </head>
 <body>
 <div th:include="partials/navbar :: navbar"></div>
+
+
+
+
+
+
+
 <div class="grid-container">
     <!-- MODAL -->
     <!--    <div id="confirmationModal" class="my-modal">-->
@@ -80,6 +95,13 @@
         <div class="view-post-container" th:include="partials/postCard">
         </div>
     </div>
+
+
+
+
+
+
+
     <div class="right-section">
         <div class="top-right-section">
             <!-- container element in which TalkJS will display a chat UI -->
@@ -210,6 +232,11 @@
         });
     }
 </script>
+
+
+
+
+
 <script th:include="partials/footer"></script>
 </body>
 
