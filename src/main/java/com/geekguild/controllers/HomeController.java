@@ -56,7 +56,7 @@ public class HomeController {
     @GetMapping("/about-us")
     public String showGroups() {
 
-        return "/partials/about";
+        return "/partials/about-us";
     }
 
     @PostMapping("/home")
