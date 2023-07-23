@@ -176,10 +176,17 @@
             <div class="ellipsis" onclick="toggleDropdown(this)">
                 <i class="fas fa-ellipsis-h"></i>
                 <div class="dropdown-menu">
-                    <a href="#" onclick="removeFriend(this)">
-                        <i class="fas fa-trash trash-icon"></i>
-                        Remove friend
-                    </a>
+                    <form method="post" th:action="@{/home/remove}">
+                        <input type="hidden" name="loggedInUserType" value="sender">
+
+                        <input type="hidden" name="friendId" th:value="${friend.receiver.id}">
+<!--                        <input type="hidden" name="loggedInUserType" th:value="${user.id == friend.sender.id ? 'sender' : 'receiver'}">-->
+
+                        <button type="submit" >
+                            <i class="fas fa-trash trash-icon"></i>
+                            Remove friend
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -206,10 +213,16 @@
             <div class="ellipsis" onclick="toggleDropdown(this)">
                 <i class="fas fa-ellipsis-h"></i>
                 <div class="dropdown-menu">
-                    <a href="#" onclick="removeFriend(this)">
+                    <form method="post" th:action="@{/home/remove}">
+                        <input type="hidden" name="friendId" th:value="${friend.sender.id}">
+<!--                        <input type="hidden" name="loggedInUserType" th:value="${user.id == friend.sender.id ? 'sender' : 'receiver'}">-->
+                        <input type="hidden" name="loggedInUserType" value="receiver">
+
+                        <button type="submit" >
                         <i class="fas fa-trash trash-icon"></i>
                         Remove friend
-                    </a>
+                    </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -222,10 +235,10 @@
         dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
     }
 
-    function removeFriend(link) {
-        const connectionDiv = link.closest(".connection");
-        connectionDiv.remove();
-    }
+    // function removeFriend(link) {
+    //     const connectionDiv = link.closest(".connection");
+    //     connectionDiv.remove();
+    // }
 
 
 </script>
