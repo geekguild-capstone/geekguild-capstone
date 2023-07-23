@@ -10,9 +10,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
-    // Add this custom query to fetch users who are not friends with the specified user
-//    @Query("SELECT u FROM User u WHERE u NOT IN (SELECT f.receiver FROM FriendRequest f WHERE f.sender = :user AND f.status = 'accepted') AND u != :user")
-//    List<User> findUsersNotFriendsWith(@Param("user") User user);
     @Query("SELECT u FROM User u WHERE u.id <> :loggedInUserId AND u NOT IN " +
             "(SELECT f.sender FROM FriendRequest f WHERE f.receiver.id = :loggedInUserId " +
             "AND f.status IN ('pending', 'accepted')) AND u NOT IN " +
@@ -22,7 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     default User getReferenceById(Long userId) {
-
         return findById(userId).orElse(null);
     }
 

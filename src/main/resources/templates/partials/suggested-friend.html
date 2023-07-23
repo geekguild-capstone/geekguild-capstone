@@ -4,9 +4,6 @@
     <title>Suggested Friend Card</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="/css/suggested-friends.css">
-    <style>
-
-    </style>
 
 
 </head>
@@ -18,27 +15,15 @@
 
         <!--PROFILE PIC-->
         <img th:src="${user.image}" alt="Profile Picture" class="profile-img">
-        <!--        <div class="profile-img"-->
-        <!--             th:style="'background-image: url(' + ${post.user} + '); background-size: cover;'"></div>-->
-        <!--        <div class="post-content">-->
 
         <!--USER NAME-->
         <div class="name">
             <h3 th:text="${user.username}"></h3>
         </div>
-        <!--    <div th:each="user : ${users}">-->
-        <!--        <h2 th:text="${user.username}" class="username"></h2>-->
-        <!--    </div>-->
 
         <!--TITLE-->
         <div class="headline">Software Engineer</div>
         <!-- CONNECT BUTTON -->
-<!--        <form th:action="@{/home/add}" method="post">-->
-<!--            <input type="hidden" name="receiverId" th:value="${user.id}" />-->
-<!--            <button type="submit" class="connect-btn">-->
-<!--                <i class="icon fas fa-user-plus"></i> Connect-->
-<!--            </button>-->
-<!--        </form>-->
         <button data-bs-toggle="modal" data-bs-target="#confirmationModal" th:attr="data-username=${user.username}, data-userid=${user.id}"
                 onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
                 class="connect-btn">

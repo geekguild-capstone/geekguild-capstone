@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container-background {
+    background-color: #333333;
+    padding: 15px; /* Add padding to the container */
+    border-radius: 10px; /* Round the container edges */
+}
+
+.connection {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.profile-picture-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: #ffb74d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.name {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px; /* Add space between name and profile picture */
+    text-decoration: none; /* Remove underline from name */
+    display: inline-block;
+}
+
+.name:hover {
+    color: #8e09e7; /* Change text color on hover */
+}
+
+.headline {
+    color: #aefc4f;
+}
+
+.message-button {
+    background-color: transparent;
+    color: #ee8631;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.message-icon {
+    margin-right: 5px;
+    margin-left: -5px; /* Adjust this value to move the icon closer */
+}
+
+.ellipsis {
+    background-color: transparent;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ellipsis {
+    margin-left: 10px;
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    top: 20px;
+    right: 0;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #8e09e7; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.dropdown-menu .trash-icon {
+    margin-right: 5px;
+}
+
+@media (max-width: 600px) {
+    .profile-picture {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-picture-placeholder {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .message-button, .ellipsis {
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+
+    .dropdown-menu {
+        top: 18px;
+    }
+}
