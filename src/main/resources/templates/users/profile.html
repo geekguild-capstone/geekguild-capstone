@@ -245,8 +245,7 @@
         <!-- Profile Picture Container -->
         <img th:src="${user.image}" alt="Profile Picture" class="profile-picture">
         <div class="profile-info">
-            <!-- Move the edit icon inside the profile-info container -->
-            <div class="edit-icon"><!--EDIT ICON-->
+            <div class="edit-icon">
                 <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
                     <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="limegreen" class="w-6 h-6">

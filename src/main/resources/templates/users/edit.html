@@ -34,7 +34,7 @@
                     overflow-y: scroll;
                     scrollbar-width: thin;
                     scrollbar-color: #8fd93f #333333;
-                    height: 400px;
+                    height: 500px;
                 }
 
                 .container::-webkit-scrollbar-track {
@@ -95,6 +95,18 @@
                     display: block;
                     margin: 0 auto;
                 }
+
+                .orange-button {
+                    background-color: #ee8631;
+                    color: #fff;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    display: block;
+                    margin: 0 auto;
+                }
+
             </style>
 
         </head>
@@ -144,24 +156,26 @@
             <div class="button-group">
                 <button type="submit" id="save-profile-btn">Save Profile</button>
                 <br>
+            </div>
+            </form>
                 <!-- Delete Task Form -->
                 <form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
-                    <button id="delete-btn" class="waves-effect waves-light btn">Delete Profile</button>
+                    <button id="delete-btn" class="orange-button">Delete Profile</button>
                 </form>
-            </div>
-        </form>
+
     </div>
-        <!--<script>-->
 
-        <!--    $(document).ready(function() {-->
-        <!--        $('#delete-btn').on('click', function(event) {-->
-        <!--            event.preventDefault();-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--    $('#delete-btn').on('click', function(event) {-->
+<!--    event.preventDefault();-->
 
-        <!--            if (confirm('Are you sure you want to delete your profile?')) {-->
-        <!--                $('#delete-user-form').submit();-->
-        <!--            }-->
-        <!--        });-->
-        <!--    });-->
+<!--    if (confirm('Are you sure you want to delete your profile?')) {-->
+<!--    $('#delete-user-form').submit();-->
+<!--    }-->
+<!--    });-->
+<!--    });-->
+<!--</script>-->
 
         <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
         <script>
