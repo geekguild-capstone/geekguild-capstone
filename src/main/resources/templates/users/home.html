@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="/css/home.css">
-    <link th:include="partials/header">
-
-</head>
+    <head th:include="partials/header :: head">
+    </head>
 <body>
-<div th:include="partials/navbar :: navbar"></div>
+<div th:replace="partials/navbar :: navbar"></div>
 <div class="grid-container">
     <!-- MODAL -->
     <!--    <div id="confirmationModal" class="my-modal">-->
@@ -33,8 +32,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img th:src="${user.image}" alt="Profile Picture" class="profile-img">
-
                     <p id="friendUsername"></p>
                 </div>
                 <div class="modal-footer">
@@ -210,7 +207,7 @@
         });
     }
 </script>
-<script th:include="partials/footer"></script>
+<footer th:replace="partials/footer :: footer"></footer>
 </body>
 
 </html>
