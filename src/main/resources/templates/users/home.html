@@ -12,19 +12,39 @@
 <div th:include="partials/navbar :: navbar"></div>
 <div class="grid-container">
     <!-- MODAL -->
-    <div id="confirmationModal" class="modal">
-        <div class="modal-content">
+    <!--    <div id="confirmationModal" class="my-modal">-->
+    <!--        <div class="my-modal-content">-->
+    <!--            <span class="close" onclick="closeModal()">&times;</span>-->
+    <!--            <h2>Send friend request?</h2>-->
+    <!--            <div class="my-modal-buttons">-->
+    <!--                <form th:action="@{/home/add}" method="post" id="friendRequestForm">-->
+    <!--                    <input type="hidden" name="receiverId" id="receiverIdInput"/>-->
+    <!--                    <button type="submit">Confirm</button>-->
+    <!--                </form>-->
+    <!--                <button onclick="closeModal()">Cancel</button>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div id="confirmationModal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Send Friend Request?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img th:src="${user.image}" alt="Profile Picture" class="profile-img">
 
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Send friend request?</h2>
-            <p id="friendUsername"></p>
-            <p id="friendId"></p>
-            <form th:action="@{/home/add}" method="post" id="friendRequestForm">
-                <input type="hidden" name="receiverId" id="receiverIdInput" />
-                <button type="submit" >Confirm</button>
-            </form>
-            <div class="modal-buttons">
-                <button onclick="closeModal()">Cancel</button>
+                    <p id="friendUsername"></p>
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/home/add}" method="post" id="friendRequestForm">
+                        <input type="hidden" name="receiverId" id="receiverIdInput"/>
+                        <button type="submit">Confirm</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
             </div>
         </div>
     </div>
@@ -74,12 +94,12 @@
     function openConfirmationModal(username, userId) {
         const modal = document.getElementById("confirmationModal");
         const friendUsername = document.getElementById("friendUsername");
-        const friendId = document.getElementById("friendId");
+        // const friendId = document.getElementById("friendId");
         const receiverIdInput = document.getElementById("receiverIdInput");
         receiverIdInput.value = userId;
         friendUsername.textContent = username;
-        friendId.textContent = userId;
-        modal.style.display = "block";
+        // friendId.textContent = userId;
+        modal.style.display = "flex";
 
         // Store the user ID in a hidden input field inside the modal
         const hiddenUserIdInput = document.createElement("input");
@@ -93,6 +113,13 @@
         const modal = document.getElementById("confirmationModal");
         modal.style.display = "none";
     }
+
+    window.addEventListener('click', function (event) {
+        const modal = document.getElementById('confirmationModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
 </script>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script>

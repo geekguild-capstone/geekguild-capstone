@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, Long> {
-// Custom query methods, if needed
-List<FriendRequest> findByReceiverAndStatus(User receiver, String status);
-List<FriendRequest> findBySenderAndStatus(User sender, String status);
+    // Custom query methods, if needed
+    List<FriendRequest> findByReceiverAndStatus(User receiver, String status);
 
+    List<FriendRequest> findBySenderAndStatus(User sender, String status);
 
+    FriendRequest findBySenderAndReceiverAndStatus(User loggedInUser, User referenceById, String accepted);
 }

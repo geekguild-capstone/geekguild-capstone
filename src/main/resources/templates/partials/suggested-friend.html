@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<div th:each="user : ${users}">
+<div th:each="user : ${notFriends}">
     <div class="card-container">
         <!--BANNER-->
         <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
@@ -39,7 +39,7 @@
 <!--                <i class="icon fas fa-user-plus"></i> Connect-->
 <!--            </button>-->
 <!--        </form>-->
-        <button th:attr="data-username=${user.username}, data-userid=${user.id}"
+        <button data-bs-toggle="modal" data-bs-target="#confirmationModal" th:attr="data-username=${user.username}, data-userid=${user.id}"
                 onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
                 class="connect-btn">
             <i class="icon fas fa-user-plus"></i> Connect

@@ -6,7 +6,7 @@
     border: 1px solid #333333;
     border-radius: 8px;
     padding: 10px;
-    width: 300px;
+    width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative; /* Add this to set a relative position for the container */
     background-color: #333333;
@@ -39,6 +39,7 @@
 
 /* Name */
 .name {
+    z-index: 99;
     text-align: center;
     font-weight: bold;
     color: #ee8631; /* Logo Orange */
