@@ -96,7 +96,7 @@
                     width: 150px;
                     height: 150px;
                     border-radius: 50%;
-                    border: 5px solid #ffb74d;
+                    border: 5px solid #8fd93f;
                     bottom: 5px;
                     left: 10px;
                     overflow: hidden;
@@ -104,7 +104,7 @@
 
                 /* Style for the "Upload Image" icon */
                 .upload-icon {
-                    background-color: #ee8631;
+                    background-color: #8fd93f;
                     color: #fff;
                     padding: 5px 10px;
                     border: none;
@@ -220,11 +220,30 @@
             <label for="about_me">About Me</label>
             <textarea id="about_me" name="about_me" rows="4">${user.about}</textarea>
             <br>
+<!--            <label for="work">Work</label>-->
+<!--            <input id="work" name="work" type="text" value="${user.work}" />-->
             <label for="work">Work</label>
+            <select id="work-selection" name="work">
+                <!-- Options for the "Work" field -->
+                <option value="work.ask" th:selected="${user.work == 'work.ask'}">Ask me:</option>
+                <option value="work.fact" th:selected="${user.work == 'work.fact'}">Fun fact:</option>
+                <option value="work.help" th:selected="${user.work == 'work.help'}">I need help with:</option>
+                <option value="work.learning" th:selected="${user.work == 'work.learning'}">I am currently earning:</option>
+                <option value="working" th:selected="${user.work == 'working'}">I am working on:</option>
+            </select>
             <input id="work" name="work" type="text" value="${user.work}" />
             <br>
             <label for="skills">Skills</label>
-            <input id="skills" name="skills" type="text" value="${user.skills}" />
+<!--            <select id="skill-selection" name="skills">-->
+<!--                &lt;!&ndash; Options for the "Work" field &ndash;&gt;-->
+<!--                <option value="language.Java" th:selected="${user.language == 'language.Java'}">Java</option>-->
+<!--                <option value="language.C++" th:selected="${user.language == 'language.C++'}">C++</option>-->
+<!--                <option value="language.Python" th:selected="${user.language == 'language.Python'}">Python</option>-->
+<!--                <option value="language.HTML" th:selected="${user.language == 'languag.HTML'}">HTML</option>-->
+<!--                <option value="language.CSS" th:selected="${user.language == 'language.CSS'}">CSS</option>-->
+<!--                <option value="language.Javascript" th:selected="${user.language == 'skills.Javascript'}">Javascript</option>-->
+<!--            </select>-->
+            <input id="skills" name="skills" type="text" value="${user.language}" />
             <br>
             <label for="social_linked_in">Social Media (LinkedIn)</label>
             <input id="social_linked_in" name="social_linked_in" type="url" value="${user.socialLinkedIn}" />
@@ -238,7 +257,6 @@
             <label for="projects">Projects</label>
             <input id="projects" name="projects" type="text" value="${user.projects}" />
             <br>
-
             <div class="button-group">
                 <button type="submit" id="save-profile-btn">Save Profile</button>
                 <br>
