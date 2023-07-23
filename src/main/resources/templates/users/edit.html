@@ -1,306 +1,145 @@
- <!DOCTYPE html>
-        <html xmlns:th="http://www.thymeleaf.org" lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Edit</title>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-            <link rel="stylesheet" href="/css/edit.css">
-            <head th:include="partials/header :: head">
-
-            </head>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <head th:include="partials/header :: head">
 
 
-            <style>
-                body {
-                    background-color: #333333;
-                    color: #8e09e7;
-                    font-family: Arial, sans-serif;
-                }
+    </head>
+<body>
+<div th:include="partials/navbar :: navbar"></div>
 
-                h2 {
-                    font-family: 'Roboto', sans-serif;
-                    color: #8fd93f;
-                    text-align: center;
-                }
-
-                h3 {
-                    color: #8e09e7;
-                    text-align: center;
-                }
-
-                .container {
-                    background-color: transparent;
-                    padding: 20px;
-                    border-radius: 10px;
-                    margin: 20px auto;
-                    max-width: 75%; /* Increase the max-width value to make it wider */
-                    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
-                    overflow: auto;
-                }
-
-
-
-                label {
-                    color: #ee8631;
-                }
-
-                input[type="text"],
-                input[type="email"],
-                textarea,
-                input[type="url"] {
-                    width: 100%;
-                    padding: 8px;
-                    margin: 5px 0;
-                    border: 1px solid #ee8631;
-                    border-radius: 5px;
-                    background-color: #fff;
-                    color: #000;
-                }
-
-                button {
-                    background-color: #ee8631;
-                    color: #fff;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    display: block;
-                    margin: 0 auto;
-                }
-
-
-                /* Add styles for the profile picture */
-                .logo {
-                    position: relative;
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 50%;
-                    border: 5px solid #8fd93f;
-                    bottom: 5px;
-                    overflow: hidden;
-                }
-
-                /* Style for the "Upload Image" icon */
-                .upload-icon {
-                    background-color: #8fd93f;
-                    color: #fff;
-                    padding: 5px 10px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-bottom: 10px; /* Add margin to create space between .upload-icon and .logo */
-                    left: 50%;
-                    transform: translateX(-50%);
-                    position: relative;
-                }
-
-                .orange-button {
-                    background-color: #ee8631;
-                    color: #fff;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    display: block;
-                    margin: 0 auto;
-                }
-
-                /* Add styles for the cover photo and update icon */
-                .profile-header-container {
-                    position: relative;
-                    max-width: 75%; /* Increase the max-width value to make it wider */
-                    margin: 10px auto; /* Center the .profile-header-container */
-                    height: 200px;
-                    background-color: #8e09e7;
-                    border-radius: 8px;
-                    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
-                    display: flex;
-                    align-items: flex-end;
-                    overflow: hidden;
-                }
-
-                .cover-photo {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(142, 9, 231, 0.8);
-                    background-size: cover;
-                    background-position: center;
-                    border-radius: 8px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #fff;
-                    font-size: 24px;
-                    cursor: pointer;
-                    transition: background-color 0.3s;
-                }
-
-
-                .update-cover-icon {
-                    position: absolute;
-                    bottom: 10px;
-                    right: 10px;
-                    color: #8fd93f;
-                    font-size: 16px;
-                    text-decoration: none;
-                }
-
-                .icon-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                /* Add new style for the .logo-container */
-                .logo-container {
-                    position: relative;
-                    max-width: 100%; /* Increase the max-width value to make it wider */
-                    margin: 0 auto; /* Center the logo within the container */
-                }
-
-                .button-group {
-                    display: flex;
-                    justify-content: center;
-                }
-
-                .button-group button {
-                    margin: 0 5px; /* Reduce the space between the buttons */
-                }
-
-
-            </style>
-
-
-        </head>
-    <body>
-    <div th:include="partials/navbar :: navbar"></div>
-
-    <h2>Hello <span th:text="${user.firstname + ' ' + user.lastname}"></span></h2>
-    <div class="profile-header-container">
-        <!-- Cover Photo Container -->
-        <div class="cover-photo" style="background-image: url('${user.coverPhoto}');">
-            <a class="update-cover-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
-                <i class="fas fa-camera"></i> Update Cover Photo
-            </a>
-        </div>
+<h2>Hello <span th:text="${user.firstname + ' ' + user.lastname}"></span></h2>
+<div class="profile-header-container">
+    <!-- Cover Photo Container -->
+    <div class="cover-photo" style="background-image: url('${user.coverPhoto}');">
+        <a class="update-cover-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+            <i class="fas fa-camera"></i> Update Cover Photo
+        </a>
+    </div>
 
     <div class="icon-container">
         <button class="upload-icon" type="button">
             <i class="fas fa-camera"></i> Upload Image
         </button>
         <div class="logo-container">
-            <img th:src="${user.image}" width="200" height="200" class="logo" alt="User Logo" />
-    <form id="imageForm" method="post" action="/profile/upload">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <input type="hidden" name="fileURL" id="fileURLInput"/>
-    </form>
+            <img th:src="${user.image}" width="200" height="200" class="logo" alt="User Logo"/>
+            <form id="imageForm" method="post" action="/profile/upload">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input type="hidden" name="fileURL" id="fileURLInput"/>
+            </form>
         </div>
     </div>
-    </div>
-    <div class="container">
-        <h3>EDIT YOUR PROFILE</h3>
-        <form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}" th:method="post">
-            <label for="name">Name:</label>
-            <input id="name" name="name" type="text" th:value="${user.firstname + ' ' + user.lastname}" required />
-            <br>
-            <label for="email">Email:</label>
-            <input id="email" name="email" type="email" th:value="${user.email}" required />
-            <br>
-            <label for="about_me">About Me:</label>
-            <textarea id="about_me" name="about_me" rows="4">${portfolio.about}</textarea>
-            <br>
-            <label for="work-custom">Work:</label>
-            <br>
-            <!-- Input fields for each work value -->
-            <label for="work-ask">Ask Me:</label>
-            <input id="work-ask" name="work" type="text" value="${user.work == 'work.ask' ? 'Ask me:' : ''}" />
+</div>
+<div class="container">
+    <h3>EDIT YOUR PROFILE</h3>
+    <form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}"
+          th:method="post">
+        <label for="name">Name:</label>
+        <input id="name" name="name" type="text" th:value="${user.firstname + ' ' + user.lastname}" required/>
+        <br>
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email" th:value="${user.email}" required/>
+        <br>
+        <label for="about_me">About Me:</label>
+        <textarea id="about_me" name="about_me" rows="4">${portfolio.about}</textarea>
+        <br>
+        <label for="work-custom">Work:</label>
+        <br>
+        <!-- Input fields for each work value -->
+        <label for="work-ask">Ask Me:</label>
+        <input id="work-ask" name="work" type="text" value="${user.work == 'work.ask' ? 'Ask me:' : ''}"/>
 
-            <label for="work-fact">Fun Fact:</label>
-            <input id="work-fact" name="work" type="text" value="${user.work == 'work.fact' ? 'Fun fact:' : ''}" />
+        <label for="work-fact">Fun Fact:</label>
+        <input id="work-fact" name="work" type="text" value="${user.work == 'work.fact' ? 'Fun fact:' : ''}"/>
 
-            <label for="work-help">I need help with...</label>
-            <input id="work-help" name="work" type="text" value="${user.work == 'work.help' ? 'I need help with:' : ''}" />
+        <label for="work-help">I need help with...</label>
+        <input id="work-help" name="work" type="text" value="${user.work == 'work.help' ? 'I need help with:' : ''}"/>
 
-            <label for="work-learning">I am currently learning...</label>
-            <input id="work-learning" name="work" type="text" value="${user.work == 'work.learning' ? 'I am currently earning:' : ''}" />
+        <label for="work-learning">I am currently learning...</label>
+        <input id="work-learning" name="work" type="text"
+               value="${user.work == 'work.learning' ? 'I am currently earning:' : ''}"/>
 
-            <label for="working">I am working on...</label>
-            <input id="working" name="work" type="text" value="${user.work == 'working' ? 'I am working on:' : ''}" />
-            <!-- Separate input field for the "Work" value -->
-            <input id="work-custom" name="work" type="text" value="${user.work}" />
-            <br>
-            <label for="skills-custom">Skills:</label>
-            <br>
-            <!-- Option input fields for "Skills" -->
-            <label for="skill-java">Java</label>
-            <input id="skill-java" name="skills" type="text" value="${user.language == 'language.Java' ? 'Java' : ''}" />
+        <label for="working">I am working on...</label>
+        <input id="working" name="work" type="text" value="${user.work == 'working' ? 'I am working on:' : ''}"/>
+        <!-- Separate input field for the "Work" value -->
+        <input id="work-custom" name="work" type="text" value="${user.work}"/>
+        <br>
+        <label for="skills-custom">Skills:</label>
+        <br>
+        <!-- Option input fields for "Skills" -->
+        <label for="skill-java">Java</label>
+        <input id="skill-java" name="skills" type="text" value="${user.language == 'language.Java' ? 'Java' : ''}"/>
 
-            <label for="skill-cpp">C++</label>
-            <input id="skill-cpp" name="skills" type="text" value="${user.language == 'language.C++' ? 'C++' : ''}" />
+        <label for="skill-cpp">C++</label>
+        <input id="skill-cpp" name="skills" type="text" value="${user.language == 'language.C++' ? 'C++' : ''}"/>
 
-            <label for="skill-python">Python</label>
-            <input id="skill-python" name="skills" type="text" value="${user.language == 'language.Python' ? 'Python' : ''}" />
+        <label for="skill-python">Python</label>
+        <input id="skill-python" name="skills" type="text"
+               value="${user.language == 'language.Python' ? 'Python' : ''}"/>
 
-            <label for="skill-html">HTML</label>
-            <input id="skill-html" name="skills" type="text" value="${user.language == 'language.HTML' ? 'HTML' : ''}" />
+        <label for="skill-html">HTML</label>
+        <input id="skill-html" name="skills" type="text" value="${user.language == 'language.HTML' ? 'HTML' : ''}"/>
 
-            <label for="skill-css">CSS</label>
-            <input id="skill-css" name="skills" type="text" value="${user.language == 'language.CSS' ? 'CSS' : ''}" />
+        <label for="skill-css">CSS</label>
+        <input id="skill-css" name="skills" type="text" value="${user.language == 'language.CSS' ? 'CSS' : ''}"/>
 
-            <label for="skill-js">Javascript</label>
-            <input id="skill-js" name="skills" type="text" value="${user.language == 'language.Javascript' ? 'Javascript' : ''}" />
-            <!-- Separate input field for the "Skills" value -->
-            <input id="skills-custom" name="skills" type="text" value="${user.language}" />
-            <br>
-            <label for="social_linked_in">Social Media (LinkedIn):</label>
-            <input id="social_linked_in" name="social_linked_in" type="url" value="${portfolio.LinkedIn}" />
-            <br>
-            <label for="social_git">Social Media (Git):</label>
-            <input id="social_git" name="social_git" type="url" value="${portfolio.github}" />
-            <br>
-            <label for="social_face_book">Social Media (Facebook):</label>
-            <input id="social_face_book" name="social_face_book" type="url" value="${portfolio.facebook}" />
-            <br>
-            <label for="personal-web">Personal Website:</label>
-            <input id="personal-web" name="personal-web" type="url" value="${portfolio.misclink}" />
-            <br>
-            <label for="projects-custom">Projects:</label>
-            <br>
-            <label for="projects.proj1">Project 1:</label>
-            <input id="projects.proj1" name="proj1" type="url" value="${portfolio.proj1}" />
-            <label for="projects.proj2">Project 2:</label>
-            <input id="projects.proj2" name="proj2" type="url" value="${portfolio.proj2}" />
-            <label for="projects.proj3">Project 3:</label>
-            <input id="projects.proj3" name="proj3" type="url" value="${portfolio.proj3}" />
-            <input id="projects-custom" name="projects" type="url" value="${user.projects}" />
-            <br>
+        <label for="skill-js">Javascript</label>
+        <input id="skill-js" name="skills" type="text"
+               value="${user.language == 'language.Javascript' ? 'Javascript' : ''}"/>
+        <!-- Separate input field for the "Skills" value -->
+        <input id="skills-custom" name="skills" type="text" value="${user.language}"/>
+        <br>
+        <label for="social_linked_in">Social Media (LinkedIn):</label>
+        <input id="social_linked_in" name="social_linked_in" type="url" value="${portfolio.LinkedIn}"/>
+        <br>
+        <label for="social_git">Social Media (Git):</label>
+        <input id="social_git" name="social_git" type="url" value="${portfolio.github}"/>
+        <br>
+        <label for="social_face_book">Social Media (Facebook):</label>
+        <input id="social_face_book" name="social_face_book" type="url" value="${portfolio.facebook}"/>
+        <br>
+        <label for="personal-web">Personal Website:</label>
+        <input id="personal-web" name="personal-web" type="url" value="${portfolio.misclink}"/>
+        <br>
+        <label for="projects-custom">Projects:</label>
+        <br>
+        <label for="projects.proj1">Project 1:</label>
+        <input id="projects.proj1" name="proj1" type="url" value="${portfolio.proj1}"/>
+        <label for="projects.proj2">Project 2:</label>
+        <input id="projects.proj2" name="proj2" type="url" value="${portfolio.proj2}"/>
+        <label for="projects.proj3">Project 3:</label>
+        <input id="projects.proj3" name="proj3" type="url" value="${portfolio.proj3}"/>
+        <input id="projects-custom" name="projects" type="url" value="${user.projects}"/>
+        <br>
 
-            <div class="button-group">
-                <!-- Save Profile Button -->
-                <button type="submit" id="save-profile-btn">Save Profile</button>
+        <div class="button-group">
+            <!-- Save Profile Button -->
+            <button type="submit" id="save-profile-btn">Save Profile</button>
 
-                <!-- Delete Profile Button -->
-                <form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
-                    <button id="delete-btn" class="orange-button">Delete Profile</button>
-                </form>
-            </div>
+            <!-- Delete Profile Button -->
+            <form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}"
+                  th:method="post">
+                <button id="delete-btn" class="orange-button">Delete Profile</button>
+            </form>
+        </div>
 
 
-            <!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--    $('#delete-btn').on('click', function(event) {-->
-<!--    event.preventDefault();-->
+        <!--<script>-->
+        <!--    $(document).ready(function() {-->
+        <!--    $('#delete-btn').on('click', function(event) {-->
+        <!--    event.preventDefault();-->
 
-<!--    if (confirm('Are you sure you want to delete your profile?')) {-->
-<!--    $('#delete-user-form').submit();-->
-<!--    }-->
-<!--    });-->
-<!--    });-->
-<!--</script>-->
+        <!--    if (confirm('Are you sure you want to delete your profile?')) {-->
+        <!--    $('#delete-user-form').submit();-->
+        <!--    }-->
+        <!--    });-->
+        <!--    });-->
+        <!--</script>-->
 
         <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
         <script>
@@ -326,10 +165,9 @@
             });
 
 
-
         </script>
-    <footer th:replace="partials/footer :: footer"></footer>
+        <footer th:replace="partials/footer :: footer"></footer>
 
-    </body>
-    </html>
+</body>
+</html>
 
