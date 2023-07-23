@@ -3,6 +3,7 @@
         <head>
             <meta charset="UTF-8">
             <title>Edit</title>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
             <link th:include="partials/header">
 
@@ -15,6 +16,7 @@
                 }
 
                 h2 {
+                    font-family: 'Roboto', sans-serif;
                     color: #8fd93f;
                     text-align: center;
                 }
@@ -29,7 +31,7 @@
                     padding: 20px;
                     border-radius: 10px;
                     margin: 20px auto;
-                    max-width: 600px;
+                    max-width: 75%; /* Increase the max-width value to make it wider */
                     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
                     overflow: auto;
                 }
@@ -73,7 +75,6 @@
                     border-radius: 50%;
                     border: 5px solid #8fd93f;
                     bottom: 5px;
-                    left: 10px;
                     overflow: hidden;
                 }
 
@@ -105,8 +106,8 @@
                 /* Add styles for the cover photo and update icon */
                 .profile-header-container {
                     position: relative;
-                    max-width: 600px;
-                    margin: 20px auto; /* Center the .profile-header-container */
+                    max-width: 75%; /* Increase the max-width value to make it wider */
+                    margin: 10px auto; /* Center the .profile-header-container */
                     height: 200px;
                     background-color: #8e09e7;
                     border-radius: 8px;
@@ -154,6 +155,17 @@
                 /* Add new style for the .logo-container */
                 .logo-container {
                     position: relative;
+                    max-width: 100%; /* Increase the max-width value to make it wider */
+                    margin: 0 auto; /* Center the logo within the container */
+                }
+
+                .button-group {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .button-group button {
+                    margin: 0 5px; /* Reduce the space between the buttons */
                 }
 
 
@@ -186,65 +198,93 @@
     <div class="container">
         <h3>EDIT YOUR PROFILE</h3>
         <form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}" th:method="post">
-            <label for="name">name</label>
+            <label for="name">Name:</label>
             <input id="name" name="name" type="text" th:value="${user.firstname + ' ' + user.lastname}" required />
             <br>
-            <label for="email">Email</label>
+            <label for="email">Email:</label>
             <input id="email" name="email" type="email" th:value="${user.email}" required />
             <br>
-            <label for="about_me">About Me</label>
-            <textarea id="about_me" name="about_me" rows="4">${user.about}</textarea>
+            <label for="about_me">About Me:</label>
+            <textarea id="about_me" name="about_me" rows="4">${portfolio.about}</textarea>
             <br>
-<!--            <label for="work">Work</label>-->
-<!--            <input id="work" name="work" type="text" value="${user.work}" />-->
-            <label for="work">Work</label>
-            <select id="work-selection" name="work">
-                <!-- Options for the "Work" field -->
-                <option value="work.ask" th:selected="${user.work == 'work.ask'}">Ask me:</option>
-                <option value="work.fact" th:selected="${user.work == 'work.fact'}">Fun fact:</option>
-                <option value="work.help" th:selected="${user.work == 'work.help'}">I need help with:</option>
-                <option value="work.learning" th:selected="${user.work == 'work.learning'}">I am currently earning:</option>
-                <option value="working" th:selected="${user.work == 'working'}">I am working on:</option>
-            </select>
-            <input id="work" name="work" type="text" value="${user.work}" />
+            <label for="work-custom">Work:</label>
             <br>
-            <label for="skills">Skills</label>
-<!--            <select id="skill-selection" name="skills">-->
-<!--                &lt;!&ndash; Options for the "Work" field &ndash;&gt;-->
-<!--                <option value="language.Java" th:selected="${user.language == 'language.Java'}">Java</option>-->
-<!--                <option value="language.C++" th:selected="${user.language == 'language.C++'}">C++</option>-->
-<!--                <option value="language.Python" th:selected="${user.language == 'language.Python'}">Python</option>-->
-<!--                <option value="language.HTML" th:selected="${user.language == 'languag.HTML'}">HTML</option>-->
-<!--                <option value="language.CSS" th:selected="${user.language == 'language.CSS'}">CSS</option>-->
-<!--                <option value="language.Javascript" th:selected="${user.language == 'skills.Javascript'}">Javascript</option>-->
-<!--            </select>-->
-            <input id="skills" name="skills" type="text" value="${user.language}" />
+            <!-- Input fields for each work value -->
+            <label for="work-ask">Ask Me:</label>
+            <input id="work-ask" name="work" type="text" value="${user.work == 'work.ask' ? 'Ask me:' : ''}" />
+
+            <label for="work-fact">Fun Fact:</label>
+            <input id="work-fact" name="work" type="text" value="${user.work == 'work.fact' ? 'Fun fact:' : ''}" />
+
+            <label for="work-help">I need help with...</label>
+            <input id="work-help" name="work" type="text" value="${user.work == 'work.help' ? 'I need help with:' : ''}" />
+
+            <label for="work-learning">I am currently learning...</label>
+            <input id="work-learning" name="work" type="text" value="${user.work == 'work.learning' ? 'I am currently earning:' : ''}" />
+
+            <label for="working">I am working on...</label>
+            <input id="working" name="work" type="text" value="${user.work == 'working' ? 'I am working on:' : ''}" />
+            <!-- Separate input field for the "Work" value -->
+            <input id="work-custom" name="work" type="text" value="${user.work}" />
             <br>
-            <label for="social_linked_in">Social Media (LinkedIn)</label>
-            <input id="social_linked_in" name="social_linked_in" type="url" value="${user.socialLinkedIn}" />
+            <label for="skills-custom">Skills:</label>
             <br>
-            <label for="social_git">Social Media (Git)</label>
-            <input id="social_git" name="social_git" type="url" value="${user.socialGit}" />
+            <!-- Option input fields for "Skills" -->
+            <label for="skill-java">Java</label>
+            <input id="skill-java" name="skills" type="text" value="${user.language == 'language.Java' ? 'Java' : ''}" />
+
+            <label for="skill-cpp">C++</label>
+            <input id="skill-cpp" name="skills" type="text" value="${user.language == 'language.C++' ? 'C++' : ''}" />
+
+            <label for="skill-python">Python</label>
+            <input id="skill-python" name="skills" type="text" value="${user.language == 'language.Python' ? 'Python' : ''}" />
+
+            <label for="skill-html">HTML</label>
+            <input id="skill-html" name="skills" type="text" value="${user.language == 'language.HTML' ? 'HTML' : ''}" />
+
+            <label for="skill-css">CSS</label>
+            <input id="skill-css" name="skills" type="text" value="${user.language == 'language.CSS' ? 'CSS' : ''}" />
+
+            <label for="skill-js">Javascript</label>
+            <input id="skill-js" name="skills" type="text" value="${user.language == 'language.Javascript' ? 'Javascript' : ''}" />
+            <!-- Separate input field for the "Skills" value -->
+            <input id="skills-custom" name="skills" type="text" value="${user.language}" />
             <br>
-            <label for="social_face_book">Social Media (Facebook)</label>
-            <input id="social_face_book" name="social_face_book" type="url" value="${user.socialFacebook}" />
+            <label for="social_linked_in">Social Media (LinkedIn):</label>
+            <input id="social_linked_in" name="social_linked_in" type="url" value="${portfolio.LinkedIn}" />
             <br>
-            <label for="projects">Projects</label>
-            <input id="projects" name="projects" type="text" value="${user.projects}" />
+            <label for="social_git">Social Media (Git):</label>
+            <input id="social_git" name="social_git" type="url" value="${portfolio.github}" />
             <br>
+            <label for="social_face_book">Social Media (Facebook):</label>
+            <input id="social_face_book" name="social_face_book" type="url" value="${portfolio.facebook}" />
+            <br>
+            <label for="personal-web">Personal Website:</label>
+            <input id="personal-web" name="personal-web" type="url" value="${portfolio.misclink}" />
+            <br>
+            <label for="projects-custom">Projects:</label>
+            <br>
+            <label for="projects.proj1">Project 1:</label>
+            <input id="projects.proj1" name="proj1" type="url" value="${portfolio.proj1}" />
+            <label for="projects.proj2">Project 2:</label>
+            <input id="projects.proj2" name="proj2" type="url" value="${portfolio.proj2}" />
+            <label for="projects.proj3">Project 3:</label>
+            <input id="projects.proj3" name="proj3" type="url" value="${portfolio.proj3}" />
+            <input id="projects-custom" name="projects" type="url" value="${user.projects}" />
+            <br>
+
             <div class="button-group">
+                <!-- Save Profile Button -->
                 <button type="submit" id="save-profile-btn">Save Profile</button>
-                <br>
-            </div>
-            </form>
-                <!-- Delete Task Form -->
+
+                <!-- Delete Profile Button -->
                 <form id="delete-user-form" class="inline-form" th:action="@{/profile/{id}/delete(id=${user.getId()})}" th:method="post">
                     <button id="delete-btn" class="orange-button">Delete Profile</button>
                 </form>
+            </div>
 
-    </div>
 
-<!--<script>-->
+            <!--<script>-->
 <!--    $(document).ready(function() {-->
 <!--    $('#delete-btn').on('click', function(event) {-->
 <!--    event.preventDefault();-->
