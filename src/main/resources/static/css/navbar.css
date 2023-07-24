@@ -142,7 +142,8 @@
 
 /* NEW FRIEND REQUEST MODAL BUTTON Styles */
 #newFriendRequestBtn {
-    background-color: #ee8631 !important;
+    margin-left: 5px;
+    background-color: transparent !important;
     border-color: #ee8631 !important;
 }
 
