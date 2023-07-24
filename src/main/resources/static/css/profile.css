@@ -14,9 +14,9 @@ body {
     margin: 20px auto 0; /* Change the margin-top value to create space */
     background-color: #444444;
     color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
     padding: 20px 40px;
+    border-radius: 20px;
+    box-shadow: inset -2px -2px 12px rgba(0, 0, 0, 1);
 }
 
 .profile-picture {
@@ -85,13 +85,13 @@ body {
 }
 
 .fas {
-    color: #ffb74d;
+    color: #8fd93f;
     font-size: 32px;
 }
 
 
 .fas:hover {
-    color: #8fd93f;
+    color: #ffb74d;
 }
 
 .about-me-container {
@@ -99,7 +99,7 @@ body {
     padding: 20px;
     background-color: transparent;
     border-radius: 8px;
-    color: #000000;
+    color: #ffb74d;
     border: 1px solid #8e09e7;
 }
 
@@ -132,11 +132,12 @@ body {
     height: 200px; /* Adjust the height as needed */
     background-color: #8e09e7;
     border-radius: 8px;
-    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
+   border: 1px solid #8e09e7;
     display: flex;
     align-items: flex-end; /* Align the content to the bottom */
     overflow: hidden; /* Ensure that the cover photo doesn't overflow the container */
 }
+
 
 .profile-header-container::before {
     content: "Cover Photo Placeholder";
@@ -188,13 +189,13 @@ body {
     align-items: center; /* Center the icon and text vertically */
     font-size: 32px; /* Adjust the icon size as needed */
     margin: 40px; /* Add spacing between the icons */
-    color: #fff; /* Make the icons white */
+    color: #8fd93f; /* Make the icons white */
     text-decoration: none;
     transition: color 0.3s; /* Add smooth transition for color change on hover */
 }
 
 .icon-link:hover {
-    color: #aefc4f /* Change the icon and link text color on hover */
+    color: #ffb74d;/* Change the icon and link text color on hover */
 }
 
 
@@ -202,6 +203,11 @@ body {
     font-size: 25px; /* Adjust the size as needed */
     margin-right: 20px; /* Adjust the spacing between icons */
     color: #ffb74d; /* Change the color to #ffb74d */
+}
+
+.profile-email {
+    font-size: 16px; /* Adjust the font size as needed */
+    color: #ffb74d;
 }
 
 
