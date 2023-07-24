@@ -8,105 +8,104 @@
     <link rel="stylesheet" href="/css/navbar.css">
 
 
-
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/home" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
-            <img width="60" src="https://cdn.filestackcontent.com/xajY09uFTyOwyLdR6SLl">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Link</a>
-                </li>
-            </ul>
-
-
-            <!--            <div class="logo">-->
-            <!--            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">-->
-            <!--            </div>-->
-
-            <!--NEW FRIEND REQUEST MODAL BUTTON  -->
-            <button type="button" class="btn btn-primary" id="newFriendRequestBtn" data-bs-toggle="tooltip"
-                    data-bs-placement="bottom" title="New Friend Request">
-                <i class="bi bi-person-plus"></i>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
+                <img width="60" src="https://cdn.filestackcontent.com/xajY09uFTyOwyLdR6SLl">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Link</a>
+                    </li>
+                </ul>
 
 
-            <!--NEW FRIEND REQUEST MODAL-->
-            <div class="modal fade" id="receivedFriendRequestModal" tabindex="-1" role="dialog"
-                 aria-labelledby="receivedFriendRequestModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="receivedFriendRequestModalLabel">New Friend Request
-                                Received</h5>
-                            <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-                            <!--                                        aria-label="Close"></button>-->
-                        </div>
-                        <div class="modal-body">
-                            <!-- Modal content here -->
-                            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-                            <p id="friendUsername">Placeholder Username</p>
-                        </div>
-                        <div class="modal-footer">
-                            <form action="#" method="post" id="acceptFriendRequestForm">
-                                <input type="hidden" name="receiverId" value="1"/>
-                                <button type="submit" class="btn btn-primary">Accept</button>
-                            </form>
-                            <form action="#" method="post" id="declineFriendRequestForm">
-                                <input type="hidden" name="receiverId" value="1"/>
-                                <button type="submit" class="btn btn-danger">Decline</button>
-                            </form>
+                <!--            <div class="logo">-->
+                <!--            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">-->
+                <!--            </div>-->
+
+                <!--NEW FRIEND REQUEST MODAL BUTTON  -->
+                <button type="button" class="btn btn-primary" id="newFriendRequestBtn" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="New Friend Request">
+                    <i class="bi bi-person-plus"></i>
+                </button>
+
+
+                <!--NEW FRIEND REQUEST MODAL-->
+                <div class="modal fade" id="receivedFriendRequestModal" tabindex="-1" role="dialog"
+                     aria-labelledby="receivedFriendRequestModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="receivedFriendRequestModalLabel">New Friend Request
+                                    Received</h5>
+                                <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                                <!--                                        aria-label="Close"></button>-->
+                            </div>
+                            <div class="modal-body">
+                                <!-- Modal content here -->
+                                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+                                <p id="friendUsername">Placeholder Username</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="#" method="post" id="acceptFriendRequestForm">
+                                    <input type="hidden" name="receiverId" value="1"/>
+                                    <button type="submit" class="btn btn-primary">Accept</button>
+                                </form>
+                                <form action="#" method="post" id="declineFriendRequestForm">
+                                    <input type="hidden" name="receiverId" value="1"/>
+                                    <button type="submit" class="btn btn-danger">Decline</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <!-- Bootstrap Tooltip JavaScript -->
-            <script>
-                <!--BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)-->
-                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl)
-                });
-
-
-                // This JavaScript code will handle the "New Friend Request" modal
-                document.addEventListener("DOMContentLoaded", function () {
-                    const friendRequestModal = new bootstrap.Modal(document.getElementById("receivedFriendRequestModal"));
-
-                    const friendRequestButton = document.getElementById("newFriendRequestBtn");
-                    friendRequestButton.addEventListener("click", function () {
-                        friendRequestModal.show();
+                <!-- Bootstrap Tooltip JavaScript -->
+                <script>
+                    <!--BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)-->
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl)
                     });
-                });
-            </script>
-            <!--END OF NEW FRIEND REQUEST MODAL-->
+
+
+                    // This JavaScript code will handle the "New Friend Request" modal
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const friendRequestModal = new bootstrap.Modal(document.getElementById("receivedFriendRequestModal"));
+
+                        const friendRequestButton = document.getElementById("newFriendRequestBtn");
+                        friendRequestButton.addEventListener("click", function () {
+                            friendRequestModal.show();
+                        });
+                    });
+                </script>
+                <!--END OF NEW FRIEND REQUEST MODAL-->
 
 
                 <form class="d-flex" role="search">
@@ -127,23 +126,21 @@
                         });
                     }
 
+                </script>
+                    <script>
+                        const link = document.querySelector("#logout-link");
+                        if (link !== null) {
+                        link.addEventListener("click", function (event) {
+                            document.getElementById("logout").submit();
+                        });
+                    }
 
-            <script>
-                const link = document.querySelector("#logout-link");
-                if (link !== null) {
-                    link.addEventListener("click", function (event) {
-                        document.getElementById("logout").submit();
-                    });
-                }
-
-
+                </script>
             </div>
 
         </div>
     </nav>
 </div>
-
-
 
 
 </html>
