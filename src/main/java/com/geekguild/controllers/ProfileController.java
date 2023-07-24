@@ -1,9 +1,6 @@
 package com.geekguild.controllers;
 
-import com.geekguild.models.Portfolio;
-import com.geekguild.models.ProfileFormWrapper;
-import com.geekguild.models.User;
-import com.geekguild.models.Work;
+import com.geekguild.models.*;
 import com.geekguild.repositories.PortfolioRepository;
 import com.geekguild.repositories.UserRepository;
 import com.geekguild.repositories.WorkRepository;
@@ -16,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sound.sampled.Port;
+import java.util.Optional;
 
 @Controller
 public class ProfileController {
@@ -29,6 +27,30 @@ public class ProfileController {
         this.userDao = userDao;
         this.workDao = workDao;
     }
+
+    @GetMapping("/profile/{id}")
+    public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
+        // Retrieve the user with the given userId from the database
+        User user = userDao.findById(userId).orElse(null);
+
+        // Check if the user exists
+        if (user == null) {
+            // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
+            return "redirect:/error"; // Example: redirect to an error page
+        }
+
+        // Fetch the user's portfolio and work
+        Portfolio portfolio = portfolioDao.findByUserId(userId);
+        Work work = workDao.findByUserId(userId);
+
+        // Add the user, portfolio, and work to the model so they can be accessed in the view
+        model.addAttribute("user", user);
+        model.addAttribute("portfolio", portfolio);
+        model.addAttribute("work", work);
+
+        return "users/profile";
+    }
+
 
     @PostMapping("/profile/upload")
     @ResponseBody
