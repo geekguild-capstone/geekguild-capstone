@@ -48,7 +48,9 @@
                 <!--            </div>-->
 
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
+
                 <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary" id="newFriendRequestBtn"
+
                         data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
                 </button>
@@ -108,14 +110,14 @@
                 <!--END OF NEW FRIEND REQUEST MODAL-->
 
 
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+<!--                <form class="d-flex" role="search">-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn search-button" type="submit">Search</button>-->
 
 
                 </form>
                 <form th:action="@{/login}" th:method="post" id="logout">
-                    <button class="btn btn-outline-success" type="submit">Logout</button>
+                    <button class="btn logout-button" type="submit">Logout</button>
                 </form>
 
                 <script>
