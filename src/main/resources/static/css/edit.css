@@ -5,6 +5,7 @@ body {
 }
 
 h2 {
+    font-family: 'Roboto', sans-serif;
     color: #8fd93f !important;
     text-align: center;
 }
@@ -19,12 +20,9 @@ h3 {
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
-    max-width: 600px;
+    max-width: 75%; /* Increase the max-width value to make it wider */
     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: #8fd93f #333333;
-    height: 500px;
+    overflow: auto;
 }
 
 .container::-webkit-scrollbar-track {
@@ -32,24 +30,6 @@ h3 {
     border-radius: 1px;
 }
 
-/* Customize the scrollbar */
-.container::-webkit-scrollbar {
-    width: 5px;
-    background-color: #444;
-}
-
-.container::-webkit-scrollbar-thumb {
-    background-color: #8e09e7; /* Set the thumb color */
-    border-radius: 5px;
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-    background-color: #ee8631 /* Set the thumb color on hover */
-}
-
-.container::-webkit-scrollbar-thumb:active {
-    background-color: #8fd93f; /* Set thumb color on active state for WebKit */
-}
 
 label {
     color: #ee8631;
@@ -120,7 +100,7 @@ button {
 /* Add styles for the cover photo and update icon */
 .profile-header-container {
     position: relative;
-    max-width: 600px;
+    max-width: 75%;
     margin: 20px auto; /* Center the .profile-header-container */
     height: 200px;
     background-color: #8e09e7;
@@ -169,5 +149,15 @@ button {
 /* Add new style for the .logo-container */
 .logo-container {
     position: relative;
+    max-width: 100%; /* Increase the max-width value to make it wider */
+    margin: 0 auto; /* Center the logo within the container */
 }
 
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.button-group button {
+    margin: 0 5px; /* Reduce the space between the buttons */
+}
