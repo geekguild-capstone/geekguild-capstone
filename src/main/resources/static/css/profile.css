@@ -207,12 +207,10 @@ body {
 
 .profile-email {
     font-size: 16px; /* Adjust the font size as needed */
-    color: #ffb74d;
+    color: #aefc4f;
 }
 
-.profile-email:hover{
-    color: #8fd93f;
-}
+
 
 
 .project-link{

@@ -49,6 +49,7 @@ public class HomeController {
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
 
 
+
         return "users/home";
     }
 
