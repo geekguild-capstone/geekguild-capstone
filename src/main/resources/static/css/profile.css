@@ -73,11 +73,15 @@ body {
     border-radius: 4px;
 }
 
+.edit-icon-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1; /* Ensure the edit icon is above the rest of the content */
+}
+
 .edit-icon {
     position: relative;
-    top: 10px;
-    right: 10px;
-    z-index: 999; /* Adjust the z-index as needed */
 }
 
 .fas {
@@ -190,6 +194,12 @@ body {
 
 .icon-link:hover {
     color: #aefc4f /* Change the icon and link text color on hover */
+}
+
+.skill-icon {
+    font-size: 25px; /* Adjust the size as needed */
+    margin-right: 20px; /* Adjust the spacing between icons */
+    color: #ffb74d; /* Change the color to #ffb74d */
 }
 
 
