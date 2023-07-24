@@ -46,7 +46,6 @@ h1 {
 }
 
 
-/*MIDDLE SECTION*/
 .left-section::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
     border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
@@ -57,7 +56,7 @@ h1 {
     background-color: #ffb74d; /* Thumb color on hover */
 }
 
-.middle-section {
+.view-post-container {
     background-color: #444444;
     overflow-y: auto;
     border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
@@ -65,20 +64,31 @@ h1 {
 
 }
 
-.middle-section::-webkit-scrollbar {
+
+/*MIDDLE SECTION*/
+.middle-section{
+    background-color: #444444;
+    /*overflow-y: auto;*/
+    /*SET GAP FROM BOTTOM OF PAGE*/
+    margin: 0 0 15px 0; /* top, right, bottom, left */
+}
+
+
+
+.view-post-container::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar track */
     background-color: transparent; /* Track color */
     border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
     /*border: #708090 solid 2px;*/
 }
 
-.middle-section::-webkit-scrollbar-thumb {
+.view-post-container::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
     border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
-    height: 40px;
+    height: 15px !important;
 }
 
-.middle-section::-webkit-scrollbar-thumb:hover {
+.view-post-container::-webkit-scrollbar-thumb:hover {
     background-color: #ffb74d; /* Thumb color on hover */
 }
 
@@ -117,7 +127,7 @@ h1 {
 .top-right-section::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
     border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
-    height: 10px;
+    height: 15px !important;
 }
 
 .top-right-section::-webkit-scrollbar-thumb:hover {
@@ -147,14 +157,12 @@ h1 {
 .bottom-right-section::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
     border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
-    height: 40px;
+    height: 15px !important;
 }
 
 .bottom-right-section::-webkit-scrollbar-thumb:hover {
     background-color: #ffb74d; /* Thumb color on hover */
 }
-
-
 
 
 
@@ -165,6 +173,7 @@ h1 {
 
 
 .create-post-container, .view-post-container {
+    height: 50%;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

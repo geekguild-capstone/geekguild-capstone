@@ -14,7 +14,10 @@
         <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
 
         <!--PROFILE PIC-->
-        <img th:src="${user.image}" alt="Profile Picture" class="profile-img">
+        <img th:if="${user.image != null and user.image != ''}" th:src="${user.image}" alt="Profile Picture" class="profile-img" />
+        <img th:unless="${user.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg" alt="Default Profile Picture" class="profile-img" />
+
+        <!--        <img th:src="${user.image}" alt="Profile Picture" class="profile-img">-->
 
         <!--USER NAME-->
         <div class="name">
