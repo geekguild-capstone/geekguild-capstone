@@ -48,6 +48,7 @@ input[type="url"] {
     color: #000;
 }
 
+
 button {
     background-color: #ee8631;
     color: #fff;
@@ -86,8 +87,8 @@ button {
     position: relative;
 }
 
-.orange-button {
-    background-color: #ee8631;
+.purple-button {
+    background-color: #8e09e7;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -251,3 +252,4 @@ button {
     background-color: #8fd93f;
     border-color: #8fd93f;
 }
+

@@ -33,7 +33,9 @@
         <!-- Profile Picture Container -->
         <img th:src="${user.image}" alt="Profile Picture" class="profile-picture">
         <div class="profile-info">
-
+            <a th:href="${user.email ?: ''}" class="profile-email">
+                <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>
+            </a>
             <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
             <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
         </div>
@@ -42,10 +44,6 @@
     <hr>
 
     <div class="icon-container">
-        <a th:href="${user.email ?: ''}" class="icon-link">
-            <i class="fas fa-envelope"></i>
-            <span class="icon-text"></span>
-        </a>
         <a th:href="${portfolio.linkedin ?: ''}" class="icon-link">
             <i class="fab fa-linkedin"></i>
             <span class="icon-text"></span>
