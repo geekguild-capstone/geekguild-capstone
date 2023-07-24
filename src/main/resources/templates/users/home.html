@@ -86,12 +86,15 @@
 
     <div class="right-section">
         <div class="top-right-section">
-            <!-- container element in which TalkJS will display a chat UI -->
-            <div id="talkjs-container" style="width: 80%; margin: 30px; height: 500px">
-                <i>Loading chat...</i>
-            </div>
+
         </div>
         <div th:include="partials/suggested-friend" class="bottom-right-section">Bottom Right Section</div>
+    </div>
+</div>
+<!-- container element in which TalkJS will display a chat UI -->
+<div class="chat-window">
+    <div id="talkjs-container" style="width: 80%; margin: 30px; height: 500px">
+        <i>Loading chat...</i>
     </div>
 </div>
 <script>
@@ -182,25 +185,37 @@
     })(window, document, []);
 </script>
 <script>
-    function openTalkJSChat(friendID, friendUsername, userID, userUsername) {
+    // let friendIdH;
+    // let friendUsernameH;
+    // let friendImageH;
+    // let userIdH;
+    // let userUsernameH;
+    // let userImageH;
+
+    function openTalkJSChat(friendId, friendUsername, friendImage, userId, userUsername, userImage, event) {
+        event.stopPropagation();
+        // friendIdH = friendId;
+        // friendUsernameH = friendUsername;
+        // friendImageH = friendImage;
+        // userIdH = userId;
+        // userUsernameH = userUsername;
+        // userImageH = userImage;
         Talk.ready.then(function () {
             var me = new Talk.User({
-                id: userID,
+                id: userId,
                 name: userUsername,
                 email: 'alice@example.com',
-                photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
-                welcomeMessage: 'Hey there! How are you? :-)',
+                photoUrl: userImage,
             });
             window.talkSession = new Talk.Session({
                 appId: 'tUloHvfB',
                 me: me,
             });
             var other = new Talk.User({
-                id: friendID,
+                id: friendId,
                 name: friendUsername,
                 email: 'Sebastian@example.com',
-                photoUrl: 'https://talkjs.com/images/avatar-5.jpg',
-                welcomeMessage: 'Hey, how can I help?',
+                photoUrl: friendImage,
             });
 
             var conversation = talkSession.getOrCreateConversation(
@@ -211,9 +226,33 @@
 
             var inbox = talkSession.createInbox({selected: conversation});
             inbox.mount(document.getElementById('talkjs-container'));
+
+            // Show the chat window when opened
+            showChatWindow();
+
         });
     }
+
+    function showChatWindow() {
+        const chatWindow = document.querySelector('.chat-window');
+        chatWindow.classList.add('visible');
+    }
+
+    function closeChatArea() {
+        const chatArea = document.querySelector('.chat-window');
+        chatArea.classList.remove('visible');
+    }
+
+
+    // Click event listener on the window to close the chat area
+    window.addEventListener('click', function (event) {
+        const chatArea = document.querySelector('.chat-window');
+        if (!chatArea.contains(event.target)) {
+            closeChatArea();
+        }
+    });
 </script>
+
 
 
 <script>
@@ -222,6 +261,7 @@
         imgElement.src = '/img/logo-no-text.jpeg'; // Replace this with the URL of your default image
     }
 </script>
+
 
 
 <footer th:replace="partials/footer :: footer"></footer>
