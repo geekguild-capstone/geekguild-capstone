@@ -58,23 +58,42 @@ public class ProfileController {
     public String editProfile(@PathVariable long id, Model model) {
         Long userId = id;
         User user = userDao.getReferenceById(userId);
+        Portfolio portfolio = portfolioDao.getReferenceById(id);
+        Work work = workDao.getReferenceById(id);
         // Check if the user exists
         if (user == null) {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
             return "redirect:/error"; // Example: redirect to an error page
         }
         model.addAttribute("user", user);
+        model.addAttribute("portfolio", portfolio);
+        model.addAttribute("work", work);
         return "/users/edit";
     }
 
     // This method handles the POST request to save the edited profile
     @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, @RequestParam String username, @RequestParam String email) {
-        User user = userDao.getReferenceById(id);
-        user.setUsername(username);
-        user.setEmail(email);
-        userDao.save(user);
-        System.out.println(user);
+    public String editProfile(@PathVariable long id, @ModelAttribute User user, @ModelAttribute Portfolio portfolio, @ModelAttribute Work work) {
+        User loggedInUser = userDao.getReferenceById(id);
+        loggedInUser.setUsername(user.getFirstname());
+        loggedInUser.setEmail(user.getLastname());
+        loggedInUser.setEmail(user.getEmail());
+        userDao.save(loggedInUser);
+
+        // Fetch the existing portfolio and update its fields
+        Portfolio existingPortfolio = portfolioDao.findByUserId(id);
+        existingPortfolio.setAbout(portfolio.getAbout());
+
+        // Save the updated portfolio back to the database
+        portfolioDao.save(existingPortfolio);
+
+        // Fetch the existing work and update its fields
+        Work existingWork = workDao.findByUserId(id);
+        existingWork.setAsk(work.getAsk());
+
+        // Save the updated work back to the database
+        workDao.save(existingWork);
+
         return "redirect:/profile/" + id;
     }
 

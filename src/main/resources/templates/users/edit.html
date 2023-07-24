@@ -38,39 +38,42 @@
 <div class="container">
     <h3>EDIT YOUR PROFILE</h3>
     <form id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${user.getId()})}"
-          th:method="post">
-        <label for="name">Name:</label>
-        <input id="name" name="name" type="text" th:value="${user.firstname + ' ' + user.lastname}" required/>
+          th:method="post" >
+        <label for="firstName">First Name:</label>
+        <input id="firstName" name="firstName" type="text" th:value="${user.firstname}"/>
+        <br>
+        <label for="lastName">First Name:</label>
+        <input id="lastName" name="lastName" type="text" th:value="${user.lastname}"/>
         <br>
         <label for="email">Email:</label>
-        <input id="email" name="email" type="email" th:value="${user.email}" required/>
+        <input id="email" name="email" type="email" th:value="${user.email}" />
         <br>
         <label for="about_me">About Me:</label>
-        <textarea id="about_me" name="about_me" rows="4">${portfolio.about}</textarea>
+        <textarea th:text="${portfolio.about}" id="about_me" name="about_me" rows="4"></textarea>
         <br>
         <label>Work:</label>
         <br>
         <!-- Input fields for each work value -->
         <label for="work-ask">Ask Me:</label>
-        <input id="work-ask" name="work" type="text" value="${user.work == 'work.ask' ? 'Ask me:' : ''}"/>
+        <input id="work-ask" name="work" type="text" th:value="${work.ask}"/>
 
         <label for="work-fact">Fun Fact:</label>
-        <input id="work-fact" name="work" type="text" value="${user.work == 'work.fact' ? 'Fun fact:' : ''}"/>
+        <input id="work-fact" name="work" type="text" th:value="${work.fact}"/>
 
         <label for="work-help">I need help with...</label>
-        <input id="work-help" name="work" type="text" value="${user.work == 'work.help' ? 'I need help with:' : ''}"/>
+        <input id="work-help" name="work" type="text" th:value="${work.help}"/>
 
         <label for="work-learning">I am currently learning...</label>
         <input id="work-learning" name="work" type="text"
-               value="${user.work == 'work.learning' ? 'I am currently earning:' : ''}"/>
+               th:value="${work.learn}"/>
 
         <label for="working">I am working on...</label>
-        <input id="working" name="work" type="text" value="${user.work == 'working' ? 'I am working on:' : ''}"/>
+        <input id="working" name="work" type="text" th:value="${work.working}"/>
         <!-- Separate input field for the "Work" value -->
        <br>
 
         <!-- Skills section using CSS classes -->
-        <label for="skills-custom">Skills:</label>
+<!--        <label for="skills-custom">Skills:</label>-->
         <br>
 
         <!-- Skills section using custom checkboxes and icons -->
@@ -140,25 +143,25 @@
 
         <br>
         <label for="social_linked_in">Social Media (LinkedIn):</label>
-        <input id="social_linked_in" name="social_linked_in" type="url" value="${portfolio.LinkedIn}"/>
+        <input id="social_linked_in" name="social_linked_in" type="url" th:value="${portfolio.linkedin}"/>
         <br>
         <label for="social_git">Social Media (Git):</label>
-        <input id="social_git" name="social_git" type="url" value="${portfolio.github}"/>
+        <input id="social_git" name="social_git" type="url" th:value="${portfolio.github}"/>
         <br>
         <label for="social_face_book">Social Media (Facebook):</label>
-        <input id="social_face_book" name="social_face_book" type="url" value="${portfolio.facebook}"/>
+        <input id="social_face_book" name="social_face_book" type="url" th:value="${portfolio.facebook}"/>
         <br>
         <label for="personal-web">Personal Website:</label>
-        <input id="personal-web" name="personal-web" type="url" value="${portfolio.misclink}"/>
+        <input id="personal-web" name="personal-web" type="url" th:value="${portfolio.misclink}"/>
         <br>
         <label>Projects:</label>
         <br>
         <label for="projects.proj1">Project 1:</label>
-        <input id="projects.proj1" name="proj1" type="url" value="${portfolio.proj1}"/>
+        <input id="projects.proj1" name="proj1" type="url" th:value="${portfolio.proj1}"/>
         <label for="projects.proj2">Project 2:</label>
-        <input id="projects.proj2" name="proj2" type="url" value="${portfolio.proj2}"/>
+        <input id="projects.proj2" name="proj2" type="url" th:value="${portfolio.proj2}"/>
         <label for="projects.proj3">Project 3:</label>
-        <input id="projects.proj3" name="proj3" type="url" value="${portfolio.proj3}"/>
+        <input id="projects.proj3" name="proj3" type="url" th:value="${portfolio.proj3}"/>
         <br>
 
         <div class="button-group">
