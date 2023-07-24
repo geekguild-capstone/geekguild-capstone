@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
+
     <head th:include="partials/header :: head">
     </head>
 <body>
@@ -251,6 +252,16 @@
         }
     });
 </script>
+
+
+
+<script>
+    function setDefaultProfilePic() {
+        const imgElement = document.querySelector('.profile-img');
+        imgElement.src = '/img/logo-no-text.jpeg'; // Replace this with the URL of your default image
+    }
+</script>
+
 
 
 <footer th:replace="partials/footer :: footer"></footer>
