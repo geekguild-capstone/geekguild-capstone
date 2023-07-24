@@ -69,8 +69,9 @@
 }
 
 /* Navbar Toggler Icon Color */
-.navbar-toggler-icon {
-    color: white !important;
+.navbar-toggler {
+    background-color: darkorange !important;
+    border-color: white !important;
 }
 
 /* Navbar Links Text Color */
