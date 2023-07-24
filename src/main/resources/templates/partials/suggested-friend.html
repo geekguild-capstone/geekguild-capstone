@@ -11,6 +11,9 @@
 <div th:each="user : ${notFriends}">
     <div class="card-container">
         <!--BANNER-->
+<!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
+<!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
+
         <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
 
         <!--PROFILE PIC-->
