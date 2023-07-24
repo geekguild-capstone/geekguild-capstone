@@ -1,0 +1,253 @@
+body {
+    background-color: #333333 !important;
+    color: #8e09e7;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #8fd93f !important;
+    text-align: center;
+}
+
+h3 {
+    color: #8e09e7 !important;
+    text-align: center;
+}
+
+.container {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 75%; /* Increase the max-width value to make it wider */
+    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
+    overflow: auto;
+}
+
+.container::-webkit-scrollbar-track {
+    background-color: #333333; /* Set the track color */
+    border-radius: 1px;
+}
+
+
+label {
+    color: #ee8631;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+input[type="url"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ee8631;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+}
+
+button {
+    background-color: #ee8631;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Add styles for the profile picture */
+.logo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #8fd93f;
+    bottom: 5px;
+    left: 10px;
+    overflow: hidden;
+}
+
+/* Style for the "Upload Image" icon */
+.upload-icon {
+    background-color: #8fd93f;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Add margin to create space between .upload-icon and .logo */
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.orange-button {
+    background-color: #ee8631;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Add styles for the cover photo and update icon */
+.profile-header-container {
+    position: relative;
+    max-width: 75%;
+    margin: 20px auto; /* Center the .profile-header-container */
+    height: 200px;
+    background-color: #8e09e7;
+    border-radius: 8px;
+    box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.cover-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(142, 9, 231, 0.8);
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.update-cover-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #8fd93f;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Add new style for the .logo-container */
+.logo-container {
+    position: relative;
+    max-width: 100%; /* Increase the max-width value to make it wider */
+    margin: 0 auto; /* Center the logo within the container */
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.button-group button {
+    margin: 0 5px; /* Reduce the space between the buttons */
+}
+
+/* Existing styles ... */
+
+     /* Styles for the Skills section */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-top: 20px;
+    max-width: 400px; /* Adjust the container width as needed */
+}
+
+
+    /* Style the custom checkboxes */
+.skills-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #8fd93f;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+/* Style the custom checkboxes when checked */
+.skills-checkbox:checked + label:before {
+    background-color: #8fd93f;
+    border-color: #8fd93f;
+}
+
+/* Styles for the Skills section */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    margin-top: 10px;
+    max-width: 400px; /* Adjust the container width as needed */
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.skills-checkbox {
+    display: none; /* Hide the default checkboxes */
+    margin-right: 5px;
+}
+
+.skills-checkbox + label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.skill-icon {
+    margin-top: 5px;
+    font-size: 24px;
+}
+
+
+/* Icons using Font Awesome */
+.skill-icon i {
+    color: #8fd93f;
+}
+
+/* Style the custom checkboxes */
+.skills-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #8fd93f;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+/* Style the custom checkboxes when checked */
+.skills-checkbox:checked + label:before {
+    background-color: #8fd93f;
+    border-color: #8fd93f;
+}

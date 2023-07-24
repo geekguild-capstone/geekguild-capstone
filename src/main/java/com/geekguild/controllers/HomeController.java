@@ -49,14 +49,19 @@ public class HomeController {
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
 
 
-
         return "users/home";
     }
 
     @GetMapping("/about-us")
+    public String showAbout() {
+
+        return "/partials/about-us";
+    }
+
+    @GetMapping("/groups")
     public String showGroups() {
 
-        return "/partials/about";
+        return "/groups/groups";
     }
 
     @PostMapping("/home")
@@ -91,128 +96,37 @@ public class HomeController {
     }
 
 
-//    @PostMapping("/home/remove")
-//    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
-//        System.out.println("Endpoint hit"); // Add this line for debugging
-//
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        System.out.println(loggedInUser);
-//        User friend = userDao.findById(friendId).orElse(null);
-//        System.out.println(friend);
-//
-//        if (friend != null) {
-//            if ("sender".equals(loggedInUserType)) {
-//                // If the logged-in user is the sender of the friend request
-//                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
-//                if (friendRequest != null) {
-//                    // Set the status of the friend request to "rejected"
-//                    friendRequest.setStatus("rejected");
-//                    friendDao.save(friendRequest);
-//                    System.out.println("Friend request status set to 'rejected' for sender"); // Add this line for debugging
-//                }
-//            } else if ("receiver".equals(loggedInUserType)) {
-//                // If the logged-in user is the receiver of the friend request
-//                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
-//                if (friendRequest != null) {
-//                    // Set the status of the friend request to "rejected"
-//                    friendRequest.setStatus("rejected");
-//                    friendDao.save(friendRequest);
-//                    System.out.println("Friend request status set to 'rejected' for receiver"); // Add this line for debugging
-//                }
-//            }
-//        }
-//
-//        return "redirect:/home";
-//    }
-@PostMapping("/home/remove")
-public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
-    System.out.println("Endpoint hit");
+    @PostMapping("/home/remove")
+    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
+        System.out.println("Endpoint hit");
 
-    User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User friend = userDao.findById(friendId).orElse(null);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User friend = userDao.findById(friendId).orElse(null);
 
-    if (friend != null) {
-        if ("sender".equals(loggedInUserType)) {
-            // If the logged-in user is the sender of the friend request
-            FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
-            if (friendRequest != null) {
-                // Set the status of the friend request to "rejected"
-                friendRequest.setStatus("rejected");
-                friendDao.save(friendRequest);
-                System.out.println("Friend request status set to 'rejected' for sender"); // Add this line for debugging
-            }
-        } else if ("receiver".equals(loggedInUserType)) {
-            // If the logged-in user is the receiver of the friend request
-            FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
-            if (friendRequest != null) {
-                // Set the status of the friend request to "rejected"
-                friendRequest.setStatus("rejected");
-                friendDao.save(friendRequest);
-                System.out.println("Friend request status set to 'rejected' for receiver"); // Add this line for debugging
+        if (friend != null) {
+            if ("sender".equals(loggedInUserType)) {
+                // If the logged-in user is the sender of the friend request
+                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
+                if (friendRequest != null) {
+                    // Set the status of the friend request to "rejected"
+                    friendRequest.setStatus("rejected");
+                    friendDao.save(friendRequest);
+                    System.out.println("Friend request status set to 'rejected' for sender"); // Add this line for debugging
+                }
+            } else if ("receiver".equals(loggedInUserType)) {
+                // If the logged-in user is the receiver of the friend request
+                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
+                if (friendRequest != null) {
+                    // Set the status of the friend request to "rejected"
+                    friendRequest.setStatus("rejected");
+                    friendDao.save(friendRequest);
+                    System.out.println("Friend request status set to 'rejected' for receiver"); // Add this line for debugging
+                }
             }
         }
+
+        return "redirect:/home";
     }
-
-    return "redirect:/home";
-}
-//    @PostMapping("/home/remove")
-//    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
-//        System.out.println("Endpoint hit");
-//
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User friend = userDao.findById(friendId).orElse(null);
-//
-//        if (friend != null) {
-//            FriendRequest friendRequest;
-//            if ("sender".equals(loggedInUserType)) {
-//                // If the logged-in user is the sender of the friend request
-//                friendRequest = friendDao.findBySenderAndReceiver(loggedInUser, friend);
-//            } else {
-//                // If the logged-in user is the receiver of the friend request
-//                friendRequest = friendDao.findBySenderAndReceiver(friend, loggedInUser);
-//            }
-//
-//            if (friendRequest != null && friendRequest.getStatus().equals("accepted")) {
-//                // Set the status of the friend request to "rejected"
-//                friendRequest.setStatus("rejected");
-//                friendDao.save(friendRequest);
-//                System.out.println("Friend request status set to 'rejected'"); // Add this line for debugging
-//            }
-//        }
-//
-//        return "redirect:/home";
-//    }
-
-//    @PostMapping("/home/remove")
-//    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
-//        System.out.println("endpoint hit");
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User friend = userDao.findById(friendId).orElse(null);
-//
-//        if (friend != null) {
-//            if ("sender".equals(loggedInUserType)) {
-//                // If the logged-in user is the sender of the friend request
-//                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
-//                if (friendRequest != null) {
-//                    // Set the status of the friend request to "rejected"
-//                    friendRequest.setStatus("rejected");
-//                    friendDao.save(friendRequest);
-//                }
-//            } else if ("receiver".equals(loggedInUserType)) {
-//                // If the logged-in user is the receiver of the friend request
-//                FriendRequest friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
-//                if (friendRequest != null) {
-//                    // Set the status of the friend request to "rejected"
-//                    friendRequest.setStatus("rejected");
-//                    friendDao.save(friendRequest);
-//                }
-//            }
-//        }
-//
-//        return "redirect:/home";
-//    }
-
-
 
 
 }

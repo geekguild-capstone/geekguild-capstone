@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Groups</title>
-</head>
+    <title>Groups</title>
+    <head th:include="partials/header :: head">
+
+    </head>
 <body>
+<div th:replace="partials/navbar :: navbar"></div>
+
 <h1>Groups</h1>
+
+<footer th:replace="partials/footer :: footer"></footer>
+
 </body>
 </html>

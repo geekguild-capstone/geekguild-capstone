@@ -1,0 +1,118 @@
+body {
+    background-color: #333333 !important;
+    color: #8fd93f !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push content to the top and bottom */
+    align-items: center; /* Center everything horizontally */
+    text-align: center;
+    height: 100vh;
+    margin: 0; /* Remove default body margin */
+    overflow: hidden; /* Hide horizontal overflow */
+}
+.container {
+    padding: 20px;
+    max-width: 800px; /* Increase the max-width for better readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.organization-name {
+    font-size: 30px;
+    color: #ee8631 !important;
+    font-weight: bold;
+}
+
+h2{
+    color: #8e09e7 !important;
+}
+
+p{
+    font-size: large;
+}
+.member-card {
+    background-color: #ee8631;
+    color: #000000;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 380px; /* Increase the height of the cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* Center items horizontally */
+    border: 1px solid #8e09e7;
+    box-shadow: -2px -5px 6px rgba(142, 9, 231, 0.5); /* Add the specified shadow effect to the border */
+    border-radius: 10px; /* Add border-radius for a rounded look */
+
+}
+.member-card h4 {
+    color: #8fd93f;
+    margin-bottom: 10px; /* Reduce space between header and paragraphs */
+    font-size: 24px; /* Increase the font size of the headers */
+    text-align: center; /* Center the member name */
+}
+.member-card p {
+    font-size: 18px; /* Increase the font size of the paragraphs */
+    margin: 5px 0; /* Reduce the margin between paragraphs */
+    text-align: center; /* Center the paragraphs */
+    color: #333;
+}
+
+.member-card .purple-text {
+    color: #8e09e7;
+}
+
+/*.fa-user-circle{*/
+/*    border: 2px solid #8e09e7;*/
+/*    border-radius: 50%; !* This makes the border circular *!*/
+/*    padding: 5px; !* Optional - adds padding inside the border *!*/
+/*}*/
+
+.scrolling-container {
+    position: relative;
+    height: 380px; /* Set the height to the card height */
+    width: 100%; /* Fill the container horizontally */
+    overflow: hidden;
+    margin-bottom: 40px; /* Add a bottom margin to keep cards visible */
+}
+.scrolling-content {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scroll-left 30s linear infinite, stop-scroll 1s forwards, pause-scroll 5s 31s; /* Add stop-scroll animation */
+}
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes stop-scroll {
+    0% {
+        animation-play-state: running;
+    }
+    100% {
+        animation-play-state: paused; /* Pause the animation when it's complete */
+    }
+}
+
+@keyframes pause-scroll {
+    0%, 100% {
+        animation-play-state: paused; /* Keep the container paused at the start and end */
+    }
+    50% {
+        animation-play-state: running; /* Resume the animation at 50% for the pause duration */
+    }
+
+}
+/* Increase the size of the placeholder icon */
+.member-card i {
+    font-size: 100px; /* Increase the font size for an even larger photo placeholder */
+    display: flex;
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    flex-grow: 1; /* Allow the icon to take available space */
+}

@@ -1,6 +1,7 @@
-    /* Custom CSS styles */
+
+/* Custom CSS styles */
 body {
-    background-color: #333333;
+    background-color: #333333 !important;
     color: #f5f5f5;
     font-family: Arial, sans-serif;
 }
@@ -16,35 +17,6 @@ body {
     border-radius: 8px;
     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
     padding: 20px 40px;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: #8fd93f #333333;
-    max-height: 700px;
-
-}
-
-.container::-webkit-scrollbar-track {
-    background-color: #333333; /* Set the track color */
-    border-radius: 1px;
-}
-
-/* Customize the scrollbar */
-.container::-webkit-scrollbar {
-    width: 5px;
-    background-color: #444;
-}
-
-.container::-webkit-scrollbar-thumb {
-    background-color: #8e09e7; /* Set the thumb color */
-    border-radius: 5px;
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-    background-color: #ee8631; /* Set the thumb color on hover */
-}
-
-.container::-webkit-scrollbar-thumb:active {
-    background-color: #8fd93f; /* Set thumb color on active state for WebKit */
 }
 
 .profile-picture {
@@ -99,11 +71,17 @@ body {
     border-radius: 4px;
 }
 
+
+
+.edit-icon-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1; /* Ensure the edit icon is above the rest of the content */
+}
+
 .edit-icon {
     position: relative;
-    top: 10px;
-    right: 10px;
-    z-index: 999; /* Adjust the z-index as needed */
 }
 
 .fas {
@@ -111,7 +89,8 @@ body {
     font-size: 32px;
 }
 
-.fas:hover{
+
+.fas:hover {
     color: #8fd93f;
 }
 
@@ -217,5 +196,13 @@ body {
 .icon-link:hover {
     color: #aefc4f /* Change the icon and link text color on hover */
 }
+
+
+.skill-icon {
+    font-size: 25px; /* Adjust the size as needed */
+    margin-right: 20px; /* Adjust the spacing between icons */
+    color: #ffb74d; /* Change the color to #ffb74d */
+}
+
 
 

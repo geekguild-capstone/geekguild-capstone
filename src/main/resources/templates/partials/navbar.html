@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en" xlms:th="http://www.thymeleaf.org" xmlns:xlms="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
 <div th:fragment="navbar">
 
 
@@ -50,6 +54,7 @@
                 <i class="bi bi-person-plus"></i>
             </button>
 
+
             <!--NEW FRIEND REQUEST MODAL-->
             <div class="modal fade" id="receivedFriendRequestModal" tabindex="-1" role="dialog"
                  aria-labelledby="receivedFriendRequestModalLabel"
@@ -81,6 +86,7 @@
                 </div>
             </div>
 
+
             <!-- Bootstrap Tooltip JavaScript -->
             <script>
                 <!--BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)-->
@@ -88,6 +94,7 @@
                 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                     return new bootstrap.Tooltip(tooltipTriggerEl)
                 });
+
 
                 // This JavaScript code will handle the "New Friend Request" modal
                 document.addEventListener("DOMContentLoaded", function () {
@@ -101,15 +108,25 @@
             </script>
             <!--END OF NEW FRIEND REQUEST MODAL-->
 
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn search-button" type="submit">Search</button>
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
 
 
-            </form>
-            <form th:action="@{/login}" th:method="post" id="logout">
-                <button class="btn logout-button" type="submit">Logout</button>
-            </form>
+                </form>
+                <form th:action="@{/login}" th:method="post" id="logout">
+                    <button class="btn btn-outline-success" type="submit">Logout</button>
+                </form>
+
+                <script>
+                    const link = document.querySelector("#logout-link");
+                    if (link !== null) {
+                        link.addEventListener("click", function (event) {
+                            document.getElementById("logout").submit();
+                        });
+                    }
+
 
             <script>
                 const link = document.querySelector("#logout-link");
@@ -119,12 +136,14 @@
                     });
                 }
 
-            </script>
+
+            </div>
+
         </div>
-    </div>
-</nav>
+    </nav>
 </div>
 
 
 
 
+</html>
