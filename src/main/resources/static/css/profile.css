@@ -210,5 +210,19 @@ body {
     color: #ffb74d;
 }
 
+.profile-email:hover{
+    color: #8fd93f;
+}
+
+
+.project-link{
+    color: #ffb74d;
+    text-decoration: none;
+}
+
+.profile-link:hover{
+    color: #8fd93f;
+}
+
 
 
