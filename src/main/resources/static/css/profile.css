@@ -1,3 +1,4 @@
+
 /* Custom CSS styles */
 body {
     background-color: #333333 !important;
@@ -16,9 +17,6 @@ body {
     border-radius: 8px;
     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
     padding: 20px 40px;
-    overflow: auto;
-
-
 }
 
 .profile-picture {
@@ -73,6 +71,8 @@ body {
     border-radius: 4px;
 }
 
+
+
 .edit-icon-container {
     position: fixed;
     top: 20px;
@@ -88,6 +88,7 @@ body {
     color: #ffb74d;
     font-size: 32px;
 }
+
 
 .fas:hover {
     color: #8fd93f;
@@ -196,10 +197,12 @@ body {
     color: #aefc4f /* Change the icon and link text color on hover */
 }
 
+
 .skill-icon {
     font-size: 25px; /* Adjust the size as needed */
     margin-right: 20px; /* Adjust the spacing between icons */
     color: #ffb74d; /* Change the color to #ffb74d */
 }
+
 
 

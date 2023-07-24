@@ -1,0 +1,202 @@
+
+
+/*NEW FRIEND REQUEST MODAL CSS*/
+/*:root {*/
+/*    --background-color: #333333;*/
+/*    --lime-green-color: #aefc4f;*/
+/*    --logo-orange-color: #ee8631;*/
+/*    --glasses-orange-color: #ffb74d;*/
+/*    --text-purple-color: #8e09e7;*/
+/*}*/
+
+/* Modal header background color */
+#receivedFriendRequestModal .modal-header {
+    background-color: #ee8631;
+    color: white;
+}
+
+/* Modal body background color */
+#receivedFriendRequestModal .modal-body {
+    background-color: #333333;
+    color: white;
+}
+
+/* Modal footer background color */
+#receivedFriendRequestModal .modal-footer {
+    background-color: #333333;
+    color: white;
+}
+
+/* Button styles */
+#receivedFriendRequestModal .btn-primary {
+    background-color: #ee8631;
+    border-color: #ee8631;
+}
+
+#receivedFriendRequestModal .btn-primary:hover {
+    /*background-color: var(--lime-green-color);*/
+    border-color: #aefc4f;
+    color: #aefc4f;
+}
+
+#receivedFriendRequestModal .btn-danger {
+    background-color: #8e09e7;
+    border-color: #8e09e7;
+}
+
+#receivedFriendRequestModal .btn-danger:hover {
+    border-color: #ee8631;
+}
+
+
+
+
+
+/*NAVBAR CSS*/
+
+/* Navbar Background Color */
+.navbar {
+    /*background-color: transparent !important;*/
+    border-radius: 8px !important;
+    box-shadow: -2px -2px 12px rgba(238, 134, 49, 0.75) !important;
+    background-color: #333333;
+    /*border: purple solid 2px !important;*/
+}
+
+/* Navbar Brand Text Color */
+.navbar-brand {
+    color: white !important;
+}
+
+/* Navbar Toggler Icon Color */
+.navbar-toggler-icon {
+    color: white !important;
+}
+
+/* Navbar Links Text Color */
+.navbar-nav .nav-link {
+    color: white !important;
+}
+
+/* Active Navbar Link Text Color */
+.navbar-nav .nav-link.active {
+    color: #aefc4f !important;
+}
+
+/* Dropdown Menu Background Color */
+.dropdown-menu {
+    background-color: #333333 !important;
+}
+
+/* Dropdown Menu Item Text Color */
+.dropdown-item {
+    color: white !important;
+}
+
+/* Dropdown Menu Item Hover Background Color */
+.dropdown-item:hover {
+    background-color: #ee8631 !important;
+    color: white !important;
+}
+
+/* Search Input Text Color */
+.form-control {
+    color: #333333 !important;
+}
+
+/* Search Input Placeholder Color */
+.form-control::placeholder {
+    color: #8e09e7 !important;
+}
+
+/* Search Input Border Color */
+.form-control {
+    border-color: #8e09e7 !important;
+}
+
+/* Search Button Color */
+.search-button {
+    color: #ee8631 !important;
+    border-color: #aefc4f !important;
+    margin: 0 12px 0 0; /* top, right, bottom, left */
+
+}
+
+/* Search Button Hover Background Color */
+.search-button:hover {
+    background-color: #aefc4f !important;
+    color: #ee8631 !important;
+}
+
+/* Logout Button Color */
+.logout-button {
+    color: #ee8631 !important;
+    border-color: #8e09e7 !important;
+}
+
+/* Logout Button Hover Background Color */
+.logout-button:hover {
+    background-color: #8e09e7 !important;
+    color: #ee8631 !important;
+}
+
+/* NEW FRIEND REQUEST MODAL BUTTON Styles */
+#newFriendRequestBtn {
+    background-color: #ee8631 !important;
+    border-color: #ee8631 !important;
+}
+
+#newFriendRequestBtn:hover {
+    border-color: #aefc4f !important;
+    color: #aefc4f !important;
+}
+
+/* NEW FRIEND REQUEST MODAL Styles */
+#receivedFriendRequestModal .modal-header {
+    background-color: #ee8631 !important;
+    color: white !important;
+}
+
+#receivedFriendRequestModal .modal-body {
+    background-color: #333333 !important;
+    color: white !important;
+}
+
+#receivedFriendRequestModal .modal-footer {
+    background-color: #333333 !important;
+    color: white !important;
+}
+
+#receivedFriendRequestModal .btn-primary {
+    background-color: #ee8631 !important;
+    border-color: #ee8631 !important;
+}
+
+#receivedFriendRequestModal .btn-primary:hover {
+    border-color: #aefc4f !important;
+    color: #aefc4f !important;
+}
+
+#receivedFriendRequestModal .btn-danger {
+    background-color: #8e09e7 !important;
+    border-color: #8e09e7 !important;
+}
+
+#receivedFriendRequestModal .btn-danger:hover {
+    border-color: #ee8631 !important;
+}
+
+
+
+/* Custom tooltip(popover) style */
+.tooltip {
+    background-color: #ee8631 !important; /* Change the background color */
+    color: #aefc4f !important;
+    font-size: 14px !important;
+    border: 1px solid #ccc !important; /* Add a border */
+}
+
+/* Custom tooltip arrow style */
+.tooltip .tooltip-arrow {
+    border-top-color: #8e09e7 !important; /* Match the background color of the tooltip */
+}

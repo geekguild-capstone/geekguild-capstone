@@ -26,18 +26,39 @@ h1 {
 .left-section, .middle-section, .top-right-section, .bottom-right-section {
     padding: 20px;
     border-radius: 20px;
+    box-shadow: inset -2px -2px 12px rgba(0, 0, 0, 1);
 }
 
+/*LEFT SECTION*/
 .left-section{
-    background-color: #708090;
+    background-color: #444444;
+    overflow-y: auto;
     /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
 
 
+.left-section::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+    background-color: transparent; /* Track color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    /*border: #708090 solid 2px;*/
+}
+
+
 /*MIDDLE SECTION*/
+.left-section::-webkit-scrollbar-thumb {
+    background-color: #8e09e7; /* Thumb color */
+    border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
+    height: 40px;
+}
+
+.left-section::-webkit-scrollbar-thumb:hover {
+    background-color: #ffb74d; /* Thumb color on hover */
+}
+
 .middle-section {
-    background-color: #708090;
+    background-color: #444444;
     overflow-y: auto;
     border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
     margin: 0 5px 15px 0; /* top, right, bottom, left */
@@ -46,20 +67,20 @@ h1 {
 
 .middle-section::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar track */
-    background-color: #708090; /* Track color */
+    background-color: transparent; /* Track color */
     border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
     /*border: #708090 solid 2px;*/
 }
 
 .middle-section::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
-    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
+    height: 40px;
 }
 
 .middle-section::-webkit-scrollbar-thumb:hover {
     background-color: #ffb74d; /* Thumb color on hover */
 }
-
 
 /*.middle-section, .top-right-section, .bottom-right-section {*/
 /*    background-color: #e0e0e0;*/
@@ -75,22 +96,66 @@ h1 {
 
 }
 
+/*TOP RIGHT SECTION*/
 .top-right-section {
-    background-color: #708090;
-    flex: 3; /* Top-right section takes up 30% of the available height */
+    background-color: #444444;
+    overflow-y: auto;
+    /*flex: 3; !* Top-right section takes up 30% of the available height *!*/
+    height: 50%;
     border-radius: 20px;
+    /*box-shadow: inset -2px -2px 12px rgba(0, 0, 0, 1);*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
-
-
 }
 
+.top-right-section::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+    background-color: transparent; /* Track color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    /*border: #708090 solid 2px;*/
+}
+
+.top-right-section::-webkit-scrollbar-thumb {
+    background-color: #8e09e7; /* Thumb color */
+    border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
+    height: 10px;
+}
+
+.top-right-section::-webkit-scrollbar-thumb:hover {
+    background-color: #ffb74d; /* Thumb color on hover */
+}
+
+
+
+
+/*BOTTOM RIGHT*/
 .bottom-right-section {
-    flex: 7; /* Bottom-right section takes up 70% of the available height */
-    background-color: #708090;
+    /*flex: 7; !* Bottom-right section takes up 70% of the available height *!*/
+    height: 50%;
+    background-color: #444444;
     border-radius: 20px;
     overflow-y: auto;
 
 }
+
+.bottom-right-section::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+    background-color: transparent; /* Track color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    /*border: #708090 solid 2px;*/
+}
+
+.bottom-right-section::-webkit-scrollbar-thumb {
+    background-color: #8e09e7; /* Thumb color */
+    border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
+    height: 40px;
+}
+
+.bottom-right-section::-webkit-scrollbar-thumb:hover {
+    background-color: #ffb74d; /* Thumb color on hover */
+}
+
+
+
 
 
 .view-post-container{
