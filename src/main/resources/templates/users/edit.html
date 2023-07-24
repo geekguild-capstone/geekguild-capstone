@@ -48,7 +48,7 @@
         <label for="about_me">About Me:</label>
         <textarea id="about_me" name="about_me" rows="4">${portfolio.about}</textarea>
         <br>
-        <label for="work-custom">Work:</label>
+        <label>Work:</label>
         <br>
         <!-- Input fields for each work value -->
         <label for="work-ask">Ask Me:</label>
@@ -67,32 +67,77 @@
         <label for="working">I am working on...</label>
         <input id="working" name="work" type="text" value="${user.work == 'working' ? 'I am working on:' : ''}"/>
         <!-- Separate input field for the "Work" value -->
-        <input id="work-custom" name="work" type="text" value="${user.work}"/>
-        <br>
+       <br>
+
+        <!-- Skills section using CSS classes -->
         <label for="skills-custom">Skills:</label>
         <br>
-        <!-- Option input fields for "Skills" -->
-        <label for="skill-java">Java</label>
-        <input id="skill-java" name="skills" type="text" value="${user.language == 'language.Java' ? 'Java' : ''}"/>
 
-        <label for="skill-cpp">C++</label>
-        <input id="skill-cpp" name="skills" type="text" value="${user.language == 'language.C++' ? 'C++' : ''}"/>
+        <!-- Skills section using custom checkboxes and icons -->
+        <div class="skills-container">
+            <div class="skill-item">
+                <input id="skill-java" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Java' ? 'checked' : ''} />
+                <label for="skill-java"><span class="skill-icon"><i class="fab fa-java"></i></span></label>
+            </div>
 
-        <label for="skill-python">Python</label>
-        <input id="skill-python" name="skills" type="text"
-               value="${user.language == 'language.Python' ? 'Python' : ''}"/>
+            <div class="skill-item">
+                <input id="skill-cpp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C++' ? 'checked' : ''} />
+                <label for="skill-cpp"><span class="skill-icon"><i class="fab fa-cuttlefish"></i></span></label>
+            </div>
 
-        <label for="skill-html">HTML</label>
-        <input id="skill-html" name="skills" type="text" value="${user.language == 'language.HTML' ? 'HTML' : ''}"/>
+            <div class="skill-item">
+                <input id="skill-python" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Python' ? 'checked' : ''} />
+                <label for="skill-python"><span class="skill-icon"><i class="fab fa-python"></i></span></label>
+            </div>
 
-        <label for="skill-css">CSS</label>
-        <input id="skill-css" name="skills" type="text" value="${user.language == 'language.CSS' ? 'CSS' : ''}"/>
+            <!-- Add other skills with checkboxes and icons here -->
+            <div class="skill-item">
+                <input id="skill-js" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Javascript' ? 'checked' : ''} />
+                <label for="skill-js"><span class="skill-icon"><i class="fab fa-js"></i></span></label>
+            </div>
 
-        <label for="skill-js">Javascript</label>
-        <input id="skill-js" name="skills" type="text"
-               value="${user.language == 'language.Javascript' ? 'Javascript' : ''}"/>
-        <!-- Separate input field for the "Skills" value -->
-        <input id="skills-custom" name="skills" type="text" value="${user.language}"/>
+            <div class="skill-item">
+                <input id="skill-react" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.React' ? 'checked' : ''} />
+                <label for="skill-react"><span class="skill-icon"><i class="fab fa-react"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-ruby" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Ruby' ? 'checked' : ''} />
+                <label for="skill-ruby"><span class="skill-icon"><i class="fas fa-gem"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-csharp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C#' ? 'checked' : ''} />
+                <label for="skill-csharp"><span class="skill-icon"><i class="fab fa-microsoft"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-html" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.HTML' ? 'checked' : ''} />
+                <label for="skill-html"><span class="skill-icon"><i class="fab fa-html5"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-css" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.CSS' ? 'checked' : ''} />
+                <label for="skill-css"><span class="skill-icon"><i class="fab fa-css3-alt"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-mysql" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.MySQL' ? 'checked' : ''} />
+                <label for="skill-mysql"><span class="skill-icon"><i class="fas fa-database"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-nodejs" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Node.js' ? 'checked' : ''} />
+                <label for="skill-nodejs"><span class="skill-icon"><i class="fab fa-node-js"></i></span></label>
+            </div>
+
+            <div class="skill-item">
+                <input id="skill-angular" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Angular' ? 'checked' : ''} />
+                <label for="skill-angular"><span class="skill-icon"><i class="fab fa-angular"></i></span></label>
+            </div>
+        </div>
+
+
         <br>
         <label for="social_linked_in">Social Media (LinkedIn):</label>
         <input id="social_linked_in" name="social_linked_in" type="url" value="${portfolio.LinkedIn}"/>
@@ -106,7 +151,7 @@
         <label for="personal-web">Personal Website:</label>
         <input id="personal-web" name="personal-web" type="url" value="${portfolio.misclink}"/>
         <br>
-        <label for="projects-custom">Projects:</label>
+        <label>Projects:</label>
         <br>
         <label for="projects.proj1">Project 1:</label>
         <input id="projects.proj1" name="proj1" type="url" value="${portfolio.proj1}"/>
@@ -114,7 +159,6 @@
         <input id="projects.proj2" name="proj2" type="url" value="${portfolio.proj2}"/>
         <label for="projects.proj3">Project 3:</label>
         <input id="projects.proj3" name="proj3" type="url" value="${portfolio.proj3}"/>
-        <input id="projects-custom" name="projects" type="url" value="${user.projects}"/>
         <br>
 
         <div class="button-group">
