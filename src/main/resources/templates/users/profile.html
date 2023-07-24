@@ -11,6 +11,17 @@
     </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+
+<div class="edit-icon">
+    <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+        <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5"
+             stroke="limegreen" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+        </svg>
+    </a>
+</div>
 <div class="container">
     <div class="profile-header-container">
         <!-- Cover Photo Container -->
@@ -20,21 +31,11 @@
         <!-- Profile Picture Container -->
         <img th:src="${user.image}" alt="Profile Picture" class="profile-picture">
         <div class="profile-info">
-            <div class="edit-icon">
-                <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
-                    <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke-width="1.5"
-                         stroke="limegreen" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
-                    </svg>
-                </a>
-            </div>
+
             <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
             <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
         </div>
     </div>
-
 
     <hr>
 
@@ -73,11 +74,11 @@
     <div class="section-container">
         <h2 class="section-header">Skills</h2>
         <div class="profile-skills">
-            <span>Java</span>
-            <span>C++</span>
-            <span>Python</span>
-            <span>HTML</span>
-            <span>CSS</span>
+            <i class="fab fa-java skill-icon"></i> <!-- Font Awesome icon for Java -->
+            <i class="fab fa-cuttlefish skill-icon"></i> <!-- Font Awesome icon for C++ -->
+            <i class="fab fa-python skill-icon"></i> <!-- Font Awesome icon for Python -->
+            <i class="fab fa-html5 skill-icon"></i> <!-- Font Awesome icon for HTML -->
+            <i class="fab fa-css3-alt skill-icon"></i> <!-- Font Awesome icon for CSS -->
         </div>
     </div>
 
