@@ -45,6 +45,9 @@
         <label for="lastName">Last Name:</label>
         <input th:field="*{user.lastname}" id="lastName" name="lastName" type="text" th:value="${profileFormWrapper.user.lastname}"/>
         <br>
+        <label for="headline">Headline:</label>
+        <input  th:field="*{portfolio.headline}" id="headline" name="headline" type="text" th:value="${profileFormWrapper.portfolio.headline}"/>
+        <br>
         <label for="email">Email:</label>
         <input id="email" th:field="*{user.email}" type="email" th:value="${profileFormWrapper.user.email ?: ''}" />
         <br>
