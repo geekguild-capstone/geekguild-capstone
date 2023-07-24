@@ -1,6 +1,7 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.Portfolio;
+import com.geekguild.models.ProfileFormWrapper;
 import com.geekguild.models.User;
 import com.geekguild.models.Work;
 import com.geekguild.repositories.PortfolioRepository;
@@ -55,7 +56,7 @@ public class ProfileController {
 
 
     @GetMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, Model model) {
+    public String editProfileLoad(@PathVariable long id, Model model) {
         Long userId = id;
         User user = userDao.getReferenceById(userId);
         Portfolio portfolio = portfolioDao.getReferenceById(id);
@@ -65,59 +66,104 @@ public class ProfileController {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
             return "redirect:/error"; // Example: redirect to an error page
         }
-        model.addAttribute("user", user);
-        model.addAttribute("portfolio", portfolio);
-        model.addAttribute("work", work);
-        return "/users/edit";
+
+        ProfileFormWrapper profileFormWrapper = new ProfileFormWrapper();
+        profileFormWrapper.setUser(user);
+        profileFormWrapper.setPortfolio(portfolio);
+        profileFormWrapper.setWork(work);
+
+        model.addAttribute("profileFormWrapper", profileFormWrapper);
+
+        return "users/edit";
     }
 
-    // This method handles the POST request to save the edited profile
+
     @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, @ModelAttribute User user, @ModelAttribute Portfolio portfolio, @ModelAttribute Work work) {
-        User loggedInUser = userDao.getReferenceById(id);
-        loggedInUser.setUsername(user.getFirstname());
-        loggedInUser.setEmail(user.getLastname());
-        loggedInUser.setEmail(user.getEmail());
+    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper) {
+        // Fetch the existing user from the database
+        User loggedInUser = userDao.findById(id).orElse(null);
+        if (loggedInUser == null) {
+            // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
+            return "redirect:/error";
+        }
+
+        // Update the user fields if they are not null
+        User formUser = profileFormWrapper.getUser();
+        if (formUser.getUsername() != null) {
+            loggedInUser.setUsername(formUser.getUsername());
+        }
+        if (formUser.getFirstname() != null) {
+            loggedInUser.setFirstname(formUser.getFirstname());
+        }
+        if (formUser.getLastname() != null) {
+            loggedInUser.setLastname(formUser.getLastname());
+        }
+        if (formUser.getEmail() != null) {
+            loggedInUser.setEmail(formUser.getEmail());
+        }
+        // Add more fields as needed...
+
+        // Save the updated user back to the database
         userDao.save(loggedInUser);
 
         // Fetch the existing portfolio and update its fields
         Portfolio existingPortfolio = portfolioDao.findByUserId(id);
-        existingPortfolio.setAbout(portfolio.getAbout());
-
-        // Save the updated portfolio back to the database
-        portfolioDao.save(existingPortfolio);
+        if (existingPortfolio != null) {
+            Portfolio formPortfolio = profileFormWrapper.getPortfolio();
+            if (formPortfolio.getAbout() != null) {
+                existingPortfolio.setAbout(formPortfolio.getAbout());
+            }
+            if (formPortfolio.getProj1() != null) {
+                existingPortfolio.setProj1(formPortfolio.getProj1());
+            }
+            if (formPortfolio.getProj2() != null) {
+                existingPortfolio.setProj2(formPortfolio.getProj2());
+            }
+            if (formPortfolio.getProj3() != null) {
+                existingPortfolio.setProj3(formPortfolio.getProj3());
+            }
+            if (formPortfolio.getLinkedin() != null) {
+                existingPortfolio.setLinkedin(formPortfolio.getLinkedin());
+            }
+            if (formPortfolio.getFacebook() != null) {
+                existingPortfolio.setFacebook(formPortfolio.getFacebook());
+            }
+            if (formPortfolio.getGithub() != null) {
+                existingPortfolio.setGithub(formPortfolio.getGithub());
+            }
+            if (formPortfolio.getMisclink() != null) {
+                existingPortfolio.setMisclink(formPortfolio.getMisclink());
+            }
+            // Add more fields as needed...
+            // Save the updated portfolio back to the database
+            portfolioDao.save(existingPortfolio);
+        }
 
         // Fetch the existing work and update its fields
         Work existingWork = workDao.findByUserId(id);
-        existingWork.setAsk(work.getAsk());
-
-        // Save the updated work back to the database
-        workDao.save(existingWork);
-
-        return "redirect:/profile/" + id;
-    }
-
-    @GetMapping("/profile/{id}")
-    public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
-        // Retrieve the user with the given userId from the database
-        User user = userDao.getReferenceById(userId);
-
-
-        // Check if the user exists
-        if (user == null) {
-            // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
-            return "redirect:/error"; // Example: redirect to an error page
+        if (existingWork != null) {
+            Work formWork = profileFormWrapper.getWork();
+            if (formWork.getAsk() != null) {
+                existingWork.setAsk(formWork.getAsk());
+            }
+            if (formWork.getLearn() != null) {
+                existingWork.setLearn(formWork.getLearn());
+            }
+            if (formWork.getFact() != null) {
+                existingWork.setFact(formWork.getFact());
+            }
+            if (formWork.getHelp() != null) {
+                existingWork.setHelp(formWork.getHelp());
+            }
+            if (formWork.getWorking() != null) {
+                existingWork.setWorking(formWork.getWorking());
+            }
+            // Add more fields as needed...
+            // Save the updated work back to the database
+            workDao.save(existingWork);
         }
 
-        Portfolio portfolio = portfolioDao.findByUserId(user.getId());
-        model.addAttribute("portfolio", portfolio);
-
-        // Add the user to the model so it can be accessed in the view
-        model.addAttribute("user", user);
-        Work work = workDao.findByUserId(user.getId());
-        model.addAttribute("work", work);
-
-        return "users/profile";
+        return "redirect:/profile";
     }
 
 
