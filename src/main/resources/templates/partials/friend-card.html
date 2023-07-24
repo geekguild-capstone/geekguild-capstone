@@ -13,7 +13,7 @@
     <div th:each="friend : ${sentFriends}">
 
         <div class="connection container-background">
-            <div class="profile-picture-placeholder">JD</div>
+            <div class="profile-picture-placeholder" th:style="'background-image: url(' + ${friend.receiver.image} + '); background-size: cover;'"></div>
             <div class="profile-info">
 
                 <a th:text="${friend.receiver.username}" th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"
@@ -21,10 +21,10 @@
                 <div class="headline">Software Engineer</div>
             </div>
             <button class="message-button"
-                    th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-current-user-id=${user.id},
-            data-current-user-username=${user.username}"
+                    th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-friend-image=${friend.receiver.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.username}, data-current-user-image=${user.image}"
 
-                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'))">
+                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                 <i class="fas fa-comment-alt message-icon"></i> Message
             </button>
             <div class="ellipsis" onclick="toggleDropdown(this)">
@@ -47,7 +47,7 @@
     <div th:each="friend : ${receiveFriends}">
 
         <div class="connection container-background">
-            <div class="profile-picture-placeholder">JD</div>
+            <div class="profile-picture-placeholder" th:style="'background-image: url(' + ${friend.sender.image} + '); background-size: cover;'"></div>
             <div class="profile-info">
 
                 <a th:text="${friend.sender.username}" th:href="@{/profile/{id}(id=${friend.sender.getId()})}"
@@ -55,10 +55,10 @@
                 <div class="headline">Software Engineer</div>
             </div>
             <button class="message-button"
-                    th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-current-user-id=${user.id},
-            data-current-user-username=${user.username}"
+                    th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-friend-image=${friend.sender.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.username}, data-current-user-image=${user.image}"
 
-                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'))">
+                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                 <i class="fas fa-comment-alt message-icon"></i> Message
             </button>
 

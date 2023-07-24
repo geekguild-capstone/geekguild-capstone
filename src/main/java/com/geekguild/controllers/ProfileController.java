@@ -156,6 +156,9 @@ public class ProfileController {
             if (formPortfolio.getMisclink() != null) {
                 existingPortfolio.setMisclink(formPortfolio.getMisclink());
             }
+            if (formPortfolio.getHeadline() != null) {
+                existingPortfolio.setHeadline(formPortfolio.getHeadline());
+            }
             // Add more fields as needed...
             // Save the updated portfolio back to the database
             portfolioDao.save(existingPortfolio);
