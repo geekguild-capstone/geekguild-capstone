@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/friend-card.css">
+    <link rel="stylesheet" href="/css/friend-card.css">
     <!-- Font Awesome CSS (you need to include this in your project) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -13,33 +13,35 @@
     <div th:each="friend : ${sentFriends}">
 
         <div class="connection container-background">
-            <div class="profile-picture-placeholder" th:style="'background-image: url(' + ${friend.receiver.image} + '); background-size: cover;'"></div>
+            <div class="profile-picture-placeholder"
+                 th:style="'background-image: url(' + ${friend.receiver.image} + '); background-size: cover;'"></div>
             <div class="profile-info">
-
-                <a th:text="${friend.receiver.username}" th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"
-                   class="name"></a>
-                <div class="headline">Software Engineer</div>
+                <div class="name-container">
+                    <a th:text="${friend.receiver.firstname + ' ' + friend.receiver.lastname}"
+                       th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"
+                       class="name"></a>
+                </div>
+                <!--                <div class="headline">Software Engineer</div>-->
             </div>
-            <button class="message-button"
-                    th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-friend-image=${friend.receiver.image},data-current-user-id=${user.id},
+            <div class="action-buttons">
+                <button class="message-button"
+                        th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-friend-image=${friend.receiver.image},data-current-user-id=${user.id},
             data-current-user-username=${user.username}, data-current-user-image=${user.image}"
 
-                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
-                <i class="fas fa-comment-alt message-icon"></i> Message
-            </button>
-            <div class="ellipsis" onclick="toggleDropdown(this)">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="dropdown-menu">
-                    <form method="post" th:action="@{/home/remove}">
-                        <input type="hidden" name="loggedInUserType" value="sender">
-
-                        <input type="hidden" name="friendId" th:value="${friend.receiver.id}">
-
-                        <button type="submit">
-                            <i class="fas fa-trash trash-icon"></i>
-                            Remove friend
-                        </button>
-                    </form>
+                        onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
+                    <i class="fas fa-comment-alt message-icon"></i>
+                </button>
+                <div class="ellipsis" onclick="toggleDropdown(this)">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="dropdown-menu">
+                        <form method="post" th:action="@{/home/remove}">
+                            <input type="hidden" name="loggedInUserType" value="sender">
+                            <input type="hidden" name="friendId" th:value="${friend.receiver.id}">
+                            <button type="submit">
+                                <i class="fas fa-trash trash-icon"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,33 +49,39 @@
     <div th:each="friend : ${receiveFriends}">
 
         <div class="connection container-background">
-            <div class="profile-picture-placeholder" th:style="'background-image: url(' + ${friend.sender.image} + '); background-size: cover;'"></div>
+            <div class="profile-picture-placeholder"
+                 th:style="'background-image: url(' + ${friend.sender.image} + '); background-size: cover;'"></div>
             <div class="profile-info">
-
-                <a th:text="${friend.sender.username}" th:href="@{/profile/{id}(id=${friend.sender.getId()})}"
-                   class="name"></a>
-                <div class="headline">Software Engineer</div>
+                <div class="name-container">
+                    <a th:text="${friend.sender.firstname + ' ' + friend.sender.lastname}"
+                       th:href="@{/profile/{id}(id=${friend.sender.getId()})}"
+                       class="name"></a>
+                </div>
+                <!--                <div class="headline">Software Engineer</div>-->
             </div>
-            <button class="message-button"
-                    th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-friend-image=${friend.sender.image},data-current-user-id=${user.id},
+            <div class="action-buttons">
+
+                <button class="message-button"
+                        th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-friend-image=${friend.sender.image},data-current-user-id=${user.id},
             data-current-user-username=${user.username}, data-current-user-image=${user.image}"
 
-                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
-                <i class="fas fa-comment-alt message-icon"></i> Message
-            </button>
+                        onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
+                    <i class="fas fa-comment-alt message-icon"></i>
+                </button>
 
-            <div class="ellipsis" onclick="toggleDropdown(this)">
-                <i class="fas fa-ellipsis-h"></i>
-                <div class="dropdown-menu">
-                    <form method="post" th:action="@{/home/remove}">
-                        <input type="hidden" name="friendId" th:value="${friend.sender.id}">
-                        <input type="hidden" name="loggedInUserType" value="receiver">
+                <div class="ellipsis" onclick="toggleDropdown(this)">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="dropdown-menu">
+                        <form method="post" th:action="@{/home/remove}">
+                            <input type="hidden" name="friendId" th:value="${friend.sender.id}">
+                            <input type="hidden" name="loggedInUserType" value="receiver">
 
-                        <button type="submit">
-                            <i class="fas fa-trash trash-icon"></i>
-                            Remove friend
-                        </button>
-                    </form>
+                            <button type="submit">
+                                <i class="fas fa-trash trash-icon"></i>
+
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

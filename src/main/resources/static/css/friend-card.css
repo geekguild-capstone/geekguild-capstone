@@ -44,12 +44,34 @@ body {
     flex-grow: 1;
 }
 
+.name-container {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*height: 100%;*/
+}
+
+
+
 .name {
+    font-size: 16px;
     font-weight: bold;
     color: #fff;
-    margin-bottom: 5px; /* Add space between name and profile picture */
+    margin-right: 10px;
+    /*margin-bottom: 5px; !* Add space between name and profile picture *!*/
     text-decoration: none; /* Remove underline from name */
-    display: inline-block;
+    /*display: inline-block;*/
+    /*align-self: center;*/
+    /*align-items: center; !* Center items vertically within the container *!*/
+
+}
+
+.name a {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Set the anchor tag to occupy the full height of the container */
 }
 
 .name:hover {
@@ -71,9 +93,39 @@ body {
     align-items: center;
 }
 
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-button {
+    background-color: transparent;
+    color: #ee8631;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
 .message-icon {
     margin-right: 5px;
     margin-left: -5px; /* Adjust this value to move the icon closer */
+}
+
+/* Adjust the spacing between name and icons if necessary */
+.message-button, .ellipsis {
+    margin-left: auto; /* This pushes the message button and ellipsis to the right */
+    padding: 5px;
+}
+
+/* If you want the icons to be centered vertically, add the following */
+.message-button i, .ellipsis i {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .ellipsis {
