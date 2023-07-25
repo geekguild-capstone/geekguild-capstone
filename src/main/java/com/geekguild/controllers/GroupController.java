@@ -63,7 +63,7 @@ public class GroupController {
     @GetMapping("/group")
     public String showGroup() {
 
-        return "groups/group";
+        return "group-card";
     }
 
     @GetMapping("/group/{id}")
@@ -76,7 +76,7 @@ public class GroupController {
         if (group == null) {
             return "redirect:/error";
         } else {
-            return "groups/group";
+            return "group-card";
         }
     }
 
