@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post</title>
+  <!--BOOTSTRAP CSS-->
+  <link th:include="partials/header">
+  <!--CUSTOM CSS -->
+  <link rel="stylesheet" href="/css/postCard.css">
+
+
+  <style>
+
+  </style>
+</head>
+
+
+<body>
+<div th:each="post : ${groupPosts}">
+
+  <div class="post-card">
+    <div class="user-profile">
+      <img th:src="${post.user.image}"
+           alt="User Profile Image">
+      <div th:text="${post.user.username}" class="username"></div>
+    </div>
+    <div class="post-content">
+      <p th:text="${post.body}"></p>
+    </div>
+
+    <div id="post_image" class="post-image">
+      <img width="200px" th:src="${post.image}">
+    </div>
+
+    <div class="interactions">
+      <button>
+        <div class="like-container">
+          <i class="far fa-thumbs-up like-icon">Like</i>
+          <div class="like-emojis">
+            <span class="like-emoji" onclick="likeAction('👍')">👍 Like</span>
+            <span class="like-emoji" onclick="likeAction('❤️')">❤️ Love</span>
+            <span class="like-emoji" onclick="likeAction('😂')">😂 Laugh</span>
+          </div>
+        </div>
+      </button>
+      <button class="comment-button"><i class="fas fa-comment">Comment</i>
+      </button>
+      <button class="share-button"><i class="fas fa-envelope ">Message</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script th:include="partials/footer"></script>
+</body>
+</html>
