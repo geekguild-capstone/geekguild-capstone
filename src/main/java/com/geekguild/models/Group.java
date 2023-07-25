@@ -14,7 +14,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 
 @Entity
@@ -28,6 +27,9 @@ public class Group {
     @Column(nullable = false)
     private String groupname;
 
+    public Group(long id, String groupname) {
+        this.id = id;
+        this.groupname = groupname;
 
-
+    }
 }
