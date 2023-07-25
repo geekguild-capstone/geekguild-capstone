@@ -15,7 +15,7 @@
         <div class="connection container-background">
             <div class="profile-picture-placeholder"
                  th:style="'background-image: url(' + ${friend.receiver.image} + '); background-size: cover;'"></div>
-            <div class="profile-info">
+            <div class="friend-info">
                 <div class="name-container">
                     <a th:text="${friend.receiver.firstname + ' ' + friend.receiver.lastname}"
                        th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"
@@ -51,7 +51,7 @@
         <div class="connection container-background">
             <div class="profile-picture-placeholder"
                  th:style="'background-image: url(' + ${friend.sender.image} + '); background-size: cover;'"></div>
-            <div class="profile-info">
+            <div class="friend-info">
                 <div class="name-container">
                     <a th:text="${friend.sender.firstname + ' ' + friend.sender.lastname}"
                        th:href="@{/profile/{id}(id=${friend.sender.getId()})}"
