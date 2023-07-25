@@ -17,26 +17,23 @@ public class Comments {
     private long id;
 
     @Column(nullable = false)
-    private String comments;
+    private String text;
 
-    public Comments(long id, String comments) {
+    public Comments(long id, String text) {
         this.id = id;
-        this.comments = comments;
+        this.text = text;
 
     }
-
-//    Many to One Users
-    @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
-
 
     //    Many to One Posts
     @ManyToOne
     @JoinColumn (name = "post_id")
     private Post post;
 
-
+    //    Many to One Posts
+//    @ManyToOne
+//    @JoinColumn (name = "user_id")
+//    private User user;
 
 
 }
