@@ -7,6 +7,11 @@
 </head>
 <body>
 <main>
+    <div class="top-bar">
+        <h4 class="group-heading">Your Groups</h4>
+
+        <button class="create-group-button">Create Group</button>
+    </div>
     <div th:each="group : ${loggedInUserGroups}">
         <div class="post-card">
             <div class="user-profile">

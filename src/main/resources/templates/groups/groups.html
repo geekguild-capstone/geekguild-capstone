@@ -15,6 +15,8 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 
+
+
 <div class="grid-container">
     <div id="confirmationModal" class="modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -39,12 +41,15 @@
 
 
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
+
+
+
     <div class="middle-section scroll-bar" th:include="groups/group-list">
 
 
-
-
     </div>
+
+
 
 
     <div class="right-section">
@@ -63,6 +68,7 @@
         <i>Loading chat...</i>
     </div>
 </div>
+
 <!--FILESTACK API SCRIPTS-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="/js/filestack.js"></script>

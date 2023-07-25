@@ -13,3 +13,43 @@
     height: 100%; /* Take up full height of the parent (.middle-section) */
 
 }
+
+/* CSS for the container and top bar */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* Style the top bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; /* You can change the color here */
+    padding: 10px;
+    color: #e67e22; /* Change font color if necessary */
+}
+
+
+
+/* Style the Create Group button */
+.create-group-button {
+    background-color: #e67e22; /* Change the color of the button */
+    color:#FFFFFF; /* Change font color if necessary */
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Style for the group details */
+.group-details {
+    background-color: #FFFFFF;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
