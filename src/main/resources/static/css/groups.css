@@ -1,0 +1,15 @@
+.middle-section {
+    position: relative; /* Ensure relative positioning for child elements */
+}
+
+
+/* Make .view-post-container take up full height of .middle-section */
+
+.view-groups-container {
+    background-color: #343333;
+    overflow-y: auto;
+    border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
+    margin: 0 5px 15px 0; /* top, right, bottom, left */
+    height: 100%; /* Take up full height of the parent (.middle-section) */
+
+}
