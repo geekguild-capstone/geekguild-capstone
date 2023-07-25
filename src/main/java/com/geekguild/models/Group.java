@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,8 +37,6 @@ public class Group {
         this.groupname = groupname;
         this.image = image;
         this.banner = banner;
-
-
     }
 
     @ManyToMany
@@ -48,5 +45,7 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> members = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private List<Post> posts;
 
 }
