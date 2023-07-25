@@ -14,10 +14,17 @@
 
 <div th:replace="partials/navbar :: navbar"></div>
 
-<h1>GeekGroup</h1>
 
 <!--<h2 th:text="${groups.name}"></h2>-->
-<h2 th:text="${group.groupname}" class="profile-title"></h2>
+<!--<h2 th:text="${group.groupname}" class="profile-title"></h2>-->
+<h1>Group Details</h1>
+<p>Group Name: <span th:text="${group.getGroupname()}"></span></p>
+<!--<p>Description: <span th:text="${group.description}"></span></p>-->
+
+<!-- Add the button/link to join the group -->
+<form th:action="@{/group/{groupId}/join(groupId=${group.id})}" method="post">
+  <button type="submit">Join Group</button>
+</form>
 
 </body>
 </html>

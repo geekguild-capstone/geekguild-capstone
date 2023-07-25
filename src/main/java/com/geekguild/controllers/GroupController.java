@@ -51,6 +51,15 @@ public class GroupController {
         return "groups/groups";
     }
 
+    @PostMapping("/group/{groupId}/join")
+    public String joinGroup(@PathVariable Long groupId) {
+//        String username = principal.getName();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        joinGroup(groupId, loggedInUser);
+        return "redirect:/group/" + groupId;
+    }
+
     @GetMapping("/group")
     public String showGroup() {
 
@@ -70,14 +79,15 @@ public class GroupController {
             return "group-card";
         }
     }
-//    public void joinGroup(Long groupId, User user) {
-//        Group group = GroupRepository.findById(groupId).orElse(null);
-//        if (group != null) {
-//            group.getMembers().add(user);
-//            GroupRepository.save(group);
-//        }
+
+    public void joinGroup(Long groupId, User user) {
+        Group group = groupDao.findById(groupId).orElse(null);
+        if (group != null) {
+            group.getMembers().add(user);
+            groupDao.save(group);
+        }
     }
 
-
+}
 
 
