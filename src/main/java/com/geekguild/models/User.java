@@ -43,13 +43,15 @@ public class User {
     private String banner;
 
 
-    public User(long id, String userName, String email, String password) {
+    public User(long id, String userName, String firstname, String lastname, String email, String password, String image, String banner) {
         this.id = id;
         this.username = userName;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.image = image;
+        this.banner = banner;
     }
 
 
@@ -60,8 +62,9 @@ public class User {
         lastname = copy.lastname;
         username = copy.username;
         password = copy.password;
+        image = copy.image;
+        banner = copy.banner;
     }
-
 
 //    Relationships
 
