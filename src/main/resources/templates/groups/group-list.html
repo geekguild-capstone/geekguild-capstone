@@ -17,7 +17,10 @@
             <div class="user-profile">
                 <img th:src="${group.image}"
                      alt="User Profile Image">
-                <div th:text="${group.groupname}" class="username"></div>
+                <div>
+                    <a th:href="@{'/group/' + ${group.id}}" class="username" th:text="${group.groupname}"></a>
+
+                </div>
                 <div th:text="'Number of Members: ' + ${groupMembersCount[group.id]}"></div>
             </div>
         </div>
