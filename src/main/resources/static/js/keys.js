@@ -1,0 +1,1 @@
+const NEWS_API = '34856f6506ff4614bd603d117cf38e9e';
