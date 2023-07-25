@@ -16,7 +16,7 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "text", nullable = false)
     private String text;
 
     public Comments(long id, String text) {
@@ -30,10 +30,10 @@ public class Comments {
     @JoinColumn (name = "post_id")
     private Post post;
 
-    //    Many to One Posts
-//    @ManyToOne
-//    @JoinColumn (name = "user_id")
-//    private User user;
+    //    Many to One User
+    @ManyToOne
+    @JoinColumn (name = "creator_id")
+    private User user;
 
 
 }
