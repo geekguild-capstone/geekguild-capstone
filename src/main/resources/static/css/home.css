@@ -13,7 +13,7 @@ h1 {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Equal spacing for Left, Middle, Right columns */
+    grid-template-columns: 1fr 2fr 1fr; /* Equal spacing for Left, Middle, Right columns */
     grid-template-rows: 90vh; /* Set the height to be the full height of the viewport */
     gap: 20px; /* Gap between sections */
     margin: 15px; /* top, right, bottom, left */
@@ -92,6 +92,8 @@ h1 {
     background-color: #ffb74d; /* Thumb color on hover */
 }
 
+
+
 /*.middle-section, .top-right-section, .bottom-right-section {*/
 /*    background-color: #e0e0e0;*/
 /*}*/
@@ -103,7 +105,7 @@ h1 {
     flex-direction: column; /* Stack the top-right and bottom-right sections vertically */
     justify-content: space-between; /* Vertically distribute the space between the sections */
     margin: 0 0 15px 0; /* top, right, bottom, left */
-
+    /*height: 90%;*/
 }
 
 /*TOP RIGHT SECTION*/

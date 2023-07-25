@@ -14,20 +14,6 @@
 <div th:replace="partials/navbar :: navbar"></div>
 
 <div class="grid-container">
-    <!-- MODAL -->
-    <!--    <div id="confirmationModal" class="my-modal">-->
-    <!--        <div class="my-modal-content">-->
-    <!--            <span class="close" onclick="closeModal()">&times;</span>-->
-    <!--            <h2>Send friend request?</h2>-->
-    <!--            <div class="my-modal-buttons">-->
-    <!--                <form th:action="@{/home/add}" method="post" id="friendRequestForm">-->
-    <!--                    <input type="hidden" name="receiverId" id="receiverIdInput"/>-->
-    <!--                    <button type="submit">Confirm</button>-->
-    <!--                </form>-->
-    <!--                <button onclick="closeModal()">Cancel</button>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
     <div id="confirmationModal" class="modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -97,172 +83,23 @@
         <i>Loading chat...</i>
     </div>
 </div>
-<script>
-    function openConfirmationModal(username, userId) {
-        const modal = document.getElementById("confirmationModal");
-        const friendUsername = document.getElementById("friendUsername");
-        // const friendId = document.getElementById("friendId");
-        const receiverIdInput = document.getElementById("receiverIdInput");
-        receiverIdInput.value = userId;
-        friendUsername.textContent = username;
-        // friendId.textContent = userId;
-        modal.style.display = "flex";
+<!-- CONFIRMATION MODAL SCRIPT-->
+<script src="/js/confirmationModal.js"></script>
 
-        // Store the user ID in a hidden input field inside the modal
-        const hiddenUserIdInput = document.createElement("input");
-        hiddenUserIdInput.type = "hidden";
-        hiddenUserIdInput.name = "receiverId";
-        hiddenUserIdInput.value = userId;
-        modal.appendChild(hiddenUserIdInput);
-    }
-
-    function closeModal() {
-        const modal = document.getElementById("confirmationModal");
-        modal.style.display = "none";
-    }
-
-    window.addEventListener('click', function (event) {
-        const modal = document.getElementById('confirmationModal');
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
-</script>
+<!--FILESTACK API SCRIPTS-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script>
-    const postImageButton = document.querySelector('.upload-post-image');
-    const postImage = document.querySelector('.post-image');
-    const postImageURLInput = document.querySelector('#postImageURLInput');
-    const postBodyTextarea = document.querySelector('#postBodyTextarea');
-    const submitButton = document.querySelector('.submit-post');
+<script src="/js/filestack.js"></script>
 
-    postImageButton.addEventListener('click', () => {
-        const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
-        const client = filestack.init(apiKey);
-        const options = {
-            onUploadDone: (uploadResponse) => {
-                console.log('onUploadDone', uploadResponse);
-                const postImageURL = uploadResponse.filesUploaded[0].url;
-                postImage.setAttribute('src', postImageURL);
-                postImageURLInput.value = postImageURL; // Store the postImageURL in the hidden input field.
-                enableSubmitButton();
-            }
-        };
-        client.picker(options).open();
-    });
+<!--TALK JS SCRIPTS-->
+<script src="/js/talk-js-snippet.js"></script>
+<script src="/js/talk-js.js"></script>
 
-    function enableSubmitButton() {
-        if (postBodyTextarea.value.trim() !== '') {
-            submitButton.disabled = false;
-        }
-    }
-
-    postBodyTextarea.addEventListener('input', () => {
-        enableSubmitButton();
-    });
-</script>
-<!-- minified snippet to load TalkJS without delaying your page -->
-<script>
-    (function (t, a, l, k, j, s) {
-        s = a.createElement('script');
-        s.async = 1;
-        s.src = "https://cdn.talkjs.com/talk.js";
-        a.head.appendChild(s)
-        ;k = t.Promise;
-        t.Talk = {
-            v: 3, ready: {
-                then: function (f) {
-                    if (k) return new k(function (r, e) {
-                        l.push([f, r, e])
-                    });
-                    l
-                        .push([f])
-                }, catch: function () {
-                    return k && new k()
-                }, c: l
-            }
-        };
-    })(window, document, []);
-</script>
-<script>
-    // let friendIdH;
-    // let friendUsernameH;
-    // let friendImageH;
-    // let userIdH;
-    // let userUsernameH;
-    // let userImageH;
-
-    function openTalkJSChat(friendId, friendUsername, friendImage, userId, userUsername, userImage, event) {
-        event.stopPropagation();
-        // friendIdH = friendId;
-        // friendUsernameH = friendUsername;
-        // friendImageH = friendImage;
-        // userIdH = userId;
-        // userUsernameH = userUsername;
-        // userImageH = userImage;
-        Talk.ready.then(function () {
-            var me = new Talk.User({
-                id: userId,
-                name: userUsername,
-                email: 'alice@example.com',
-                photoUrl: userImage,
-            });
-            window.talkSession = new Talk.Session({
-                appId: 'tUloHvfB',
-                me: me,
-            });
-            var other = new Talk.User({
-                id: friendId,
-                name: friendUsername,
-                email: 'Sebastian@example.com',
-                photoUrl: friendImage,
-            });
-
-            var conversation = talkSession.getOrCreateConversation(
-                Talk.oneOnOneId(me, other)
-            );
-            conversation.setParticipant(me);
-            conversation.setParticipant(other);
-
-            var inbox = talkSession.createInbox({selected: conversation});
-            inbox.mount(document.getElementById('talkjs-container'));
-
-            // Show the chat window when opened
-            showChatWindow();
-
-        });
-    }
-
-    function showChatWindow() {
-        const chatWindow = document.querySelector('.chat-window');
-        chatWindow.classList.add('visible');
-    }
-
-    function closeChatArea() {
-        const chatArea = document.querySelector('.chat-window');
-        chatArea.classList.remove('visible');
-    }
-
-
-    // Click event listener on the window to close the chat area
-    window.addEventListener('click', function (event) {
-        const chatArea = document.querySelector('.chat-window');
-        if (!chatArea.contains(event.target)) {
-            closeChatArea();
-        }
-    });
-</script>
-
-
-
-<script>
-    function setDefaultProfilePic() {
-        const imgElement = document.querySelector('.profile-img');
-        imgElement.src = '/img/logo-no-text.jpeg'; // Replace this with the URL of your default image
-    }
-</script>
-
-
+<!--<script>-->
+<!--    function setDefaultProfilePic() {-->
+<!--        const imgElement = document.querySelector('.profile-img');-->
+<!--        imgElement.src = '/img/logo-no-text.jpeg'; // Replace this with the URL of your default image-->
+<!--    }-->
+<!--</script>-->
 
 <footer th:replace="partials/footer :: footer"></footer>
 
