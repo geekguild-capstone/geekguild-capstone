@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Group Modal</title>
+    <link rel="stylesheet" href="/css/create-group-modal.css">
+    <link rel="stylesheet" href="/templates/partials/header.html">
+</head>
+<body>
+
+<h1>Create a Group</h1>
+
+<!--CREATE GROUP MODAL-->
+
+<div id="createGroupModal">
+    <div class="modal-header">
+        <h2>Create Group</h2>
+    </div>
+    <div class="modal-body">
+        <label for="groupName">Group Name:</label>
+        <input type="text" id="groupName" name="groupName" required>
+
+        <label for="groupDescription">Group Description:</label>
+        <textarea id="groupDescription" name="groupDescription" required></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit">Create Group</button>
+        <button type="button" onclick="closeModal()">Close</button>
+    </div>
+</div>
+<!--END OF CREATE GROUP MODAL-->
+
+<script src="/templates/partials/footer.html"></script>
+</body>
+</html>
