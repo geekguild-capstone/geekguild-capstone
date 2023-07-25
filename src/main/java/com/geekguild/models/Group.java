@@ -27,9 +27,18 @@ public class Group {
     @Column(nullable = false)
     private String groupname;
 
-    public Group(long id, String groupname) {
+    @Column
+    private String image;
+
+    @Column
+    private String banner;
+
+    public Group(long id, String groupname, String image, String banner) {
         this.id = id;
         this.groupname = groupname;
+        this.image = image;
+        this.banner = banner;
+
 
     }
 
