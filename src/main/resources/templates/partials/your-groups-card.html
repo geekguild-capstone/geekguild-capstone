@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Your Groups</title>
+    <title>Your Groups Card</title>
+    <link rel="stylesheet" href="/css/your-groups-card.css">
 </head>
 <body>
 
 <h1>This will be looped over and show groups you are in</h1>
 
+
+<div class="suggested-group-card">
+    <div class="group-thumbnail">
+        <!-- Replace the URL with the group thumbnail image -->
+        <img src="https://via.placeholder.com/150" alt="Group Thumbnail">
+    </div>
+    <div class="group-details">
+        <h3 class="group-name">Suggested Group Name</h3>
+        <p class="group-members">X members</p>
+        <p class="group-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id volutpat mauris.</p>
+        <button class="join-button">Join Group</button>
+    </div>
+</div>
 </body>
 </html>
