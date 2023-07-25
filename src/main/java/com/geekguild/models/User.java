@@ -37,6 +37,9 @@ public class User {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "banner")
+    private String banner;
+
 
     public User(long id, String userName, String email, String password) {
         this.id = id;

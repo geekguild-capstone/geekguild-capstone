@@ -59,12 +59,6 @@ public class HomeController {
         return "/partials/about-us";
     }
 
-//    @GetMapping("/groups")
-//    public String showGroups() {
-//
-//        return "/groups/groups";
-//    }
-
     @PostMapping("/home")
     public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
