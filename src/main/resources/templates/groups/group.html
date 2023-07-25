@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/home.css">
+
+    <head th:include="partials/header :: head">
+
+    </head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+
+
+<div>
+  <h3 th:text="${group.groupname}"></h3>
+  <p th:text="${'Number of Members: ' + groupMembersCount}"></p>
+  <!-- Add other group details here -->
+</div>
+    <footer th:replace="partials/footer :: footer"></footer>
+
+</body>
+</html>
