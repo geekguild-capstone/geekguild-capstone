@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -63,28 +65,29 @@ public class User {
 
 //    Relationships
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Post> posts;
-
+    // Each user should have exactly one portfolio, and each profile should be associated with only one user. This allows you to keep the user-specific information, preferences, and settings separate from the core user authentication and authorization data.
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
 
+    // In this scenario, each user can have multiple posts, but each post belongs to only one user. This is the most straightforward relationship for a social media website, where users can create and own their posts.
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Post> posts;
+
+    // Each user should have exactly one work categories, and each work source should be associated with only one user. This allows you to keep the user-specific information, preferences, and settings separate from the core user authentication and authorization data.
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
-
-
-
-//    Working Group to User Relationship
-
+// friends
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
     List<FriendRequest> friends = new ArrayList<>();
 
+    // groups
+    @ManyToMany(mappedBy = "members")
+    private Set<Group> groups = new HashSet<>();
 
-    // try to add a many to many relationship to keep the db from duplicating new columns.
-//@ManyToMany
 
 }

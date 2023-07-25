@@ -32,4 +32,12 @@ public class Group {
         this.groupname = groupname;
 
     }
+
+    @ManyToMany
+    @JoinTable(name = "groupusers",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> members = new HashSet<>();
+
+
 }
