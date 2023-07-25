@@ -12,6 +12,7 @@ import lombok.*;
 @Entity
 @Table(name = "comments")
 public class Comments {
+//    comment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
