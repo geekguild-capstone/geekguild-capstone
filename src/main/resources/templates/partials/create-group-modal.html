@@ -3,10 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Group Modal</title>
+
+
+
+    <style>
+        #createGroupModal {
+            display: none; /* Hide the modal by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .modal-header {
+            padding: 10px;
+            background-color: #f7f7f7;
+        }
+
+        .modal-footer {
+            padding: 10px;
+            background-color: #f7f7f7;
+            text-align: right;
+        }
+    </style>
+
+
+
 </head>
 <body>
 
 <h1>This will be a modal where you can create a group</h1>
+
+
+<div id="createGroupModal">
+    <div class="modal-header">
+        <h2>Create Group</h2>
+    </div>
+    <div class="modal-body">
+        <label for="groupName">Group Name:</label>
+        <input type="text" id="groupName" name="groupName" required>
+
+        <label for="groupDescription">Group Description:</label>
+        <textarea id="groupDescription" name="groupDescription" required></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit">Create Group</button>
+        <button type="button" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
 
 </body>
 </html>
