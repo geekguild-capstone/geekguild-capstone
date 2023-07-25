@@ -65,18 +65,29 @@
 
 /* Navbar Brand Text Color */
 .navbar-brand {
-    color: white !important;
+    color: #ccc !important;
 }
 
-/* Navbar Toggler Icon Color */
+
+
+ /*Navbar Toggler Icon*/
 .navbar-toggler {
-    background-color: darkorange !important;
-    border-color: white !important;
+    background-color: transparent;
+    border-color: #ee8631 !important;
 }
+
+.fa-bars{
+    color: #ee8631 !important;
+}
+.fa-bars:hover{
+    color: #8fd93f !important;
+}
+
+
 
 /* Navbar Links Text Color */
 .navbar-nav .nav-link {
-    color: white !important;
+    color: #ee8631 !important;
 }
 
 /* Active Navbar Link Text Color */
@@ -91,13 +102,13 @@
 
 /* Dropdown Menu Item Text Color */
 .dropdown-item {
-    color: white !important;
+    color: #ccc !important;
 }
 
 /* Dropdown Menu Item Hover Background Color */
 .dropdown-item:hover {
     background-color: #ee8631 !important;
-    color: white !important;
+    color: #ccc !important;
 }
 
 /* Search Input Text Color */
@@ -161,12 +172,12 @@
 
 #receivedFriendRequestModal .modal-body {
     background-color: #333333 !important;
-    color: white !important;
+    color: #ccc !important;
 }
 
 #receivedFriendRequestModal .modal-footer {
     background-color: #333333 !important;
-    color: white !important;
+    color: #ccc !important;
 }
 
 #receivedFriendRequestModal .btn-primary {
@@ -188,6 +199,29 @@
     border-color: #ee8631 !important;
 }
 
+.navbar-nav::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar track */
+    background-color: transparent; /* Track color */
+    border-radius: 0 20px 20px 0; /* top-left, top-right, bottom-right, bottom-left */
+    /*border: #708090 solid 2px;*/}
+
+.navbar-nav::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.navbar-nav::-webkit-scrollbar-thumb {
+    background-color: #8e09e7; /* Thumb color */
+    border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
+    height: 15px !important;}
+
+/* Hover styles for the scrollbar */
+.navbar-nav::-webkit-scrollbar-thumb:hover {
+    background-color: #ffb74d; /* Thumb color on hover */
+}
+
+.navbar-nav::-webkit-scrollbar-thumb:active {
+    background-color: limegreen;
+}
 
 
 /* Custom tooltip(popover) style */
