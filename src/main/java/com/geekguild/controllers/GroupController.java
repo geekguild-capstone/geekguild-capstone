@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GroupController {
@@ -55,8 +57,19 @@ public class GroupController {
         // Retrieve groups that the logged-in user is a member of
         List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
 
-        // Add the list of groups that the logged-in user is a member of to the model
+        // Create a map to store group IDs and their corresponding member counts
+        Map<Long, Integer> groupMembersCount = new HashMap<>();
+
+        // Loop through the groups to calculate and store the member counts
+        for (Group group : loggedInUserGroups) {
+            int membersCount = group.getMembers().size();
+            groupMembersCount.put(group.getId(), membersCount);
+        }
+
+
+        // Add the list of groups and group members count to the model
         model.addAttribute("loggedInUserGroups", loggedInUserGroups);
+        model.addAttribute("groupMembersCount", groupMembersCount);
 
 
         return "groups/groups";

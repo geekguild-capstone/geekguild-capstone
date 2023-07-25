@@ -8,37 +8,13 @@
 <body>
 <main>
     <div th:each="group : ${loggedInUserGroups}">
-        <!--<h1 th:text="${group.groupname}"></h1>-->
         <div class="post-card">
             <div class="user-profile">
                 <img th:src="${group.image}"
                      alt="User Profile Image">
                 <div th:text="${group.groupname}" class="username"></div>
+                <div th:text="'Number of Members: ' + ${groupMembersCount[group.id]}"></div>
             </div>
-<!--            <div class="post-content">-->
-<!--                <p th:text="${post.body}"></p>-->
-<!--            </div>-->
-
-<!--            <div id="post_image" class="post-image">-->
-<!--                <img width="200px" th:src="${post.image}">-->
-<!--            </div>-->
-
-<!--            <div class="interactions">-->
-<!--                <button>-->
-<!--                    <div class="like-container">-->
-<!--                        <i class="far fa-thumbs-up like-icon">Like</i>-->
-<!--                        <div class="like-emojis">-->
-<!--                            <span class="like-emoji" onclick="likeAction('👍')">👍 Like</span>-->
-<!--                            <span class="like-emoji" onclick="likeAction('❤️')">❤️ Love</span>-->
-<!--                            <span class="like-emoji" onclick="likeAction('😂')">😂 Laugh</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </button>-->
-<!--                <button class="comment-button"><i class="fas fa-comment">Comment</i>-->
-<!--                </button>-->
-<!--                <button class="share-button"><i class="fas fa-envelope ">Message</i>-->
-<!--                </button>-->
-<!--            </div>-->
         </div>
     </div>
 
