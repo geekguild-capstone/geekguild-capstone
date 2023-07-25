@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/groups.css">
+    <link rel="stylesheet" href="/css/suggested-friends.css">
 
     <head th:include="partials/header :: head">
     </head>
@@ -38,9 +39,8 @@
 
 
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
-    <div class="middle-section scroll-bar">
-        <div class="view-groups-container">
-        </div>
+    <div class="middle-section scroll-bar" th:include="groups/group-list">
+
     </div>
 
 
@@ -48,7 +48,10 @@
         <div class="top-right-section">
 
         </div>
-        <div class="bottom-right-section">Bottom Right Section</div>
+        <div class="bottom-right-section" th:include="groups/suggested-group">
+
+
+        </div>
     </div>
 </div>
 <!-- container element in which TalkJS will display a chat UI -->

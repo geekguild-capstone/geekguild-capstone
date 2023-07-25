@@ -39,6 +39,7 @@ public class Group {
         this.image = image;
         this.banner = banner;
 
+
     }
 
     @ManyToMany

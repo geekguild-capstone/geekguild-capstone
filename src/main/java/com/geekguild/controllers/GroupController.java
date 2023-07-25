@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -48,6 +49,16 @@ public class GroupController {
         model.addAttribute("receiveFriends", receiveFriends);
         List<FriendRequest> sentFriends = friendDao.findBySenderAndStatus(user, "accepted");
         model.addAttribute("sentFriends", sentFriends);
+        List<Group> groups = groupDao.findAll();
+        model.addAttribute("groups", groups);
+
+        // Retrieve groups that the logged-in user is a member of
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+
+        // Add the list of groups that the logged-in user is a member of to the model
+        model.addAttribute("loggedInUserGroups", loggedInUserGroups);
+
+
         return "groups/groups";
     }
 
@@ -72,12 +83,19 @@ public class GroupController {
         Group group = groupDao.findById(groupId).orElse(null);
         model.addAttribute("group", group);
 
-        // CHeck if the group exists
+
+//         Check if the group exists
         if (group == null) {
             return "redirect:/error";
         } else {
-            return "group-card";
+            // Get the count of members in the group using the repository method
+            int groupMembersCount = groupDao.getGroupMembersCount(groupId);
+            model.addAttribute("groupMembersCount", groupMembersCount);
+
+            return "/groups/group";
         }
+
+
     }
 
     public void joinGroup(Long groupId, User user) {
