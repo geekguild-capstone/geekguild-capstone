@@ -1,1 +1,2 @@
-const NEWS_API = '34856f6506ff4614bd603d117cf38e9e';
+// const NEWS_API = '34856f6506ff4614bd603d117cf38e9e';
+const NEWS_API = '5b927cb7f8f743ee82264dbdc4488a3f';

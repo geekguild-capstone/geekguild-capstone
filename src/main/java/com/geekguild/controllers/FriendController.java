@@ -97,6 +97,7 @@ public class FriendController {
         });
     }
 
+
     private Long getUserIdFromSecurityContext() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof User) {
@@ -107,3 +108,4 @@ public class FriendController {
 
     // Additional friend-related methods and endpoints can go here
 }
+
