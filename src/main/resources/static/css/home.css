@@ -119,6 +119,23 @@ h1 {
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
 
+/* Text Input Styles */
+.top-right-section input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f0f2f5;
+    margin-bottom: 10px;
+}
+
+/* News Cards Container Styles */
+.top-right-section .news-cards-container {
+    max-height: 70vh; /* Set a maximum height to allow for scrolling */
+    overflow-y: auto; /* Add a vertical scrollbar if content overflows */
+}
+
 .top-right-section::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar track */
     background-color: transparent; /* Track color */
@@ -318,4 +335,47 @@ h1 {
 
 .chat-area.visible + .right-section {
     z-index: 1;
+}
+
+/*NEWS STYLING*/
+.article-card {
+    max-width: 400px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.article-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+    text-decoration: none;
+    word-wrap: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.article-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.article-url {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.article-url:hover {
+    text-decoration: underline;
 }

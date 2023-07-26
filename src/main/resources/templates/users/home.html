@@ -73,7 +73,15 @@
 
     <div class="right-section">
         <div class="top-right-section">
-
+            <!-- Text Input -->
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <!-- News Cards Container -->
+            <div class="news-cards-container">
+                <!-- News cards will be rendered here -->
+            </div>
         </div>
         <div th:include="partials/suggested-friend" class="bottom-right-section">Bottom Right Section</div>
     </div>
@@ -95,12 +103,9 @@
 <script src="/js/talk-js-snippet.js"></script>
 <script src="/js/talk-js.js"></script>
 
-<!--<script>-->
-<!--    function setDefaultProfilePic() {-->
-<!--        const imgElement = document.querySelector('.profile-img');-->
-<!--        imgElement.src = '/img/logo-no-text.jpeg'; // Replace this with the URL of your default image-->
-<!--    }-->
-<!--</script>-->
+<!--NEWS API SCRIPTS-->
+<script src="/js/keys.js"></script>
+<script src="/js/news.js"></script>
 
 <footer th:replace="partials/footer :: footer"></footer>
 
