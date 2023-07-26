@@ -4,13 +4,49 @@
     <meta charset="UTF-8">
     <!--CUSTOM CSS -->
     <link rel="stylesheet" href="/css/postCard.css">
+    <link rel="stylesheet" href="/css/create-group-modal.css">
 </head>
 <body>
 <main>
     <div class="top-bar">
         <h4 class="group-heading">Your Groups</h4>
 
-        <button class="create-group-button">Create Group</button>
+
+        <button data-bs-toggle="modal" data-bs-target="#createGroupModal" class="btn btn-primary" id="newFriendRequestBtn"
+                data-bs-placement="bottom" title="New Friend Request">
+            <i class="bi bi-person-plus"></i>
+        </button>
+
+        <!-- CREATE GROUP MODAL -->
+        <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog"
+             aria-labelledby="createGroupModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createGroupModalLabel">Create Group</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Modal content here -->
+                        <img src="https://via.placeholder.com/150" alt="Group Picture" class="group-img">
+                        <label for="groupName">Group Name:</label>
+                        <input type="text" id="groupName" name="groupName" required>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="#" method="post" id="createGroupForm">
+                            <input type="hidden" name="receiverId" value="1"/>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </form>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF CREATE GROUP MODAL -->
+
+
     </div>
     <div th:each="group : ${loggedInUserGroups}">
         <div class="post-card">
@@ -27,6 +63,6 @@
 
 </main>
 
-
+<script src="/js/friend-request-modal.js"></script>
 </body>
 </html>
