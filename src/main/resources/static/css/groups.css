@@ -28,7 +28,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: #333; /* You can change the color here */
-    padding: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
     color: #e67e22; /* Change font color if necessary */
 }
 
@@ -52,4 +53,12 @@
     margin-top: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.groupname {
+    color: #e67e22;
+}
+
+.members{
+    color: #8fd93f;
 }
