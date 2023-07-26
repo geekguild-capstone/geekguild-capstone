@@ -34,9 +34,15 @@
         </div>
 
         <div class="interactions">
-            <button>
+            <button onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
                 <i class="far fa-thumbs-up"></i>Like
             </button>
+                <div class="like-emojis" style="display: none;">
+                    <span class="like-emoji" onclick="likeAction('👍')">👍</span>
+                    <span class="like-emoji" onclick="likeAction('❤️')">❤️</span>
+                    <span class="like-emoji" onclick="likeAction('😂')">😂</span>
+                </div>
+
             <button class="comment-button" onclick="toggleCommentBox(this)">
                 <i class="far fa-comment-dots"></i>Comment
             </button>
@@ -116,7 +122,18 @@
             commentBox.style.display = 'none';
         }
 
+    }
 
+    function showLikeEmojis(button) {
+        const postCard = button.closest('.post-card');
+        const likeEmojis = postCard.querySelector('.like-emojis');
+        likeEmojis.style.display = 'block';
+    }
+
+    function hideLikeEmojis(button) {
+        const postCard = button.closest('.post-card');
+        const likeEmojis = postCard.querySelector('.like-emojis');
+        likeEmojis.style.display = 'none';
     }
 </script>
 </body>

@@ -11,12 +11,12 @@ body {
     background-color: #ee8631;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 24px;
+    margin-bottom: 5px;
     padding: 16px;
 }
 
 .post-content-container {
-    border: 2px solid #8e09e7;
+    border: 2px solid #8fd93f;
     padding: 10px;
     margin-bottom: 20px;
 }
@@ -120,7 +120,7 @@ body {
 
 .comments-section hr {
     border: none;
-    border-top: 1px solid #e1e5ea;
+    border-top: 1px solid #8e09e7 !important;
     margin: 8px 0;
 }
 
@@ -162,3 +162,23 @@ body {
 .post-content p {
     color: #8e09e7;
 }
+
+/* Style for the emojis container */
+.like-emojis {
+    position: absolute;
+    display: flex;
+    flex-direction: row; /* Make emojis appear horizontally */
+    align-items: center; /* Center emojis vertically */
+    justify-content: center; /* Center emojis horizontally */
+    top: -30px; /* Adjust this value as needed to position the emojis properly */
+    left: 0; /* Position relative to the like button */
+    width: 100%; /* Set width to occupy the full width of the like container */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+}
+
+
