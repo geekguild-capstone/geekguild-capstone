@@ -33,7 +33,10 @@ public class HomeController {
 
         model.addAttribute("user", user);
         model.addAttribute("post", new Post());
-        model.addAttribute("posts", postDao.findAll());
+        // Fetch only the posts where groupId is null
+        List<Post> posts = postDao.findByGroupIdIsNull();
+        model.addAttribute("posts", posts);
+
         model.addAttribute("users", userDao.findAll());
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(user, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(user, "accepted"));

@@ -9,6 +9,5 @@ public interface PostRepository extends JpaRepository<Post, Long>{
     List<Post> findByGroupId(Long groupId);
 
 
-
-
+    List<Post> findByGroupIdIsNull();
 }
