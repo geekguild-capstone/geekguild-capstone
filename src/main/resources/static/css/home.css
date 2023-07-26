@@ -58,7 +58,7 @@ h1 {
 
 .view-post-container {
     background-color: #444444;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
     margin: 0 5px 15px 0; /* top, right, bottom, left */
 
@@ -68,7 +68,7 @@ h1 {
 /*MIDDLE SECTION*/
 .middle-section{
     background-color: #444444;
-    /*overflow-y: auto;*/
+    overflow-y: auto;
     /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
@@ -192,7 +192,7 @@ h1 {
 
 
 .create-post-container, .view-post-container {
-    height: 50%;
+    /*height: 50%;*/
     background-color: #333;
     border-radius: 8px;
     box-shadow : inset 0 2px 4px rgba(0, 0, 0, 0.4);

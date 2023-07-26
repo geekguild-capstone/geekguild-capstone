@@ -3,64 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Post</title>
-    <!--BOOTSTRAP CSS-->
-    <link th:include="partials/header">
+    <!-- Add the necessary CSS libraries (e.g., Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!--CUSTOM CSS -->
     <link rel="stylesheet" href="/css/postCard.css">
-
-
-    <style>
-
-    </style>
 </head>
-
 
 <body>
 <div th:each="post : ${posts}">
-
     <div class="post-card">
         <div class="user-profile">
-            <img th:src="${post.user.image}"
-                 alt="User Profile Image">
+            <img th:src="${post.user.image}" alt="User Profile Image">
             <div th:text="${post.user.username}" class="username"></div>
         </div>
         <div class="post-content">
             <p th:text="${post.body}"></p>
-        </div>
 
-        <div id="post_image" class="post-image">
-            <img width="200px" th:src="${post.image}">
+            <!-- Move the .post-image div here, within .post-content -->
+            <div class="post-image">
+                <img width="100%" th:src="${post.image}">
+            </div>
         </div>
-
 
         <div class="interactions">
             <button>
-                <div class="like-container">
-                    <i class="far fa-thumbs-up like-icon">Like</i>
-                    <div class="like-emojis">
-                        <span class="like-emoji" onclick="likeAction('👍')">👍 Like</span>
-                        <span class="like-emoji" onclick="likeAction('❤️')">❤️ Love</span>
-                        <span class="like-emoji" onclick="likeAction('😂')">😂 Laugh</span>
-                    </div>
-                </div>
+                <i class="far fa-thumbs-up"></i>Like
             </button>
-            <button class="comment-button" onclick="toggleCommentBox(this)"><i class="fas fa-comment">Comment</i></button>
-            <button class="share-button"><i class="fas fa-envelope ">Message</i>
+            <button class="comment-button" onclick="toggleCommentBox(this)">
+                <i class="far fa-comment-dots"></i>Comment
+            </button>
+            <button class="share-button">
+                <i class="fas fa-envelope"></i>Message <!-- Updated text and icon -->
             </button>
         </div>
-        <!-- Comment Dropdown Box -->
-        <div class="comment-box" style="display: none;">
+
+        <div class="comment-box">
             <input type="text" id="comment-input" placeholder="Add a comment...">
             <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
         </div>
-        <!-- Comments Section -->
+
         <div class="comments-section" id="comments-section">
             <!-- Display comments here (if available) -->
         </div>
     </div>
 </div>
 
-<    <script>
+<!-- Add any necessary JavaScript here -->
+<script th:include="partials/footer"></script>
+<script>
     function toggleCommentBox(button) {
         const postCard = button.closest('.post-card');
         const commentBox = postCard.querySelector('.comment-box');
@@ -73,12 +63,10 @@
         }
     }
 
-    // Function to handle comment submission
     function submitComment(event) {
         const button = event.target;
         const postCard = button.closest('.post-card');
         const commentInput = postCard.querySelector('#comment-input');
-        console.log(commentInput)
         const commentsSection = postCard.querySelector('.comments-section');
 
         const commentText = commentInput.value.trim();
@@ -86,20 +74,43 @@
             // Create a new comment element and append it to the comments section
             const newComment = document.createElement('div');
             newComment.classList.add('comment');
-            newComment.textContent = commentText;
+
+            // User profile image (replace with actual image source)
+            const userProfileImg = document.createElement('img');
+            userProfileImg.src = 'https://via.placeholder.com/24';
+            userProfileImg.alt = 'User Profile Image';
+
+            // User profile username (replace with actual username)
+            const userProfileUsername = document.createElement('div');
+            userProfileUsername.classList.add('username');
+            userProfileUsername.textContent = 'John Doe';
+
+            // Comment content
+            const commentContent = document.createElement('p');
+            commentContent.textContent = commentText;
+
+            // Horizontal line to separate comments
+            const hr = document.createElement('hr');
+
+            // Append the elements to the comment container
+            newComment.appendChild(userProfileImg);
+            newComment.appendChild(userProfileUsername);
+            newComment.appendChild(commentContent);
+            newComment.appendChild(hr);
+
             commentsSection.appendChild(newComment);
 
             // Clear the comment input field
             commentInput.value = '';
-        }
-    }
 
-    // Function for the like action, if needed
-    function likeAction(emoji) {
-        // Code for handling like action goes here
+            // Auto-close the comment box after submission
+            const commentBox = postCard.querySelector('.comment-box');
+            commentBox.style.display = 'none';
+        }
+
+
     }
 </script>
-
-<script th:include="partials/footer"></script>
 </body>
 </html>
+
