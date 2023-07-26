@@ -1,49 +1,5 @@
 
 
-
-/* Modal header background color */
-#receivedFriendRequestModal .modal-header {
-    background-color: #ee8631;
-    color: white;
-}
-
-/* Modal body background color */
-#receivedFriendRequestModal .modal-body {
-    background-color: #333333;
-    color: white;
-}
-
-/* Modal footer background color */
-#receivedFriendRequestModal .modal-footer {
-    background-color: #333333;
-    color: white;
-}
-
-/* Button styles */
-#receivedFriendRequestModal .btn-primary {
-    background-color: #ee8631;
-    border-color: #ee8631;
-}
-
-#receivedFriendRequestModal .btn-primary:hover {
-    /*background-color: var(--lime-green-color);*/
-    border-color: #aefc4f;
-    color: #aefc4f;
-}
-
-#receivedFriendRequestModal .btn-danger {
-    background-color: #8e09e7;
-    border-color: #8e09e7;
-}
-
-#receivedFriendRequestModal .btn-danger:hover {
-    border-color: #ee8631;
-}
-
-
-
-
-
 /*NAVBAR CSS*/
 
 /* Navbar Background Color */
@@ -156,40 +112,40 @@
     color: #aefc4f !important;
 }
 
-/* NEW FRIEND REQUEST MODAL Styles */
-#receivedFriendRequestModal .modal-header {
-    background-color: #ee8631 !important;
-    color: white !important;
-}
+/*!* NEW FRIEND REQUEST MODAL Styles *!*/
+/*#receivedFriendRequestModal .modal-header {*/
+/*    background-color: #ee8631 !important;*/
+/*    color: white !important;*/
+/*}*/
 
-#receivedFriendRequestModal .modal-body {
-    background-color: #333333 !important;
-    color: #ccc !important;
-}
+/*#receivedFriendRequestModal .modal-body {*/
+/*    background-color: #333333 !important;*/
+/*    color: #ccc !important;*/
+/*}*/
 
-#receivedFriendRequestModal .modal-footer {
-    background-color: #333333 !important;
-    color: #ccc !important;
-}
+/*#receivedFriendRequestModal .modal-footer {*/
+/*    background-color: #333333 !important;*/
+/*    color: #ccc !important;*/
+/*}*/
 
-#receivedFriendRequestModal .btn-primary {
-    background-color: #ee8631 !important;
-    border-color: #ee8631 !important;
-}
+/*#receivedFriendRequestModal .btn-primary {*/
+/*    background-color: #ee8631 !important;*/
+/*    border-color: #ee8631 !important;*/
+/*}*/
 
-#receivedFriendRequestModal .btn-primary:hover {
-    border-color: #aefc4f !important;
-    color: #aefc4f !important;
-}
+/*#receivedFriendRequestModal .btn-primary:hover {*/
+/*    border-color: #aefc4f !important;*/
+/*    color: #aefc4f !important;*/
+/*}*/
 
-#receivedFriendRequestModal .btn-danger {
-    background-color: #8e09e7 !important;
-    border-color: #8e09e7 !important;
-}
+/*#receivedFriendRequestModal .btn-danger {*/
+/*    background-color: #8e09e7 !important;*/
+/*    border-color: #8e09e7 !important;*/
+/*}*/
 
-#receivedFriendRequestModal .btn-danger:hover {
-    border-color: #ee8631 !important;
-}
+/*#receivedFriendRequestModal .btn-danger:hover {*/
+/*    border-color: #ee8631 !important;*/
+/*}*/
 
 .navbar-nav::-webkit-scrollbar {
     width: 10px; /* Width of the scrollbar track */
@@ -227,4 +183,46 @@
 /* Custom tooltip arrow style */
 .tooltip .tooltip-arrow {
     border-top-color: #8e09e7 !important; /* Match the background color of the tooltip */
+}
+
+
+
+
+/* Modal header background color */
+#receivedFriendRequestModal .modal-header {
+    background-color: #ee8631;
+    color: white;
+}
+
+/* Modal body background color */
+#receivedFriendRequestModal .modal-body {
+    background-color: #333333;
+    color: white;
+}
+
+/* Modal footer background color */
+#receivedFriendRequestModal .modal-footer {
+    background-color: #333333;
+    color: white;
+}
+
+/* Button styles */
+#receivedFriendRequestModal .btn-primary {
+    background-color: #ee8631;
+    border-color: #ee8631;
+}
+
+#receivedFriendRequestModal .btn-primary:hover {
+    /*background-color: var(--lime-green-color);*/
+    border-color: #aefc4f;
+    color: #aefc4f;
+}
+
+#receivedFriendRequestModal .btn-danger {
+    background-color: #8e09e7;
+    border-color: #8e09e7;
+}
+
+#receivedFriendRequestModal .btn-danger:hover {
+    border-color: #ee8631;
 }
