@@ -41,17 +41,17 @@
 
     <div class="middle-section">
         <div class="create-post-container">
-            <div class="profile-picture"
-                 th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
+            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>
             <div class="post-content">
                 <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
                     <!-- Post image upload section -->
                     <div>
                         <button type="button" class="upload-post-image">Upload Post Image</button>
                     </div>
-<!--                    <div>-->
-<!--                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage"/>-->
-<!--                    </div>-->
+
+                    <div class="upload-post-img">
+                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage"/>
+                    </div>
 
                     <!-- Post body input section -->
                     <textarea th:field="*{body}" id="postBodyTextarea" placeholder="What's on your mind?"
