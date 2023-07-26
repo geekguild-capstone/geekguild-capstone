@@ -7,13 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class GroupController {
@@ -34,6 +32,7 @@ public class GroupController {
 
     @GetMapping("/groups")
     public String showGroups(Model model) {
+        model.addAttribute("group", new Group()); // Add an empty Group object to the model
         User loggedInUser = getCurrentLoggedInUser();
         model.addAttribute("post", new Post());
         model.addAttribute("user", loggedInUser);
@@ -55,6 +54,32 @@ public class GroupController {
         model.addAttribute("groupMembersCount", groupMembersCount);
 
         return "groups/groups";
+    }
+
+    @PostMapping("/group/create")
+    public String createGroup(@ModelAttribute Group group) {
+        User loggedInUser = getCurrentLoggedInUser();
+        Group newGroup = new Group();
+
+        newGroup.setGroupname(group.getGroupname()); // Set other properties if required
+        newGroup.setImage(group.getImage());
+        newGroup.setBanner(group.getBanner());
+        newGroup.setDescription(group.getDescription());
+        newGroup.setAdminId(loggedInUser.getId());
+
+        // Add the logged-in user as a member of the new group
+        Set<User> members = new HashSet<>();
+        members.add(loggedInUser);
+        newGroup.setMembers(members);
+
+        // Save the new group
+        groupDao.save(newGroup);
+
+        return "redirect:/groups";
+//        User loggedInUser = getCurrentLoggedInUser();
+//        Group newGroup = new Group();
+//        newGroup.setUserId();
+//        return "redirect:/group/{groupId}";
     }
 
     @PostMapping("/group/{groupId}/join")
@@ -95,8 +120,8 @@ public class GroupController {
         if (group == null) {
             return "redirect:/error";
         } else {
-            int groupMembersCount = groupDao.getGroupMembersCount(groupId);
-            model.addAttribute("groupMembersCount", groupMembersCount);
+//            int groupMembersCount = groupDao.getGroupMembersCount(groupId);
+//            model.addAttribute("groupMembersCount", groupMembersCount);
             return "/groups/group";
         }
     }
@@ -108,10 +133,12 @@ public class GroupController {
     private void joinGroup(Long groupId, User user) {
         Group group = groupDao.findById(groupId).orElse(null);
         if (group != null) {
-            group.getMembers().add(user);
+//            group.getMembers().add(user);
             groupDao.save(group);
         }
     }
+
+
 }
 
 

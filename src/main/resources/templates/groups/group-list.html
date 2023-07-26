@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <!--CUSTOM CSS -->
     <link rel="stylesheet" href="/css/postCard.css">
@@ -28,28 +30,29 @@
                         <h5 class="modal-title" id="createGroupModalLabel">Create Group</h5>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form th:object="${group}" th:action="@{/group/create}" method="post">
                             <div class="form-group">
                                 <label for="groupName">Group Name</label>
-                                <input type="text" class="form-control" id="groupName" placeholder="Enter group name">
+                                <input th:field="*{groupname}" type="text" class="form-control" id="groupName" placeholder="Enter group name">
                             </div>
                             <div class="form-group">
                                 <label for="groupBanner">Add Group Banner</label>
-                                <input type="file" class="form-control" id="groupBanner">
+                                <input th:field="*{banner}" type="file" class="form-control" id="groupBanner">
                             </div>
                             <div class="form-group">
                                 <label for="groupPhoto">Add Group Photo</label>
-                                <input type="file" class="form-control" id="groupPhoto">
+                                <input th:field="*{image}" type="file" class="form-control" id="groupPhoto">
                             </div>
                             <div class="form-group">
                                 <label for="groupDescription">Group Description</label>
-                                <textarea class="form-control" id="groupDescription" rows="3"
+                                <textarea th:field="*{description}" class="form-control" id="groupDescription" rows="3"
                                           placeholder="Enter group description"></textarea>
                             </div>
+                            <button type="submit" class="btn create-group-button">Create</button>
+                            <button type="button" class="btn cancel-create-group-button" data-bs-dismiss="modal">Cancel</button>
                         </form>
                     </div>
-                    <button type="button" class="btn create-group-button">Create</button>
-                    <button type="button" class="btn cancel-create-group-button" data-bs-dismiss="modal">Cancel</button>
+
                 </div>
             </div>
         </div>

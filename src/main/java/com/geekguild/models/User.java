@@ -84,13 +84,16 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
-// friends
+    // friends
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
     List<FriendRequest> friends = new ArrayList<>();
 
     // groups
     @ManyToMany(mappedBy = "members")
     private Set<Group> groups = new HashSet<>();
-
-
+//    @ManyToMany
+//    @JoinTable(name = "groupusers",
+//            joinColumns = {@JoinColumn(name = "user_id")},
+//    inverseJoinColumns = {@JoinColumn(name = "group_id")})
+//    private List<Group> groupsList;
 }
