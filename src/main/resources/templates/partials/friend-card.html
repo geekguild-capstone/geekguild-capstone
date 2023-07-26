@@ -34,7 +34,7 @@
                 <div class="ellipsis" onclick="toggleDropdown(this)">
                     <i class="fas fa-ellipsis-h"></i>
                     <div class="dropdown-menu">
-                        <form method="post" th:action="@{/home/remove}">
+                        <form method="post" th:action="@{/friends/remove}">
                             <input type="hidden" name="loggedInUserType" value="sender">
                             <input type="hidden" name="friendId" th:value="${friend.receiver.id}">
                             <button type="submit">
@@ -72,7 +72,7 @@
                 <div class="ellipsis" onclick="toggleDropdown(this)">
                     <i class="fas fa-ellipsis-h"></i>
                     <div class="dropdown-menu">
-                        <form method="post" th:action="@{/home/remove}">
+                        <form method="post" th:action="@{/friends/remove}">
                             <input type="hidden" name="friendId" th:value="${friend.sender.id}">
                             <input type="hidden" name="loggedInUserType" value="receiver">
 
