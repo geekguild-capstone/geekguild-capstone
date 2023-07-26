@@ -60,6 +60,10 @@
     text-decoration: none;
 }
 
+.groupname:hover {
+    color: #8e09e7;
+}
+
 .members{
     color: #8fd93f;
 }
