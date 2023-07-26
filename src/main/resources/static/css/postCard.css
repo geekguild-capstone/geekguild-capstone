@@ -4,7 +4,7 @@
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 10px;
-    background-color: #333333;
+    background-color: #e67e22;
 }
 
 .post-image{
@@ -69,4 +69,24 @@
 .like-emojis span:hover {
     background-color: #8e09e7;
     color: #fff;
+}
+
+.interactions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-box {
+    /* You can add additional styles here for the appearance of the comment box */
+}
+
+.comments-section {
+    /* Add styles for the comments section */
+    margin-top: 10px;
+    /* Add any other styles you need for the appearance of comments */
+}
+
+/* Add styles for individual comments (optional) */
+.comment {
+    /* Add styles for individual comments */
 }

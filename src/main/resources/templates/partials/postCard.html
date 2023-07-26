@@ -32,6 +32,7 @@
             <img width="200px" th:src="${post.image}">
         </div>
 
+
         <div class="interactions">
             <button>
                 <div class="like-container">
@@ -43,14 +44,61 @@
                     </div>
                 </div>
             </button>
-            <button class="comment-button"><i class="fas fa-comment">Comment</i>
-            </button>
+            <button class="comment-button" onclick="toggleCommentBox(this)"><i class="fas fa-comment">Comment</i></button>
             <button class="share-button"><i class="fas fa-envelope ">Message</i>
             </button>
+        </div>
+        <!-- Comment Dropdown Box -->
+        <div class="comment-box" style="display: none;">
+            <input type="text" id="comment-input" placeholder="Add a comment...">
+            <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
+        </div>
+        <!-- Comments Section -->
+        <div class="comments-section" id="comments-section">
+            <!-- Display comments here (if available) -->
         </div>
     </div>
 </div>
 
+<    <script>
+    function toggleCommentBox(button) {
+        const postCard = button.closest('.post-card');
+        const commentBox = postCard.querySelector('.comment-box');
+
+        // Toggle the visibility of the comment box
+        if (commentBox.style.display === 'none') {
+            commentBox.style.display = 'block';
+        } else {
+            commentBox.style.display = 'none';
+        }
+    }
+
+    // Function to handle comment submission
+    function submitComment(event) {
+        const button = event.target;
+        const postCard = button.closest('.post-card');
+        const commentInput = postCard.querySelector('#comment-input');
+        console.log(commentInput)
+        const commentsSection = postCard.querySelector('.comments-section');
+
+        const commentText = commentInput.value.trim();
+        if (commentText !== '') {
+            // Create a new comment element and append it to the comments section
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.textContent = commentText;
+            commentsSection.appendChild(newComment);
+
+            // Clear the comment input field
+            commentInput.value = '';
+        }
+    }
+
+    // Function for the like action, if needed
+    function likeAction(emoji) {
+        // Code for handling like action goes here
+    }
+</script>
 
 <script th:include="partials/footer"></script>
 </body>
