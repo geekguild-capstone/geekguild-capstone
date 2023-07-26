@@ -58,7 +58,7 @@ h1 {
 
 .view-post-container {
     background-color: #444444;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     border-radius: 20px; /* top-left, top-right, bottom-right, bottom-left */
     margin: 0 5px 15px 0; /* top, right, bottom, left */
 
@@ -68,7 +68,7 @@ h1 {
 /*MIDDLE SECTION*/
 .middle-section{
     background-color: #444444;
-    /*overflow-y: auto;*/
+    overflow-y: auto;
     /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
@@ -82,13 +82,13 @@ h1 {
     /*border: #708090 solid 2px;*/
 }
 
-.view-post-container::-webkit-scrollbar-thumb {
+.middle-section::-webkit-scrollbar-thumb {
     background-color: #8e09e7; /* Thumb color */
     border-radius: 8px; /* top-left, top-right, bottom-right, bottom-left */
     height: 15px !important;
 }
 
-.view-post-container::-webkit-scrollbar-thumb:hover {
+.middle-section::-webkit-scrollbar-thumb:hover {
     background-color: #ffb74d; /* Thumb color on hover */
 }
 
