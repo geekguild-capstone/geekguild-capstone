@@ -9,38 +9,47 @@
 <body>
 <main>
     <div class="top-bar">
-        <h4 class="group-heading">Your Groups</h4>
+        <h4 class="group-heading">Your Groups
+            <!--CREATE GROUP BUTTON-->
+            <button data-bs-toggle="modal" data-bs-target="#createGroupModal" class="btn btn-primary"
+                    id="createGroupBtn"
+                    data-bs-placement="bottom" title="Create Group">
+                <i class="fas fa-plus"></i>
+            </button>
+        </h4>
 
-
-        <button data-bs-toggle="modal" data-bs-target="#createGroupModal" class="btn btn-primary" id="newFriendRequestBtn"
-                data-bs-placement="bottom" title="New Friend Request">
-            <i class="bi bi-person-plus"></i>
-        </button>
 
         <!-- CREATE GROUP MODAL -->
         <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog"
-             aria-labelledby="createGroupModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+             aria-labelledby="createGroupModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createGroupModalLabel">Create Group</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Modal content here -->
-                        <img src="https://via.placeholder.com/150" alt="Group Picture" class="group-img">
-                        <label for="groupName">Group Name:</label>
-                        <input type="text" id="groupName" name="groupName" required>
-                    </div>
-                    <div class="modal-footer">
-                        <form action="#" method="post" id="createGroupForm">
-                            <input type="hidden" name="receiverId" value="1"/>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                        <form>
+                            <div class="form-group">
+                                <label for="groupName">Group Name</label>
+                                <input type="text" class="form-control" id="groupName" placeholder="Enter group name">
+                            </div>
+                            <div class="form-group">
+                                <label for="groupBanner">Add Group Banner</label>
+                                <input type="file" class="form-control" id="groupBanner">
+                            </div>
+                            <div class="form-group">
+                                <label for="groupPhoto">Add Group Photo</label>
+                                <input type="file" class="form-control" id="groupPhoto">
+                            </div>
+                            <div class="form-group">
+                                <label for="groupDescription">Group Description</label>
+                                <textarea class="form-control" id="groupDescription" rows="3"
+                                          placeholder="Enter group description"></textarea>
+                            </div>
                         </form>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                     </div>
+                    <button type="button" class="btn create-group-button">Create</button>
+                    <button type="button" class="btn cancel-create-group-button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -55,10 +64,10 @@
                      alt="User Profile Image">
                 <div>
                     <a th:href="@{'/group/' + ${group.id}}" class="groupname" th:text="${group.groupname}"></a>
-                <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
+                    <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 </main>
