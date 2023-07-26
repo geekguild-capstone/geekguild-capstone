@@ -16,118 +16,94 @@ import java.util.Optional;
 @RequestMapping("/friends")
 public class FriendController {
 
-    private final FriendRequestRepository friendRequestRepository;
-    private final UserRepository userRepository;
+    private final UserRepository userDao;
+    private final FriendRequestRepository friendDao;
 
-    public FriendController(FriendRequestRepository friendRequestRepository, UserRepository userRepository) {
-        this.friendRequestRepository = friendRequestRepository;
-        this.userRepository = userRepository;
+    public FriendController(UserRepository userDao, FriendRequestRepository friendDao) {
+        this.userDao = userDao;
+        this.friendDao = friendDao;
     }
 
     @GetMapping("")
     public String getFriendRequests(Model model) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<FriendRequest> friendRequests = friendRequestRepository.findByReceiverAndStatus(loggedInUser, "pending");
-        System.out.println(friendRequests);
+        User loggedInUser = getLoggedInUser();
+        List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
         model.addAttribute("requests", friendRequests);
         return "partials/friendRequest";
     }
 
     @PostMapping("/{requestId}/accept")
     public String acceptFriendRequest(@PathVariable Long requestId) {
-        Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
-        optionalFriendRequest.ifPresent(friendRequest -> {
-            friendRequest.setStatus("accepted");
-            friendRequestRepository.save(friendRequest);
-        });
+        updateFriendRequestStatus(requestId, "accepted");
         return "redirect:/friends";
     }
 
     @PostMapping("/{requestId}/reject")
     public String rejectFriendRequest(@PathVariable Long requestId) {
-        Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
-        optionalFriendRequest.ifPresent(friendRequest -> {
-            friendRequest.setStatus("rejected");
-            friendRequestRepository.save(friendRequest);
-        });
+        updateFriendRequestStatus(requestId, "rejected");
         return "redirect:/friends";
     }
+
+    @PostMapping("/add")
+    public String sendFriendRequest(@RequestParam("receiverId") Long receiverId) {
+        User loggedInUser = getLoggedInUser();
+        User receiver = userDao.findById(receiverId).orElse(null);
+
+        if (receiver != null) {
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.setSender(loggedInUser);
+            friendRequest.setReceiver(receiver);
+            friendRequest.setStatus("pending");
+            friendDao.save(friendRequest);
+        }
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/remove")
+    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
+        Long loggedInUserId = getUserIdFromSecurityContext();
+        User loggedInUser = userDao.findById(loggedInUserId).orElse(null);
+        User friend = userDao.findById(friendId).orElse(null);
+
+        if (loggedInUser != null && friend != null) {
+            FriendRequest friendRequest;
+            if ("sender".equals(loggedInUserType)) {
+                friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
+            } else if ("receiver".equals(loggedInUserType)) {
+                friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
+            } else {
+                return "redirect:/home";
+            }
+
+            if (friendRequest != null) {
+                friendRequest.setStatus("rejected");
+                friendDao.save(friendRequest);
+            }
+        }
+
+        return "redirect:/home";
+    }
+
+    private User getLoggedInUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private void updateFriendRequestStatus(Long requestId, String status) {
+        Optional<FriendRequest> optionalFriendRequest = friendDao.findById(requestId);
+        optionalFriendRequest.ifPresent(friendRequest -> {
+            friendRequest.setStatus(status);
+            friendDao.save(friendRequest);
+        });
+    }
+
+    private Long getUserIdFromSecurityContext() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof User) {
+            return ((User) principal).getId();
+        }
+        return null;
+    }
+
+    // Additional friend-related methods and endpoints can go here
 }
-
-
-//package com.geekguild.controllers;
-//
-//import com.geekguild.models.FriendRequest;
-//import com.geekguild.models.User;
-//import com.geekguild.repositories.FriendRequestRepository;
-//import com.geekguild.repositories.UserRepository;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//@Controller
-//@RequestMapping("/friends")
-//public class FriendController {
-//
-//    private final FriendRequestRepository friendRequestRepository;
-//    private final UserRepository userRepository;
-//
-//    public FriendController(FriendRequestRepository friendRequestRepository, UserRepository userRepository) {
-//        this.friendRequestRepository = friendRequestRepository;
-//        this.userRepository = userRepository;
-//    }
-//
-//
-//
-//    // Endpoint to get all friend requests for a specific user
-//    @GetMapping("")
-//    public String getFriendRequests(Model model) {
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-////        Long userId = loggedInUser.getId();
-////        optionalUser = userRepository.findById(userId);
-////        if (lo.isPresent()) {
-////            User user = optionalUser.get();
-//            List<FriendRequest> friendRequests = friendRequestRepository.findByReceiverAndStatus(loggedInUser, "pending");
-//            System.out.println(friendRequests);
-//            model.addAttribute("requests", friendRequests);
-////
-////            return "partials/friendRequest";
-////        } else {
-////            return "partials/userNotFound";
-////        }
-//        return "partials/friendRequest";
-//    }
-//
-//    // Endpoint to accept a friend request
-//    @PostMapping("/{requestId}/accept")
-//    public String acceptFriendRequest(@PathVariable Long requestId) {
-//        Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
-//        if (optionalFriendRequest.isPresent()) {
-//            FriendRequest friendRequest = optionalFriendRequest.get();
-//            friendRequest.setStatus("accepted");
-//            friendRequestRepository.save(friendRequest);
-//            return "redirect:/friends";
-//        } else {
-//            return "redirect:/userNotFound";
-//        }
-//    }
-//
-//    // Endpoint to reject a friend request
-//    @PostMapping("/{requestId}/reject")
-//    public String rejectFriendRequest(@PathVariable Long requestId) {
-//        Optional<FriendRequest> optionalFriendRequest = friendRequestRepository.findById(requestId);
-//        if (optionalFriendRequest.isPresent()) {
-//            FriendRequest friendRequest = optionalFriendRequest.get();
-//            friendRequest.setStatus("rejected");
-//            friendRequestRepository.save(friendRequest);
-//            return "redirect:/friends";
-//        } else {
-//            return "redirect:/userNotFound";
-//        }
-//    }
-//}
