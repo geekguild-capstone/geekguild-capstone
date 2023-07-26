@@ -50,8 +50,8 @@
         </div>
         <!-- Comment Dropdown Box -->
         <div class="comment-box" style="display: none;">
-            <input type="text" placeholder="Add a comment...">
-            <button onclick="submitComment()">Submit</button>
+            <input type="text" id="comment-input" placeholder="Add a comment...">
+            <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
         </div>
         <!-- Comments Section -->
         <div class="comments-section" id="comments-section">
@@ -74,9 +74,11 @@
     }
 
     // Function to handle comment submission
-    function submitComment(button) {
+    function submitComment(event) {
+        const button = event.target;
         const postCard = button.closest('.post-card');
         const commentInput = postCard.querySelector('#comment-input');
+        console.log(commentInput)
         const commentsSection = postCard.querySelector('.comments-section');
 
         const commentText = commentInput.value.trim();
