@@ -24,13 +24,13 @@
 
         <!--USER NAME-->
         <div class="name">
-            <h3 th:text="${user.username}"></h3>
+            <h3 th:text="${user.firstname + ' ' + user.lastname}"></h3>
         </div>
 
         <!--TITLE-->
         <div class="headline">Software Engineer</div>
         <!-- CONNECT BUTTON -->
-        <button data-bs-toggle="modal" data-bs-target="#confirmationModal" th:attr="data-username=${user.username}, data-userid=${user.id}"
+        <button data-bs-toggle="modal" data-bs-target="#confirmationModal" th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"
                 onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
                 class="connect-btn">
             <i class="icon fas fa-user-plus"></i> Connect

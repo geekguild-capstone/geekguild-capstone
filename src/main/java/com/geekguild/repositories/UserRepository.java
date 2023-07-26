@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+    User findByEmail(String email);
 
     @Query("SELECT u FROM User u WHERE u.id <> :loggedInUserId AND u NOT IN " +
             "(SELECT f.sender FROM FriendRequest f WHERE f.receiver.id = :loggedInUserId " +

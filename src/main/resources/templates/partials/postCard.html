@@ -14,7 +14,7 @@
     <div class="post-card">
         <div class="user-profile">
             <img th:src="${post.user.image}" alt="User Profile Image">
-            <div th:text="${post.user.username}" class="username"></div>
+            <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>
         </div>
         <div class="post-content">
             <p th:text="${post.body}"></p>

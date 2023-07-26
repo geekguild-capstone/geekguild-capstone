@@ -38,6 +38,11 @@ public class UserWithRoles extends User implements UserDetails {
         return true;
     }
 
+    @Override
+    public String getUsername() {
+        return super.getEmail(); // Return the email field as the username
+    }
+
 
 }
 
