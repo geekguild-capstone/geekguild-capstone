@@ -22,12 +22,12 @@ public class PostController {
         this.groupDao = groupDao;
     }
 
-    @PostMapping("/group/{id}/createPost")
-    public String createPost(@PathVariable long id, @ModelAttribute Post post, @RequestParam("image") String image) {
+    @PostMapping("/post/{groupId}/create")
+    public String createPost(@PathVariable long groupId, @ModelAttribute Post post, @RequestParam("image") String image) {
         User loggedInUser = getCurrentLoggedInUser();
         post.setUser(loggedInUser);
 
-        Group group = groupDao.findById(id).orElse(null);
+        Group group = groupDao.findById(groupId).orElse(null);
         if (group == null) {
             // Handle invalid group ID
             return "redirect:/error";
@@ -37,7 +37,29 @@ public class PostController {
         post.setImage(image);
 
         postDao.save(post);
-        return "redirect:/group/{id}";
+        return "redirect:/group/{groupId}";
+
+
+    }
+
+    @PostMapping("/post/{id}/edit")
+    public String editPost(@PathVariable long postId, Model model) {
+        User loggedInUser = getCurrentLoggedInUser();
+        Post post = postDao.getReferenceById(postId);
+        model.addAttribute("post", post);
+
+
+        if (loggedInUser == null) {
+            // Handle invalid group ID
+            return "redirect:/error";
+        }
+
+        if (post.getGroup() == null) {
+            return "redirect:/home";
+        } else {
+            return "redirect:/group/{groupId}";
+        }
+
     }
 
     @PostMapping("/group/{groupId}/addComment/{postId}")
@@ -57,6 +79,16 @@ public class PostController {
         postDao.save(post);
         return "redirect:/group/{groupId}";
     }
+
+    @PostMapping("/post/create")
+    public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
+        post.setImage(image);
+        postDao.save(post);
+        return "redirect:/home";
+    }
+
 
     private User getCurrentLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

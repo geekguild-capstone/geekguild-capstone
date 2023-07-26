@@ -20,7 +20,6 @@ public class HomeController {
 
     private final UserRepository userDao;
     private final PostRepository postDao;
-
     private final FriendRequestRepository friendDao;
 
 
@@ -58,14 +57,6 @@ public class HomeController {
         return "/partials/about-us";
     }
 
-    @PostMapping("/home")
-    public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        post.setUser(loggedInUser);
-        post.setImage(image);
-        postDao.save(post);
-        return "redirect:/home";
-    }
 
     // Other post-related methods and endpoints can stay here
     // ...

@@ -50,7 +50,7 @@
 
             </div>
             <div class="post-content">
-                <form action="/home" method="post" th:object="${post}" th:action="@{/home}">
+                <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}">
                     <!-- Post image upload section -->
                     <div>
                         <button type="button" class="upload-post-image">Upload Post Image</button>

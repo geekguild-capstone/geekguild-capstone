@@ -111,9 +111,9 @@ public class ProfileController {
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
-        if (formUser.getUsername() != null) {
-            loggedInUser.setUsername(formUser.getUsername());
-        }
+//        if (formUser.getUsername() != null) {
+//            loggedInUser.setUsername(formUser.getUsername());
+//        }
         if (formUser.getFirstname() != null) {
             loggedInUser.setFirstname(formUser.getFirstname());
         }

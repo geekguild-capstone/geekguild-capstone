@@ -25,8 +25,8 @@
             </div>
             <div class="action-buttons">
                 <button class="message-button"
-                        th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.username}, data-friend-image=${friend.receiver.image},data-current-user-id=${user.id},
-            data-current-user-username=${user.username}, data-current-user-image=${user.image}"
+                        th:attr="data-friend-id=${friend.receiver.id}, data-friend-username=${friend.receiver.email}, data-friend-image=${friend.receiver.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.email}, data-current-user-image=${user.image}"
 
                         onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                     <i class="fas fa-comment-alt message-icon"></i>
@@ -62,8 +62,8 @@
             <div class="action-buttons">
 
                 <button class="message-button"
-                        th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.username}, data-friend-image=${friend.sender.image},data-current-user-id=${user.id},
-            data-current-user-username=${user.username}, data-current-user-image=${user.image}"
+                        th:attr="data-friend-id=${friend.sender.id}, data-friend-username=${friend.sender.email}, data-friend-image=${friend.sender.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.email}, data-current-user-image=${user.image}"
 
                         onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                     <i class="fas fa-comment-alt message-icon"></i>

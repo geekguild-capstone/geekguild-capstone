@@ -11,8 +11,8 @@
 <h1>Friend Requests</h1>
 <div id="friendRequestsContainer">
     <div th:each="request : ${requests}">
-        <p th:text="${request.sender.username}"></p>
-        <p th:text="${request.receiver.username}"></p>
+        <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
+        <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>
         <p th:text="${request.status}"></p>
         <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">
             <button type="submit">Accept</button>
