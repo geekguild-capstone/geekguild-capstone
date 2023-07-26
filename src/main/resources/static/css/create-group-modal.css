@@ -1,30 +1,34 @@
-
-#createGroupModal {
-    display: none; /* Hide the modal by default */
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.15);
+/* Custom styles for the modal */
+.modal-body {
+    background-color: #333333;
 }
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
 .modal-header {
-    padding: 10px;
-    background-color: #f7f7f7;
+    background-color: #ee8631;
+    /*color: #fff;*/
 }
-
-.modal-footer {
-    padding: 10px;
-    background-color: #f7f7f7;
-    text-align: right;
+.create-group-button {
+    background-color: #333333 !important;
+    border-color: #ee8631 !important;
+}
+.create-group-button:hover {
+    border-color: #aefc4f !important;
+    color: #aefc4f !important;
+}
+.cancel-create-group-button {
+    background-color: #ffb74d;
+    border-color: #ffb74d;
+    color: #333333;
+}
+.cancel-create-group-button:hover {
+    background-color: #ee8631;
+    border-color: #ee8631;
+    color: #fff;
+}
+#createGroupModal label {
+    color: #8e09e7;
+}
+#createGroupModal .form-control {
+    color: #8e09e7;
+    background-color: #333333;
+    border: 1px solid #8e09e7;
 }
