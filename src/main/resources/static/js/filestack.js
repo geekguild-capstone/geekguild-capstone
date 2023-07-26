@@ -8,6 +8,10 @@ postImageButton.addEventListener('click', () => {
     const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
     const client = filestack.init(apiKey);
     const options = {
+        onFileUploadStarted: () => {
+            // This callback is triggered when the user selects a file and clicks the "Upload" button.
+            showUploadedImage();
+        },
         onUploadDone: (uploadResponse) => {
             console.log('onUploadDone', uploadResponse);
             const postImageURL = uploadResponse.filesUploaded[0].url;
@@ -18,6 +22,13 @@ postImageButton.addEventListener('click', () => {
     };
     client.picker(options).open();
 });
+
+function showUploadedImage() {
+    // Show the container by removing the "display: none" CSS property.
+    const uploadPostImgContainer = document.querySelector('.upload-post-img');
+    uploadPostImgContainer.style.display = 'block';
+}
+
 
 function enableSubmitButton() {
     if (postBodyTextarea.value.trim() !== '') {
