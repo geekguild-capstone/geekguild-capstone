@@ -1,14 +1,8 @@
 
 package com.geekguild.controllers;
 
-import com.geekguild.models.FriendRequest;
-import com.geekguild.models.Group;
-import com.geekguild.models.Post;
-import com.geekguild.models.User;
-import com.geekguild.repositories.FriendRequestRepository;
-import com.geekguild.repositories.GroupRepository;
-import com.geekguild.repositories.PostRepository;
-import com.geekguild.repositories.UserRepository;
+import com.geekguild.models.*;
+import com.geekguild.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,12 +22,14 @@ public class GroupController {
     private final UserRepository userDao;
     private final FriendRequestRepository friendDao;
     private final PostRepository postDao;
+    private final CommentRepository commentDao;
 
-    public GroupController(GroupRepository groupDao, UserRepository userDao, FriendRequestRepository friendDao, PostRepository postDao) {
+    public GroupController(GroupRepository groupDao, UserRepository userDao, FriendRequestRepository friendDao, PostRepository postDao, CommentRepository commentDao) {
         this.groupDao = groupDao;
         this.userDao = userDao;
         this.friendDao = friendDao;
         this.postDao = postDao;
+        this.commentDao = commentDao;
     }
 
     @GetMapping("/groups")
@@ -74,10 +69,12 @@ public class GroupController {
         User loggedInUser = getCurrentLoggedInUser();
         model.addAttribute("post", new Post());
         model.addAttribute("user", loggedInUser);
-        model.addAttribute("groupPosts", postDao.findByGroupId(groupId));
+        List<Post> groupPosts = postDao.findByGroupId(groupId);
+        model.addAttribute("groupPosts", groupPosts);
         model.addAttribute("users", userDao.findAll());
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
+
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
@@ -85,6 +82,15 @@ public class GroupController {
         Group group = groupDao.findById(groupId).orElse(null);
         model.addAttribute("group", group);
         model.addAttribute("groups", groupDao.findAll());
+
+        // Fetch the comments related to the groupPosts
+        List<List<Comments>> groupPostComments = new ArrayList<>();
+        for (Post post : groupPosts) {
+            List<Comments> commentsForPost = commentDao.findByPost(post);
+            groupPostComments.add(commentsForPost);
+        }
+
+        model.addAttribute("groupPostComments", groupPostComments);
 
         if (group == null) {
             return "redirect:/error";
