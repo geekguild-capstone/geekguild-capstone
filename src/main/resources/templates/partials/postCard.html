@@ -12,10 +12,18 @@
 <body>
 <div th:each="post : ${posts}">
     <div class="post-card">
+
+        <div class="edit-icons">
+            <i class="far fa-edit edit-icon" onclick="editPost(event)"></i>
+            <i class="far fa-times-circle delete-icon" onclick="deletePost(event)"></i>
+        </div>
+
+
         <div class="user-profile">
             <img th:src="${post.user.image}" alt="User Profile Image">
             <div th:text="${post.user.username}" class="username"></div>
         </div>
+        <div class="post-content-container">
         <div class="post-content">
             <p th:text="${post.body}"></p>
 
@@ -35,6 +43,7 @@
             <button class="share-button">
                 <i class="fas fa-envelope"></i>Message <!-- Updated text and icon -->
             </button>
+        </div>
         </div>
 
         <div class="comment-box">

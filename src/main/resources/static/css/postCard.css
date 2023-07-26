@@ -7,11 +7,18 @@ body {
 }
 
 .post-card {
+    position: relative;
     background-color: #ee8631;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 24px;
     padding: 16px;
+}
+
+.post-content-container {
+    border: 2px solid #8e09e7;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .post-content {
@@ -136,4 +143,22 @@ body {
     border: none;
     border-top: 1px solid #e1e5ea;
     margin: 8px 0;
+}
+
+.edit-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #8e09e7;
+}
+
+.edit-icon, .delete-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #8e09e7 !important;
+}
+
+.post-content p {
+    color: #8e09e7;
 }
