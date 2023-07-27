@@ -2,32 +2,38 @@ body {
     background-color: #333333 !important;
     color: #8e09e7;
     font-family: Arial, sans-serif;
+
 }
+
 
 h2 {
     font-family: 'Roboto', sans-serif;
-    color: #8fd93f !important;
+    color: #e67e22 !important;
     text-align: center;
 }
 
 h3 {
-    color: #8e09e7 !important;
+    color: #e67e22 !important;
     text-align: center;
+}
+
+h6{
+    color: #e67e22 !important;
 }
 
 .container {
     background-color: transparent;
-    padding: 20px;
     border-radius: 10px;
-    margin: 20px auto;
-    max-width: 75%; /* Increase the max-width value to make it wider */
+    padding: 20px 40px;
+    margin: 20px auto 0;
     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
     overflow: auto;
-}
+    width: 800px; /* Same width as profile-header-container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-.container::-webkit-scrollbar-track {
-    background-color: #333333; /* Set the track color */
-    border-radius: 1px;
 }
 
 
@@ -101,14 +107,14 @@ button {
 /* Add styles for the cover photo and update icon */
 .profile-header-container {
     position: relative;
-    max-width: 75%;
+    width: 800px;
     margin: 20px auto; /* Center the .profile-header-container */
-    height: 200px;
+    /*height: 200px;*/
     background-color: #8e09e7;
     border-radius: 8px;
     box-shadow: -2px -2px 6px rgba(142, 9, 231, 0.5);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -162,8 +168,6 @@ button {
 .button-group button {
     margin: 0 5px; /* Reduce the space between the buttons */
 }
-
-/* Existing styles ... */
 
      /* Styles for the Skills section */
 .skills-container {
@@ -233,23 +237,12 @@ button {
     color: #8fd93f;
 }
 
-/* Style the custom checkboxes */
-.skills-checkbox + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #8fd93f;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: border-color 0.3s;
-}
 
-/* Style the custom checkboxes when checked */
-.skills-checkbox:checked + label:before {
-    background-color: #8fd93f;
-    border-color: #8fd93f;
-}
+
+
+
+
+
+
+
 
