@@ -152,6 +152,8 @@ public class GroupController {
     @GetMapping("/group/{id}")
     public String viewGroup(@PathVariable("id") Long groupId, Model model) {
         User loggedInUser = getCurrentLoggedInUser();
+        model.addAttribute("comment", new Comments());
+
         model.addAttribute("post", new Post());
         model.addAttribute("user", loggedInUser);
         List<Post> groupPosts = postDao.findByGroupId(groupId);
@@ -185,6 +187,30 @@ public class GroupController {
             return "/groups/group";
         }
     }
+
+    @PostMapping("/group/{groupId}/comment")
+    public String addComment(@PathVariable Long groupId, @ModelAttribute("newComment") Comments newComment) {
+        // Get the logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
+
+        // Fetch the post based on the provided postId
+        Post post = postDao.findById(newComment.getPost().getId()).orElse(null);
+        if (post == null || post.getGroup() == null || !groupId.equals(post.getGroup().getId())) {
+            // Invalid post or post doesn't belong to the group
+            return "redirect:/group/" + groupId;
+        }
+
+        // Set the user and post for the new comment
+        newComment.setUser(loggedInUser);
+        newComment.setPost(post);
+
+        // Save the new comment to the database
+        commentDao.save(newComment);
+
+        // Redirect back to the group's page
+        return "redirect:/group/" + groupId;
+    }
+
 
     private User getCurrentLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

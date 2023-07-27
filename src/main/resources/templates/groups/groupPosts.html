@@ -1,140 +1,4 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Post</title>-->
-<!--    &lt;!&ndash;BOOTSTRAP CSS&ndash;&gt;-->
-<!--    <link th:include="partials/header">-->
-<!--    &lt;!&ndash;CUSTOM CSS &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="/css/postCard.css">-->
 
-<!--</head>-->
-
-
-<!--<body>-->
-<!--<div th:each="groupPost, postIndex : ${groupPosts}">-->
-
-<!--    <div class="post-card">-->
-<!--        <div class="user-profile">-->
-<!--            <img th:src="${groupPost.user.image}"-->
-<!--                 alt="User Profile Image">-->
-<!--            <div th:text="${groupPost.user.firstname + ' ' + groupPost.user.lastname}" class="username"></div>-->
-<!--        </div>-->
-<!--        <div class="post-content">-->
-<!--            <p th:text="${groupPost.body}"></p>-->
-<!--        </div>-->
-
-<!--        <div id="post_image" class="post-image">-->
-<!--            <img width="200px" th:src="${groupPost.image}">-->
-<!--        </div>-->
-
-
-<!--        <div class="interactions">-->
-<!--            <button>-->
-<!--                <div class="like-container">-->
-<!--                    <i class="far fa-thumbs-up like-icon">Like</i>-->
-<!--                    <div class="like-emojis">-->
-<!--                        <span class="like-emoji" onclick="likeAction('👍')">👍 Like</span>-->
-<!--                        <span class="like-emoji" onclick="likeAction('❤️')">❤️ Love</span>-->
-<!--                        <span class="like-emoji" onclick="likeAction('😂')">😂 Laugh</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </button>-->
-<!--            <button class="comment-button" onclick="toggleCommentBox(this)"><i class="fas fa-comment">Comment</i>-->
-<!--            </button>-->
-<!--            <button class="share-button"><i class="fas fa-envelope ">Message</i>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Comment Dropdown Box &ndash;&gt;-->
-<!--        <div class="comment-box" style="display: none;">-->
-<!--            <input type="text" id="comment-input" placeholder="Add a comment...">-->
-<!--            <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Comments Section &ndash;&gt;-->
-<!--        <div class="comments-section" id="comments-section">-->
-<!--            <div class="view-comments">-->
-<!--                <h3>Comments:</h3>-->
-<!--                <ul>-->
-<!--                    <li th:each="comment : ${groupPostComments[postIndex.index]}">-->
-<!--                        <p th:text="${comment.text}"></p>-->
-<!--                        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"></p>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<script>-->
-<!--    function toggleCommentBox(button) {-->
-<!--        const postCard = button.closest('.post-card');-->
-<!--        const commentBox = postCard.querySelector('.comment-box');-->
-
-<!--        // Toggle the visibility of the comment box-->
-<!--        if (commentBox.style.display === 'none') {-->
-<!--            commentBox.style.display = 'block';-->
-<!--        } else {-->
-<!--            commentBox.style.display = 'none';-->
-<!--        }-->
-<!--    }-->
-
-<!--    // Function to handle comment submission-->
-<!--    function submitComment(event) {-->
-<!--        const button = event.target;-->
-<!--        const postCard = button.closest('.post-card');-->
-<!--        const commentInput = postCard.querySelector('#comment-input');-->
-<!--        console.log(commentInput)-->
-<!--        const commentsSection = postCard.querySelector('.comments-section');-->
-
-<!--        const commentText = commentInput.value.trim();-->
-<!--        if (commentText !== '') {-->
-<!--            // Create a new comment element and append it to the comments section-->
-<!--            const newComment = document.createElement('div');-->
-<!--            newComment.classList.add('comment');-->
-<!--            newComment.textContent = commentText;-->
-<!--            commentsSection.appendChild(newComment);-->
-
-<!--            // Clear the comment input field-->
-<!--            commentInput.value = '';-->
-<!--        }-->
-<!--    }-->
-
-<!--    // Function for the like action, if needed-->
-<!--    function likeAction(emoji) {-->
-<!--        // Code for handling like action goes here-->
-<!--    }-->
-<!--</script>-->
-<!--&lt;!&ndash;<div th:each="groupPost, postIndex : ${groupPosts}">&ndash;&gt;-->
-<!--&lt;!&ndash;  &lt;!&ndash; Display post content here &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;  <p th:text="${groupPost.body}"></p>&ndash;&gt;-->
-
-<!--&lt;!&ndash;  &lt;!&ndash; Display post image if available &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;  <img th:src="${groupPost.image}" width="200" height="200" class="post-image" />&ndash;&gt;-->
-
-<!--&lt;!&ndash;  &lt;!&ndash; Display comments for the current post &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;  <div class="view-comments">&ndash;&gt;-->
-<!--&lt;!&ndash;    <h3>Comments:</h3>&ndash;&gt;-->
-<!--    <ul>-->
-<!--      <li th:each="comment : ${groupPostComments[postIndex.index]}">-->
-<!--        <p th:text="${comment.text}"></p>-->
-<!--        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"></p>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;  &lt;!&ndash; Add a form to submit new comments for the current post &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;  <form th:action="@{/comment}" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;    <input type="hidden" name="postId" th:value="${groupPost.id}" />&ndash;&gt;-->
-<!--&lt;!&ndash;    <textarea name="content"></textarea>&ndash;&gt;-->
-<!--&lt;!&ndash;    <button type="submit">Add Comment</button>&ndash;&gt;-->
-<!--&lt;!&ndash;  </form>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-
-<!--<script th:include="partials/footer"></script>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,8 +54,13 @@
         </div>
 
         <div class="comment-box">
-            <input type="text" id="comment-input" placeholder="Add a comment...">
-            <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
+            <!-- Use a <form> element to wrap the comment input and button -->
+            <form th:action="@{/group/{groupId}/comment(groupId=${group.id})}" th:object="${comment}" method="post">
+                <input type="hidden" name="post.id" th:value="${post.id}" />
+                <input type="hidden" name="user.id" th:value="${user.id}" />
+                <input type="text" th:field="*{text}" id="comment-input" placeholder="Add a comment..." />
+                <button class="submit-comment-btn" type="submit">Submit</button>
+            </form>
         </div>
 
         <div class="comments-section" id="comments-section">
