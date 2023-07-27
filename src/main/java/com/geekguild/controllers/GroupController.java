@@ -42,7 +42,10 @@ public class GroupController {
         model.addAttribute("users", userDao.findAll());
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
-        model.addAttribute("groups", groupDao.findAll());
+
+        // Get groups that the loggedInUser is not a part of using the custom query
+        List<Group> loggedInUserNotPartOfGroups = groupDao.findGroupsNotContainingMember(loggedInUser);
+        model.addAttribute("suggestedGroups", loggedInUserNotPartOfGroups);
 
         List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
         Map<Long, Integer> groupMembersCount = new HashMap<>();
@@ -57,6 +60,7 @@ public class GroupController {
 
         return "groups/groups";
     }
+
 
     @PostMapping("/group/create")
     public String createGroup(@ModelAttribute Group group) {
@@ -129,8 +133,6 @@ public class GroupController {
                 groupDao.delete(group);
             } else {
                 // User is not the admin, so just remove the user from the group
-//                group.getMembers().remove(loggedInUser);
-//                groupDao.save(group);
                 User userToRemove = groupDao.findMemberById(groupId, loggedInUser.getId());
                 if (userToRemove != null) {
                     // Delete posts and their comments made by the user in the group
