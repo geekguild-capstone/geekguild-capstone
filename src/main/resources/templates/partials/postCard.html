@@ -12,46 +12,46 @@
 <body>
 <div th:each="post : ${posts}">
     <div class="post-card">
-
         <div class="edit-icons">
             <i class="far fa-edit edit-icon" onclick="editPost(event)"></i>
             <i class="far fa-times-circle delete-icon" onclick="deletePost(event)"></i>
         </div>
 
-
         <div class="user-profile">
             <img th:src="${post.user.image}" alt="User Profile Image">
             <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>
         </div>
-        <div class="post-content-container">
-        <div class="post-content">
-            <p th:text="${post.body}"></p>
 
-            <!-- Move the .post-image div here, within .post-content -->
-            <div class="post-image">
-                <img width="100%" th:src="${post.image}">
+        <div class="post-content-container">
+            <div class="post-content">
+                <p th:text="${post.body}"></p>
+                <!-- Move the .post-image div here, within .post-content -->
+                <div class="post-image">
+                    <img width="100%" th:src="${post.image}">
+                </div>
             </div>
 
+
         </div>
 
-        <div class="interactions">
-            <button onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
-                <i class="far fa-thumbs-up"></i>Like
-            </button>
+
+
+            <div class="interactions">
+                <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
+                    <i class="far fa-thumbs-up"></i>Like
+                </button>
                 <div class="like-emojis" style="display: none;">
-                    <span class="like-emoji" onclick="likeAction('👍')">👍</span>
-                    <span class="like-emoji" onclick="likeAction('❤️')">❤️</span>
-                    <span class="like-emoji" onclick="likeAction('😂')">😂</span>
+                    <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>
+                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
                 </div>
-
-            <button class="comment-button" onclick="toggleCommentBox(this)">
-                <i class="far fa-comment-dots"></i>Comment
-            </button>
-            <button class="share-button">
-                <i class="fas fa-envelope"></i>Message <!-- Updated text and icon -->
-            </button>
-        </div>
-        </div>
+                <button class="comment-button" onclick="toggleCommentBox(this)">
+                    <i class="far fa-comment-dots"></i>Comment
+                </button>
+                <button class="share-button">
+                    <i class="fas fa-envelope"></i>Message
+                </button>
+            </div>
 
         <div class="comment-box">
             <input type="text" id="comment-input" placeholder="Add a comment...">
@@ -62,6 +62,7 @@
             <!-- Display comments here (if available) -->
         </div>
     </div>
+</div>
 </div>
 
 
@@ -125,17 +126,20 @@
 
     }
 
+    // Function to handle showing the emojis container
     function showLikeEmojis(button) {
         const postCard = button.closest('.post-card');
-        const likeEmojis = postCard.querySelector('.like-emojis');
-        likeEmojis.style.display = 'block';
+        const emojisContainer = postCard.querySelector('.like-emojis');
+        emojisContainer.style.display = 'block';
     }
 
+    // Function to handle hiding the emojis container
     function hideLikeEmojis(button) {
         const postCard = button.closest('.post-card');
-        const likeEmojis = postCard.querySelector('.like-emojis');
-        likeEmojis.style.display = 'none';
+        const emojisContainer = postCard.querySelector('.like-emojis');
+        emojisContainer.style.display = 'none';
     }
+
 </script>
 
 
@@ -161,6 +165,26 @@
         });
     });
 </script>
+
+
+
+    // Function to handle emoji click (replace this with your desired action)
+    function handleEmojiClick(emoji) {
+        console.log('Emoji clicked:', emoji);
+        // Add your like or other action logic here
+    }
+
+    // Update the event listeners to handle mouseleave on the emojis container
+    document.addEventListener('DOMContentLoaded', function() {
+        const emojisContainers = document.querySelectorAll('.like-emojis');
+        emojisContainers.forEach(container => {
+            container.addEventListener('mouseleave', function() {
+                this.style.display = 'none';
+            });
+        });
+    });
+
+    </script>
 
 </body>
 </html>

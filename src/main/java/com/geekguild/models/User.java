@@ -80,7 +80,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Work work;
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comments> comments;
 
@@ -91,6 +90,16 @@ public class User {
     // groups
     @ManyToMany(mappedBy = "members")
     private Set<Group> groups = new HashSet<>();
+
+
+    // In this scenario, each user can have multiple languages,
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_languages",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id"))
+    private List<Language> language;
+
+
 //    @ManyToMany
 //    @JoinTable(name = "groupusers",
 //            joinColumns = {@JoinColumn(name = "user_id")},

@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="/css/edit.css">
     <head th:include="partials/header :: head">
 
-
     </head>
 <body>
 <div th:include="partials/navbar :: navbar"></div>
 
 <h2>Hello <span th:text="${profileFormWrapper.user.firstname + ' ' + profileFormWrapper.user.lastname}"></span></h2>
+
 <div class="profile-header-container">
     <!-- Cover Photo Container -->
     <div class="cover-photo" style="background-image: url('${user.coverPhoto}');">
@@ -35,8 +35,9 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <h3>EDIT YOUR PROFILE</h3>
+
+    <div class="container">
+        <h3>EDIT YOUR PROFILE</h3>
     <form th:object="${profileFormWrapper}" id="edit-user-form" class="inline-form" th:action="@{/profile/{id}/edit(id=${profileFormWrapper.user.getId()})}"
           th:method="post" >
         <label for="firstName">First Name:</label>
@@ -75,10 +76,8 @@
         <!-- Separate input field for the "Work" value -->
        <br>
 
-        <!-- Skills section using CSS classes -->
-<!--        <label for="skills-custom">Skills:</label>-->
-        <br>
 
+    <h6>Skills:</h6>
         <!-- Skills section using custom checkboxes and icons -->
         <div class="skills-container">
             <div class="skill-item">
@@ -96,7 +95,6 @@
                 <label for="skill-python"><span class="skill-icon"><i class="fab fa-python"></i></span></label>
             </div>
 
-            <!-- Add other skills with checkboxes and icons here -->
             <div class="skill-item">
                 <input id="skill-js" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Javascript' ? 'checked' : ''} />
                 <label for="skill-js"><span class="skill-icon"><i class="fab fa-js"></i></span></label>
@@ -177,6 +175,13 @@
                 <button id="delete-btn" class="purple-button">Delete Profile</button>
             </form>
         </div>
+    </form>
+    </div>
+
+
+
+
+
 
 
         <!--<script>-->
