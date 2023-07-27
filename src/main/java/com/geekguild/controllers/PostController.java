@@ -22,6 +22,26 @@ public class PostController {
         this.groupDao = groupDao;
     }
 
+    //Creating a new post
+    @PostMapping("/post/create")
+    public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
+        post.setImage(image);
+        postDao.save(post);
+        return "redirect:/home";
+    }
+
+    //Edit a post
+
+
+
+    //Delete a Post
+
+
+
+
+    //Creating a post within a group "This may be able to be combined with normal create post"
     @PostMapping("/post/{groupId}/create")
     public String createPost(@PathVariable long groupId, @ModelAttribute Post post, @RequestParam("image") String image) {
         User loggedInUser = getCurrentLoggedInUser();
@@ -62,6 +82,10 @@ public class PostController {
 
     }
 
+
+    //COMMENTS
+
+    //Add comment to a specific post
     @PostMapping("/group/{groupId}/addComment/{postId}")
     public String addComment(@PathVariable long groupId, @PathVariable long postId, @ModelAttribute Comments comment) {
         User loggedInUser = getCurrentLoggedInUser();
@@ -80,15 +104,10 @@ public class PostController {
         return "redirect:/group/{groupId}";
     }
 
-    @PostMapping("/post/create")
-    public String showCreatePostForm(@ModelAttribute Post post, @RequestParam("image") String image) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        post.setUser(loggedInUser);
-        post.setImage(image);
-        postDao.save(post);
-        return "redirect:/home";
-    }
+    //Edit comment to a specific post
 
+
+    //Delete comment to a specific post
 
     private User getCurrentLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
