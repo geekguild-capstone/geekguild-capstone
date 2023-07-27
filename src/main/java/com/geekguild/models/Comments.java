@@ -39,7 +39,6 @@ public class Comments {
     @JoinColumn (name = "creator_id")
     private User user;
 
-    // Add the many-to-many relationship with reactions
     @ManyToMany(mappedBy = "comments")
     private List<Reaction> reactions;
 

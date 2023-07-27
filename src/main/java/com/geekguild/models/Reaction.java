@@ -27,8 +27,11 @@ public class Reaction {
     @Column(nullable = false)
     private String reaction;
 
-    @Column
-    private String emblem;
+    public Reaction(long id, String reaction) {
+        this.id = id;
+        this.reaction = reaction;
+    }
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,7 +45,7 @@ public class Reaction {
         joinColumns = @JoinColumn(name = "reaction_id"),
         inverseJoinColumns = @JoinColumn(name = "post_id")
     )
-    private List<Reaction> reactions;
+    private List<Post> posts;
 
     // Add the many-to-many relationship with comments
     @ManyToMany
@@ -51,21 +54,11 @@ public class Reaction {
             joinColumns = @JoinColumn(name = "reaction_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id")
     )
-    private List<Reaction> commentReaction;
+    private List<Comments> comments;
 
 
 //        @ManyToMany(mappedBy = "language")
 //        private List<User> users;
-
-
-
-
-    public Reaction(long id, String reaction, String emblem) {
-        this.id = id;
-        this.reaction = reaction;
-        this.emblem = emblem;
-    }
-
 
 
 }
