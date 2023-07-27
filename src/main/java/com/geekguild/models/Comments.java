@@ -4,6 +4,10 @@ package com.geekguild.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,5 +39,8 @@ public class Comments {
     @JoinColumn (name = "creator_id")
     private User user;
 
+    // Add the many-to-many relationship with reactions
+    @ManyToMany(mappedBy = "comments")
+    private List<Reaction> reactions;
 
 }

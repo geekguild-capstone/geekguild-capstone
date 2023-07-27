@@ -4,7 +4,9 @@ import com.geekguild.repositories.PostRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -38,4 +40,7 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comments> comments;
 
+    // Add the many-to-many relationship with reactions
+    @ManyToMany(mappedBy = "posts")
+    private List<Reaction> reactions;
 }
