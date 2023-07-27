@@ -25,8 +25,10 @@
         <div class="post-content-container">
             <div class="post-content">
                 <p th:text="${post.body}"></p>
+
+
                 <!-- Move the .post-image div here, within .post-content -->
-                <div class="post-image">
+                <div class="post-image" th:if="${!post.image.equals('')}">
                     <img width="100%" th:src="${post.image}">
                 </div>
             </div>
@@ -152,6 +154,8 @@
         });
     });
 
+
 </script>
+
 </body>
 </html>
