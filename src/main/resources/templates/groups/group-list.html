@@ -68,6 +68,9 @@
                 <div>
                     <a th:href="@{'/group/' + ${group.id}}" class="groupname" th:text="${group.groupname}"></a>
                     <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
+                    <form th:action="@{/group/{groupId}/leave(groupId=${group.id})}" method="post">
+                        <button type="submit">Leave Group</button>
+                    </form>
                 </div>
             </div>
         </div>
