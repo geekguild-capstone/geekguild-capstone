@@ -88,12 +88,14 @@
             <!--                <p th:text="${language.languageName}"></p>-->
             <!--            </div>-->
             <div class="skill-item" th:each="language : ${allLanguages}">
-                <label>
-                    <input th:id="${'skill-' + language.id}" name="languages" class="skills-checkbox" type="checkbox" th:checked="${profileFormWrapper.user.languages.contains(language)}" th:value="${language.id}" />
+                <input th:id="${'skill-' + language.id}" name="selectedLanguages" class="skills-checkbox" type="checkbox" th:checked="${profileFormWrapper.user.languages != null and profileFormWrapper.user.languages.contains(language)}" th:value="${language.id}" />
+                <label th:for="${'skill-' + language.id}">
                     <span class="skill-icon" th:class="${'fab fa-' + language.logo}"></span>
                     <span th:text="${language.languageName}"></span>
                 </label>
             </div>
+<!--            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">-->
+<!--            <label for="vehicle1"> I have a bike</label><br>-->
             <!--            <div class="skill-item">-->
             <!--                <input id="skill-java" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Java' ? 'checked' : ''} />-->
             <!--                <label for="skill-java"><span class="skill-icon"><i class="fab fa-java"></i></span></label>-->

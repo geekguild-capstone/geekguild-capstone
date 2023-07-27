@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -89,11 +90,6 @@ public class ProfileController {
         Portfolio portfolio = portfolioDao.getReferenceById(id);
         Work work = workDao.getReferenceById(id);
         List<Language> allLanguages = languageDao.findAll();
-        // Fetch user, portfolio, and work...
-//        List<Language> userLanguages = user.getLanguages();
-
-        // Populate the selectedLanguages with the IDs of the user's current languages
-//        List<Long> selectedLanguageIds = userLanguages.stream().map(Language::getId).collect(Collectors.toList());
 
         // Check if the user exists
         if (user == null) {
@@ -105,9 +101,7 @@ public class ProfileController {
         profileFormWrapper.setUser(user);
         profileFormWrapper.setPortfolio(portfolio);
         profileFormWrapper.setWork(work);
-//        profileFormWrapper.setSelectedLanguages(selectedLanguageIds); // Set the selected language IDs
 
-//        model.addAttribute("languages", languages);
         model.addAttribute("allLanguages", allLanguages);
 
         model.addAttribute("profileFormWrapper", profileFormWrapper);
@@ -117,7 +111,7 @@ public class ProfileController {
 
 
     @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "languages", required = false) List<Long> languageIds) {
+    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds) {
         // Fetch the existing user from the database
         User loggedInUser = userDao.findById(id).orElse(null);
         if (loggedInUser == null) {
@@ -127,7 +121,6 @@ public class ProfileController {
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
-
         if (formUser.getFirstname() != null) {
             loggedInUser.setFirstname(formUser.getFirstname());
         }
@@ -137,10 +130,66 @@ public class ProfileController {
         if (formUser.getEmail() != null) {
             loggedInUser.setEmail(formUser.getEmail());
         }
-        // Add more fields as needed...
 
         // Save the updated user back to the database
         userDao.save(loggedInUser);
+
+        // Fetch the existing user languages
+        List<Language> userLanguages = loggedInUser.getLanguages();
+
+        // Update the user's languages based on the selectedLanguageIds
+        if (selectedLanguageIds != null) {
+            List<Language> selectedLanguages = languageDao.findAllById(selectedLanguageIds);
+            // Add the selected languages to the user's languages if they are not already present
+            for (Language language : selectedLanguages) {
+                if (!userLanguages.contains(language)) {
+                    userLanguages.add(language);
+                }
+            }
+            // Save the updated user languages back to the database
+            loggedInUser.setLanguages(userLanguages);
+            userDao.save(loggedInUser);
+        }
+
+        // Handle the unchecked languages
+        // Get the list of language IDs that are currently selected for the user
+        List<Long> currentSelectedLanguageIds = userLanguages != null
+                ? userLanguages.stream().map(Language::getId).collect(Collectors.toList())
+                : new ArrayList<>();
+        // Find the language IDs that are unchecked (present in currentSelectedLanguageIds but not in selectedLanguageIds)
+        List<Long> uncheckedLanguageIds;
+        if (selectedLanguageIds != null) {
+            uncheckedLanguageIds = currentSelectedLanguageIds.stream()
+                    .filter(languageId -> !selectedLanguageIds.contains(languageId))
+                    .collect(Collectors.toList());
+        } else {
+            uncheckedLanguageIds = new ArrayList<>();
+        }
+
+// Remove the unchecked languages from the user's languages and save the updated user languages back to the database
+        if (!uncheckedLanguageIds.isEmpty()) {
+            // Create a new list to hold the updated user languages
+            List<Language> updatedUserLanguages = new ArrayList<>(userLanguages);
+
+            // Remove the unchecked languages from the updatedUserLanguages list by matching their IDs
+            updatedUserLanguages.removeIf(language -> uncheckedLanguageIds.contains(language.getId()));
+
+            // Save the updated user languages back to the user object
+            loggedInUser.setLanguages(updatedUserLanguages);
+
+            // Save the updated user object back to the database
+            userDao.save(loggedInUser);
+        } else if (selectedLanguageIds != null) {
+            // If selectedLanguageIds is not null but uncheckedLanguageIds is empty, it means all checkboxes are checked,
+            // and we need to save the updated user languages back to the user object and database
+            loggedInUser.setLanguages(userLanguages);
+            userDao.save(loggedInUser);
+        } else {
+            // If selectedLanguageIds is null, it means no checkboxes are checked,
+            // so we need to remove all languages from the user's languages and save the empty list back to the database
+            userLanguages.clear();
+            userDao.save(loggedInUser);
+        }
 
         // Fetch the existing portfolio and update its fields
         Portfolio existingPortfolio = portfolioDao.findByUserId(id);
@@ -197,12 +246,6 @@ public class ProfileController {
             if (formWork.getWorking() != null) {
                 existingWork.setWorking(formWork.getWorking());
             }
-            // Add more fields as needed...
-            // Update user languages
-//            if (languageIds != null) {
-//                List<Language> selectedLanguages = languageDao.findAllById(languageIds);
-//                loggedInUser.setLanguages(selectedLanguages);
-//            }
 
             // Save the updated work back to the database
             workDao.save(existingWork);
