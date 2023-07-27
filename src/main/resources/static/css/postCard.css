@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f3f2ef;
+    cursor: pointer;
 }
 
 .post-card {
@@ -74,7 +75,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #666;
+    color: #8e09e7;
     font-size: 14px;
     margin-right: 24px;
     padding: 4px;
@@ -86,7 +87,7 @@ body {
 }
 
 .interactions button:hover {
-    color: #8e09e7;
+    color: #666;
 }
 
 .comment-box {
@@ -100,7 +101,7 @@ body {
 }
 
 
-.comment-box .submit-comment-btn {
+.submit-comment-btn {
     background-color: #ee8631;
     color: #fff;
     border: none;
@@ -147,38 +148,48 @@ body {
 
 .edit-icons {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #8e09e7;
+    top: 5px;
+    right: 5px;
+    color: #000000;
 }
 
-.edit-icon, .delete-icon {
-    font-size: 20px;
-    margin-right: 10px;
+.delete-icon,
+.edit-icon {
+    font-size: 16px;
     cursor: pointer;
-    color: #8e09e7 !important;
+    color: #000000;
+    padding: 4px;
+    border-radius: 50%;
+    transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
+}
+
+/* Add shadow hover effect for the icons */
+.delete-icon:hover,
+.edit-icon:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .post-content p {
     color: #8e09e7;
 }
 
-/* Style for the emojis container */
 .like-emojis {
     position: absolute;
     display: flex;
-    flex-direction: row; /* Make emojis appear horizontally */
-    align-items: center; /* Center emojis vertically */
-    justify-content: center; /* Center emojis horizontally */
-    top: -30px; /* Adjust this value as needed to position the emojis properly */
-    left: 0; /* Position relative to the like button */
-    width: 100%; /* Set width to occupy the full width of the like container */
+    align-items: center;
+    justify-content: center;
+    bottom: 30px; /* Adjust this value to position the emojis under the like button */
+    left: 0; /* Set left to 0 to align with the left edge of the like button */
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    z-index: 1; /* Ensure the emojis appear above the post-card container */
 }
 
-
+/* Style for individual emojis */
+.like-emoji {
+    cursor: pointer;
+    margin: 0 5px;
+}
