@@ -76,6 +76,7 @@ h1 {
 /*CREATE POST CONTAINER*/
 .upload-post-img {
     display: none;
+    object-fit: scale-down;
 }
 
 
