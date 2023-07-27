@@ -93,11 +93,11 @@ public class User {
 
 
     // In this scenario, each user can have multiple languages,
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "user_languages",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
-    private List<Language> language;
+    private List<Language> languages;
 
 
 //    @ManyToMany

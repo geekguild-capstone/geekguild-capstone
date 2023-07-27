@@ -72,12 +72,13 @@
 
     <div class="section-container">
         <h2 class="section-header">Skills</h2>
-        <div class="profile-skills">
-            <i class="fab fa-java skill-icon"></i> <!-- Font Awesome icon for Java -->
-            <i class="fab fa-cuttlefish skill-icon"></i> <!-- Font Awesome icon for C++ -->
-            <i class="fab fa-python skill-icon"></i> <!-- Font Awesome icon for Python -->
-            <i class="fab fa-html5 skill-icon"></i> <!-- Font Awesome icon for HTML -->
-            <i class="fab fa-css3-alt skill-icon"></i> <!-- Font Awesome icon for CSS -->
+        <div th:each="languages : ${userLanguages}" class="profile-skills">
+          <p th:text="${languages.languageName}"></p>
+<!--            <i class="fab fa-java skill-icon"></i> &lt;!&ndash; Font Awesome icon for Java &ndash;&gt;-->
+<!--            <i class="fab fa-cuttlefish skill-icon"></i> &lt;!&ndash; Font Awesome icon for C++ &ndash;&gt;-->
+<!--            <i class="fab fa-python skill-icon"></i> &lt;!&ndash; Font Awesome icon for Python &ndash;&gt;-->
+<!--            <i class="fab fa-html5 skill-icon"></i> &lt;!&ndash; Font Awesome icon for HTML &ndash;&gt;-->
+<!--            <i class="fab fa-css3-alt skill-icon"></i> &lt;!&ndash; Font Awesome icon for CSS &ndash;&gt;-->
         </div>
     </div>
 
