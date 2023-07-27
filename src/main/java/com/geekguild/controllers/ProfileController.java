@@ -1,19 +1,18 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.*;
+import com.geekguild.repositories.LanguageRepository;
 import com.geekguild.repositories.PortfolioRepository;
 import com.geekguild.repositories.UserRepository;
 import com.geekguild.repositories.WorkRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sound.sampled.Port;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
@@ -22,10 +21,13 @@ public class ProfileController {
     private UserRepository userDao;
     private WorkRepository workDao;
 
-    public ProfileController(UserRepository userDao, PortfolioRepository portfolioDao, WorkRepository workDao) {
+    private LanguageRepository languageDao;
+
+    public ProfileController(UserRepository userDao, PortfolioRepository portfolioDao, WorkRepository workDao, LanguageRepository languageDao) {
         this.portfolioDao = portfolioDao;
         this.userDao = userDao;
         this.workDao = workDao;
+        this.languageDao = languageDao;
     }
 
     @GetMapping("/profile/{id}")
@@ -72,6 +74,9 @@ public class ProfileController {
         model.addAttribute("portfolio", portfolio);
         Work work = workDao.findByUserId(loggedInUser.getId());
         model.addAttribute("work", work);
+        List<Language> userLanguages = user.getLanguages();
+        model.addAttribute("userLanguages", userLanguages);
+
 
         return "users/profile";
     }
@@ -83,6 +88,13 @@ public class ProfileController {
         User user = userDao.getReferenceById(userId);
         Portfolio portfolio = portfolioDao.getReferenceById(id);
         Work work = workDao.getReferenceById(id);
+        List<Language> allLanguages = languageDao.findAll();
+        // Fetch user, portfolio, and work...
+//        List<Language> userLanguages = user.getLanguages();
+
+        // Populate the selectedLanguages with the IDs of the user's current languages
+//        List<Long> selectedLanguageIds = userLanguages.stream().map(Language::getId).collect(Collectors.toList());
+
         // Check if the user exists
         if (user == null) {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
@@ -93,6 +105,10 @@ public class ProfileController {
         profileFormWrapper.setUser(user);
         profileFormWrapper.setPortfolio(portfolio);
         profileFormWrapper.setWork(work);
+//        profileFormWrapper.setSelectedLanguages(selectedLanguageIds); // Set the selected language IDs
+
+//        model.addAttribute("languages", languages);
+        model.addAttribute("allLanguages", allLanguages);
 
         model.addAttribute("profileFormWrapper", profileFormWrapper);
 
@@ -101,7 +117,7 @@ public class ProfileController {
 
 
     @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper) {
+    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "languages", required = false) List<Long> languageIds) {
         // Fetch the existing user from the database
         User loggedInUser = userDao.findById(id).orElse(null);
         if (loggedInUser == null) {
@@ -111,9 +127,7 @@ public class ProfileController {
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
-//        if (formUser.getUsername() != null) {
-//            loggedInUser.setUsername(formUser.getUsername());
-//        }
+
         if (formUser.getFirstname() != null) {
             loggedInUser.setFirstname(formUser.getFirstname());
         }
@@ -184,13 +198,18 @@ public class ProfileController {
                 existingWork.setWorking(formWork.getWorking());
             }
             // Add more fields as needed...
+            // Update user languages
+//            if (languageIds != null) {
+//                List<Language> selectedLanguages = languageDao.findAllById(languageIds);
+//                loggedInUser.setLanguages(selectedLanguages);
+//            }
+
             // Save the updated work back to the database
             workDao.save(existingWork);
         }
 
         return "redirect:/profile";
     }
-
 
 
 }

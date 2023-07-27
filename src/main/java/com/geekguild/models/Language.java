@@ -36,8 +36,8 @@ import java.util.Set;
 
 
 
-        @ManyToMany(mappedBy = "language")
-        private List<User> users;
+//        @ManyToMany(mappedBy = "language")
+//        private List<User> users;
 
 
 
