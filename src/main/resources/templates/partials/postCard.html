@@ -32,10 +32,6 @@
             </div>
 
 
-        </div>
-
-
-
             <div class="interactions">
                 <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
                     <i class="far fa-thumbs-up"></i>Like
@@ -53,20 +49,20 @@
                 </button>
             </div>
 
-        <div class="comment-box">
-            <input type="text" id="comment-input" placeholder="Add a comment...">
-            <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
-        </div>
+            <div class="comment-box">
+                <input type="text" id="comment-input" placeholder="Add a comment...">
+                <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
+            </div>
 
-        <div class="comments-section" id="comments-section">
-            <!-- Display comments here (if available) -->
+            <div class="comments-section" id="comments-section">
+                <!-- Display comments here (if available) -->
+            </div>
         </div>
     </div>
 </div>
-</div>
 
 
-    <script>
+<script>
     function toggleCommentBox(button) {
         const postCard = button.closest('.post-card');
         const commentBox = postCard.querySelector('.comment-box');
@@ -140,34 +136,6 @@
         emojisContainer.style.display = 'none';
     }
 
-</script>
-
-
-<script>
-    // Add a script to toggle the display of .post-image div for each card
-    document.addEventListener('DOMContentLoaded', function() {
-        const postCards = document.querySelectorAll('.post-card');
-        postCards.forEach(postCard => {
-            const postImageDiv = postCard.querySelector('.post-image');
-            const postImage = postCard.querySelector('img');
-            if (postImage.src !== '') {
-                // Show the .post-image div if image is available
-                postImageDiv.style.display = 'block';
-            }
-            // Show .post-image div on hovering over the post card
-            postCard.addEventListener('mouseover', function() {
-                postImageDiv.style.display = 'block';
-            });
-            // // Hide .post-image div when mouse leaves the post card
-            // postCard.addEventListener('mouseout', function() {
-            //     postImageDiv.style.display = 'none';
-            // });
-        });
-    });
-</script>
-
-
-
     // Function to handle emoji click (replace this with your desired action)
     function handleEmojiClick(emoji) {
         console.log('Emoji clicked:', emoji);
@@ -184,8 +152,6 @@
         });
     });
 
-    </script>
-
+</script>
 </body>
 </html>
-
