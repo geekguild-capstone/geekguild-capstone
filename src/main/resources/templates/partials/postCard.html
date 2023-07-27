@@ -31,6 +31,7 @@
             <div class="post-image">
                 <img width="100%" th:src="${post.image}">
             </div>
+
         </div>
 
         <div class="interactions">
@@ -136,6 +137,31 @@
         likeEmojis.style.display = 'none';
     }
 </script>
+
+
+<script>
+    // Add a script to toggle the display of .post-image div for each card
+    document.addEventListener('DOMContentLoaded', function() {
+        const postCards = document.querySelectorAll('.post-card');
+        postCards.forEach(postCard => {
+            const postImageDiv = postCard.querySelector('.post-image');
+            const postImage = postCard.querySelector('img');
+            if (postImage.src !== '') {
+                // Show the .post-image div if image is available
+                postImageDiv.style.display = 'block';
+            }
+            // Show .post-image div on hovering over the post card
+            postCard.addEventListener('mouseover', function() {
+                postImageDiv.style.display = 'block';
+            });
+            // // Hide .post-image div when mouse leaves the post card
+            // postCard.addEventListener('mouseout', function() {
+            //     postImageDiv.style.display = 'none';
+            // });
+        });
+    });
+</script>
+
 </body>
 </html>
 
