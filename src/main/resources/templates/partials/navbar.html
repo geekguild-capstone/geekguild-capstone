@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xlms:th="http://www.thymeleaf.org" xmlns:xlms="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+
 
 <div th:fragment="navbar">
 
@@ -48,7 +47,8 @@
 
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
 
-                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary" id="newFriendRequestBtn"
+                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary"
+                        id="newFriendRequestBtn"
 
                         data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
@@ -64,70 +64,82 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="receivedFriendRequestModalLabel">New Friend Request
                                     Received</h5>
-                                <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-                                <!--                                        aria-label="Close"></button>-->
                             </div>
                             <div class="modal-body">
-                                <!-- Modal content here -->
-                                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-                                <p id="friendUsername">Placeholder Username</p>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="#" method="post" id="acceptFriendRequestForm">
-                                    <input type="hidden" name="receiverId" value="1"/>
-                                    <button type="submit" class="btn btn-primary">Accept</button>
-                                </form>
-                                <form action="#" method="post" id="declineFriendRequestForm">
-                                    <input type="hidden" name="receiverId" value="1"/>
-                                    <button type="submit" class="btn btn-danger">Decline</button>
-                                </form>
+                                <div th:each="request : ${requests}">
+
+                                    <!-- Modal content here -->
+                                    <img th:src="${request.sender.image}" alt="Profile Picture"
+                                         class="profile-img">
+                                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
+
+                                    <div class="modal-footer">
+                                        <form action="#" method="post" id="acceptFriendRequestForm">
+                                            <input type="hidden" name="receiverId" value="1"/>
+                                            <button type="submit" class="btn btn-primary">Accept</button>
+                                        </form>
+                                        <form action="#" method="post" id="declineFriendRequestForm">
+                                            <input type="hidden" name="receiverId" value="1"/>
+                                            <button type="submit" class="btn btn-danger">Decline</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <!--                <div th:each="request : ${requests}">-->
+                    <!--                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
+                    <!--                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
+                    <!--                    <p th:text="${request.status}"></p>-->
+                    <!--                    <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+                    <!--                        <button type="submit">Accept</button>-->
+                    <!--                    </form>-->
+                    <!--                    <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+                    <!--                        <button type="submit" >Reject</button>-->
+                    <!--                    </form>-->
+
+                    <!--                </div>-->
+
+                    <!-- Bootstrap Tooltip JavaScript -->
+                    <!--                <script>-->
+                    <!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
+                    <!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
+                    <!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
+                    <!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
+                    <!--                    });-->
 
 
-                <!-- Bootstrap Tooltip JavaScript -->
-<!--                <script>-->
-<!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
-<!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
-<!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
-<!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
-<!--                    });-->
+                    <!--                <form class="d-flex" role="search">-->
+                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <!--                    <button class="btn search-button" type="submit">Search</button>-->
 
 
+                    <form th:action="@{/login}" th:method="post" id="logout">
+                        <button class="btn logout-button" type="submit">Logout</button>
+                    </form>
 
-<!--                <form class="d-flex" role="search">-->
-<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                    <button class="btn search-button" type="submit">Search</button>-->
-
-
-
-                <form th:action="@{/login}" th:method="post" id="logout">
-                    <button class="btn logout-button" type="submit">Logout</button>
-                </form>
-
-                <script>
-                    const link = document.querySelector("#logout-link");
-                    if (link !== null) {
-                        link.addEventListener("click", function (event) {
-                            document.getElementById("logout").submit();
-                        });
-                    }
-
-                </script>
                     <script>
                         const link = document.querySelector("#logout-link");
                         if (link !== null) {
-                        link.addEventListener("click", function (event) {
-                            document.getElementById("logout").submit();
-                        });
-                    }
+                            link.addEventListener("click", function (event) {
+                                document.getElementById("logout").submit();
+                            });
+                        }
 
-                </script>
+                    </script>
+                    <script>
+                        const link = document.querySelector("#logout-link");
+                        if (link !== null) {
+                            link.addEventListener("click", function (event) {
+                                document.getElementById("logout").submit();
+                            });
+                        }
+
+                    </script>
+                </div>
+
             </div>
-
-        </div>
     </nav>
 </div>
 
