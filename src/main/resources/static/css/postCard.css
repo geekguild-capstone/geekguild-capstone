@@ -65,6 +65,7 @@ body {
 
 
 .interactions {
+    position: relative;
     display: flex;
     align-items: center;
     border-top: 1px solid #e1e5ea;

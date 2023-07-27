@@ -125,18 +125,22 @@
     }
 
     // Function to handle showing the emojis container
-    function showLikeEmojis(button) {
+    function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
         const emojisContainer = postCard.querySelector('.like-emojis');
-        emojisContainer.style.display = 'block';
+        emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Function to handle hiding the emojis container
-    function hideLikeEmojis(button) {
-        const postCard = button.closest('.post-card');
-        const emojisContainer = postCard.querySelector('.like-emojis');
-        emojisContainer.style.display = 'none';
-    }
+    // Update the event listeners to handle click on the "like-button"
+    document.addEventListener('DOMContentLoaded', function() {
+        const likeButtons = document.querySelectorAll('.like-button');
+        likeButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent the click event from bubbling to the document
+                toggleLikeEmojis(this);
+            });
+        });
+    });
 
     // Function to handle emoji click (replace this with your desired action)
     function handleEmojiClick(emoji) {
