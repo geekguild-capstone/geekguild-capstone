@@ -30,6 +30,7 @@ public class HomeController {
         this.friendDao = friendDao;
     }
 
+
     @GetMapping("/home")
     public String landingPage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
