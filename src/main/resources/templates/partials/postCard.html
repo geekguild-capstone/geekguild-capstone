@@ -35,6 +35,10 @@
 
 
             <div class="interactions">
+                <p>Reactions:</p>
+                <ul>
+                    <li th:each="reaction : ${post.reactions}" th:text="${reaction.reaction}"></li>
+                </ul>
                 <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>

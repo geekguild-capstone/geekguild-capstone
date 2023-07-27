@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/friends")
 public class FriendController {
 
     private final UserRepository userDao;
@@ -35,13 +34,13 @@ public class FriendController {
     @PostMapping("/{requestId}/accept")
     public String acceptFriendRequest(@PathVariable Long requestId) {
         updateFriendRequestStatus(requestId, "accepted");
-        return "redirect:/friends";
+        return "redirect:/home";
     }
 
     @PostMapping("/{requestId}/reject")
     public String rejectFriendRequest(@PathVariable Long requestId) {
         updateFriendRequestStatus(requestId, "rejected");
-        return "redirect:/friends";
+        return "redirect:/home";
     }
 
     @PostMapping("/add")

@@ -1,6 +1,8 @@
 package com.geekguild.controllers;
 
+import com.geekguild.models.FriendRequest;
 import com.geekguild.models.Post;
+import com.geekguild.models.Reaction;
 import com.geekguild.models.User;
 import com.geekguild.repositories.FriendRequestRepository;
 import com.geekguild.repositories.PostRepository;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,11 +37,18 @@ public class HomeController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
 
+        List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
+        model.addAttribute("requests", friendRequests);
+
         model.addAttribute("user", user);
         model.addAttribute("post", new Post());
+
         // Fetch only the posts where groupId is null
         List<Post> posts = postDao.findByGroupIdIsNull();
         model.addAttribute("posts", posts);
+
+        // Add the reactions to the model, so they can be accessed within the view
+        model.addAttribute("reactions", getReactions(posts));
 
         model.addAttribute("users", userDao.findAll());
         // The friend-related attributes are removed from here
@@ -58,7 +68,15 @@ public class HomeController {
     }
 
 
+
     // Other post-related methods and endpoints can stay here
     // ...
+    private List<List<Reaction>> getReactions(List<Post> posts) {
+        List<List<Reaction>> reactions = new ArrayList<>();
+        for (Post post : posts) {
+            reactions.add(post.getReactions());
+        }
+        return reactions;
+    }
 }
 
