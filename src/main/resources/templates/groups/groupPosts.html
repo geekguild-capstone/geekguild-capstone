@@ -217,13 +217,37 @@
             </div>
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
-                <ul>
-                    <li th:each="comment : ${groupPostComments[postIndex.index]}">
-                        <p th:text="${comment.text}"></p>
-                        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"></p>
-                    </li>
-                </ul>
+                <div th:each="comment : ${groupPostComments[postIndex.index]}">
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <div class="user-profile">
+                                <img th:src="${comment.user.image}" alt="User Profile Image">
+                                <div class="username-box">
+                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}" class="username"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-content">
+                            <p th:text="${comment.text}" class="comment-text"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
+<!--            <div class="comments-section" id="comments-section">-->
+<!--                &lt;!&ndash; Display comments here (if available) &ndash;&gt;-->
+<!--                <div th:each="comment : ${groupPostComments[postIndex.index]}">-->
+<!--                    <div class="comment-card">-->
+<!--                        <div class="user-profile">-->
+<!--                            <img th:src="${comment.user.image}" alt="User Profile Image">-->
+<!--                            <div>-->
+<!--                                <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}" class="username"></p>-->
+<!--                                <p th:text="${comment.text}" class="comment-content"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
         </div>
     </div>
     <div class="like-emojis count-display">
@@ -323,15 +347,15 @@
     //     // Add your like or other action logic here
     // }
 
-    // // Update the event listeners to handle mouseleave on the emojis container
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const emojisContainers = document.querySelectorAll('.like-emojis');
-    //     emojisContainers.forEach(container => {
-    //         container.addEventListener('mouseleave', function () {
-    //             this.style.display = 'none';
-    //         });
-    //     });
-    // });
+    // Update the event listeners to handle mouseleave on the emojis container
+    document.addEventListener('DOMContentLoaded', function () {
+        const emojisContainers = document.querySelectorAll('.like-emojis');
+        emojisContainers.forEach(container => {
+            container.addEventListener('mouseleave', function () {
+                this.style.display = 'none';
+            });
+        });
+    });
 
     // // Store the counters for each post in an object
     // const emojiCounters = {};
