@@ -9,7 +9,7 @@ body {
 
 .post-card {
     position: relative;
-    background-color: rgba(142, 9, 231, 0.29);
+    background-color: #39045c;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 5px;
