@@ -9,7 +9,7 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #ee8631;
+    background-color: #8e09e7;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 5px;
@@ -78,7 +78,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #8e09e7;
+    color:#8fd93f;
     font-size: 14px;
     margin-right: 24px;
     padding: 4px;
@@ -124,7 +124,7 @@ body {
 
 .comments-section hr {
     border: none;
-    border-top: 1px solid #8e09e7 !important;
+    border-top: 1px solid #e67e22 !important;
     margin: 8px 0;
 }
 
@@ -140,7 +140,7 @@ body {
 
 .comment p {
     font-size: 14px;
-    color: #333;
+    color: #e67e22 !important;
 }
 
 .comment hr {
@@ -153,27 +153,31 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    color: #000000;
+    display: flex; /* Display the buttons side by side */
+    align-items: center; /* Align the buttons vertically */
+    padding: 0; /* Remove padding to remove extra space */
 }
 
-.delete-icon,
-.edit-icon {
+
+.edit-icons {
     font-size: 16px;
     cursor: pointer;
-    color: #000000;
-    padding: 4px;
-    border-radius: 50%;
+    color: #e67e22 !important;
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
 }
 
 /* Add shadow hover effect for the icons */
-.delete-icon:hover,
-.edit-icon:hover {
+.edit-icons:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+.edit-icons i {
+    /* Remove margin to remove extra space */
+    margin: 0;
+}
+
 .post-content p {
-    color: #8e09e7;
+    color: #e67e22 !important;
 }
 
 .like-emojis {
@@ -196,4 +200,19 @@ body {
 .like-emoji {
     cursor: pointer;
     margin: 0 5px;
+}
+
+.like-emojis.count-display {
+    /* ... Your styles for the like-emojis count-display ... */
+    position: absolute;
+    bottom: 10px; /* Adjust as needed to position it correctly */
+    right: 10px; /* Adjust as needed to position it in the bottom right corner */
+    pointer-events: none; /* Prevent hover and click events on the container */
+    font-size: 12px; /* Adjust the font size */
+    width: 100px; /* Set the width to "auto" or specify a fixed value */
+}
+
+/* Reduce the spacing between emoji icons and counters */
+.like-emojis.count-display .like-emoji {
+    margin-right: 2px; /* Adjust as needed */
 }
