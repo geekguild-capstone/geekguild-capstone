@@ -41,10 +41,6 @@
                 </ul>
 
 
-                <!--            <div class="logo">-->
-                <!--            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">-->
-                <!--            </div>-->
-
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
 
                 <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary"
@@ -87,59 +83,59 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--                <div th:each="request : ${requests}">-->
-                    <!--                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
-                    <!--                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
-                    <!--                    <p th:text="${request.status}"></p>-->
-                    <!--                    <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
-                    <!--                        <button type="submit">Accept</button>-->
-                    <!--                    </form>-->
-                    <!--                    <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
-                    <!--                        <button type="submit" >Reject</button>-->
-                    <!--                    </form>-->
-
-                    <!--                </div>-->
-
-                    <!-- Bootstrap Tooltip JavaScript -->
-                    <!--                <script>-->
-                    <!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
-                    <!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
-                    <!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
-                    <!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
-                    <!--                    });-->
-
-
-                    <!--                <form class="d-flex" role="search">-->
-                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-                    <!--                    <button class="btn search-button" type="submit">Search</button>-->
-
-
-                    <form th:action="@{/login}" th:method="post" id="logout">
-                        <button class="btn logout-button" type="submit">Logout</button>
-                    </form>
-
-                    <script>
-                        const link = document.querySelector("#logout-link");
-                        if (link !== null) {
-                            link.addEventListener("click", function (event) {
-                                document.getElementById("logout").submit();
-                            });
-                        }
-
-                    </script>
-                    <script>
-                        const link = document.querySelector("#logout-link");
-                        if (link !== null) {
-                            link.addEventListener("click", function (event) {
-                                document.getElementById("logout").submit();
-                            });
-                        }
-
-                    </script>
                 </div>
+                <!--                <div th:each="request : ${requests}">-->
+                <!--                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
+                <!--                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
+                <!--                    <p th:text="${request.status}"></p>-->
+                <!--                    <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+                <!--                        <button type="submit">Accept</button>-->
+                <!--                    </form>-->
+                <!--                    <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+                <!--                        <button type="submit" >Reject</button>-->
+                <!--                    </form>-->
 
+                <!--                </div>-->
+
+                <!-- Bootstrap Tooltip JavaScript -->
+                <!--                <script>-->
+                <!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
+                <!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
+                <!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
+                <!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
+                <!--                    });-->
+
+
+                <!--                <form class="d-flex" role="search">-->
+                <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                <!--                    <button class="btn search-button" type="submit">Search</button>-->
+
+
+                <form th:action="@{/login}" th:method="post" id="logout">
+                    <button class="btn logout-button" type="submit">Logout</button>
+                </form>
+
+                <script>
+                    const link = document.querySelector("#logout-link");
+                    if (link !== null) {
+                        link.addEventListener("click", function (event) {
+                            document.getElementById("logout").submit();
+                        });
+                    }
+
+                </script>
+                <script>
+                    const link = document.querySelector("#logout-link");
+                    if (link !== null) {
+                        link.addEventListener("click", function (event) {
+                            document.getElementById("logout").submit();
+                        });
+                    }
+
+                </script>
             </div>
+
+        </div>
     </nav>
 </div>
 

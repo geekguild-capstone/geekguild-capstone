@@ -52,6 +52,15 @@ public class HomeController {
         // Add the reactions to the model, so they can be accessed within the view
         model.addAttribute("reactions", getReactions(posts));
 
+        // Calculate and add the counts of each type of reaction to the model
+        List<Integer> likesCounts = getReactionCounts(posts, "like");
+        List<Integer> lovesCounts = getReactionCounts(posts, "love");
+        List<Integer> laughsCounts = getReactionCounts(posts, "laugh");
+
+        model.addAttribute("likesCount", likesCounts);
+        model.addAttribute("lovesCount", lovesCounts);
+        model.addAttribute("laughsCount", laughsCounts);
+
         model.addAttribute("users", userDao.findAll());
         // The friend-related attributes are removed from here
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
@@ -79,6 +88,18 @@ public class HomeController {
             reactions.add(post.getReactions());
         }
         return reactions;
+    }
+
+    // Helper method to calculate the counts of each type of reaction for all posts
+    private List<Integer> getReactionCounts(List<Post> posts, String reactionId) {
+        List<Integer> counts = new ArrayList<>();
+        for (Post post : posts) {
+            int count = (int) post.getReactions().stream()
+                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionId))
+                    .count();
+            counts.add(count);
+        }
+        return counts;
     }
 }
 

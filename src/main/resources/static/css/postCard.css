@@ -9,7 +9,7 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #ee8631;
+    background-color: #39045c;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 5px;
@@ -29,7 +29,6 @@ body {
 .user-profile {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
 }
 
 .user-profile img {
@@ -42,7 +41,7 @@ body {
 .user-profile .username {
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: white;
 }
 
 .post-image {
@@ -93,16 +92,75 @@ body {
     color: #666;
 }
 
+/*COMMENT STYLING*/
 .comment-box {
     /* Adjust the height as needed to make the input box smaller */
     height: 100px;
-    display: none; /* Hide the comment box by default */
+    /*display: none; !* Hide the comment box by default *!*/
     /* Existing styles... */
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
     padding-top: 16px;
 }
 
+/*.comment-card {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 5px;*/
+/*    padding: 10px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+.comment-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8; /* Grey background for the comment card */
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Vertically stack the header and content */
+}
+
+.comment-header {
+    background-color: #ebebeb; /* Darker background for the header area */
+    padding: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Vertically center the first and last names */
+.username-box {
+
+    height: 32px; /* Set the height to ensure proper centering */
+}
+
+.username {
+    font-weight: bold;
+    margin-top: 5px;
+    /*display: flex;*/
+    /*flex-direction: column; !* Vertically stack the first and last name *!*/
+    /*align-items: center; !* Horizontally center the first and last name *!*/
+}
+
+.comment-content {
+    /*flex: 1;*/
+    margin-top: 5px;
+}
+
+.comment-text {
+    margin-top: 5px;
+}
 
 .submit-comment-btn {
     background-color: #ee8631;
@@ -120,6 +178,7 @@ body {
 
 .comments-section {
     margin-top: 16px;
+    display: none;
 }
 
 .comments-section hr {
@@ -175,7 +234,7 @@ body {
 }
 
 .post-content p {
-    color: #000000 !important;
+    color: white !important;
 }
 
 .like-emojis {

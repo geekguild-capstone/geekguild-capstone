@@ -33,10 +33,6 @@
                 </div>
             </div>
             <div class="interactions">
-                <p>Reactions:</p>
-                <ul>
-                    <li th:each="reaction : ${post.reactions}" th:text="${reaction.reaction}"></li>
-                </ul>
                 <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
@@ -67,11 +63,11 @@
     </div>
     <div class="like-emojis count-display">
         <span class="like-emoji"><i>👍</i></span>
-        <span class="emoji-counter">0</span>
+        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>
         <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
-        <span class="emoji-counter">0</span>
+        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>
         <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
-        <span class="emoji-counter">0</span>
+        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>
     </div>
 </div>
 
