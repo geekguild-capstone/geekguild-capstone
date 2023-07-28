@@ -96,7 +96,7 @@ body {
 .comment-box {
     /* Adjust the height as needed to make the input box smaller */
     height: 100px;
-    display: none; /* Hide the comment box by default */
+    /*display: none; !* Hide the comment box by default *!*/
     /* Existing styles... */
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
@@ -120,6 +120,7 @@ body {
 
 .comments-section {
     margin-top: 16px;
+    display: none;
 }
 
 .comments-section hr {

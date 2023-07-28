@@ -179,6 +179,18 @@ public class GroupController {
 
         model.addAttribute("groupPostComments", groupPostComments);
 
+        // Add the reactions to the model, so they can be accessed within the view
+        model.addAttribute("reactions", getReactions(groupPosts));
+
+        // Calculate and add the counts of each type of reaction to the model
+        List<Integer> likesCounts = getReactionCounts(groupPosts, "like");
+        List<Integer> lovesCounts = getReactionCounts(groupPosts, "love");
+        List<Integer> laughsCounts = getReactionCounts(groupPosts, "laugh");
+
+        model.addAttribute("likesCount", likesCounts);
+        model.addAttribute("lovesCount", lovesCounts);
+        model.addAttribute("laughsCount", laughsCounts);
+
         if (group == null) {
             return "redirect:/error";
         } else {
@@ -222,6 +234,26 @@ public class GroupController {
             group.getMembers().add(user);
             groupDao.save(group);
         }
+    }
+
+    private List<List<Reaction>> getReactions(List<Post> posts) {
+        List<List<Reaction>> reactions = new ArrayList<>();
+        for (Post post : posts) {
+            reactions.add(post.getReactions());
+        }
+        return reactions;
+    }
+
+    // Helper method to calculate the counts of each type of reaction for all posts
+    private List<Integer> getReactionCounts(List<Post> posts, String reactionId) {
+        List<Integer> counts = new ArrayList<>();
+        for (Post post : posts) {
+            int count = (int) post.getReactions().stream()
+                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionId))
+                    .count();
+            counts.add(count);
+        }
+        return counts;
     }
 
 
