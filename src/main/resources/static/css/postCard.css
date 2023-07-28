@@ -9,7 +9,7 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #8e09e7;
+    background-color: #ee8631;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 5px;
@@ -140,7 +140,7 @@ body {
 
 .comment p {
     font-size: 14px;
-    color: #e67e22 !important;
+    color: #8e09e7 !important;
 }
 
 .comment hr {
@@ -162,7 +162,7 @@ body {
 .edit-icons {
     font-size: 16px;
     cursor: pointer;
-    color: #e67e22 !important;
+    color: #8fd93f !important;
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
 }
 
@@ -174,10 +174,11 @@ body {
 .edit-icons i {
     /* Remove margin to remove extra space */
     margin: 0;
+    color: #8fd93f;
 }
 
 .post-content p {
-    color: #e67e22 !important;
+    color:#8e09e7 !important;
 }
 
 .like-emojis {
