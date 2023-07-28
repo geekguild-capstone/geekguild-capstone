@@ -9,7 +9,7 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #8e09e7;
+    background-color: #ee8631;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 5px;
@@ -78,7 +78,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    color:#8fd93f;
+    color: #FFFFFF;
     font-size: 14px;
     margin-right: 24px;
     padding: 4px;
@@ -140,7 +140,7 @@ body {
 
 .comment p {
     font-size: 14px;
-    color: #e67e22 !important;
+    color: #000 !important;
 }
 
 .comment hr {
@@ -155,14 +155,13 @@ body {
     right: 5px;
     display: flex; /* Display the buttons side by side */
     align-items: center; /* Align the buttons vertically */
-    padding: 0; /* Remove padding to remove extra space */
+    /*padding: 0; !* Remove padding to remove extra space *!*/
 }
 
 
 .edit-icons {
     font-size: 16px;
     cursor: pointer;
-    color: #e67e22 !important;
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
 }
 
@@ -172,12 +171,11 @@ body {
 }
 
 .edit-icons i {
-    /* Remove margin to remove extra space */
-    margin: 0;
+    color: #8fd93f;
 }
 
 .post-content p {
-    color: #e67e22 !important;
+    color: #000000 !important;
 }
 
 .like-emojis {
