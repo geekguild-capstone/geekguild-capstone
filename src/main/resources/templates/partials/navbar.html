@@ -47,12 +47,14 @@
 
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
 
-                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary"
-                        id="newFriendRequestBtn"
-
-                        data-bs-placement="bottom" title="New Friend Request">
+                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary" id="newFriendRequestBtn" data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
                 </button>
+
+
+                <form th:action="@{/login}" th:method="post" id="logout">
+                    <button class="btn logout-button" type="submit">Logout</button>
+                </form>
 
 
                 <!--NEW FRIEND REQUEST MODAL-->
@@ -74,14 +76,25 @@
                                     <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
 
                                     <div class="modal-footer">
-                                        <form action="#" method="post" id="acceptFriendRequestForm">
-                                            <input type="hidden" name="receiverId" value="1"/>
+                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post" id="acceptFriendRequestForm">
+<!--                                            <input type="hidden" name="receiverId" value="1"/>-->
                                             <button type="submit" class="btn btn-primary">Accept</button>
                                         </form>
-                                        <form action="#" method="post" id="declineFriendRequestForm">
-                                            <input type="hidden" name="receiverId" value="1"/>
+                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post" id="declineFriendRequestForm">
+<!--                                            <input type="hidden" name="receiverId" value="1"/>-->
                                             <button type="submit" class="btn btn-danger">Decline</button>
                                         </form>
+
+
+<!--                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+<!--                                            <button type="submit">Accept</button>-->
+<!--                                        </form>-->
+<!--                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+<!--                                            <button type="submit" >Reject</button>-->
+<!--                                        </form>-->
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -115,9 +128,7 @@
                     <!--                    <button class="btn search-button" type="submit">Search</button>-->
 
 
-                    <form th:action="@{/login}" th:method="post" id="logout">
-                        <button class="btn logout-button" type="submit">Logout</button>
-                    </form>
+
 
                     <script>
                         const link = document.querySelector("#logout-link");
