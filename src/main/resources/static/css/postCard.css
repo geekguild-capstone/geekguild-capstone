@@ -9,14 +9,16 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #39045c;
+    background-color: rgba(142, 9, 231, 0.5) !important;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0 2px 4px rgba(57, 4, 91, 0.5) !important;
     margin-bottom: 5px;
     padding: 16px;
 }
 
 .post-content-container {
+    background-color: rgba(142, 9, 231, 0.5) !important;
     border: 2px solid #8fd93f;
     padding: 10px;
     margin-bottom: 20px;
@@ -214,23 +216,26 @@ body {
     right: 5px;
     display: flex; /* Display the buttons side by side */
     align-items: center; /* Align the buttons vertically */
-    /*padding: 0; !* Remove padding to remove extra space *!*/
 }
 
-
-.edit-icons {
+.edit-icons i {
     font-size: 16px;
     cursor: pointer;
+    margin-right: 10px; /* Add some spacing between the buttons */
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
 }
 
 /* Add shadow hover effect for the icons */
-.edit-icons:hover {
+.edit-icons i:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.edit-icons i {
-    color: #8fd93f;
+.edit-icons .edit-button {
+    color: #e67e22; /* Change the color of the edit button to #e67e22 */
+}
+
+.edit-icons .delete-button {
+    color: #ff0000; /* Change the color of the delete button to #ff0000 */
 }
 
 .post-content p {
