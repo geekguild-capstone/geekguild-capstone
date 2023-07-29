@@ -10,13 +10,11 @@ import com.geekguild.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -69,7 +67,63 @@ public class HomeController {
         return "/partials/about-us";
     }
 
+    @PostMapping("/friends/{requestId}/accept")
+    public String acceptFriendRequest(@PathVariable Long requestId) {
+        updateFriendRequestStatus(requestId, "accepted");
+        return "redirect:/home";
+    }
 
+    @PostMapping("/friends/{requestId}/reject")
+    public String rejectFriendRequest(@PathVariable Long requestId) {
+        updateFriendRequestStatus(requestId, "rejected");
+        return "redirect:/home";
+    }
+
+    @PostMapping("/friends/add")
+    public String sendFriendRequest(@RequestParam("receiverId") Long receiverId) {
+        User loggedInUser = getLoggedInUser();
+        User receiver = userDao.findById(receiverId).orElse(null);
+
+        if (receiver != null) {
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.setSender(loggedInUser);
+            friendRequest.setReceiver(receiver);
+            friendRequest.setStatus("pending");
+            friendDao.save(friendRequest);
+        }
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/friends/remove")
+    public String removeFriend(@RequestParam("friendId") Long friendId, @RequestParam("loggedInUserType") String loggedInUserType) {
+        Long loggedInUserId = getUserIdFromSecurityContext();
+        User loggedInUser = userDao.findById(loggedInUserId).orElse(null);
+        User friend = userDao.findById(friendId).orElse(null);
+
+        if (loggedInUser != null && friend != null) {
+            FriendRequest friendRequest;
+            if ("sender".equals(loggedInUserType)) {
+                friendRequest = friendDao.findBySenderAndReceiverAndStatus(loggedInUser, friend, "accepted");
+            } else if ("receiver".equals(loggedInUserType)) {
+                friendRequest = friendDao.findBySenderAndReceiverAndStatus(friend, loggedInUser, "accepted");
+            } else {
+                return "redirect:/home";
+            }
+
+            if (friendRequest != null) {
+                friendRequest.setStatus("rejected");
+                friendDao.save(friendRequest);
+            }
+        }
+
+        return "redirect:/home";
+    }
+
+
+    private User getLoggedInUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
     // Other post-related methods and endpoints can stay here
     // ...
@@ -80,5 +134,24 @@ public class HomeController {
         }
         return reactions;
     }
+
+    private void updateFriendRequestStatus(Long requestId, String status) {
+        Optional<FriendRequest> optionalFriendRequest = friendDao.findById(requestId);
+        optionalFriendRequest.ifPresent(friendRequest -> {
+            friendRequest.setStatus(status);
+            friendDao.save(friendRequest);
+        });
+    }
+
+    private Long getUserIdFromSecurityContext() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof User) {
+            return ((User) principal).getId();
+        }
+        return null;
+    }
+
+
+
 }
 

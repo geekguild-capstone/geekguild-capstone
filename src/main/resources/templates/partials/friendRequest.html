@@ -4,7 +4,7 @@
     <title>Friend Requests</title>
     <head th:include="partials/header :: head">
 
-</head>
+    </head>
 <body>
 <div th:include="partials/navbar :: navbar"></div>
 
@@ -14,11 +14,12 @@
         <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
         <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>
         <p th:text="${request.status}"></p>
+
         <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">
             <button type="submit">Accept</button>
         </form>
         <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">
-            <button type="submit" >Reject</button>
+            <button type="submit">Reject</button>
         </form>
 
     </div>
