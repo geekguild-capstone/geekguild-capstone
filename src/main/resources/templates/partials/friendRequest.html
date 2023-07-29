@@ -1,28 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Friend Requests</title>
-    <head th:include="partials/header :: head">
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Friend Requests</title>-->
+<!--    <head th:include="partials/header :: head">-->
 
-</head>
-<body>
-<div th:include="partials/navbar :: navbar"></div>
+<!--    </head>-->
+<!--<body>-->
+<!--<div th:include="partials/navbar :: navbar"></div>-->
 
-<h1>Friend Requests</h1>
-<div id="friendRequestsContainer">
-    <div th:each="request : ${requests}">
-        <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
-        <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>
-        <p th:text="${request.status}"></p>
-        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">
-            <button type="submit">Accept</button>
-        </form>
-        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">
-            <button type="submit" >Reject</button>
-        </form>
+<!--<h1>Friend Requests</h1>-->
+<!--<div id="friendRequestsContainer">-->
+<!--    <div th:each="request : ${requests}">-->
+<!--        <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
+<!--        <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
+<!--        <p th:text="${request.status}"></p>-->
 
-    </div>
-</div>
+<!--        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+<!--            <button type="submit">Accept</button>-->
+<!--        </form>-->
+<!--        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+<!--            <button type="submit">Reject</button>-->
+<!--        </form>-->
 
-</body>
-</html>
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
