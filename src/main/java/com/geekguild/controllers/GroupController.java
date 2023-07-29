@@ -256,6 +256,16 @@ public class GroupController {
         return counts;
     }
 
+    // Helper method to escape HTML entities in the code for display
+    private String escapeHTML(String code) {
+        return code.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+
+    // Method to display code on the "/group/{id}" page
+    private void displayCodeOnGroupPage(Model model, String code) {
+        model.addAttribute("escapedCode", escapeHTML(code));
+    }
+
 
 }
 

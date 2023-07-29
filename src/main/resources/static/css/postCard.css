@@ -95,12 +95,13 @@ body {
 /*COMMENT STYLING*/
 .comment-box {
     /* Adjust the height as needed to make the input box smaller */
-    height: 100px;
+    /*height: 100px;*/
     /*display: none; !* Hide the comment box by default *!*/
     /* Existing styles... */
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
-    padding-top: 16px;
+    /*padding-top: 16px;*/
+    padding: 10px;
 }
 
 /*.comment-card {*/
@@ -272,4 +273,16 @@ body {
 /* Reduce the spacing between emoji icons and counters */
 .like-emojis.count-display .like-emoji {
     margin-right: 2px; /* Adjust as needed */
+}
+
+/* Style for the container holding the code snippet */
+.code-container {
+    max-height: 300px; /* Adjust this value as needed to fit your layout */
+    overflow-y: auto; /* Add vertical scrollbar when needed */
+}
+
+/* Style for the code snippet */
+.code-container code {
+    white-space: pre-wrap; /* Wrap lines as needed to fit the container */
+    word-break: break-all; /* Break long words if necessary */
 }

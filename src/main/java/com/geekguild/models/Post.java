@@ -27,6 +27,9 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
+    @Column(name = "snippet")
+    private String snippet;
+
 
 //    USER RELATIONSHIPS
     @ManyToOne
