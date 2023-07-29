@@ -9,14 +9,16 @@ body {
 
 .post-card {
     position: relative;
-    background-color: #ee8631;
+    background-color: rgba(142, 9, 231, 0.3) !important;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0 2px 4px rgba(142, 9, 231, 0.3) !important;
     margin-bottom: 5px;
     padding: 16px;
 }
 
 .post-content-container {
+    background-color: rgba(142, 9, 231, 0.4) !important;
     border: 2px solid #8fd93f;
     padding: 10px;
     margin-bottom: 20px;
@@ -29,7 +31,6 @@ body {
 .user-profile {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
 }
 
 .user-profile img {
@@ -42,7 +43,7 @@ body {
 .user-profile .username {
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: white;
 }
 
 .post-image {
@@ -78,7 +79,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #8e09e7;
+    color: #FFFFFF;
     font-size: 14px;
     margin-right: 24px;
     padding: 4px;
@@ -93,16 +94,75 @@ body {
     color: #666;
 }
 
+/*COMMENT STYLING*/
 .comment-box {
     /* Adjust the height as needed to make the input box smaller */
     height: 100px;
-    display: none; /* Hide the comment box by default */
+    /*display: none; !* Hide the comment box by default *!*/
     /* Existing styles... */
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
     padding-top: 16px;
 }
 
+/*.comment-card {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 5px;*/
+/*    padding: 10px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+.comment-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8; /* Grey background for the comment card */
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Vertically stack the header and content */
+}
+
+.comment-header {
+    background-color: #ebebeb; /* Darker background for the header area */
+    padding: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Vertically center the first and last names */
+.username-box {
+
+    height: 32px; /* Set the height to ensure proper centering */
+}
+
+.username {
+    font-weight: bold;
+    margin-top: 5px;
+    /*display: flex;*/
+    /*flex-direction: column; !* Vertically stack the first and last name *!*/
+    /*align-items: center; !* Horizontally center the first and last name *!*/
+}
+
+.comment-content {
+    /*flex: 1;*/
+    margin-top: 5px;
+}
+
+.comment-text {
+    margin-top: 5px;
+}
 
 .submit-comment-btn {
     background-color: #ee8631;
@@ -120,11 +180,12 @@ body {
 
 .comments-section {
     margin-top: 16px;
+    display: none;
 }
 
 .comments-section hr {
     border: none;
-    border-top: 1px solid #8e09e7 !important;
+    border-top: 1px solid #e67e22 !important;
     margin: 8px 0;
 }
 
@@ -140,7 +201,7 @@ body {
 
 .comment p {
     font-size: 14px;
-    color: #333;
+    color: #000 !important;
 }
 
 .comment hr {
@@ -153,27 +214,32 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    color: #000000;
+    display: flex; /* Display the buttons side by side */
+    align-items: center; /* Align the buttons vertically */
 }
 
-.delete-icon,
-.edit-icon {
+.edit-icons i {
     font-size: 16px;
     cursor: pointer;
-    color: #000000;
-    padding: 4px;
-    border-radius: 50%;
+    margin-right: 10px; /* Add some spacing between the buttons */
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
 }
 
 /* Add shadow hover effect for the icons */
-.delete-icon:hover,
-.edit-icon:hover {
+.edit-icons i:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+.edit-icons .edit-button {
+    color: #e67e22; /* Change the color of the edit button to #e67e22 */
+}
+
+.edit-icons .delete-button {
+    color: #ff0000; /* Change the color of the delete button to #ff0000 */
+}
+
 .post-content p {
-    color: #8e09e7;
+    color: white !important;
 }
 
 .like-emojis {
@@ -196,4 +262,19 @@ body {
 .like-emoji {
     cursor: pointer;
     margin: 0 5px;
+}
+
+.like-emojis.count-display {
+    /* ... Your styles for the like-emojis count-display ... */
+    position: absolute;
+    bottom: 10px; /* Adjust as needed to position it correctly */
+    right: 10px; /* Adjust as needed to position it in the bottom right corner */
+    pointer-events: none; /* Prevent hover and click events on the container */
+    font-size: 12px; /* Adjust the font size */
+    width: 100px; /* Set the width to "auto" or specify a fixed value */
+}
+
+/* Reduce the spacing between emoji icons and counters */
+.like-emojis.count-display .like-emoji {
+    margin-right: 2px; /* Adjust as needed */
 }

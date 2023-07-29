@@ -10,11 +10,11 @@
 </head>
 
 <body>
-<div th:each="post : ${posts}">
+<div th:each="post, postIndex : ${posts}" class="post-card" id="post-${postIndex.index}">
     <div class="post-card">
         <div class="edit-icons">
-            <i class="far fa-edit edit-icon" onclick="editPost(event)"></i>
-            <i class="far fa-times-circle delete-icon" onclick="deletePost(event)"></i>
+            <i class="edit-button fas fa-pencil-alt" onclick="editPost(event)"></i>
+            <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>
         </div>
 
         <div class="user-profile">
@@ -32,13 +32,7 @@
                     <img width="100%" th:src="${post.image}">
                 </div>
             </div>
-
-
             <div class="interactions">
-                <p>Reactions:</p>
-                <ul>
-                    <li th:each="reaction : ${post.reactions}" th:text="${reaction.reaction}"></li>
-                </ul>
                 <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
@@ -59,11 +53,18 @@
                 <input type="text" id="comment-input" placeholder="Add a comment...">
                 <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
             </div>
-
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
             </div>
         </div>
+    </div>
+    <div class="like-emojis count-display">
+        <span class="like-emoji"><i>👍</i></span>
+        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>
+        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>
+        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>
     </div>
 </div>
 
@@ -82,10 +83,9 @@
     }
 
     function submitComment(event) {
-        const button = event.target;
-        const postCard = button.closest('.post-card');
-        const commentInput = postCard.querySelector('#comment-input');
+        const postCard = event.target.closest('.post-card');
         const commentsSection = postCard.querySelector('.comments-section');
+        const commentInput = postCard.querySelector('#comment-input');
 
         const commentText = commentInput.value.trim();
         if (commentText !== '') {
@@ -124,9 +124,12 @@
             // Auto-close the comment box after submission
             const commentBox = postCard.querySelector('.comment-box');
             commentBox.style.display = 'none';
-        }
 
+            // Initialize the emoji counters for the post
+            emojiCounters[postCard.id] = {};
+        }
     }
+
 
     // Function to handle showing the emojis container
     function toggleLikeEmojis(button) {
@@ -162,6 +165,36 @@
         });
     });
 
+    // Store the counters for each post in an object
+    const emojiCounters = {};
+
+    function handleEmojiClick(emoji) {
+        const postCard = event.target.closest('.post-card');
+        const likeEmojis = postCard.querySelector('.like-emojis');
+
+        // Increment the counter for the clicked emoji
+        emojiCounters[postCard.id] = emojiCounters[postCard.id] || {};
+        emojiCounters[postCard.id][emoji] = emojiCounters[postCard.id][emoji] + 1 || 1;
+
+        //     // Update the emoji innerHTML to include the counter
+        //     likeEmojis.innerHTML = `
+        //     <span class="like-emoji"><i>${emoji}</i></span>
+        //     <span class="emoji-counter">${emojiCounters[postCard.id][emoji]}</span>
+        //     <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>
+        //     <span class="emoji-counter">${emojiCounters[postCard.id]['👍'] || 0}</span>
+        //     <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+        //     <span class="emoji-counter">${emojiCounters[postCard.id]['❤️'] || 0}</span>
+        //     <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+        //     <span class="emoji-counter">${emojiCounters[postCard.id]['😂'] || 0}</span>
+        // `;
+        //     // Update the emoji count display element with the total count of each emoji
+        //     emojiCountDisplay.innerHTML = `
+        //     👍 ${emojiCounters[postCard.id]['👍'] || 0}
+        //     ❤️ ${emojiCounters[postCard.id]['❤️'] || 0}
+        //     😂 ${emojiCounters[postCard.id]['😂'] || 0}
+        // `;
+
+    }
 
 </script>
 

@@ -14,6 +14,7 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 
+<div class="page-container">
 <div class="edit-icon">
     <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
         <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -33,9 +34,8 @@
         <!-- Profile Picture Container -->
         <img th:src="${user.image}" alt="Profile Picture" class="profile-picture">
         <div class="profile-info">
-            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>
-
             <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
+<!--            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>-->
             <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
         </div>
     </div>
@@ -104,7 +104,7 @@
     </div>
 </div>
 <footer th:replace="partials/footer :: footer"></footer>
-
+</div>
 </body>
 
 </html>
