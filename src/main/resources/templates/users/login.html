@@ -20,7 +20,11 @@
 <div th:if="${param.logout}" class="message">
     You have been logged out.
 </div>
-
+<div class="logo-container">
+    <div class="logo">
+        <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo">
+    </div>
+</div>
 <div class="centered-column">
     <form th:action="@{/login}" method="post" class="login-form">
         <h3>Unite, Collaborate, Geek Out: Join the Ultimate Tech Enthusiast Community!</h3>
@@ -34,11 +38,6 @@
         <a th:href="@{/register}"><div>Create Account</div></a>
     </form>
 
-    <div class="logo-container">
-        <div class="logo">
-            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo"   width="700px" height="700px">
-        </div>
-    </div>
 </div>
 
 
