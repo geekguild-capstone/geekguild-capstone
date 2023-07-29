@@ -10,7 +10,11 @@
 
     </head>
 <body>
+
 <div th:include="partials/navbar :: navbar"></div>
+
+<div class="page-wrapper">
+    <div class="content-wrapper">
 
 <h2>Hello <span th:text="${profileFormWrapper.user.firstname + ' ' + profileFormWrapper.user.lastname}"></span></h2>
 
@@ -196,6 +200,7 @@
         </div>
     </form>
 </div>
+    </div>
 
 
 <!--<script>-->
@@ -236,6 +241,7 @@
 
 </script>
 <footer th:replace="partials/footer :: footer"></footer>
+    </div>
 
 </body>
 </html>
