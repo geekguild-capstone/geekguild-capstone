@@ -13,7 +13,7 @@
 <div th:each="post, postIndex : ${posts}" class="post-card" id="post-${postIndex.index}">
     <div class="post-card">
         <div class="edit-icons">
-                <i class="edit-button  fas fa-pencil-alt" onclick="editPost(event)"></i>
+            <i class="edit-button fas fa-pencil-alt" onclick="editPost(event)"></i>
             <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>
         </div>
 
@@ -37,13 +37,10 @@
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
                 <div class="like-emojis" style="display: none;">
-                        <span class="like-emoji"><i>👍</i></span>
-                        <span class="emoji-counter">0</span>
-                        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
-                        <span class="emoji-counter">0</span>
-                        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
-                        <span class="emoji-counter">0</span>
-                    </div>
+                    <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>
+                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+                </div>
                 <button class="comment-button" onclick="toggleCommentBox(this)">
                     <i class="far fa-comment-dots"></i>Comment
                 </button>
