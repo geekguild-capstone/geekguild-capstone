@@ -60,12 +60,19 @@
                     </div>
 
                     <!-- Post body input section -->
-                    <textarea th:field="*{body}" id="postBodyTextarea" placeholder="What's on your mind?"
-                              required></textarea>
 
-                    <div class="post-actions">
-                        <button type="submit" class="submit-post" disabled>Submit</button>
+                    <div class="input-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Comment</span>
+                            <input th:field="*{body}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+                        <span class="input-group-text">Code</span>
+                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>
+                        <button class="submit-comment-btn" type="submit">Submit</button>
+
                     </div>
+
+
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     <input type="hidden" name="image" id="postImageURLInput"/>
                 </form>
@@ -110,29 +117,3 @@
 </body>
 
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <link rel="stylesheet" href="/css/navbar.css">-->
-<!--    <link rel="stylesheet" href="/css/home.css">-->
-
-<!--    <head th:include="partials/header :: head">-->
-
-<!--    </head>-->
-<!--<body>-->
-<!--<div th:replace="partials/navbar :: navbar"></div>-->
-
-
-<!--<div>-->
-<!--  <h3 th:text="${group.groupname}"></h3>-->
-<!--  <p th:text="${'Number of Members: ' + groupMembersCount}"></p>-->
-<!--  &lt;!&ndash; Add other group details here &ndash;&gt;-->
-<!--</div>-->
-<!--    <footer th:replace="partials/footer :: footer"></footer>-->
-
-<!--</body>-->
-<!--</html>-->

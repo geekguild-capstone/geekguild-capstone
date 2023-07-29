@@ -23,11 +23,15 @@ public class Comments {
     @Column(name = "text", nullable = false)
     private String text;
 
-    public Comments(long id, String text) {
-        this.id = id;
-        this.text = text;
+    @Column(name = "snippet")
+    private String snippet;
 
-    }
+//    public Comments(long id, String text, String snippet) {
+//        this.id = id;
+//        this.text = text;
+//        this.snippet = snippet;
+//
+//    }
 
     //    Many to One Posts
     @ManyToOne
