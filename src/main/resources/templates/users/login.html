@@ -11,6 +11,9 @@
 
 </head>
 <body>
+
+<div th:include="partials/navbar :: navbar"></div>
+
 <div th:if="${param.error}" class="message">
     Invalid Username and Password.
 </div>
@@ -33,7 +36,7 @@
 
     <div class="logo-container">
         <div class="logo">
-            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo"   width="400px" height="400px">
+            <img th:src="@{/img/gglogo.png}" alt="GeekGuild Logo"   width="600px" height="600px">
         </div>
     </div>
 </div>
