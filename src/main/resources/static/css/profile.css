@@ -28,7 +28,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #8e09e7;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative; /* Change the position to relative */
     top: -20px; /* Adjust the value to move the profile picture up */
     left: 20px; /* Adjust as needed */
@@ -45,7 +45,7 @@ body {
 
 
 .profile-name {
-    color: #ffb74d;
+    color: #e67e22;
     font-size: 25px;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -70,7 +70,7 @@ body {
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 5px 10px;
-    background-color: #ffb74d;
+    background-color: #e67e22;
     color: #333333;
     border-radius: 4px;
 }
@@ -93,13 +93,13 @@ body {
 
 
 .fas {
-    color: #8fd93f;
+    color: #e67e22;
     font-size: 32px;
 }
 
 
 .fas:hover {
-    color: #ffb74d;
+    color: #8e09e7;
 }
 
 .about-me-container {
@@ -107,8 +107,9 @@ body {
     padding: 20px;
     background-color: transparent;
     border-radius: 8px;
-    color: #ffb74d;
-    border: 1px solid #8e09e7;
+    color: #e67e22;
+    border: 3px #8e09e7;
+    box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);
 }
 
 .section-container {
@@ -116,8 +117,8 @@ body {
     padding: 20px;
     background-color: transparent;
     border-radius: 8px;
-    border-color: #8e09e7;
-    border-style: solid;
+    border: 3px #8e09e7;
+    box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);
     color: #000000;
 }
 
@@ -130,7 +131,7 @@ body {
 }
 
 .section-container p {
-    color: #ffb74d;
+    color: #e67e22;
 }
 
 .profile-header-container {
@@ -197,20 +198,20 @@ body {
     align-items: center; /* Center the icon and text vertically */
     font-size: 32px; /* Adjust the icon size as needed */
     margin: 40px; /* Add spacing between the icons */
-    color: #8fd93f; /* Make the icons white */
+    color: #ee8631; /* Make the icons white */
     text-decoration: none;
     transition: color 0.3s; /* Add smooth transition for color change on hover */
 }
 
 .icon-link:hover {
-    color: #ffb74d;/* Change the icon and link text color on hover */
+    color: #8e09e7;/* Change the icon and link text color on hover */
 }
 
 
 .skill-icon {
     font-size: 25px; /* Adjust the size as needed */
     margin-right: 20px; /* Adjust the spacing between icons */
-    color: #ffb74d; /* Change the color to #ffb74d */
+    color: #e67e22 /* Change the color to #ffb74d */
 }
 
 .profile-email {
@@ -220,7 +221,7 @@ body {
 
 
 .project-link{
-    color: #ffb74d;
+    color: #e67e22;
     text-decoration: none;
 }
 
