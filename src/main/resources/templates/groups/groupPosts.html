@@ -181,7 +181,7 @@
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
                     <pre class="code-container" style="display: none;">
-                        <code class="language-js" th:text="${post.snippet}"></code>
+                        <code class="language-html" th:text="${post.snippet}"></code>
                     </pre>
                 </div>
 
@@ -219,49 +219,51 @@
                     <input type="hidden" name="user.id" th:value="${user.id}"/>
                     <div class="comment-input-section">
 
-<!--                        <input type="text" th:field="*{text}"  placeholder="Add a comment..."/>-->
+                        <!--                        <input type="text" th:field="*{text}"  placeholder="Add a comment..."/>-->
                         <div class="input-group">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Comment</span>
-                                <input th:field="*{text}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1">
+                                <input th:field="*{text}" type="text" class="form-control"
+                                       placeholder="Whats on your mind?" aria-label="Username"
+                                       aria-describedby="basic-addon1">
                             </div>
                             <span class="input-group-text">Code</span>
                             <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>
                             <button class="submit-comment-btn" type="submit">Submit</button>
 
                         </div>
-<!--                        <textarea th:field="*{snippet}" id="comment-input"  rows="10" cols="50"></textarea>-->
+                        <!--                        <textarea th:field="*{snippet}" id="comment-input"  rows="10" cols="50"></textarea>-->
                     </div>
                 </form>
 
             </div>
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
-                <div th:each="commentsForPost, postIndex : ${groupPostComments}">
-                    <div th:each="comment : ${commentsForPost}">
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <div class="user-profile">
-                                    <img th:src="${comment.user.image}" alt="User Profile Image">
-                                    <div class="username-box">
-                                        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
-                                           class="username"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p th:text="${comment.text}" class="comment-text"></p>
-                                <!-- Add a button to show/hide the code snippet -->
-                                <div th:if="${comment.snippet}">
-                                    <button class="show-code-btn">Show Code</button>
-                                    <!-- Add a container to hold the code snippet -->
-                                    <pre class="code-container" style="display: none;">
-                        <code class="language-html" th:text="${comment.snippet}"></code>
-                    </pre>
+                <div th:each="comment : ${groupPostComments[postIndex.index]}">
+                    <!--                    <div th:each="comment : ${commentsForPost}">-->
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <div class="user-profile">
+                                <img th:src="${comment.user.image}" alt="User Profile Image">
+                                <div class="username-box">
+                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
+                                       class="username"></p>
                                 </div>
                             </div>
                         </div>
+                        <div class="comment-content">
+                            <p th:text="${comment.text}" class="comment-text"></p>
+                            <!-- Add a button to show/hide the code snippet -->
+                            <div th:if="${comment.snippet}">
+                                <button class="show-code-btn">Show Code</button>
+                                <!-- Add a container to hold the code snippet -->
+                                <pre class="code-container" style="display: none;">
+                        <code class="language-html" th:text="${comment.snippet}"></code>
+                    </pre>
+                            </div>
+                        </div>
                     </div>
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>

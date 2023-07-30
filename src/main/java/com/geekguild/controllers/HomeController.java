@@ -1,9 +1,7 @@
 package com.geekguild.controllers;
 
-import com.geekguild.models.FriendRequest;
-import com.geekguild.models.Post;
-import com.geekguild.models.Reaction;
-import com.geekguild.models.User;
+import com.geekguild.models.*;
+import com.geekguild.repositories.CommentRepository;
 import com.geekguild.repositories.FriendRequestRepository;
 import com.geekguild.repositories.PostRepository;
 import com.geekguild.repositories.UserRepository;
@@ -22,13 +20,16 @@ public class HomeController {
     private final UserRepository userDao;
     private final PostRepository postDao;
     private final FriendRequestRepository friendDao;
+    private final CommentRepository commentDao;
 
 
 
-    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao) {
+
+    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.friendDao = friendDao;
+        this.commentDao = commentDao;
     }
 
 
@@ -36,6 +37,7 @@ public class HomeController {
     public String landingPage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
+        model.addAttribute("comment", new Comments());
 
         List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
         model.addAttribute("requests", friendRequests);
@@ -63,6 +65,15 @@ public class HomeController {
         // The friend-related attributes are removed from here
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
+
+        // Fetch the comments related to the homePosts
+        List<List<Comments>> homePostComments = new ArrayList<>();
+        for (Post post : posts) {
+            List<Comments> commentsForPost = commentDao.findByPost(post);
+            homePostComments.add(commentsForPost);
+        }
+
+        model.addAttribute("homePostComments", homePostComments);
 
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
@@ -126,6 +137,29 @@ public class HomeController {
             }
         }
 
+        return "redirect:/home";
+    }
+
+    @PostMapping("/comment")
+    public String addComment(@ModelAttribute("newComment") Comments newComment) {
+        // Get the logged-in user
+        User loggedInUser = getLoggedInUser();
+
+        // Fetch the post based on the provided postId in the newComment object
+        Post post = postDao.findById(newComment.getPost().getId()).orElse(null);
+        if (post == null) {
+            // Invalid post
+            return "redirect:/home"; // Redirect to your home page
+        }
+
+        // Set the user and post for the new comment
+        newComment.setUser(loggedInUser);
+        newComment.setPost(post);
+
+        // Save the new comment to the database
+        commentDao.save(newComment);
+
+        // Redirect back to the home page
         return "redirect:/home";
     }
 

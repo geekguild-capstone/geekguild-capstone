@@ -1,3 +1,357 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Post</title>-->
+<!--    &lt;!&ndash; Add the necessary CSS libraries (e.g., Font Awesome) &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
+<!--    &lt;!&ndash;CUSTOM CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="/css/postCard.css">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div th:each="post, postIndex : ${posts}" class="post-card" id="post-${postIndex.index}">-->
+<!--    <div class="post-card">-->
+<!--        <div class="edit-icons">-->
+<!--            <i class="edit-button fas fa-pencil-alt" onclick="editPost(event)"></i>-->
+<!--            <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>-->
+<!--        </div>-->
+
+<!--        <div class="user-profile">-->
+<!--            <img th:src="${post.user.image}" alt="User Profile Image">-->
+<!--            <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>-->
+<!--        </div>-->
+
+<!--        <div class="post-content-container">-->
+<!--            <div class="post-content">-->
+<!--                <p th:text="${post.body}"></p>-->
+
+
+<!--                &lt;!&ndash; Move the .post-image div here, within .post-content &ndash;&gt;-->
+<!--                <div class="post-image" th:if="${!post.image.equals('')}">-->
+<!--                    <img width="100%" th:src="${post.image}">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="interactions">-->
+<!--                <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">-->
+<!--                    <i class="far fa-thumbs-up"></i>Like-->
+<!--                </button>-->
+<!--                <div class="like-emojis" style="display: none;">-->
+<!--                    <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>-->
+<!--                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>-->
+<!--                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>-->
+<!--                </div>-->
+<!--                <button class="comment-button" onclick="toggleCommentBox(this)">-->
+<!--                    <i class="far fa-comment-dots"></i>Comment-->
+<!--                </button>-->
+<!--                <button class="share-button">-->
+<!--                    <i class="fas fa-envelope"></i>Message-->
+<!--                </button>-->
+<!--            </div>-->
+
+<!--            <div class="comment-box">-->
+<!--                <input type="text" id="comment-input" placeholder="Add a comment...">-->
+<!--                <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>-->
+<!--            </div>-->
+<!--            <div class="comments-section" id="comments-section">-->
+<!--                &lt;!&ndash; Display comments here (if available) &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="like-emojis count-display">-->
+<!--        <span class="like-emoji"><i>👍</i></span>-->
+<!--        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>-->
+<!--        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>-->
+<!--        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<script>-->
+<!--    function toggleCommentBox(button) {-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const commentBox = postCard.querySelector('.comment-box');-->
+
+<!--        // Toggle the visibility of the comment box-->
+<!--        if (commentBox.style.display === 'none') {-->
+<!--            commentBox.style.display = 'block';-->
+<!--        } else {-->
+<!--            commentBox.style.display = 'none';-->
+<!--        }-->
+<!--    }-->
+
+<!--    function submitComment(event) {-->
+<!--        const postCard = event.target.closest('.post-card');-->
+<!--        const commentsSection = postCard.querySelector('.comments-section');-->
+<!--        const commentInput = postCard.querySelector('#comment-input');-->
+
+<!--        const commentText = commentInput.value.trim();-->
+<!--        if (commentText !== '') {-->
+<!--            // Create a new comment element and append it to the comments section-->
+<!--            const newComment = document.createElement('div');-->
+<!--            newComment.classList.add('comment');-->
+
+<!--            // User profile image (replace with actual image source)-->
+<!--            const userProfileImg = document.createElement('img');-->
+<!--            userProfileImg.src = 'https://via.placeholder.com/24';-->
+<!--            userProfileImg.alt = 'User Profile Image';-->
+
+<!--            // User profile username (replace with actual username)-->
+<!--            const userProfileUsername = document.createElement('div');-->
+<!--            userProfileUsername.classList.add('username');-->
+<!--            userProfileUsername.textContent = 'John Doe';-->
+
+<!--            // Comment content-->
+<!--            const commentContent = document.createElement('p');-->
+<!--            commentContent.textContent = commentText;-->
+
+<!--            // Horizontal line to separate comments-->
+<!--            const hr = document.createElement('hr');-->
+
+<!--            // Append the elements to the comment container-->
+<!--            newComment.appendChild(userProfileImg);-->
+<!--            newComment.appendChild(userProfileUsername);-->
+<!--            newComment.appendChild(commentContent);-->
+<!--            newComment.appendChild(hr);-->
+
+<!--            commentsSection.appendChild(newComment);-->
+
+<!--            // Clear the comment input field-->
+<!--            commentInput.value = '';-->
+
+<!--            // Auto-close the comment box after submission-->
+<!--            const commentBox = postCard.querySelector('.comment-box');-->
+<!--            commentBox.style.display = 'none';-->
+
+<!--            // Initialize the emoji counters for the post-->
+<!--            emojiCounters[postCard.id] = {};-->
+<!--        }-->
+<!--    }-->
+
+
+<!--    // Function to handle showing the emojis container-->
+<!--    function toggleLikeEmojis(button) {-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const emojisContainer = postCard.querySelector('.like-emojis');-->
+<!--        emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';-->
+<!--    }-->
+
+<!--    // Update the event listeners to handle click on the "like-button"-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        const likeButtons = document.querySelectorAll('.like-button');-->
+<!--        likeButtons.forEach(button => {-->
+<!--            button.addEventListener('click', function(event) {-->
+<!--                event.stopPropagation(); // Prevent the click event from bubbling to the document-->
+<!--                toggleLikeEmojis(this);-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+
+<!--    // Function to handle emoji click (replace this with your desired action)-->
+<!--    function handleEmojiClick(emoji) {-->
+<!--        console.log('Emoji clicked:', emoji);-->
+<!--        // Add your like or other action logic here-->
+<!--    }-->
+
+<!--    // Update the event listeners to handle mouseleave on the emojis container-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        const emojisContainers = document.querySelectorAll('.like-emojis');-->
+<!--        emojisContainers.forEach(container => {-->
+<!--            container.addEventListener('mouseleave', function() {-->
+<!--                this.style.display = 'none';-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+
+<!--    // Store the counters for each post in an object-->
+<!--    const emojiCounters = {};-->
+
+<!--    function handleEmojiClick(emoji) {-->
+<!--        const postCard = event.target.closest('.post-card');-->
+<!--        const likeEmojis = postCard.querySelector('.like-emojis');-->
+
+<!--        // Increment the counter for the clicked emoji-->
+<!--        emojiCounters[postCard.id] = emojiCounters[postCard.id] || {};-->
+<!--        emojiCounters[postCard.id][emoji] = emojiCounters[postCard.id][emoji] + 1 || 1;-->
+
+<!--        //     // Update the emoji innerHTML to include the counter-->
+<!--        //     likeEmojis.innerHTML = `-->
+<!--        //     <span class="like-emoji"><i>${emoji}</i></span>-->
+<!--        //     <span class="emoji-counter">${emojiCounters[postCard.id][emoji]}</span>-->
+<!--        //     <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>-->
+<!--        //     <span class="emoji-counter">${emojiCounters[postCard.id]['👍'] || 0}</span>-->
+<!--        //     <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>-->
+<!--        //     <span class="emoji-counter">${emojiCounters[postCard.id]['❤️'] || 0}</span>-->
+<!--        //     <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>-->
+<!--        //     <span class="emoji-counter">${emojiCounters[postCard.id]['😂'] || 0}</span>-->
+<!--        // `;-->
+<!--        //     // Update the emoji count display element with the total count of each emoji-->
+<!--        //     emojiCountDisplay.innerHTML = `-->
+<!--        //     👍 ${emojiCounters[postCard.id]['👍'] || 0}-->
+<!--        //     ❤️ ${emojiCounters[postCard.id]['❤️'] || 0}-->
+<!--        //     😂 ${emojiCounters[postCard.id]['😂'] || 0}-->
+<!--        // `;-->
+
+<!--    }-->
+
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Post</title>-->
+<!--    &lt;!&ndash; Add the necessary CSS libraries (e.g., Font Awesome) &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
+<!--    &lt;!&ndash;CUSTOM CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="/css/postCard.css">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div th:each="post, postIndex : ${groupPosts}">-->
+<!--    <div class="post-card">-->
+
+<!--        <div class="edit-icons">-->
+<!--            <i class="far fa-edit edit-icon" onclick="editPost(event)"></i>-->
+<!--            <i class="far fa-times-circle delete-icon" onclick="deletePost(event)"></i>-->
+<!--        </div>-->
+
+
+<!--        <div class="user-profile">-->
+<!--            <img th:src="${post.user.image}" alt="User Profile Image">-->
+<!--            <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>-->
+<!--        </div>-->
+<!--        <div class="post-content-container">-->
+<!--            <div class="post-content">-->
+<!--                <p th:text="${post.body}"></p>-->
+
+<!--                &lt;!&ndash; Move the .post-image div here, within .post-content &ndash;&gt;-->
+<!--                <div class="post-image">-->
+<!--                    <img width="100%" th:src="${post.image}">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="interactions">-->
+<!--                <button onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">-->
+<!--                    <i class="far fa-thumbs-up"></i>Like-->
+<!--                </button>-->
+<!--                <div class="like-emojis" style="display: none;">-->
+<!--                    <span class="like-emoji" onclick="likeAction('👍')">👍</span>-->
+<!--                    <span class="like-emoji" onclick="likeAction('❤️')">❤️</span>-->
+<!--                    <span class="like-emoji" onclick="likeAction('😂')">😂</span>-->
+<!--                </div>-->
+
+<!--                <button class="comment-button" onclick="toggleCommentBox(this)">-->
+<!--                    <i class="far fa-comment-dots"></i>Comment-->
+<!--                </button>-->
+<!--                <button class="share-button">-->
+<!--                    <i class="fas fa-envelope"></i>Message &lt;!&ndash; Updated text and icon &ndash;&gt;-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="comment-box">-->
+<!--            &lt;!&ndash; Use a <form> element to wrap the comment input and button &ndash;&gt;-->
+<!--            <form th:action="@{/group/{groupId}/comment(groupId=${group.id})}" th:object="${comment}" method="post">-->
+<!--                <input type="hidden" name="post.id" th:value="${post.id}" />-->
+<!--                <input type="hidden" name="user.id" th:value="${user.id}" />-->
+<!--                <input type="text" th:field="*{text}" id="comment-input" placeholder="Add a comment..." />-->
+<!--                <button class="submit-comment-btn" type="submit">Submit</button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--        <div class="comments-section" id="comments-section">-->
+<!--            &lt;!&ndash; Display comments here (if available) &ndash;&gt;-->
+<!--            <ul>-->
+<!--                <li th:each="comment : ${groupPostComments[postIndex.index]}">-->
+<!--                    <p th:text="${comment.text}"></p>-->
+<!--                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"></p>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<script>-->
+<!--    function toggleCommentBox(button) {-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const commentBox = postCard.querySelector('.comment-box');-->
+
+<!--        // Toggle the visibility of the comment box-->
+<!--        if (commentBox.style.display === 'none') {-->
+<!--            commentBox.style.display = 'block';-->
+<!--        } else {-->
+<!--            commentBox.style.display = 'none';-->
+<!--        }-->
+<!--    }-->
+
+<!--    function submitComment(event) {-->
+<!--        const button = event.target;-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const commentInput = postCard.querySelector('#comment-input');-->
+<!--        const commentsSection = postCard.querySelector('.comments-section');-->
+
+<!--        const commentText = commentInput.value.trim();-->
+<!--        if (commentText !== '') {-->
+<!--            // Create a new comment element and append it to the comments section-->
+<!--            const newComment = document.createElement('div');-->
+<!--            newComment.classList.add('comment');-->
+
+<!--            // User profile image (replace with actual image source)-->
+<!--            const userProfileImg = document.createElement('img');-->
+<!--            userProfileImg.src = 'https://via.placeholder.com/24';-->
+<!--            userProfileImg.alt = 'User Profile Image';-->
+
+<!--            // User profile username (replace with actual username)-->
+<!--            const userProfileUsername = document.createElement('div');-->
+<!--            userProfileUsername.classList.add('username');-->
+<!--            userProfileUsername.textContent = 'John Doe';-->
+
+<!--            // Comment content-->
+<!--            const commentContent = document.createElement('p');-->
+<!--            commentContent.textContent = commentText;-->
+
+<!--            // Horizontal line to separate comments-->
+<!--            const hr = document.createElement('hr');-->
+
+<!--            // Append the elements to the comment container-->
+<!--            newComment.appendChild(userProfileImg);-->
+<!--            newComment.appendChild(userProfileUsername);-->
+<!--            newComment.appendChild(commentContent);-->
+<!--            newComment.appendChild(hr);-->
+
+<!--            commentsSection.appendChild(newComment);-->
+
+<!--            // Clear the comment input field-->
+<!--            commentInput.value = '';-->
+
+<!--            // Auto-close the comment box after submission-->
+<!--            const commentBox = postCard.querySelector('.comment-box');-->
+<!--            commentBox.style.display = 'none';-->
+<!--        }-->
+
+<!--    }-->
+
+<!--    function showLikeEmojis(button) {-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const likeEmojis = postCard.querySelector('.like-emojis');-->
+<!--        likeEmojis.style.display = 'block';-->
+<!--    }-->
+
+<!--    function hideLikeEmojis(button) {-->
+<!--        const postCard = button.closest('.post-card');-->
+<!--        const likeEmojis = postCard.querySelector('.like-emojis');-->
+<!--        likeEmojis.style.display = 'none';-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +367,7 @@
 <div th:each="post, postIndex : ${posts}" class="post-card" id="post-${postIndex.index}">
     <div class="post-card">
         <div class="edit-icons">
-            <i class="edit-button fas fa-pencil-alt" onclick="editPost(event)"></i>
+            <i class="edit-button  fas fa-pencil-alt" onclick="editPost(event)"></i>
             <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>
         </div>
 
@@ -25,6 +379,13 @@
         <div class="post-content-container">
             <div class="post-content">
                 <p th:text="${post.body}"></p>
+                <div th:if="${post.snippet}">
+                    <button class="show-code-btn">Show Code</button>
+                    <!-- Add a container to hold the code snippet -->
+                    <pre class="code-container" style="display: none;">
+                        <code class="language-html" th:text="${post.snippet}"></code>
+                    </pre>
+                </div>
 
 
                 <!-- Move the .post-image div here, within .post-content -->
@@ -37,9 +398,12 @@
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
                 <div class="like-emojis" style="display: none;">
-                    <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>
+                    <span class="like-emoji"><i>👍</i></span>
+                    <span class="emoji-counter">0</span>
                     <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+                    <span class="emoji-counter">0</span>
                     <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+                    <span class="emoji-counter">0</span>
                 </div>
                 <button class="comment-button" onclick="toggleCommentBox(this)">
                     <i class="far fa-comment-dots"></i>Comment
@@ -50,11 +414,55 @@
             </div>
 
             <div class="comment-box">
-                <input type="text" id="comment-input" placeholder="Add a comment...">
-                <button class="submit-comment-btn" onclick="submitComment(event)">Submit</button>
+                <!-- Use a <form> element to wrap the comment input and button -->
+                <form th:action="@{/comment}" th:object="${comment}"
+                      method="post">
+                    <input type="hidden" name="post.id" th:value="${post.id}"/>
+                    <input type="hidden" name="user.id" th:value="${user.id}"/>
+                    <div class="comment-input-section">
+                        <div class="input-group">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Comment</span>
+                                <input th:field="*{text}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <span class="input-group-text">Code</span>
+                            <textarea th:field="*{snippet}" class="form-control language-html" aria-label="With textarea"></textarea>
+                            <button class="submit-comment-btn" type="submit">Submit</button>
+
+                        </div>
+                        <!--                        <textarea th:field="*{snippet}" id="comment-input"  rows="10" cols="50"></textarea>-->
+                    </div>
+                </form>
+
             </div>
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
+                <div th:each="comment : ${homePostComments[postIndex.index]}">
+<!--                    <div th:each="comment : ${commentsForPost}">-->
+                        <div class="comment-card">
+                            <div class="comment-header">
+                                <div class="user-profile">
+                                    <img th:src="${comment.user.image}" alt="User Profile Image">
+                                    <div class="username-box">
+                                        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
+                                           class="username"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p th:text="${comment.text}" class="comment-text"></p>
+                                <!-- Add a button to show/hide the code snippet -->
+                                <div th:if="${comment.snippet}">
+                                    <button class="show-code-btn">Show Code</button>
+                                    <!-- Add a container to hold the code snippet -->
+                                    <pre class="code-container" style="display: none;">
+                        <code class="language-html" th:text="${comment.snippet}"></code>
+                    </pre>
+                                </div>
+                            </div>
+                        </div>
+<!--                    </div>-->
+                </div>
             </div>
         </div>
     </div>
@@ -69,10 +477,14 @@
 </div>
 
 
+<!-- Load the toggleSnippet.js file -->
+<script th:src="@{/js/toggleSnippet.js}" type="text/javascript"></script>
+
+
 <script>
     function toggleCommentBox(button) {
         const postCard = button.closest('.post-card');
-        const commentBox = postCard.querySelector('.comment-box');
+        const commentBox = postCard.querySelector('.comments-section');
 
         // Toggle the visibility of the comment box
         if (commentBox.style.display === 'none') {
@@ -82,55 +494,6 @@
         }
     }
 
-    function submitComment(event) {
-        const postCard = event.target.closest('.post-card');
-        const commentsSection = postCard.querySelector('.comments-section');
-        const commentInput = postCard.querySelector('#comment-input');
-
-        const commentText = commentInput.value.trim();
-        if (commentText !== '') {
-            // Create a new comment element and append it to the comments section
-            const newComment = document.createElement('div');
-            newComment.classList.add('comment');
-
-            // User profile image (replace with actual image source)
-            const userProfileImg = document.createElement('img');
-            userProfileImg.src = 'https://via.placeholder.com/24';
-            userProfileImg.alt = 'User Profile Image';
-
-            // User profile username (replace with actual username)
-            const userProfileUsername = document.createElement('div');
-            userProfileUsername.classList.add('username');
-            userProfileUsername.textContent = 'John Doe';
-
-            // Comment content
-            const commentContent = document.createElement('p');
-            commentContent.textContent = commentText;
-
-            // Horizontal line to separate comments
-            const hr = document.createElement('hr');
-
-            // Append the elements to the comment container
-            newComment.appendChild(userProfileImg);
-            newComment.appendChild(userProfileUsername);
-            newComment.appendChild(commentContent);
-            newComment.appendChild(hr);
-
-            commentsSection.appendChild(newComment);
-
-            // Clear the comment input field
-            commentInput.value = '';
-
-            // Auto-close the comment box after submission
-            const commentBox = postCard.querySelector('.comment-box');
-            commentBox.style.display = 'none';
-
-            // Initialize the emoji counters for the post
-            emojiCounters[postCard.id] = {};
-        }
-    }
-
-
     // Function to handle showing the emojis container
     function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
@@ -139,10 +502,10 @@
     }
 
     // Update the event listeners to handle click on the "like-button"
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const likeButtons = document.querySelectorAll('.like-button');
         likeButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', function (event) {
                 event.stopPropagation(); // Prevent the click event from bubbling to the document
                 toggleLikeEmojis(this);
             });
@@ -150,53 +513,34 @@
     });
 
     // Function to handle emoji click (replace this with your desired action)
-    function handleEmojiClick(emoji) {
-        console.log('Emoji clicked:', emoji);
-        // Add your like or other action logic here
-    }
+    // function handleEmojiClick(emoji) {
+    //     console.log('Emoji clicked:', emoji);
+    //     // Add your like or other action logic here
+    // }
 
     // Update the event listeners to handle mouseleave on the emojis container
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const emojisContainers = document.querySelectorAll('.like-emojis');
         emojisContainers.forEach(container => {
-            container.addEventListener('mouseleave', function() {
+            container.addEventListener('mouseleave', function () {
                 this.style.display = 'none';
             });
         });
     });
 
-    // Store the counters for each post in an object
-    const emojiCounters = {};
-
-    function handleEmojiClick(emoji) {
-        const postCard = event.target.closest('.post-card');
-        const likeEmojis = postCard.querySelector('.like-emojis');
-
-        // Increment the counter for the clicked emoji
-        emojiCounters[postCard.id] = emojiCounters[postCard.id] || {};
-        emojiCounters[postCard.id][emoji] = emojiCounters[postCard.id][emoji] + 1 || 1;
-
-        //     // Update the emoji innerHTML to include the counter
-        //     likeEmojis.innerHTML = `
-        //     <span class="like-emoji"><i>${emoji}</i></span>
-        //     <span class="emoji-counter">${emojiCounters[postCard.id][emoji]}</span>
-        //     <span class="like-emoji" onclick="handleEmojiClick('👍')">👍</span>
-        //     <span class="emoji-counter">${emojiCounters[postCard.id]['👍'] || 0}</span>
-        //     <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
-        //     <span class="emoji-counter">${emojiCounters[postCard.id]['❤️'] || 0}</span>
-        //     <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
-        //     <span class="emoji-counter">${emojiCounters[postCard.id]['😂'] || 0}</span>
-        // `;
-        //     // Update the emoji count display element with the total count of each emoji
-        //     emojiCountDisplay.innerHTML = `
-        //     👍 ${emojiCounters[postCard.id]['👍'] || 0}
-        //     ❤️ ${emojiCounters[postCard.id]['❤️'] || 0}
-        //     😂 ${emojiCounters[postCard.id]['😂'] || 0}
-        // `;
-
-    }
 
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Prism.highlightAll();
+    });
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-html.min.js"></script>
 
 </body>
 </html>
