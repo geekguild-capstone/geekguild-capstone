@@ -40,7 +40,7 @@ public class Post {
     @JoinColumn (name = "group_id")
     private Group group;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comments> comments;
 
     // Add the many-to-many relationship with reactions

@@ -1,25 +1,32 @@
 package com.geekguild.controllers;
 
-import com.geekguild.models.Comments;
-import com.geekguild.models.Group;
-import com.geekguild.models.Post;
-import com.geekguild.models.User;
+import com.geekguild.models.*;
+import com.geekguild.repositories.CommentRepository;
 import com.geekguild.repositories.GroupRepository;
 import com.geekguild.repositories.PostRepository;
+import com.geekguild.repositories.ReactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostRepository postDao;
     private final GroupRepository groupDao;
+    private final CommentRepository commentDao;
+    private final ReactionRepository reactionDao;
 
-    public PostController(PostRepository postDao, GroupRepository groupDao) {
+    public PostController(PostRepository postDao, GroupRepository groupDao, CommentRepository commentDao, ReactionRepository reactionDao) {
         this.postDao = postDao;
         this.groupDao = groupDao;
+        this.commentDao = commentDao;
+        this.reactionDao = reactionDao;
     }
 
     //Creating a new post
@@ -37,13 +44,52 @@ public class PostController {
         return "redirect:/home";
     }
 
-    //Edit a post
 
 
 
-    //Delete a Post
+    // Delete a Post
+    @Transactional
+    @PostMapping("/post/delete/{postId}")
+    public String deletePost(@PathVariable long postId) {
+        // Get the currently logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
 
 
+        // Find the post by ID
+        Post post = postDao.findById(postId).orElse(null);
+
+        if (post == null) {
+            // Handle post not found
+            return "redirect:/error";
+        }
+
+        // Delete associated comments first
+        List<Comments> comments = post.getComments();
+        post.setComments(Collections.emptyList());
+        postDao.save(post); // Save the post without comments
+
+        for (Comments comment : comments) {
+            // Delete each comment
+            // Assuming you have a commentDao/repository to interact with comments
+            commentDao.deleteById(comment.getId());
+        }
+
+        // Delete associated reactions
+        List<Reaction> reactions = post.getReactions();
+        for (Reaction reaction : reactions) {
+            reactionDao.delete(reaction);
+        }
+
+        // Check if the logged-in user is the owner of the post
+        if (post.getUser().getId() != loggedInUser.getId()) {
+            // User is not the owner, return an error or handle it as you prefer
+            return "redirect:/error"; // For example, redirect to an error page
+        }
+
+        // Use the custom query method to delete the post by ID
+        postDao.deletePostById(postId);
+        return "redirect:/home";
+    }
 
 
     //Creating a post within a group "This may be able to be combined with normal create post"
@@ -67,6 +113,7 @@ public class PostController {
 
     }
 
+    //Edit a post
     @PostMapping("/post/{id}/edit")
     public String editPost(@PathVariable long postId, Model model) {
         User loggedInUser = getCurrentLoggedInUser();
