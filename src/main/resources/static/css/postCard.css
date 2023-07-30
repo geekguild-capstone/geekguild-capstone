@@ -196,6 +196,10 @@ body {
     margin-right: 8px;
 }
 
+.username-box p{
+    color: #000000 !important;
+}
+
 .comment .user-profile .username {
     font-size: 12px;
 }
