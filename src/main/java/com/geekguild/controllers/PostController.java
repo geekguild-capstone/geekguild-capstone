@@ -28,6 +28,11 @@ public class PostController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(loggedInUser);
         post.setImage(image);
+
+        // Check if the snippet field is empty (empty string) and set it to null
+        if (post.getSnippet() != null && post.getSnippet().trim().isEmpty()) {
+            post.setSnippet(null);
+        }
         postDao.save(post);
         return "redirect:/home";
     }
