@@ -18,8 +18,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+//    @Autowired
+//    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
 
     private UserDetailsLoader usersLoader;
@@ -60,11 +60,10 @@ public class SecurityConfiguration {
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
                 /* Login configuration */
-//                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
+                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
                 /* Logout configuration */
                 .logout((logout) -> logout.logoutSuccessUrl("/"))
-                .httpBasic()
-                .authenticationEntryPoint(authenticationEntryPoint);
+                .httpBasic(withDefaults());
         return http.build();
     }
 
