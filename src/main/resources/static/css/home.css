@@ -24,7 +24,7 @@ h1 {
 
 /* Styling for the left, middle, and right sections */
 .left-section, .middle-section, .top-right-section, .bottom-right-section {
-    padding: 20px;
+    padding: 10px;
     border-radius: 20px;
     box-shadow: inset -2px -2px 12px rgba(0, 0, 0, 1);
 }
@@ -181,7 +181,12 @@ h1 {
     background-color: #444444;
     border-radius: 20px;
     overflow-y: auto;
+}
 
+.bottom-right-section h2 {
+    font-size: 1rem;
+    color: #ee8631;
+    text-align: center;
 }
 
 .bottom-right-section::-webkit-scrollbar {
