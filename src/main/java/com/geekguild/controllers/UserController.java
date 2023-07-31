@@ -32,6 +32,9 @@ public class UserController {
     @GetMapping("/register")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
+
+        model.addAttribute("title", "GeekGuild - Registration");
+
         return "users/register";
     }
 

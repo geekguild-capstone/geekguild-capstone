@@ -43,6 +43,8 @@ public class GroupController {
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
 
+        model.addAttribute("title", "GeekGuild - Groups");
+
         // Get groups that the loggedInUser is not a part of using the custom query
         List<Group> loggedInUserNotPartOfGroups = groupDao.findGroupsNotContainingMember(loggedInUser);
         model.addAttribute("suggestedGroups", loggedInUserNotPartOfGroups);
@@ -162,6 +164,7 @@ public class GroupController {
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
 
+        model.addAttribute("title", "GeekGuild - your group");
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
