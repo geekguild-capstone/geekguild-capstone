@@ -78,6 +78,8 @@ public class ProfileController {
         List<Language> userLanguages = user.getLanguages();
         model.addAttribute("userLanguages", userLanguages);
 
+        //add dynamic page title upon load
+        model.addAttribute("title", "GeekGuild - your profile");
 
         return "users/profile";
     }
