@@ -6,6 +6,9 @@ import com.geekguild.repositories.GroupRepository;
 import com.geekguild.repositories.PostRepository;
 import com.geekguild.repositories.ReactionRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +46,6 @@ public class PostController {
         postDao.save(post);
         return "redirect:/home";
     }
-
-
 
 
     // Delete a Post
@@ -113,26 +114,90 @@ public class PostController {
 
     }
 
-    //Edit a post
-    @PostMapping("/post/{id}/edit")
-    public String editPost(@PathVariable long postId, Model model) {
+//    //Edit a post
+//    @PostMapping("/post/{id}/edit")
+//    public String editPost(@PathVariable long postId, Model model) {
+//        User loggedInUser = getCurrentLoggedInUser();
+//        Post post = postDao.getReferenceById(postId);
+//        model.addAttribute("post", post);
+//
+//
+//        if (loggedInUser == null) {
+//            // Handle invalid group ID
+//            return "redirect:/error";
+//        }
+//
+//        if (post.getGroup() == null) {
+//            return "redirect:/home";
+//        } else {
+//            return "redirect:/group/{groupId}";
+//        }
+//
+//    }
+
+    // Update a post
+//    @PostMapping("/post/{id}/update")
+//    public ResponseEntity<String> updatePost(@PathVariable long id, @ModelAttribute PostUpdateRequest request) {
+//        Post post = postDao.findById(id).orElse(null);
+//        if (post == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        // Check if the logged-in user is the owner of the post or has permission to edit it
+//        User loggedInUser = getCurrentLoggedInUser();
+//        if (loggedInUser == null || !post.getUser().equals(loggedInUser)) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have permission to edit this post.");
+//        }
+//
+//        // Update the post with the new data
+//        post.setBody(request.getBody());
+//        post.setSnippet(request.getSnippet());
+//        postDao.save(post);
+//
+//        return ResponseEntity.ok("Post updated successfully.");
+//    }
+
+    // Update a post
+    @PostMapping("/post/{postId}/update")
+    @ResponseBody
+    public ResponseEntity<String> updatePost(@PathVariable long postId, @RequestBody PostUpdateRequest request) {
+        Post post = postDao.findById(postId).orElse(null);
+        if (post == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Check if the logged-in user is the owner of the post or has permission to edit it
         User loggedInUser = getCurrentLoggedInUser();
-        Post post = postDao.getReferenceById(postId);
-        model.addAttribute("post", post);
-
-
-        if (loggedInUser == null) {
-            // Handle invalid group ID
-            return "redirect:/error";
+        if (loggedInUser.getId() != post.getUser().getId()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have permission to edit this post.");
         }
 
-        if (post.getGroup() == null) {
-            return "redirect:/home";
-        } else {
-            return "redirect:/group/{groupId}";
-        }
+        // Update the post with the new data
+        post.setBody(request.getBody());
+        post.setSnippet(request.getSnippet());
+        postDao.save(post);
 
+        return ResponseEntity.ok("Post updated successfully.");
     }
+
+
+    @GetMapping("/post/{postId}")
+    @ResponseBody
+    public ResponseEntity<Post> getPostById(@PathVariable long postId) {
+        Post post = postDao.findById(postId).orElse(null);
+        if (post == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Check if the logged-in user is the owner of the post or has permission to edit it
+        User loggedInUser = getCurrentLoggedInUser();
+        if (post.getUser().getId() == loggedInUser.getId()) {
+            return ResponseEntity.ok(post);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
 
 
     //COMMENTS
@@ -160,6 +225,43 @@ public class PostController {
 
 
     //Delete comment to a specific post
+    @Transactional
+    @PostMapping("/comment/delete/{commentId}")
+    public String deleteComment(@PathVariable long commentId) {
+        // Get the currently logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
+
+
+        // Find the comment by ID
+        Comments comment = commentDao.getReferenceById(commentId);
+
+//        if (comment == null) {
+//            // Handle post not found
+//            return "redirect:/error";
+//        }
+
+
+        // Delete associated reactions
+//        List<Reaction> reactions = post.getReactions();
+//        for (Reaction reaction : reactions) {
+//            reactionDao.delete(reaction);
+//        }
+
+        // Check if the logged-in user is the owner of the post
+        if (comment.getUser().getId() != loggedInUser.getId()) {
+            // User is not the owner, return an error or handle it as you prefer
+            return "redirect:/error"; // For example, redirect to an error page
+        }
+
+        // Use the custom query method to delete the post by ID
+        commentDao.deleteCommentById(commentId);
+        return "redirect:/home";
+    }
+
+
+//    private User getCurrentLoggedInUser() {
+//        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    }
 
     private User getCurrentLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

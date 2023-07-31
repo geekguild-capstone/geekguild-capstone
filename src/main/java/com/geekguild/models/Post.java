@@ -1,5 +1,6 @@
 package com.geekguild.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geekguild.repositories.PostRepository;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,7 @@ public class Post {
 //    USER RELATIONSHIPS
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne

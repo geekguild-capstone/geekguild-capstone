@@ -74,6 +74,7 @@ public class HomeController {
         }
 
         model.addAttribute("homePostComments", homePostComments);
+        model.addAttribute("request", new PostUpdateRequest());
 
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());

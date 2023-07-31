@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="_csrf" th:content="${_csrf.token}" />
+
     <title>Post</title>
     <!-- Add the necessary CSS libraries (e.g., Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -11,13 +11,60 @@
 </head>
 
 <body>
-<div th:each="post, postIndex : ${posts}" class="post-card" id="post-${postIndex.index}">
+<!-- Rest of your HTML content -->
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:object="${request}" method="post" id="editForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editBody" class="form-label">Body</label>
+                            <input th:field="*{body}" type="text" class="form-control" id="editBody" name="body"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editSnippet" class="form-label">Snippet</label>
+                            <textarea th:field="*{snippet}" class="form-control" id="editSnippet" name="snippet"
+                                      rows="5" required></textarea>
+                        </div>
+                        <input type="hidden" id="postId" name="postId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitEdit">Save Changes</button>
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+        </form>
+    </div>
+</div>
+
+<!-- Rest of your HTML content -->
+
+<div th:each="post, postIndex : ${posts}" class="post-card" th:data-post-id="${post.id}" id="post-${postIndex.index}">
     <div class="post-card">
         <!-- Add this check to conditionally display the trash icon -->
-        <div class="edit-icons" th:if="${user.id == post.user.id}">
-            <form method="post" th:action="@{/post/delete/{postId}(postId=${post.id})}" >
-                <div class="edit-icons">
-                    <button type="submit" class="edit-button"><i class="fas fa-pencil-alt"></i></button>
+        <div class="post-icons" th:if="${user.id == post.user.id}">
+            <div class="edit-icon">
+                <button data-bs-toggle="modal" data-bs-target="#editModal" th:attr="data-post-id=${post.id}" onclick="openEditModal(this.getAttribute('data-post-id'))">
+<!--                        th:attr="data-postid=${post.id}, data-body=${post.body}, data-snippet=${post.snippet}"-->
+<!--                        onclick="openEditModal(this.getAttribute('data-postid'), this.getAttribute('data-body'), this.getAttribute('data-snippet'))"-->
+<!--                        class="connect-btn"-->
+
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <!--                    <button onclick="" type="button" class="edit-button"><i class="fas fa-pencil-alt"></i></button>-->
+            </div>
+
+            <form method="post" th:action="@{/post/delete/{postId}(postId=${post.id})}">
+                <div class="delete-icon">
                     <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
                 </div>
             </form>
@@ -30,7 +77,7 @@
 
         <div class="post-content-container">
             <div class="post-content">
-                <p th:text="${post.body}"></p>
+                <p class="post-body" th:text="${post.body}"></p>
                 <div th:if="${post.snippet}">
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
@@ -75,10 +122,13 @@
                         <div class="input-group">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Comment</span>
-                                <input th:field="*{text}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1">
+                                <input th:field="*{text}" type="text" class="form-control"
+                                       placeholder="Whats on your mind?" aria-label="Username"
+                                       aria-describedby="basic-addon1">
                             </div>
                             <span class="input-group-text">Code</span>
-                            <textarea th:field="*{snippet}" class="form-control language-html" aria-label="With textarea"></textarea>
+                            <textarea th:field="*{snippet}" class="form-control language-html"
+                                      aria-label="With textarea"></textarea>
                             <button class="submit-comment-btn" type="submit">Submit</button>
 
                         </div>
@@ -90,36 +140,48 @@
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
                 <div th:each="comment : ${homePostComments[postIndex.index]}">
-<!--                    <div th:each="comment : ${commentsForPost}">-->
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <!-- Edit and Delete icons for each comment -->
 
-                                <div class="user-profile">
-                                    <img th:src="${comment.user.image}" alt="User Profile Image">
-                                    <div class="username-box">
-                                        <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
-                                           class="username"></p>
-                                    </div>
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <div class="user-profile">
+                                <img th:src="${comment.user.image}" alt="User Profile Image">
+                                <div class="username-box">
+                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
+                                       class="username"></p>
+
                                 </div>
                                     <div class="edit-delete-icons">
                                         <button type="submit" class="edit2-button"><i class="fas fa-pencil-alt"></i></button>
                                         <button type="submit" class="delete2-button"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
-                            <div class="comment-content">
-                                <p th:text="${comment.text}" class="comment-text"></p>
-                                <!-- Add a button to show/hide the code snippet -->
-                                <div th:if="${comment.snippet}">
-                                    <button class="show-code-btn">Show Code</button>
-                                    <!-- Add a container to hold the code snippet -->
-                                    <pre class="code-container" style="display: none;">
-                        <code class="language-html" th:text="${comment.snippet}"></code>
-                    </pre>
+                            <div class="comment-icons" th:if="${user.id == comment.user.id}">
+
+                                <div class="comment-icons">
+                                    <form method="post"
+                                          th:action="@{/comment/delete/{commentId}(commentId=${comment.id})}">
+                                        <button type="submit" class="comment-edit-button"><i
+                                                class="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-<!--                    </div>-->
+
+                        <div class="comment-content">
+                            <p th:text="${comment.text}" class="comment-text"></p>
+                            <!-- Add a button to show/hide the code snippet -->
+                            <div th:if="${comment.snippet}">
+                                <button class="show-code-btn">Show Code</button>
+                                <!-- Add a container to hold the code snippet -->
+                                <pre class="code-container" style="display: none;">
+                        <code class="language-html" th:text="${comment.snippet}"></code>
+                    </pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -200,5 +262,203 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-html.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Function to open the edit modal and pre-fill the form
+    function openEditModal(postId) {
+        fetch(`/post/${postId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Set the values of the form fields in the modal with the fetched data
+                $('#editBody').val(data.body);
+                $('#editSnippet').val(data.snippet);
+                $('#postId').val(postId);
+
+                // Show the modal
+                $('#editModal').modal('show');
+            })
+            .catch(error => {
+                console.error('Error fetching post data:', error);
+            });
+    }
+    // Function to handle form submission asynchronously
+    function submitEditForm() {
+
+        event.preventDefault(); // Prevent default form submission behavior
+
+
+
+        const postId = $('#postId').val();
+        const body = $('#editBody').val();
+        const snippet = $('#editSnippet').val();
+        console.log(postId)
+        console.log(body)
+        console.log(snippet)
+
+        // Get the CSRF token from the hidden input field
+        const csrfToken = $('[name="_csrf"]').val();
+
+        // Make an AJAX request to submit the form data
+        $.ajax({
+            type: 'POST',
+            url: `/post/${postId}/update`,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                body: body,
+                snippet: snippet
+            }),
+            success: function (response) {
+                // Handle the response if needed (e.g., show a success message)
+                console.log('Post updated successfully');
+                // Update the post content on the page without reloading
+                const postCard = $(`[data-post-id="${postId}"]`);
+                postCard.find('.post-body').text(body);
+                postCard.find('.code-container code').text(snippet);
+
+                // Close the modal after successful update
+                $('#editModal').modal('hide');
+            },
+            error: function (error) {
+                // Handle errors if needed
+                console.error('Error updating post:', error);
+            }
+        });
+    }
+
+
+    // Attach click event to the "Save Changes" button in the modal
+    $(document).on('click', '#submitEdit', function () {
+        submitEditForm();
+    });
+
+
+</script>
+
+<!--<script>-->
+
+
+<!--    // Function to open the edit modal and pre-fill the form-->
+<!--    function openEditModal(postId, body, snippet) {-->
+<!--        console.log(postId)-->
+<!--        console.log(body)-->
+<!--        console.log(snippet)-->
+<!--        $('#editBody').val(body);-->
+<!--        $('#editSnippet').val(snippet);-->
+<!--        $('#postId').val(postId);-->
+<!--        $('#editModal').modal('show');-->
+<!--    }-->
+
+<!--    // Function to handle form submission asynchronously-->
+<!--    function submitEditForm() {-->
+
+<!--        event.preventDefault(); // Prevent default form submission behavior-->
+
+
+<!--        const postId = $('#postId').val();-->
+<!--        const body = $('#editBody').val();-->
+<!--        const snippet = $('#editSnippet').val();-->
+<!--        console.log(postId)-->
+<!--        console.log(body)-->
+<!--        console.log(snippet)-->
+
+<!--        // Make an AJAX request to submit the form data-->
+<!--        $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url: `/post/${postId}/update`,-->
+<!--            headers: {-->
+<!--                'X-CSRF-TOKEN': $('[name="_csrf"]').attr('content')-->
+<!--            },-->
+<!--            contentType: 'application/json',-->
+<!--            data: JSON.stringify({-->
+<!--                body: body,-->
+<!--                snippet: snippet-->
+<!--            }),-->
+<!--            success: function (response) {-->
+<!--                // Handle the response if needed (e.g., show a success message)-->
+<!--                console.log('Post updated successfully');-->
+<!--                // Update the post content on the page without reloading-->
+<!--                const postCard = $('#post-' + postId);-->
+<!--                postCard.find('.post-content p').text(body);-->
+<!--                postCard.find('.post-content code').text(snippet);-->
+<!--                // Close the modal after successful update-->
+<!--                $('#editModal').modal('hide');-->
+<!--            },-->
+<!--            error: function (error) {-->
+<!--                // Handle errors if needed-->
+<!--                console.error('Error updating post:', error);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--    // Attach click event to the "Save Changes" button in the modal-->
+<!--    $(document).on('click', '#submitEdit', function () {-->
+<!--        submitEditForm();-->
+<!--    });-->
+<!--</script>-->
+<!--<script>-->
+<!--    // Function to open the edit modal and pre-fill the form-->
+<!--    function openEditModal(postId, body, snippet) {-->
+<!--        console.log(postId)-->
+<!--        console.log(body)-->
+<!--        console.log(snippet)-->
+<!--        $('#editBody').val(body);-->
+<!--        $('#editSnippet').val(snippet);-->
+<!--        $('#postId').val(postId);-->
+<!--        $('#editModal').modal('show');-->
+<!--    }-->
+
+<!--    // Function to handle form submission asynchronously-->
+<!--    function submitEditForm() {-->
+<!--        const postId = $('#postId').val();-->
+<!--        const body = $('#editBody').val();-->
+<!--        const snippet = $('#editSnippet').val();-->
+
+<!--        // Make an AJAX request to submit the form data-->
+<!--        $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url: '/post/' + postId + '/update',-->
+<!--            data: {-->
+<!--                body: body,-->
+<!--                snippet: snippet-->
+<!--            },-->
+<!--            success: function (response) {-->
+<!--                // Handle the response if needed (e.g., show a success message)-->
+<!--                console.log('Post updated successfully');-->
+<!--                // Close the modal after successful update-->
+<!--                $('#editModal').modal('hide');-->
+<!--                // Optionally, you can update the post content on the page without reloading-->
+<!--                // For example, find the post element by its ID and update its content.-->
+<!--            },-->
+<!--            error: function (error) {-->
+<!--                // Handle errors if needed-->
+<!--                console.error('Error updating post:', error);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--    // Attach click event to the edit button-->
+<!--    // $(document).on('click', '.edit-button', function () {-->
+<!--    //     const postCard = $(this).closest('.post-card');-->
+<!--    //     const postId = postCard.attr('id').split('-')[1];-->
+<!--    //     const postBody = postCard.find('.post-content p').text();-->
+<!--    //     const postSnippet = postCard.find('.post-content code').text();-->
+<!--    //-->
+<!--    //     openEditModal(postId, postBody, postSnippet);-->
+<!--    // });-->
+
+<!--    // Attach click event to the "Save Changes" button in the modal-->
+<!--    $(document).on('click', '#submitEdit', function () {-->
+<!--        submitEditForm();-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>
