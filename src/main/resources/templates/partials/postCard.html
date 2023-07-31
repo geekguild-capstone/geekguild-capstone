@@ -93,12 +93,18 @@
 <!--                    <div th:each="comment : ${commentsForPost}">-->
                         <div class="comment-card">
                             <div class="comment-header">
+                                <!-- Edit and Delete icons for each comment -->
+
                                 <div class="user-profile">
                                     <img th:src="${comment.user.image}" alt="User Profile Image">
                                     <div class="username-box">
                                         <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
                                            class="username"></p>
                                     </div>
+                                </div>
+                                    <div class="edit-delete-icons">
+                                        <button type="submit" class="edit2-button"><i class="fas fa-pencil-alt"></i></button>
+                                        <button type="submit" class="delete2-button"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                             <div class="comment-content">
