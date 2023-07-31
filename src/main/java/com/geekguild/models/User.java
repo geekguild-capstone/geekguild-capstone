@@ -74,6 +74,7 @@ public class User {
 
     // In this scenario, each user can have multiple posts, but each post belongs to only one user. This is the most straightforward relationship for a social media website, where users can create and own their posts.
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Post> posts;
 
     // Each user should have exactly one work categories, and each work source should be associated with only one user. This allows you to keep the user-specific information, preferences, and settings separate from the core user authentication and authorization data.
