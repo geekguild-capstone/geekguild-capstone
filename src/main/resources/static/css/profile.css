@@ -19,7 +19,7 @@ body {
     color: #f5f5f5;
     padding: 20px 40px;
     border-radius: 20px;
-    box-shadow: inset -2px -2px 12px rgba(0, 0, 0, 1);
+   border: 2px solid #8e09e7;
 }
 
 .profile-picture {
@@ -27,7 +27,7 @@ body {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #8e09e7;
+    border: 4px solid #8fd93f;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative; /* Change the position to relative */
     top: -20px; /* Adjust the value to move the profile picture up */
@@ -93,7 +93,7 @@ body {
 
 
 .fas {
-    color: #e67e22;
+    color: #8fd93f;
     font-size: 32px;
 }
 
@@ -108,8 +108,9 @@ body {
     background-color: transparent;
     border-radius: 8px;
     color: #e67e22;
-    border: 3px #8e09e7;
-    box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);
+    border: 3px solid #8e09e7 !important;
+    /*box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);*/
+
 }
 
 .section-container {
@@ -117,8 +118,8 @@ body {
     padding: 20px;
     background-color: transparent;
     border-radius: 8px;
-    border: 3px #8e09e7;
-    box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);
+    border: 3px solid #8e09e7 !important;
+    /*box-shadow: inset 0 2px 4px rgb(142, 9, 231, 0.5);*/
     color: #000000;
 }
 
@@ -139,9 +140,8 @@ body {
     margin-bottom: 20px;
     width: 100%;
     height: 200px; /* Adjust the height as needed */
-    background-color: #8e09e7;
     border-radius: 8px;
-   border: 1px solid #8e09e7;
+   border: 2px solid #8e09e7;
     display: flex;
     align-items: flex-end; /* Align the content to the bottom */
     overflow: hidden; /* Ensure that the cover photo doesn't overflow the container */
@@ -155,7 +155,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #666; /* Gray color for the placeholder */
+    background-color:#8e09e7; /* Gray color for the placeholder */
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -174,7 +174,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #666;
+    background-color: #8e09e7;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -191,6 +191,7 @@ body {
     padding-bottom: 5px;
     margin: 10px;
     z-index: 1;
+    border: 2px solid #8e09e7;
 }
 
 .icon-link {
@@ -198,13 +199,13 @@ body {
     align-items: center; /* Center the icon and text vertically */
     font-size: 32px; /* Adjust the icon size as needed */
     margin: 40px; /* Add spacing between the icons */
-    color: #ee8631; /* Make the icons white */
+    color: #8fd93f; /* Make the icons white */
     text-decoration: none;
     transition: color 0.3s; /* Add smooth transition for color change on hover */
 }
 
 .icon-link:hover {
-    color: #8e09e7;/* Change the icon and link text color on hover */
+    color: #8e09e7/* Change the icon and link text color on hover */
 }
 
 
