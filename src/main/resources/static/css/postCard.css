@@ -31,6 +31,7 @@ body {
 .user-profile {
     display: flex;
     align-items: center;
+    margin-top: 10px;
 }
 
 .user-profile img {
@@ -47,10 +48,7 @@ body {
 }
 
 .post-image {
-    /*display: none;*/
-    /* Adjust the height as needed to fit the image within the container */
     height: 200px;
-    /*overflow: hidden;*/
     position: relative;
 }
 
@@ -96,24 +94,11 @@ body {
 
 /*COMMENT STYLING*/
 .comment-box {
-    /* Adjust the height as needed to make the input box smaller */
-    /*height: 100px;*/
-    /*display: none; !* Hide the comment box by default *!*/
-    /* Existing styles... */
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
-    /*padding-top: 16px;*/
     padding: 10px;
 }
 
-/*.comment-card {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 5px;*/
-/*    padding: 10px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
 
 .comment-card {
     border: 1px solid #ddd;
@@ -133,13 +118,6 @@ body {
     display: flex;
     align-items: center; /* Vertically center the content */
 
-}
-
-.user-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
 }
 
 /* Vertically center the first and last names */
@@ -215,29 +193,37 @@ body {
     margin: 8px 0;
 }
 
-.edit-icons {
+.post-icons {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    display: flex; /* Display the buttons side by side */
-    align-items: center; /* Align the buttons vertically */
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.edit-icons i {
-    cursor: pointer;
-    margin-right: 10px; /* Add some spacing between the buttons */
-    transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
+.edit-icon,
+.delete-icon {
+    margin-left: 10px; /* Add some spacing between the icons */
+}
 
+.edit-icon button,
+.delete-icon button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-icon i,
+.delete-icon i {
+    color: #e67e22;
 }
 
 /* Add shadow hover effect for the icons */
-.edit-icons i:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+.edit-icon i:hover,
+.delete-icon i:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
-.edit-icons .edit-button {
-    color: #e67e22; /* Change the color of the edit button to #e67e22 */
-}
 
 /*.edit-icons .delete-button {*/
 /*    color: #ff0000; !* Change the color of the delete button to #ff0000 *!*/
@@ -295,17 +281,26 @@ body {
     white-space: pre-wrap; /* Wrap lines as needed to fit the container */
     word-break: break-all; /* Break long words if necessary */
 }
-
 .comment-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-.user-profile {
+.comment-icons {
     display: flex;
     align-items: center;
 }
 
-.edit-delete-icons i {
-  color: #e67e22; !important;
+.comment-edit-button,
+.comment-delete-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px; /* Add some spacing between the buttons */
+}
+
+.comment-edit-button i,
+.comment-delete-button i {
+    color: #e67e22;
 }

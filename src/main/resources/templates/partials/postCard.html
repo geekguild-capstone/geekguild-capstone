@@ -49,25 +49,19 @@
 <!-- Rest of your HTML content -->
 
 <div th:each="post, postIndex : ${posts}" class="post-card" th:data-post-id="${post.id}" id="post-${postIndex.index}">
+
     <div class="post-card">
-        <!-- Add this check to conditionally display the trash icon -->
         <div class="post-icons" th:if="${user.id == post.user.id}">
             <div class="edit-icon">
                 <button data-bs-toggle="modal" data-bs-target="#editModal" th:attr="data-post-id=${post.id}" onclick="openEditModal(this.getAttribute('data-post-id'))">
-<!--                        th:attr="data-postid=${post.id}, data-body=${post.body}, data-snippet=${post.snippet}"-->
-<!--                        onclick="openEditModal(this.getAttribute('data-postid'), this.getAttribute('data-body'), this.getAttribute('data-snippet'))"-->
-<!--                        class="connect-btn"-->
-
                     <i class="fas fa-pencil-alt"></i>
                 </button>
-                <!--                    <button onclick="" type="button" class="edit-button"><i class="fas fa-pencil-alt"></i></button>-->
             </div>
-
-            <form method="post" th:action="@{/post/delete/{postId}(postId=${post.id})}">
-                <div class="delete-icon">
+            <div class="delete-icon">
+                <form method="post" th:action="@{/post/delete/{postId}(postId=${post.id})}">
                     <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
 
         <div class="user-profile">
@@ -146,27 +140,14 @@
                             <div class="user-profile">
                                 <img th:src="${comment.user.image}" alt="User Profile Image">
                                 <div class="username-box">
-                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
-                                       class="username"></p>
-
-                                </div>
-                                    <div class="edit-delete-icons">
-                                        <button type="submit" class="edit2-button"><i class="fas fa-pencil-alt"></i></button>
-                                        <button type="submit" class="delete2-button"><i class="fas fa-trash"></i></button>
+                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}" class="username"></p>
                                 </div>
                             </div>
                             <div class="comment-icons" th:if="${user.id == comment.user.id}">
-
-                                <div class="comment-icons">
-                                    <form method="post"
-                                          th:action="@{/comment/delete/{commentId}(commentId=${comment.id})}">
-                                        <button type="submit" class="comment-edit-button"><i
-                                                class="fas fa-pencil-alt"></i>
-                                        </button>
-                                        <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                <form method="post" th:action="@{/comment/delete/{commentId}(commentId=${comment.id})}">
+                                    <button type="submit" class="comment-edit-button"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i></button>
+                                </form>
                             </div>
                         </div>
 
