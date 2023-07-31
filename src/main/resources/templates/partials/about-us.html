@@ -31,7 +31,9 @@
 
     <script defer src="/js/about-us.js"></script>
 
-    <title>GeekGuild &mdash; Unite, Collaborate, Geek Out!</title>
+<!--    <title>GeekGuild &mdash; Unite, Collaborate, Geek Out!</title>-->
+    <title th:text="${title}"></title>
+
     <link rel="stylesheet" href="/css/about-general.css"/>
     <link rel="stylesheet" href="/css/about-style.css"/>
     <link rel="stylesheet" href="/css/about-queries.css"/>
@@ -691,7 +693,7 @@
             </ul>
 
             <p class="copyright">
-                Copyright &copy;<span class="year">2027</span> by Omnifood, Inc. All
+                Copyright &copy;<span class="year">2023</span> by Geekguild, Inc. All
                 rights reserved.
             </p>
         </div>
@@ -699,13 +701,13 @@
             <p class="footer-heading">Contact Us</p>
             <address class="contacts">
                 <p class="address">
-                    623 Harrison St., 2nd Floor, San Francisco, CA 94107
+                    999 Virtual Dr., San Francisco, CA 94107
                 </p>
                 <p>
-                    <a class="footer-link" href="tel:415-201-6370">415-201-6370</a
+                    <a class="footer-link" href="tel:999-999-4335">999-999-GEEK</a
                     ><br/>
-                    <a class="footer-link" href="mailto:hello@omnifood.com"
-                    >hello@omnifood.com</a
+                    <a class="footer-link" href="mailto:hello@geekguild.com"
+                    >hello@geekguild.com</a
                     >
                 </p>
             </address>
@@ -734,7 +736,7 @@
         <nav class="nav-col">
             <p class="footer-heading">Resources</p>
             <ul class="footer-nav">
-                <li><a class="footer-link" href="#">Recipe directory </a></li>
+                <li><a class="footer-link" href="#">Code Directory </a></li>
                 <li><a class="footer-link" href="#"> Help center </a></li>
                 <li><a class="footer-link" href="#"> Privacy & terms </a></li>
             </ul>
