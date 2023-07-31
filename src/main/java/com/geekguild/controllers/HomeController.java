@@ -39,6 +39,9 @@ public class HomeController {
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("comment", new Comments());
 
+        // add dynamic title page
+        model.addAttribute("title", "GeekGuild");
+
         List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
         model.addAttribute("requests", friendRequests);
 
@@ -84,7 +87,9 @@ public class HomeController {
     }
 
     @GetMapping("/about-us")
-    public String showAbout() {
+    public String showAbout(Model model) {
+
+        model.addAttribute("title", "GeekGuild - Unite, Collaborate, Geek Out!");
         return "/partials/about-us";
     }
 

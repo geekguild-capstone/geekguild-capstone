@@ -47,7 +47,6 @@ public class PostController {
         return "redirect:/home";
     }
 
-
     // Delete a Post
     @Transactional
     @PostMapping("/post/delete/{postId}")
