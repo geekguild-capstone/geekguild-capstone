@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
+<!--    <link rel="stylesheet" href="/css/suggested-friends.css">-->
 
     <head th:include="partials/header :: head">
     </head>
@@ -53,7 +54,7 @@
                         <button type="button" class="upload-post-image">Upload Post Image</button>
                     </div>
                     <div class="upload-post-img">
-                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage"/>
+                        <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
                     </div>
 
                     <!-- Post body input section -->
@@ -93,8 +94,11 @@
                 <!-- News cards will be rendered here -->
             </div>
         </div>
-        <div th:include="partials/suggested-friend" class="bottom-right-section">Bottom Right Section</div>
-    </div>
+        <div class="bottom-right-section">
+            <h2>Suggested Friends</h2>
+            <div th:include="partials/suggested-friend">
+            </div>
+        </div>
 </div>
 <!-- container element in which TalkJS will display a chat UI -->
 <div class="chat-window">

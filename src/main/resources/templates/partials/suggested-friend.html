@@ -7,20 +7,19 @@
 
 </head>
 <body>
-<h6>Suggested Friends</h6>
-<div th:each="user : ${notFriends}">
-    <div class="card-container">
+<!--<div >-->
+    <div class="card-container" th:each="user : ${notFriends}">
         <!--BANNER-->
-<!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
-<!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
+        <!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
+        <!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
 
         <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
 
         <!--PROFILE PIC-->
-        <img th:if="${user.image != null and user.image != ''}" th:src="${user.image}" alt="Profile Picture" class="profile-img" />
-        <img th:unless="${user.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg" alt="Default Profile Picture" class="profile-img" />
-
-        <!--        <img th:src="${user.image}" alt="Profile Picture" class="profile-img">-->
+        <img th:if="${user.image != null and user.image != ''}" th:src="${user.image}" alt="Profile Picture"
+             class="profile-img"/>
+        <img th:unless="${user.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg"
+             alt="Default Profile Picture" class="profile-img"/>
 
         <!--USER NAME-->
         <div class="name">
@@ -28,15 +27,16 @@
         </div>
 
         <!--TITLE-->
-        <div class="headline">Software Engineer</div>
+<!--        <div class="headline">Software Engineer</div>-->
         <!-- CONNECT BUTTON -->
-        <button data-bs-toggle="modal" data-bs-target="#confirmationModal" th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"
+        <button data-bs-toggle="modal" data-bs-target="#confirmationModal"
+                th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"
                 onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
                 class="connect-btn">
             <i class="icon fas fa-user-plus"></i> Connect
         </button>
-
     </div>
-</div>
+
+<!--</div>-->
 </body>
 </html>
