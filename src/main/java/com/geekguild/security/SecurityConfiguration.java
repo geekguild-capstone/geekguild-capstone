@@ -1,5 +1,6 @@
 package com.geekguild.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    @Autowired
+    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+
+
     private UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
@@ -33,8 +38,14 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    
+
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+
         http.authorizeHttpRequests((requests) -> requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
@@ -43,16 +54,17 @@ public class SecurityConfiguration {
                          * anyone can visit the home page, register, login, and view ads */
 
                         .requestMatchers("/", "/posts", "/posts/*", "/register", "/login", "/home", "/groups", "/group", "/group/*", "/about-us", "/profile", "/profile/*/edit", "/profile/upload", "/profile/*", "/home/upload", "/friends", "/friends/*/accept", "/friends/*/reject", "/friends/add",
-                                "/friends/remove","/group/create", "/group/*/join", "/group/*/leave", "/group/*/comment", "/post/create", "/post/delete/*", "/post/*/create", "/comment", "/comment/delete/*", "/post/*/update", "/post/*").permitAll()
+                                "/friends/remove","/group/create", "/group/*/join", "/group/*/leave", "/group/*/comment", "/post/create", "/post/delete/*", "/post/*/create", "/comment", "/comment/delete/*", "/post/*/update", "/post/*", "/register/check-email").permitAll()
 
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
                 /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
+//                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
                 /* Logout configuration */
                 .logout((logout) -> logout.logoutSuccessUrl("/"))
-                .httpBasic(withDefaults());
+                .httpBasic()
+                .authenticationEntryPoint(authenticationEntryPoint);
         return http.build();
     }
 

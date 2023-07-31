@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 <!--    <title>Register</title>-->
     <title th:text="${title}"></title>
@@ -13,6 +14,11 @@
             background-color: #333333;
             margin: 0;
             padding: 0;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
         }
 
 
@@ -81,13 +87,27 @@
         }
 
         @keyframes colorWaterfall {
-            0% { color: #8e09e7; } /* Purple shade */
-            25% { color: #ffb74d; } /* Orange shade */
-            50% { color: #aefc4f; } /* Green shade */
-            75% { color: #ee8631; } /* Orange shade */
-            100% { color: #8e09e7;} /* Purple shade */
+            0% {
+                color: #8e09e7;
+            }
+            /* Purple shade */
+            25% {
+                color: #ffb74d;
+            }
+            /* Orange shade */
+            50% {
+                color: #aefc4f;
+            }
+            /* Green shade */
+            75% {
+                color: #ee8631;
+            }
+            /* Orange shade */
+            100% {
+                color: #8e09e7;
+            }
+            /* Purple shade */
         }
-
 
 
         h2 {
@@ -206,46 +226,154 @@
 </div>
 
 <h2>Create an Account</h2>
-
-<form th:action="@{/register}" method="POST" th:object="${user}">
+<form id="signupForm" th:action="@{/register}" method="POST" th:object="${user}">
     <div class="name-container">
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input id="firstname" type="text" th:field="*{firstname}"/>
+            <span id="firstNameError" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input id="lastname" type="text" th:field="*{lastname}"/>
+            <span id="lastNameError" class="error"></span>
+        </div>
+    </div>
+
     <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input id="firstname" type="text" th:field="*{firstname}" />
+        <label for="email">Email</label>
+        <input id="email" type="text" th:field="*{email}"/>
+        <span th:text="${emailError}" class="error"></span>
+        <span id="emailError" class="error"></span>
     </div>
+
     <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input id="lastname" type="text" th:field="*{lastname}" />
+        <label for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}"/>
+        <span id="passwordError" class="error"></span>
+
     </div>
-    </div>
 
-<!--    <label for="username" >Username</label>-->
-<!--    <input id="username" type="text" th:field="*{username}" />-->
-
-    <label for="email">Email</label>
-    <input id="email" type="text" th:field="*{email}" />
-
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
-
-<!--    <div class="terms-and-conditions">-->
-<!--        <input type="checkbox" id="agreeTerms" th:field="*{agreeTerms}" required />-->
-<!--        <label for="agreeTerms">I agree with the Terms and Conditions</label>-->
-<!--    </div>-->
-
-    <input value="Sign me up!" type="submit"/>
+    <!--    <input id="submit-form-btn" value="Sign me up!" type="button" />-->
+    <button type="button" id="submit-form-btn">Sign me up!</button>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
 </form>
 
+
+<!--<form th:action="@{/register}" method="POST" th:object="${user}">-->
+<!--    <div class="name-container">-->
+<!--    <div class="form-group">-->
+<!--        <label for="firstname">First Name</label>-->
+<!--        <input id="firstname" type="text" th:field="*{firstname}" />-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label for="lastname">Last Name</label>-->
+<!--        <input id="lastname" type="text" th:field="*{lastname}" />-->
+<!--    </div>-->
+<!--    </div>-->
+
+<!--    <label for="email">Email</label>-->
+<!--    <input id="email" type="text" th:field="*{email}" />-->
+
+<!--    <label for="password">Password</label>-->
+<!--    <input id="password" type="password" th:field="*{password}" />-->
+
+<!--&lt;!&ndash;    <div class="terms-and-conditions">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="checkbox" id="agreeTerms" th:field="*{agreeTerms}" required />&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="agreeTerms">I agree with the Terms and Conditions</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--    <input value="Sign me up!" type="submit"/>-->
+
+<!--</form>-->
+
 <div class="outer-container">
-<div class="rotating-profile-pics">
-    <img src="/img/gglogo.png" alt="Profile Picture 1">
-    <img src="/img/gghelp.png" alt="Profile Picture 2">
-    <!-- Add more profile pictures here -->
-</div>
+    <div class="rotating-profile-pics">
+        <img src="/img/gglogo.png" alt="Profile Picture 1">
+        <img src="/img/gghelp.png" alt="Profile Picture 2">
+        <!-- Add more profile pictures here -->
+    </div>
 </div>
 
+<script>
+    const registrationForm = document.getElementById("signupForm");
+    const emailInput = document.getElementById("email");
+    const emailErrorDiv = document.getElementById("emailError");
+    const submitBtn = document.getElementById('submit-form-btn')
+
+    // const csrfToken = document.querySelector("meta[name='_csrf']").content;
+    // const csrfHeader = document.querySelector("meta[name='_csrf_header']").content;
+
+    submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const email = emailInput.value;
+        const firstName = document.getElementById('firstname').value;
+        const lastName = document.getElementById('lastname').value;
+        const password = document.getElementById('password').value;
+
+
+        // Clear previous error messages
+        document.getElementById('firstNameError').textContent = '';
+        document.getElementById('lastNameError').textContent = '';
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('passwordError').textContent = '';
+
+
+        // Check for empty fields
+        if (firstName.trim() === '') {
+            document.getElementById('firstNameError').textContent = 'First name is required.';
+        }
+
+        if (lastName.trim() === '') {
+            document.getElementById('lastNameError').textContent = 'Last name is required.';
+        }
+
+        if (email.trim() === '') {
+            document.getElementById('emailError').textContent = 'Email is required.';
+        }
+
+        if (password.trim() === '') {
+            document.getElementById('passwordError').textContent = 'Password is required.';
+        }
+
+        // If there are no errors, you can proceed with the form submission
+        if (firstName.trim() !== '' && lastName.trim() !== '' && password.trim() !== '') {
+            // Implement form submission logic here
+            registrationForm.submit();
+            // For example: document.getElementById('signupForm').submit();
+            // console.log('Form submitted successfully.');
+        }
+
+        // try {
+        //     const response = await fetch("/register/check-email", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             [csrfHeader]: csrfToken,
+        //         },
+        //         body: JSON.stringify({ email }),
+        //     });
+        //
+        //     if (!response.ok) {
+        //         throw new Error("Network response was not ok");
+        //     }
+        //
+        //     const data = await response.json();
+        //
+        //     if (data.exists) {
+        //         emailErrorDiv.innerText = "Email already used, please try another.";
+        //     } else {
+        //         registrationForm.submit();
+        //     }
+        // } catch (error) {
+        //     console.error("Error checking email:", error);
+        // }
+    });
+</script>
+
 <script th:include="partials/footer"></script>
+
 </body>
 
 </html>
