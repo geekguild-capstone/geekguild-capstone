@@ -42,7 +42,9 @@
 
                 <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary" id="newFriendRequestBtn" data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
+                    <span id="friendRequestBadge" class="badge badge-danger badge-pill">0</span>
                 </button>
+
 
 
                 <form th:action="@{/login}" th:method="post" id="logout">
@@ -130,7 +132,25 @@
 
                     </script>
 
-            </div>
+
+                    <!-- Place this JavaScript code below the existing JavaScript code -->
+
+                    <script>
+                        // This function updates the friend request badge with the provided count
+                        function updateFriendRequestBadge(count) {
+                            const badge = document.getElementById("friendRequestBadge");
+                            if (badge) {
+                                badge.innerText = count.toString();
+                            }
+                        }
+
+                        // Example usage: Call this function with the actual count of friend requests
+                        const friendRequestCount = 3; // Replace this with the actual count of received friend requests
+                        updateFriendRequestBadge(friendRequestCount);
+                    </script>
+
+
+                </div>
 
         </div>
     </nav>
