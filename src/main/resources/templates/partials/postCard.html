@@ -140,6 +140,7 @@
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
                 <div th:each="comment : ${homePostComments[postIndex.index]}">
+
                     <div class="comment-card">
                         <div class="comment-header">
                             <div class="user-profile">
@@ -147,6 +148,11 @@
                                 <div class="username-box">
                                     <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
                                        class="username"></p>
+
+                                </div>
+                                    <div class="edit-delete-icons">
+                                        <button type="submit" class="edit2-button"><i class="fas fa-pencil-alt"></i></button>
+                                        <button type="submit" class="delete2-button"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                             <div class="comment-icons" th:if="${user.id == comment.user.id}">

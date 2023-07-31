@@ -224,10 +224,10 @@ body {
 }
 
 .edit-icons i {
-    font-size: 16px;
     cursor: pointer;
     margin-right: 10px; /* Add some spacing between the buttons */
     transition: box-shadow 0.3s ease; /* Add transition for the hover effect */
+
 }
 
 /* Add shadow hover effect for the icons */
@@ -239,9 +239,9 @@ body {
     color: #e67e22; /* Change the color of the edit button to #e67e22 */
 }
 
-.edit-icons .delete-button {
-    color: #ff0000; /* Change the color of the delete button to #ff0000 */
-}
+/*.edit-icons .delete-button {*/
+/*    color: #ff0000; !* Change the color of the delete button to #ff0000 *!*/
+/*}*/
 
 .post-content p {
     color: white !important;
@@ -294,4 +294,18 @@ body {
 .code-container code {
     white-space: pre-wrap; /* Wrap lines as needed to fit the container */
     word-break: break-all; /* Break long words if necessary */
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.edit-delete-icons i {
+  color: #e67e22; !important;
 }
