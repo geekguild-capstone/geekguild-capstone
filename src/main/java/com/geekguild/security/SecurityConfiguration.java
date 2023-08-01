@@ -38,15 +38,22 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    
-
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 
-        http.authorizeHttpRequests((requests) -> requests
+        http
+                /* Login configuration */
+                .formLogin((login) -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true))
+
+            /* Logout configuration */
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
+
+
+                .authorizeHttpRequests((requests) -> requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("/posts/create", "/posts/*/edit", "/profile/*/delete").authenticated()
@@ -59,10 +66,6 @@ public class SecurityConfiguration {
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
-                /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
-                /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());
         return http.build();
     }

@@ -37,6 +37,7 @@ public class HomeController {
     public String landingPage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
+
         model.addAttribute("comment", new Comments());
 
         // add dynamic title page
