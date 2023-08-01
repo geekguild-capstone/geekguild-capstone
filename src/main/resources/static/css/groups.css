@@ -31,12 +31,15 @@
     padding: 20px;
     margin-bottom: 10px;
     color: #e67e22; /* Change font color if necessary */
+    position: relative; /* Add relative positioning */
 }
 
-
+.group-heading{
+    margin:0;
+}
 
 /* Style the Create Group button */
-.create-group-button {
+#createGroupBtn {
     background-color: #e67e22; /* Change the color of the button */
     color:#FFFFFF; /* Change font color if necessary */
     border: none;
@@ -44,7 +47,13 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    position: absolute; /* Add absolute positioning */
+    top: 0;
+    right: 0;
+    margin: 5px; /* Add some margin for spacing */
 }
+
+
 
 /* Style for the group details */
 .group-details {
@@ -66,4 +75,9 @@
 
 .members{
     color: #8fd93f;
+}
+
+.group-list-container {
+    background-color: #f2f2f2;
+    padding: 10px;
 }
