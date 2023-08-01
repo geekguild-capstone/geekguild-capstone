@@ -1,6 +1,7 @@
 package com.geekguild.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.geekguild.repositories.PostRepository;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,6 +43,7 @@ public class Post {
     @JoinColumn (name = "group_id")
     private Group group;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comments> comments;
 
