@@ -1,7 +1,7 @@
 body, html {
     height: 90%;
     margin: 0;
-    background-color: #333333 !important;
+    background-color: #000000 !important;
 }
 
 h1 {
@@ -86,10 +86,29 @@ h1 {
     margin: 0 0 15px 0; /* top, right, bottom, left */
 }
 
+.create-post-body{
+    width: 100%;
+    margin-right: 10%;
+}
+
+
 /*CREATE POST CONTAINER*/
 .upload-post-img {
     display: none;
     object-fit: scale-down;
+}
+
+.fa-camera {
+    color: #ee8631;
+    background: none;
+    border: none;
+}
+
+.code-snippet{
+    display: flex;
+    margin-right: 10%;
+    width: 100%;
+    border-radius: 8px;
 }
 
 
