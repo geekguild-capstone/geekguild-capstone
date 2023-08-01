@@ -6,8 +6,8 @@
 .navbar {
     /*background-color: transparent !important;*/
     border-radius: 8px !important;
-    box-shadow: -2px -2px 12px rgba(238, 134, 49, 0.75) !important;
-    background-color: #333333;
+    /*box-shadow: -2px -2px 12px rgba(238, 134, 49, 0.75) !important;*/
+    background-color: #8E09E7;
     /*border: purple solid 2px !important;*/
 }
 
@@ -20,12 +20,12 @@
 
  /*Navbar Toggler Icon*/
 .navbar-toggler {
-    background-color: transparent;
-    border-color: #ee8631 !important;
+    background-color: #ee8631;
+    /*border-color: #ee8631 !important;*/
 }
 
 .fa-bars{
-    color: #ee8631 !important;
+    color: #8e09e7 !important;
 }
 .fa-bars:hover{
     color: #8fd93f !important;
@@ -75,41 +75,41 @@
 }
 
 /* Search Button Color */
-.search-button {
-    color: #ee8631 !important;
-    border-color: #aefc4f !important;
-    margin: 0 12px 0 0; /* top, right, bottom, left */
+/*.search-button {*/
+/*    color: #ee8631 !important;*/
+/*    border-color: #aefc4f !important;*/
+/*    margin: 0 12px 0 0; !* top, right, bottom, left *!*/
 
-}
+/*}*/
 
 /* Search Button Hover Background Color */
-.search-button:hover {
-    background-color: #aefc4f !important;
-    color: #ee8631 !important;
-}
+/*.search-button:hover {*/
+/*    background-color: #aefc4f !important;*/
+/*    color: #ee8631 !important;*/
+/*}*/
 
 /* Logout Button Color */
 .logout-button {
-    color: #ee8631 !important;
-    border-color: #8e09e7 !important;
+    color: #000000 !important;
+    background-color: #ee8631 !important;
 }
 
 /* Logout Button Hover Background Color */
 .logout-button:hover {
-    background-color: #8e09e7 !important;
-    color: #ee8631 !important;
+    /*background-color: #8e09e7 !important;*/
+    color: #8E09E7 !important;
 }
 
 /* NEW FRIEND REQUEST MODAL BUTTON Styles */
 #newFriendRequestBtn {
     margin-right: 15px;
-    background-color: transparent !important;
+    background-color: #64c757 !important;
     border-color: #ee8631 !important;
 }
 
 #newFriendRequestBtn:hover {
     border-color: #aefc4f !important;
-    color: #aefc4f !important;
+    color: #8E09E7 !important;
 }
 
 /*!* NEW FRIEND REQUEST MODAL Styles *!*/

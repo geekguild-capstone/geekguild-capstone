@@ -8,18 +8,22 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/home" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
-                <img width="60" src="https://cdn.filestackcontent.com/xajY09uFTyOwyLdR6SLl">
+
+
+<!--            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>-->
+
+            <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                <img width="60" th:src="${user.image}" />
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">Profile</a>
+                        <a class="nav-link" href="/home" data-bs-toggle="tooltip" title="News Feed">News Feed</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
