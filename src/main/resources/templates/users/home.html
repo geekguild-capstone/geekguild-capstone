@@ -50,7 +50,7 @@
                 <form method="post" th:object="${post}" th:action="@{/post/create}" id="postForm">
                     <!-- Post image upload section -->
                     <div>
-                        <button type="button" class="upload-post-image">Upload Post Image</button>
+                        <button type="button" class="upload-post-image"><i class="fa-solid fa-camera"></i></button>
                     </div>
                     <div class="upload-post-img">
                         <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
@@ -60,10 +60,10 @@
 
                     <div class="input-group">
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Comment</span>
-                            <input th:field="*{body}" type="text" class="form-control" placeholder="Whats on your mind?"
+                            <input th:field="*{body}" type="text" class="form-control create-post-body" placeholder="Whats on your mind?"
                                    aria-label="Username" aria-describedby="basic-addon1" required>
                         </div>
+                        <div class="code-snippet">
                         <span class="input-group-text">Code</span>
                         <textarea class="language-html"  th:field="*{snippet}"></textarea>
 
@@ -72,6 +72,7 @@
                     </div>
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     <input type="hidden" name="image" id="postImageURLInput"/>
+                    </div>
                 </form>
             </div>
         </div>
