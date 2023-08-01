@@ -48,8 +48,8 @@
 /* Styling for the user profile image */
 .user-profile img {
     border-radius: 5px; /* Make the image square by setting border-radius */
-    width: 75%; /* Take up 25% of its container */
-    max-width: 100px; /* Limit the max-width of the image to avoid excessive size */
+    width: 100%; /* Take up 25% of its container */
+    max-width: 75px; /* Limit the max-width of the image to avoid excessive size */
     height: auto; /* Let the height adjust automatically to maintain the aspect ratio */
     margin-right: 10px;
 }
