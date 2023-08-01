@@ -71,9 +71,12 @@
                      alt="User Profile Image">
                 <div>
                     <a th:href="@{'/group/' + ${group.id}}" class="groupname" th:text="${group.groupname}"></a>
+                    <br>
                     <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
                     <form th:action="@{/group/{groupId}/leave(groupId=${group.id})}" method="post">
-                        <button type="submit">Leave Group</button>
+                        <button type="submit" class="leave-button">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </form>
                 </div>
             </div>

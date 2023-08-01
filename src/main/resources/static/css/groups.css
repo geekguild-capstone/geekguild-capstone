@@ -31,12 +31,29 @@
     padding: 20px;
     margin-bottom: 10px;
     color: #e67e22; /* Change font color if necessary */
+    border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
     position: relative; /* Add relative positioning */
 }
 
 .group-heading{
     margin:0;
 }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the user profile image */
+.user-profile img {
+    border-radius: 5px; /* Make the image square by setting border-radius */
+    width: 75%; /* Take up 25% of its container */
+    max-width: 100px; /* Limit the max-width of the image to avoid excessive size */
+    height: auto; /* Let the height adjust automatically to maintain the aspect ratio */
+    margin-right: 10px;
+}
+
 
 /* Style the Create Group button */
 #createGroupBtn {
@@ -69,6 +86,9 @@
 .groupname {
     color: #e67e22;
     text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .groupname:hover {
@@ -77,6 +97,7 @@
 
 .members{
     color: #8fd93f;
+    font-size: 20px;
 }
 
 .group-list-container {
@@ -87,3 +108,22 @@
 .post-card {
     margin-bottom: 10px; /* Add desired spacing between group list items */
 }
+
+.leave-button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #e67e22;
+    cursor: pointer;
+    position: absolute; /* Add absolute positioning */
+    top: 5px; /* Add top spacing to position the button at the top */
+    right: 5px; /* Add right spacing to position the button at the right */
+}
+
+.leave-button:hover{
+    color: #8fd93f;
+}
+
+
+
+
