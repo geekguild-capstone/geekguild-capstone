@@ -2,6 +2,7 @@ package com.geekguild.controllers;
 
 import com.geekguild.models.Reaction;
 import com.geekguild.models.User;
+import com.geekguild.repositories.CommentRepository;
 import com.geekguild.repositories.PostRepository;
 import com.geekguild.repositories.ReactionRepository;
 import com.geekguild.repositories.UserRepository;
@@ -16,25 +17,44 @@ public class ReactionController {
     private final ReactionRepository reactionDao;
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final CommentRepository commentDao;
 
     @Autowired
-    public ReactionController(ReactionRepository reactionDao, PostRepository postDao, UserRepository userDao) {
+    public ReactionController(ReactionRepository reactionDao, PostRepository postDao, UserRepository userDao, CommentRepository commentDao) {
         this.reactionDao = reactionDao;
         this.postDao = postDao;
         this.userDao = userDao;
+        this.commentDao = commentDao;
     }
 
-    @PostMapping("reaction/submit")
+    @PostMapping("/reaction/post/submit")
     public String submitReaction(
             @RequestParam("postId") Long postId,
             @RequestParam("reaction") String reaction) {
-        System.out.println(postId);
-        System.out.println(reaction);
+        System.out.println("postId: " + postId);
+        System.out.println("reaction: " + reaction);
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         Reaction newReaction = new Reaction();
         newReaction.setReaction(reaction);
         newReaction.setPost(postDao.getReferenceById(postId));
+        newReaction.setUser(user);
+        reactionDao.save(newReaction);
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/reaction/comment/submit")
+    public String submitCommentReaction(
+            @RequestParam("commentId") Long commentId,
+            @RequestParam("reaction") String reaction) {
+        System.out.println("commentId: " + commentId);
+        System.out.println("reaction: " + reaction);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        Reaction newReaction = new Reaction();
+        newReaction.setReaction(reaction);
+        newReaction.setComment(commentDao.getReferenceById(commentId));
         newReaction.setUser(user);
         reactionDao.save(newReaction);
 

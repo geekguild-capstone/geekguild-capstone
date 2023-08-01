@@ -1,18 +1,13 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.*;
-import com.geekguild.repositories.CommentRepository;
-import com.geekguild.repositories.FriendRequestRepository;
-import com.geekguild.repositories.PostRepository;
-import com.geekguild.repositories.UserRepository;
+import com.geekguild.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -22,14 +17,15 @@ public class HomeController {
     private final FriendRequestRepository friendDao;
     private final CommentRepository commentDao;
 
+    private final ReactionRepository reactionDao;
 
 
-
-    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao) {
+    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao, ReactionRepository reactionDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.friendDao = friendDao;
         this.commentDao = commentDao;
+        this.reactionDao = reactionDao;
     }
 
 
@@ -64,6 +60,8 @@ public class HomeController {
         model.addAttribute("lovesCount", lovesCounts);
         model.addAttribute("laughsCount", laughsCounts);
 
+
+
         model.addAttribute("users", userDao.findAll());
         // The friend-related attributes are removed from here
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
@@ -77,6 +75,32 @@ public class HomeController {
         }
 
         model.addAttribute("homePostComments", homePostComments);
+
+        // Calculate and add the counts of each type of reaction for each comment to the model
+        Map<Long, Integer> commentLikesCount = new HashMap<>();
+        Map<Long, Integer> commentLovesCount = new HashMap<>();
+        Map<Long, Integer> commentLaughsCount = new HashMap<>();
+
+        for (List<Comments> commentsForPost : homePostComments) {
+            for (Comments comment : commentsForPost) {
+                long commentId = comment.getId();
+
+                int likesCount = reactionDao.countByCommentAndReaction(comment, "like");
+                commentLikesCount.put(commentId, likesCount);
+
+                int lovesCount = reactionDao.countByCommentAndReaction(comment, "love");
+                commentLovesCount.put(commentId, lovesCount);
+
+                int laughsCount = reactionDao.countByCommentAndReaction(comment, "laugh");
+                commentLaughsCount.put(commentId, laughsCount);
+            }
+        }
+
+// Add the comment reaction counts to the model
+        model.addAttribute("commentLikesCount", commentLikesCount);
+        model.addAttribute("commentLovesCount", commentLovesCount);
+        model.addAttribute("commentLaughsCount", commentLaughsCount);
+
         model.addAttribute("request", new PostUpdateRequest());
 
 
@@ -85,6 +109,7 @@ public class HomeController {
 
         return "users/home";
     }
+
 
     @GetMapping("/about-us")
     public String showAbout(Model model) {
@@ -202,13 +227,23 @@ public class HomeController {
     }
 
 
-
-
     // Helper method to calculate the counts of each type of reaction for all posts
     private List<Integer> getReactionCounts(List<Post> posts, String reactionType) {
         List<Integer> counts = new ArrayList<>();
         for (Post post : posts) {
             int count = (int) post.getReactions().stream()
+                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
+                    .count();
+            counts.add(count);
+        }
+        return counts;
+    }
+
+
+    private List<Integer> getCommentReactionCounts(List<Comments> comments, String reactionType) {
+        List<Integer> counts = new ArrayList<>();
+        for (Comments comment : comments) {
+            int count = (int) comment.getReactions().stream()
                     .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
                     .count();
             counts.add(count);
