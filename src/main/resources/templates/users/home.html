@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-<!--    <title>Home</title>-->
+    <!--    <title>Home</title>-->
     <title th:text="${title}"></title>
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
-<!--    <link rel="stylesheet" href="/css/suggested-friends.css">-->
+<!--ANIMATION ON SCROLL LIBRARY LINK-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <!--    <link rel="stylesheet" href="/css/suggested-friends.css">-->
 
     <head th:include="partials/header :: head">
     </head>
@@ -60,18 +62,19 @@
 
                     <div class="input-group">
                         <div class="input-group mb-3">
-                            <input th:field="*{body}" type="text" class="form-control create-post-body" placeholder="Whats on your mind?"
+                            <input th:field="*{body}" type="text" class="form-control create-post-body"
+                                   placeholder="Whats on your mind?"
                                    aria-label="Username" aria-describedby="basic-addon1" required>
                         </div>
                         <div class="code-snippet">
-                        <span class="input-group-text">Code=></span>
-                        <textarea class="language-html"  th:field="*{snippet}"></textarea>
+                            <span class="input-group-text">Code=></span>
+                            <textarea class="language-html" th:field="*{snippet}"></textarea>
 
-                        <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
-                        <button class="submit-comment-btn" type="submit">Submit</button>
-                    </div>
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                    <input type="hidden" name="image" id="postImageURLInput"/>
+                            <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
+                            <button class="submit-comment-btn" type="submit">Submit</button>
+                        </div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" name="image" id="postImageURLInput"/>
                     </div>
                 </form>
             </div>
@@ -96,33 +99,35 @@
         </div>
         <div class="bottom-right-section">
             <h2>Suggested Friends</h2>
-            <div th:include="partials/suggested-friend">
+            <div th:include="partials/suggested-friend" >
             </div>
         </div>
-</div>
-<!-- container element in which TalkJS will display a chat UI -->
-<div class="chat-window">
-    <div id="talkjs-container" style="width: 80%; margin: 30px; height: 500px">
-        <i>Loading chat...</i>
     </div>
-</div>
+    <!-- container element in which TalkJS will display a chat UI -->
+    <div class="chat-window">
+        <div id="talkjs-container" style="width: 80%; margin: 30px; height: 500px">
+            <i>Loading chat...</i>
+        </div>
+    </div>
 
-<!-- CONFIRMATION MODAL SCRIPT-->
-<script src="/js/confirmationModal.js"></script>
+    <!-- CONFIRMATION MODAL SCRIPT-->
+    <script src="/js/confirmationModal.js"></script>
 
-<!--FILESTACK API SCRIPTS-->
-<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-<script src="/js/filestack.js"></script>
+    <!--FILESTACK API SCRIPTS-->
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+    <script src="/js/filestack.js"></script>
 
-<!--TALK JS SCRIPTS-->
-<script src="/js/talk-js-snippet.js"></script>
-<script src="/js/talk-js.js"></script>
+    <!--TALK JS SCRIPTS-->
+    <script src="/js/talk-js-snippet.js"></script>
+    <script src="/js/talk-js.js"></script>
 
-<!--NEWS API SCRIPTS-->
-<script src="/js/keys.js"></script>
-<script src="/js/news.js"></script>
+    <!--NEWS API SCRIPTS-->
+    <script src="/js/keys.js"></script>
+    <script src="/js/news.js"></script>
 
-<footer th:replace="partials/footer :: footer"></footer>
+
+
+    <footer th:replace="partials/footer :: footer"></footer>
 
 </body>
 

@@ -8,6 +8,7 @@
     /*background-color: transparent !important;*/
     /*border-radius: 8px !important;*/
     /*box-shadow: -2px -2px 12px rgba(238, 134, 49, 0.75) !important;*/
+    box-shadow : 0 2px 4px rgba(0, 0, 0, 0.4);
     background-color: #8E09E7;
     /*border: purple solid 2px !important;*/
 }
