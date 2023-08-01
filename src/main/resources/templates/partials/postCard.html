@@ -87,20 +87,20 @@
                 </div>
             </div>
             <div class="interactions">
-                <button class="like-button" onclick="toggleLikeEmojis()">
+                <button class="like-button" onclick="toggleLikeEmojis(this) " >
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
                 <div class="like-emojis" style="display: none;">
                     <!-- Add forms for each icon -->
-                    <form th:action="@{/reaction/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'like', this.getAttribute('data-post-id'))">
+                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'like', this.getAttribute('data-post-id'))">
                         <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">👍</button>
 <!--                        <span class="emoji-counter">0</span>-->
                     </form>
-                    <form th:action="@{/reaction/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'love', this.getAttribute('data-post-id'))">
+                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'love', this.getAttribute('data-post-id'))">
                         <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">❤️</button>
 <!--                        <span class="emoji-counter">0</span>-->
                     </form>
-                    <form th:action="@{/reaction/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'laugh', this.getAttribute('data-post-id'))">
+                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form" style="display: inline-block;" th:data-post-id="${post.id}" onsubmit="submitReaction(event, 'laugh', this.getAttribute('data-post-id'))">
                         <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">😂</button>
 <!--                        <span class="emoji-counter">0</span>-->
                     </form>
@@ -151,8 +151,9 @@
                                 </div>
                             </div>
                             <div class="comment-icons" th:if="${user.id == comment.user.id}">
+                                <button type="submit" class="comment-edit-button"><i class="fas fa-pencil-alt"></i></button>
+
                                 <form method="post" th:action="@{/comment/delete/{commentId}(commentId=${comment.id})}">
-                                    <button type="submit" class="comment-edit-button"><i class="fas fa-pencil-alt"></i></button>
                                     <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
@@ -168,6 +169,39 @@
                         <code class="language-html" th:text="${comment.snippet}"></code>
                     </pre>
                             </div>
+                            <div class="comment-interactions">
+                                <button class="comment-like-button"  onclick="toggleLikeEmojisComment(this)">
+                                    <i class="far fa-thumbs-up"></i>Like
+                                </button>
+                                <div class="comment-like-emojis" style="display: none;">
+                                    <!-- Add forms for each icon -->
+                                    <form th:action="@{/reaction/comment/submit}" method="post" class="comment-reaction-form" style="display: inline-block;" th:data-comment-id="${comment.id}" onsubmit="submitCommentReaction(event, 'like', this.getAttribute('data-comment-id'))">
+                                        <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">👍</button>
+                                        <!--                        <span class="emoji-counter">0</span>-->
+                                    </form>
+                                    <form th:action="@{/reaction/comment/submit}" method="post" class="comment-reaction-form" style="display: inline-block;" th:data-comment-id="${comment.id}" onsubmit="submitCommentReaction(event, 'love', this.getAttribute('data-comment-id'))">
+                                        <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">❤️</button>
+                                        <!--                        <span class="emoji-counter">0</span>-->
+                                    </form>
+                                    <form th:action="@{/reaction/comment/submit}" method="post" class="comment-reaction-form" style="display: inline-block;" th:data-comment-id="${comment.id}" onsubmit="submitCommentReaction(event, 'laugh', this.getAttribute('data-comment-id'))">
+                                        <button type="submit" class="like-emoji" style="background: none; border: none; cursor: pointer;">😂</button>
+                                        <!--                        <span class="emoji-counter">0</span>-->
+                                    </form>
+                                </div>
+                                <button class="share-button">
+                                    <i class="fas fa-envelope"></i>Message
+                                </button>
+                                <!-- Display the comment reaction counts maybe look here if it breaks-->
+                                <div class="comment-like-emojis count-display" style="float: right;">
+                                    <span class="like-emoji"><i>👍</i></span>
+                                    <span th:text="${commentLikesCount[comment.id]}" class="emoji-counter"></span>
+                                    <span class="like-emoji">❤️</span>
+                                    <span th:text="${commentLovesCount[comment.id]}" class="emoji-counter"></span>
+                                    <span class="like-emoji">😂</span>
+                                    <span th:text="${commentLaughsCount[comment.id]}" class="emoji-counter"></span>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,11 +210,11 @@
     </div>
     <div class="like-emojis count-display">
         <span class="like-emoji"><i>👍</i></span>
-        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>
+        <span th:text="${likesCount[comment.id]}" class="emoji-counter"></span>
         <span class="like-emoji">❤️</span>
-        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>
+        <span th:text="${lovesCount[comment.id]}" class="emoji-counter"></span>
         <span class="like-emoji" >😂</span>
-        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>
+        <span th:text="${laughsCount[comment.id]}" class="emoji-counter"></span>
     </div>
 </div>
 
@@ -203,22 +237,40 @@
     }
 
     // Function to handle showing the emojis container
+    // function toggleLikeEmojis(button) {
+    //     console.log("button clicked")
+    //     const postCard = button.closest('.post-card');
+    //     console.log(postCard)
+    //     const emojisContainer = postCard.querySelector('.like-emojis');
+    //     console.log(emojisContainer)
+    //     emojisContainer.style.display = emojisContainer.style.display === 'none' ? 'block' : 'none';
+    // }
+
     function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
         const emojisContainer = postCard.querySelector('.like-emojis');
         emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';
     }
 
+    function toggleLikeEmojisComment(button) {
+        const postCard = button.closest('.comment-card');
+        const commentEmojisContainer = postCard.querySelector('.comment-like-emojis');
+        commentEmojisContainer.style.display = commentEmojisContainer.style.display === 'block' ? 'none' : 'block';
+
+    }
+
+
     // Update the event listeners to handle click on the "like-button"
-    document.addEventListener('DOMContentLoaded', function () {
-        const likeButtons = document.querySelectorAll('.like-button');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.stopPropagation(); // Prevent the click event from bubbling to the document
-                toggleLikeEmojis(this);
-            });
-        });
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const likeButtons = document.querySelectorAll('.like-button');
+    //     likeButtons.forEach(button => {
+    //         button.addEventListener('click', function (event) {
+    //             console.log("triggered")
+    //             event.stopPropagation(); // Prevent the click event from bubbling to the document
+    //             toggleLikeEmojis(this);
+    //         });
+    //     });
+    // });
 
     function submitReaction(event, reaction, postId) {
         event.preventDefault();
@@ -240,6 +292,57 @@
         form.submit();
     }
 
+    function submitCommentReaction(event, reaction, commentId) {
+        event.preventDefault();
+        const form = event.target;
+        const reactionField = document.createElement('input');
+        const commentIdField = document.createElement('input');
+
+        reactionField.setAttribute('type', 'hidden');
+        reactionField.setAttribute('name', 'reaction');
+        reactionField.setAttribute('value', reaction);
+        form.appendChild(reactionField);
+
+        commentIdField.setAttribute('type', 'hidden');
+        commentIdField.setAttribute('name', 'commentId');
+        commentIdField.setAttribute('value', commentId);
+        form.appendChild(commentIdField);
+
+
+        form.submit();
+    }
+
+
+    // function submitReaction(event, reaction, postId) {
+    //     event.preventDefault();
+    //     const form = event.target;
+    //     const reactionField = document.createElement('input');
+    //     const postIdField = document.createElement('input');
+    //
+    //     reactionField.setAttribute('type', 'hidden');
+    //     reactionField.setAttribute('name', 'reaction');
+    //     reactionField.setAttribute('value', reaction);
+    //     form.appendChild(reactionField);
+    //
+    //     // Check if it's a comment reaction and add commentId field
+    //     const commentId = form.querySelector('[name="commentId"]');
+    //     if (commentId) {
+    //         const commentIdField = document.createElement('input');
+    //         commentIdField.setAttribute('type', 'hidden');
+    //         commentIdField.setAttribute('name', 'commentId');
+    //         commentIdField.setAttribute('value', commentId.value);
+    //         form.appendChild(commentIdField);
+    //     }
+    //
+    //     postIdField.setAttribute('type', 'hidden');
+    //     postIdField.setAttribute('name', 'postId');
+    //     postIdField.setAttribute('value', postId);
+    //     form.appendChild(postIdField);
+    //
+    //     form.submit();
+    // }
+
+
 
     // Function to handle emoji click (replace this with your desired action)
     // function handleEmojiClick(emoji) {
@@ -248,14 +351,23 @@
     // }
 
     // Update the event listeners to handle mouseleave on the emojis container
-    document.addEventListener('DOMContentLoaded', function () {
-        const emojisContainers = document.querySelectorAll('.like-emojis');
-        emojisContainers.forEach(container => {
-            container.addEventListener('mouseleave', function () {
-                this.style.display = 'none';
-            });
-        });
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const emojisContainers = document.querySelectorAll('.like-emojis');
+    //     emojisContainers.forEach(container => {
+    //         container.addEventListener('mouseleave', function () {
+    //             this.style.display = 'none';
+    //         });
+    //     });
+    // });
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const emojisContainers = document.querySelectorAll('.comment-like-emojis');
+    //     emojisContainers.forEach(container => {
+    //         container.addEventListener('mouseleave', function () {
+    //             this.style.display = 'none';
+    //         });
+    //     });
+    // });
 
 
 </script>
