@@ -205,11 +205,11 @@ public class HomeController {
 
 
     // Helper method to calculate the counts of each type of reaction for all posts
-    private List<Integer> getReactionCounts(List<Post> posts, String reactionId) {
+    private List<Integer> getReactionCounts(List<Post> posts, String reactionType) {
         List<Integer> counts = new ArrayList<>();
         for (Post post : posts) {
             int count = (int) post.getReactions().stream()
-                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionId))
+                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
                     .count();
             counts.add(count);
         }
