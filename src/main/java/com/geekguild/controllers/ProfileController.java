@@ -33,6 +33,7 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}")
     public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
+
         // Retrieve the user with the given userId from the database
         User user = userDao.findById(userId).orElse(null);
 
@@ -87,8 +88,8 @@ public class ProfileController {
 
     @GetMapping("/profile/{userId}/edit")
     public String editProfileLoad(@PathVariable long userId, Model model) {
-//        Long userId = userId;
-        User user = userDao.getReferenceById(userId);
+        User loggedInUser = getLoggedInUser();
+        User user = userDao.getReferenceById(loggedInUser.getId());
         Portfolio portfolio = portfolioDao.findByUserId(userId);
         Work work = workDao.findByUserId(userId);
         List<Language> allLanguages = languageDao.findAll();
@@ -105,7 +106,7 @@ public class ProfileController {
         profileFormWrapper.setWork(work);
 
         model.addAttribute("allLanguages", allLanguages);
-
+        model.addAttribute("user", user);
         model.addAttribute("profileFormWrapper", profileFormWrapper);
 
         return "users/edit";
@@ -254,6 +255,10 @@ public class ProfileController {
         }
 
         return "redirect:/profile";
+    }
+
+    private User getLoggedInUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 
