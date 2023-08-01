@@ -57,8 +57,5 @@ public class Reaction {
     private List<Comments> comments;
 
 
-//        @ManyToMany(mappedBy = "language")
-//        private List<User> users;
-
 
 }

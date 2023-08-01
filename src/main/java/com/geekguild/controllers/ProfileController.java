@@ -85,12 +85,12 @@ public class ProfileController {
     }
 
 
-    @GetMapping("/profile/{id}/edit")
-    public String editProfileLoad(@PathVariable long id, Model model) {
-        Long userId = id;
+    @GetMapping("/profile/{userId}/edit")
+    public String editProfileLoad(@PathVariable long userId, Model model) {
+//        Long userId = userId;
         User user = userDao.getReferenceById(userId);
-        Portfolio portfolio = portfolioDao.getReferenceById(id);
-        Work work = workDao.getReferenceById(id);
+        Portfolio portfolio = portfolioDao.findByUserId(userId);
+        Work work = workDao.findByUserId(userId);
         List<Language> allLanguages = languageDao.findAll();
 
         // Check if the user exists
@@ -112,10 +112,10 @@ public class ProfileController {
     }
 
 
-    @PostMapping("/profile/{id}/edit")
-    public String editProfile(@PathVariable long id, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds) {
+    @PostMapping("/profile/{userId}/edit")
+    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds) {
         // Fetch the existing user from the database
-        User loggedInUser = userDao.findById(id).orElse(null);
+        User loggedInUser = userDao.findById(userId).orElse(null);
         if (loggedInUser == null) {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
             return "redirect:/error";
@@ -194,7 +194,7 @@ public class ProfileController {
         }
 
         // Fetch the existing portfolio and update its fields
-        Portfolio existingPortfolio = portfolioDao.findByUserId(id);
+        Portfolio existingPortfolio = portfolioDao.findByUserId(userId);
         if (existingPortfolio != null) {
             Portfolio formPortfolio = profileFormWrapper.getPortfolio();
             if (formPortfolio.getAbout() != null) {
@@ -230,7 +230,7 @@ public class ProfileController {
         }
 
         // Fetch the existing work and update its fields
-        Work existingWork = workDao.findByUserId(id);
+        Work existingWork = workDao.findByUserId(userId);
         if (existingWork != null) {
             Work formWork = profileFormWrapper.getWork();
             if (formWork.getAsk() != null) {

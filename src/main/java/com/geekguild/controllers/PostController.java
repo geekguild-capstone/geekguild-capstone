@@ -8,10 +8,8 @@ import com.geekguild.repositories.ReactionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -112,49 +110,6 @@ public class PostController {
 
 
     }
-
-//    //Edit a post
-//    @PostMapping("/post/{id}/edit")
-//    public String editPost(@PathVariable long postId, Model model) {
-//        User loggedInUser = getCurrentLoggedInUser();
-//        Post post = postDao.getReferenceById(postId);
-//        model.addAttribute("post", post);
-//
-//
-//        if (loggedInUser == null) {
-//            // Handle invalid group ID
-//            return "redirect:/error";
-//        }
-//
-//        if (post.getGroup() == null) {
-//            return "redirect:/home";
-//        } else {
-//            return "redirect:/group/{groupId}";
-//        }
-//
-//    }
-
-    // Update a post
-//    @PostMapping("/post/{id}/update")
-//    public ResponseEntity<String> updatePost(@PathVariable long id, @ModelAttribute PostUpdateRequest request) {
-//        Post post = postDao.findById(id).orElse(null);
-//        if (post == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        // Check if the logged-in user is the owner of the post or has permission to edit it
-//        User loggedInUser = getCurrentLoggedInUser();
-//        if (loggedInUser == null || !post.getUser().equals(loggedInUser)) {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have permission to edit this post.");
-//        }
-//
-//        // Update the post with the new data
-//        post.setBody(request.getBody());
-//        post.setSnippet(request.getSnippet());
-//        postDao.save(post);
-//
-//        return ResponseEntity.ok("Post updated successfully.");
-//    }
 
     // Update a post
     @PostMapping("/post/{postId}/update")

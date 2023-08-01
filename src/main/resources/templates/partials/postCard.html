@@ -87,15 +87,15 @@
                 </div>
             </div>
             <div class="interactions">
-                <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
+                <button class="like-button">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
                 <div class="like-emojis" style="display: none;">
                     <span class="like-emoji"><i>👍</i></span>
                     <span class="emoji-counter">0</span>
-                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+                    <span class="like-emoji" >❤️</span>
                     <span class="emoji-counter">0</span>
-                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+                    <span class="like-emoji">😂</span>
                     <span class="emoji-counter">0</span>
                 </div>
                 <button class="comment-button" onclick="toggleCommentBox(this)">
@@ -170,9 +170,9 @@
     <div class="like-emojis count-display">
         <span class="like-emoji"><i>👍</i></span>
         <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>
-        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
+        <span class="like-emoji">❤️</span>
         <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>
-        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
+        <span class="like-emoji" >😂</span>
         <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>
     </div>
 </div>
@@ -324,122 +324,5 @@
 
 </script>
 
-<!--<script>-->
-
-
-<!--    // Function to open the edit modal and pre-fill the form-->
-<!--    function openEditModal(postId, body, snippet) {-->
-<!--        console.log(postId)-->
-<!--        console.log(body)-->
-<!--        console.log(snippet)-->
-<!--        $('#editBody').val(body);-->
-<!--        $('#editSnippet').val(snippet);-->
-<!--        $('#postId').val(postId);-->
-<!--        $('#editModal').modal('show');-->
-<!--    }-->
-
-<!--    // Function to handle form submission asynchronously-->
-<!--    function submitEditForm() {-->
-
-<!--        event.preventDefault(); // Prevent default form submission behavior-->
-
-
-<!--        const postId = $('#postId').val();-->
-<!--        const body = $('#editBody').val();-->
-<!--        const snippet = $('#editSnippet').val();-->
-<!--        console.log(postId)-->
-<!--        console.log(body)-->
-<!--        console.log(snippet)-->
-
-<!--        // Make an AJAX request to submit the form data-->
-<!--        $.ajax({-->
-<!--            type: 'POST',-->
-<!--            url: `/post/${postId}/update`,-->
-<!--            headers: {-->
-<!--                'X-CSRF-TOKEN': $('[name="_csrf"]').attr('content')-->
-<!--            },-->
-<!--            contentType: 'application/json',-->
-<!--            data: JSON.stringify({-->
-<!--                body: body,-->
-<!--                snippet: snippet-->
-<!--            }),-->
-<!--            success: function (response) {-->
-<!--                // Handle the response if needed (e.g., show a success message)-->
-<!--                console.log('Post updated successfully');-->
-<!--                // Update the post content on the page without reloading-->
-<!--                const postCard = $('#post-' + postId);-->
-<!--                postCard.find('.post-content p').text(body);-->
-<!--                postCard.find('.post-content code').text(snippet);-->
-<!--                // Close the modal after successful update-->
-<!--                $('#editModal').modal('hide');-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                // Handle errors if needed-->
-<!--                console.error('Error updating post:', error);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--    // Attach click event to the "Save Changes" button in the modal-->
-<!--    $(document).on('click', '#submitEdit', function () {-->
-<!--        submitEditForm();-->
-<!--    });-->
-<!--</script>-->
-<!--<script>-->
-<!--    // Function to open the edit modal and pre-fill the form-->
-<!--    function openEditModal(postId, body, snippet) {-->
-<!--        console.log(postId)-->
-<!--        console.log(body)-->
-<!--        console.log(snippet)-->
-<!--        $('#editBody').val(body);-->
-<!--        $('#editSnippet').val(snippet);-->
-<!--        $('#postId').val(postId);-->
-<!--        $('#editModal').modal('show');-->
-<!--    }-->
-
-<!--    // Function to handle form submission asynchronously-->
-<!--    function submitEditForm() {-->
-<!--        const postId = $('#postId').val();-->
-<!--        const body = $('#editBody').val();-->
-<!--        const snippet = $('#editSnippet').val();-->
-
-<!--        // Make an AJAX request to submit the form data-->
-<!--        $.ajax({-->
-<!--            type: 'POST',-->
-<!--            url: '/post/' + postId + '/update',-->
-<!--            data: {-->
-<!--                body: body,-->
-<!--                snippet: snippet-->
-<!--            },-->
-<!--            success: function (response) {-->
-<!--                // Handle the response if needed (e.g., show a success message)-->
-<!--                console.log('Post updated successfully');-->
-<!--                // Close the modal after successful update-->
-<!--                $('#editModal').modal('hide');-->
-<!--                // Optionally, you can update the post content on the page without reloading-->
-<!--                // For example, find the post element by its ID and update its content.-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                // Handle errors if needed-->
-<!--                console.error('Error updating post:', error);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--    // Attach click event to the edit button-->
-<!--    // $(document).on('click', '.edit-button', function () {-->
-<!--    //     const postCard = $(this).closest('.post-card');-->
-<!--    //     const postId = postCard.attr('id').split('-')[1];-->
-<!--    //     const postBody = postCard.find('.post-content p').text();-->
-<!--    //     const postSnippet = postCard.find('.post-content code').text();-->
-<!--    //-->
-<!--    //     openEditModal(postId, postBody, postSnippet);-->
-<!--    // });-->
-
-<!--    // Attach click event to the "Save Changes" button in the modal-->
-<!--    $(document).on('click', '#submitEdit', function () {-->
-<!--        submitEditForm();-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>
