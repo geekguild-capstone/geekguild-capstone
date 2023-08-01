@@ -152,8 +152,6 @@ public class PostController {
         }
     }
 
-
-
     //COMMENTS
 
     //Add comment to a specific post
