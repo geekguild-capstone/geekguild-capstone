@@ -5,7 +5,9 @@ const postBodyTextarea = document.querySelector('#postBodyTextarea');
 const submitButton = document.querySelector('.submit-post');
 
 postImageButton.addEventListener('click', () => {
-    const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
+    const apiKey = 'AkB0xPD0qS7OWG1qTtSu5z';
+    // const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
+
     const client = filestack.init(apiKey);
     const options = {
         onFileUploadStarted: () => {
