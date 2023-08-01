@@ -43,7 +43,9 @@ public class Comments {
     @JoinColumn (name = "creator_id")
     private User user;
 
-    @ManyToMany(mappedBy = "comments")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
     private List<Reaction> reactions;
+
 
 }

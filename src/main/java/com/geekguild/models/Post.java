@@ -45,7 +45,10 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comments> comments;
 
-    // Add the many-to-many relationship with reactions
-    @ManyToMany(mappedBy = "posts")
+//    // Add the many-to-many relationship with reactions
+//    @ManyToMany(mappedBy = "posts")
+//    private List<Reaction> reactions;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Reaction> reactions;
 }
