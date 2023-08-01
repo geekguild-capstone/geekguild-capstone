@@ -20,7 +20,7 @@
 
 <div class="profile-header-container">
     <!-- Cover Photo Container -->
-    <div class="cover-photo" style="background-image: url('${user.coverPhoto}');">
+    <div class="cover-photo" >
         <a class="update-cover-icon" th:href="@{/profile/{id}/edit(id=${profileFormWrapper.user.getId()})}">
             <i class="fas fa-camera"></i> Update Cover Photo
         </a>
