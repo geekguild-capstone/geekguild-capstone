@@ -1,6 +1,7 @@
 package com.geekguild.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +35,7 @@ public class Comments {
 //    }
 
     //    Many to One Posts
+    @JsonBackReference
     @ManyToOne
     @JoinColumn (name = "post_id")
     private Post post;
