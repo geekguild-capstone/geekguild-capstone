@@ -66,6 +66,10 @@
 
     <div th:each="group : ${loggedInUserGroups}">
         <div class="post-card">
+
+<!--            <div class="user-profile">-->
+<!--                <img src="/img/javaphoto" alt="User Profile Image">-->
+<!--                <div>-->
             <div class="user-profile">
                 <img th:src="${group.image}"
                      alt="User Profile Image">
@@ -75,7 +79,7 @@
                     <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
                     <form th:action="@{/group/{groupId}/leave(groupId=${group.id})}" method="post">
                         <button type="submit" class="leave-button">
-                            <i class="fas fa-times"></i>
+                            <i class="fas fa-trash"></i>
                         </button>
                     </form>
                 </div>
