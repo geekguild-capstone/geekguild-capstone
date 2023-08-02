@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -77,23 +78,28 @@ public class HomeController {
 
         model.addAttribute("homePostComments", homePostComments);
 
+        // Collect all comments for which we need to fetch reaction counts
+        List<Comments> allComments = homePostComments.stream().flatMap(List::stream).collect(Collectors.toList());
+
+        // Fetch comment reaction counts in a single query
+        List<Object[]> commentReactionsCounts = reactionDao.countReactionsForComments(allComments);
+
         // Calculate and add the counts of each type of reaction for each comment to the model
         Map<Long, Integer> commentLikesCount = new HashMap<>();
         Map<Long, Integer> commentLovesCount = new HashMap<>();
         Map<Long, Integer> commentLaughsCount = new HashMap<>();
 
-        for (List<Comments> commentsForPost : homePostComments) {
-            for (Comments comment : commentsForPost) {
-                long commentId = comment.getId();
+        for (Object[] row : commentReactionsCounts) {
+            long commentId = (Long) row[0];
+            String reactionType = (String) row[1];
+            int count = ((Number) row[2]).intValue();
 
-                int likesCount = reactionDao.countByCommentAndReaction(comment, "like");
-                commentLikesCount.put(commentId, likesCount);
-
-                int lovesCount = reactionDao.countByCommentAndReaction(comment, "love");
-                commentLovesCount.put(commentId, lovesCount);
-
-                int laughsCount = reactionDao.countByCommentAndReaction(comment, "laugh");
-                commentLaughsCount.put(commentId, laughsCount);
+            if ("like".equalsIgnoreCase(reactionType)) {
+                commentLikesCount.put(commentId, count);
+            } else if ("love".equalsIgnoreCase(reactionType)) {
+                commentLovesCount.put(commentId, count);
+            } else if ("laugh".equalsIgnoreCase(reactionType)) {
+                commentLaughsCount.put(commentId, count);
             }
         }
 
@@ -103,10 +109,13 @@ public class HomeController {
         model.addAttribute("commentLaughsCount", commentLaughsCount);
 
         model.addAttribute("request", new PostUpdateRequest());
+        model.addAttribute("commentRequest", new CommentUpdateRequest());
+
 
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
+//        System.out.println(usersNotFriendsWithLoggedInUser);
 
         return "users/home";
     }
@@ -241,16 +250,16 @@ public class HomeController {
     }
 
 
-    private List<Integer> getCommentReactionCounts(List<Comments> comments, String reactionType) {
-        List<Integer> counts = new ArrayList<>();
-        for (Comments comment : comments) {
-            int count = (int) comment.getReactions().stream()
-                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
-                    .count();
-            counts.add(count);
-        }
-        return counts;
-    }
+//    private List<Integer> getCommentReactionCounts(List<Comments> comments, String reactionType) {
+//        List<Integer> counts = new ArrayList<>();
+//        for (Comments comment : comments) {
+//            int count = (int) comment.getReactions().stream()
+//                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
+//                    .count();
+//            counts.add(count);
+//        }
+//        return counts;
+//    }
 
 }
 

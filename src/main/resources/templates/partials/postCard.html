@@ -13,7 +13,7 @@
 <body>
 <!-- Rest of your HTML content -->
 
-<!-- Edit Modal -->
+<!-- Edit Post Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form th:object="${request}" method="post" id="editForm">
@@ -38,6 +38,39 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="submitEdit">Save Changes</button>
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+        </form>
+    </div>
+</div>
+
+<!-- Edit Comment Modal -->
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:object="${commentRequest}" method="post" id="editCommentForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editCommentBody" class="form-label">Body</label>
+                        <input th:field="*{text}" type="text" class="form-control comment-text" id="editCommentBody" name="body"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCommentSnippet" class="form-label">Snippet</label>
+                        <textarea th:field="*{snippet}" class="form-control comment-snippet" id="editCommentSnippet" name="snippet"
+                                  rows="5" required></textarea>
+                    </div>
+                    <input type="hidden" id="commentId" name="commentId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitCommentEdit">Save Changes</button>
                 </div>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -140,9 +173,9 @@
             </div>
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
-                <div th:each="comment : ${homePostComments[postIndex.index]}">
+                <div class="comment-card" th:each="comment : ${homePostComments[postIndex.index]}" th:data-comment-id="${comment.id}">
 
-                    <div class="comment-card">
+<!--                    <div class="comment-card">-->
                         <div class="comment-header">
                             <div class="user-profile">
                                 <img th:src="${comment.user.image}" alt="User Profile Image">
@@ -151,8 +184,9 @@
                                 </div>
                             </div>
                             <div class="comment-icons" th:if="${user.id == comment.user.id}">
-                                <button type="submit" class="comment-edit-button"><i class="fas fa-pencil-alt"></i></button>
-
+                                <button data-bs-toggle="modal" data-bs-target="#editCommentModal" th:attr="data-comment-id=${comment.id}" onclick="openEditCommentModal(this.getAttribute('data-comment-id'))">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
                                 <form method="post" th:action="@{/comment/delete/{commentId}(commentId=${comment.id})}">
                                     <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i></button>
                                 </form>
@@ -204,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -236,15 +270,7 @@
         }
     }
 
-    // Function to handle showing the emojis container
-    // function toggleLikeEmojis(button) {
-    //     console.log("button clicked")
-    //     const postCard = button.closest('.post-card');
-    //     console.log(postCard)
-    //     const emojisContainer = postCard.querySelector('.like-emojis');
-    //     console.log(emojisContainer)
-    //     emojisContainer.style.display = emojisContainer.style.display === 'none' ? 'block' : 'none';
-    // }
+
 
     function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
@@ -260,17 +286,6 @@
     }
 
 
-    // Update the event listeners to handle click on the "like-button"
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const likeButtons = document.querySelectorAll('.like-button');
-    //     likeButtons.forEach(button => {
-    //         button.addEventListener('click', function (event) {
-    //             console.log("triggered")
-    //             event.stopPropagation(); // Prevent the click event from bubbling to the document
-    //             toggleLikeEmojis(this);
-    //         });
-    //     });
-    // });
 
     function submitReaction(event, reaction, postId) {
         event.preventDefault();
@@ -313,62 +328,6 @@
     }
 
 
-    // function submitReaction(event, reaction, postId) {
-    //     event.preventDefault();
-    //     const form = event.target;
-    //     const reactionField = document.createElement('input');
-    //     const postIdField = document.createElement('input');
-    //
-    //     reactionField.setAttribute('type', 'hidden');
-    //     reactionField.setAttribute('name', 'reaction');
-    //     reactionField.setAttribute('value', reaction);
-    //     form.appendChild(reactionField);
-    //
-    //     // Check if it's a comment reaction and add commentId field
-    //     const commentId = form.querySelector('[name="commentId"]');
-    //     if (commentId) {
-    //         const commentIdField = document.createElement('input');
-    //         commentIdField.setAttribute('type', 'hidden');
-    //         commentIdField.setAttribute('name', 'commentId');
-    //         commentIdField.setAttribute('value', commentId.value);
-    //         form.appendChild(commentIdField);
-    //     }
-    //
-    //     postIdField.setAttribute('type', 'hidden');
-    //     postIdField.setAttribute('name', 'postId');
-    //     postIdField.setAttribute('value', postId);
-    //     form.appendChild(postIdField);
-    //
-    //     form.submit();
-    // }
-
-
-
-    // Function to handle emoji click (replace this with your desired action)
-    // function handleEmojiClick(emoji) {
-    //     console.log('Emoji clicked:', emoji);
-    //     // Add your like or other action logic here
-    // }
-
-    // Update the event listeners to handle mouseleave on the emojis container
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const emojisContainers = document.querySelectorAll('.like-emojis');
-    //     emojisContainers.forEach(container => {
-    //         container.addEventListener('mouseleave', function () {
-    //             this.style.display = 'none';
-    //         });
-    //     });
-    // });
-
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     const emojisContainers = document.querySelectorAll('.comment-like-emojis');
-    //     emojisContainers.forEach(container => {
-    //         container.addEventListener('mouseleave', function () {
-    //             this.style.display = 'none';
-    //         });
-    //     });
-    // });
-
 
 </script>
 
@@ -385,7 +344,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Function to open the edit modal and pre-fill the form
+
     function openEditModal(postId) {
         fetch(`/post/${postId}`)
             .then(response => {
@@ -399,7 +358,7 @@
                 // Set the values of the form fields in the modal with the fetched data
                 $('#editBody').val(data.body);
                 $('#editSnippet').val(data.snippet);
-                $('#postId').val(postId);
+                $('#postId').val(data.id); // Use data.id from the DTO
 
                 // Show the modal
                 $('#editModal').modal('show');
@@ -463,6 +422,92 @@
 
 
 </script>
+<script>
+    // Function to open the edit Comment modal and pre-fill the form
+    function openEditCommentModal(commentId) {
+        fetch(`/comment/${commentId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Set the values of the form fields in the modal with the fetched data
+                $('#editCommentBody').val(data.text);
+                $('#editCommentSnippet').val(data.snippet);
+                $('#commentId').val(data.id); // Use data.id from the DTO
+
+                // Show the modal
+                $('#editCommentModal').modal('show');
+            })
+            .catch(error => {
+                console.error('Error fetching comment data:', error);
+            });
+    }
+
+    // Function to handle form submission asynchronously
+    function submitEditCommentForm() {
+
+        event.preventDefault(); // Prevent default form submission behavior
+
+
+
+        const commentId = $('#commentId').val();
+        const body = $('#editCommentBody').val();
+        const snippet = $('#editCommentSnippet').val();
+        console.log(commentId)
+        console.log(body)
+        console.log(snippet)
+
+        // Get the CSRF token from the hidden input field
+        const csrfToken = $('[name="_csrf"]').val();
+
+        // Make an AJAX request to submit the form data
+        $.ajax({
+            type: 'POST',
+            url: `/comment/${commentId}/update`,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                text: body,
+                snippet: snippet
+            }),
+            success: function (response) {
+                // Handle the response if needed (e.g., show a success message)
+                console.log('Post updated successfully');
+                // Update the comment content on the page without reloading
+                // const commentCard = $(`[data-comment-id="${data.id}"]`);
+                const commentCard = $(`[data-comment-id="${commentId}"]`);
+
+                commentCard.find('.comment-text').text(body);
+                commentCard.find('.comment-snippet').text(snippet);
+                // const postCard = $(`[data-comment-id="${commentId}"]`);
+                // postCard.find('.post-body').text(body);
+                // postCard.find('.code-container code').text(snippet);
+
+                // Close the modal after successful update
+                $('#editCommentModal').modal('hide');
+            },
+            error: function (error) {
+                // Handle errors if needed
+                console.error('Error updating comment:', error);
+            }
+        });
+    }
+
+
+    // Attach click event to the "Save Changes" button in the modal
+    $(document).on('click', '#submitCommentEdit', function () {
+        submitEditCommentForm();
+    });
+
+
+</script>
+
 
 </body>
 </html>
