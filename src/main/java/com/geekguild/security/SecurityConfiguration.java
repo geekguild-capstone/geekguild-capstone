@@ -38,15 +38,22 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    
-
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 
-        http.authorizeHttpRequests((requests) -> requests
+        http
+                /* Login configuration */
+                .formLogin((login) -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true))
+
+            /* Logout configuration */
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
+
+
+                .authorizeHttpRequests((requests) -> requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("/posts/create", "/posts/*/edit", "/profile/*/delete").authenticated()
@@ -54,15 +61,11 @@ public class SecurityConfiguration {
                          * anyone can visit the home page, register, login, and view ads */
 
                         .requestMatchers("/", "/posts", "/posts/*", "/register", "/login", "/home", "/groups", "/group", "/group/*", "/about-us", "/profile", "/profile/*/edit", "/profile/upload", "/profile/*", "/home/upload", "/friends", "/friends/*/accept", "/friends/*/reject", "/friends/add",
-                                "/friends/remove","/group/create", "/group/*/join", "/group/*/leave", "/group/*/comment", "/post/create", "/post/delete/*", "/post/*/create", "/comment", "/comment/delete/*", "/post/*/update", "/post/*", "/register/check-email").permitAll()
+                                "/friends/remove","/group/create", "/group/*/join", "/group/*/leave", "/group/*/comment", "/post/create", "/post/delete/*", "/post/*/create", "/comment", "/comment/delete/*", "/post/*/update", "/post/*", "/register/check-email", "/reaction/post/submit", "/reaction/comment/submit", "/comment/*","/comment/*/update").permitAll()
 
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
-                /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/home"))
-                /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());
         return http.build();
     }

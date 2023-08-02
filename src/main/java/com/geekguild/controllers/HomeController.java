@@ -1,18 +1,14 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.*;
-import com.geekguild.repositories.CommentRepository;
-import com.geekguild.repositories.FriendRequestRepository;
-import com.geekguild.repositories.PostRepository;
-import com.geekguild.repositories.UserRepository;
+import com.geekguild.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -22,14 +18,15 @@ public class HomeController {
     private final FriendRequestRepository friendDao;
     private final CommentRepository commentDao;
 
+    private final ReactionRepository reactionDao;
 
 
-
-    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao) {
+    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao, ReactionRepository reactionDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.friendDao = friendDao;
         this.commentDao = commentDao;
+        this.reactionDao = reactionDao;
     }
 
 
@@ -37,6 +34,7 @@ public class HomeController {
     public String landingPage(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
+
         model.addAttribute("comment", new Comments());
 
         // add dynamic title page
@@ -64,6 +62,8 @@ public class HomeController {
         model.addAttribute("lovesCount", lovesCounts);
         model.addAttribute("laughsCount", laughsCounts);
 
+
+
         model.addAttribute("users", userDao.findAll());
         // The friend-related attributes are removed from here
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
@@ -77,14 +77,49 @@ public class HomeController {
         }
 
         model.addAttribute("homePostComments", homePostComments);
+
+        // Collect all comments for which we need to fetch reaction counts
+        List<Comments> allComments = homePostComments.stream().flatMap(List::stream).collect(Collectors.toList());
+
+        // Fetch comment reaction counts in a single query
+        List<Object[]> commentReactionsCounts = reactionDao.countReactionsForComments(allComments);
+
+        // Calculate and add the counts of each type of reaction for each comment to the model
+        Map<Long, Integer> commentLikesCount = new HashMap<>();
+        Map<Long, Integer> commentLovesCount = new HashMap<>();
+        Map<Long, Integer> commentLaughsCount = new HashMap<>();
+
+        for (Object[] row : commentReactionsCounts) {
+            long commentId = (Long) row[0];
+            String reactionType = (String) row[1];
+            int count = ((Number) row[2]).intValue();
+
+            if ("like".equalsIgnoreCase(reactionType)) {
+                commentLikesCount.put(commentId, count);
+            } else if ("love".equalsIgnoreCase(reactionType)) {
+                commentLovesCount.put(commentId, count);
+            } else if ("laugh".equalsIgnoreCase(reactionType)) {
+                commentLaughsCount.put(commentId, count);
+            }
+        }
+
+// Add the comment reaction counts to the model
+        model.addAttribute("commentLikesCount", commentLikesCount);
+        model.addAttribute("commentLovesCount", commentLovesCount);
+        model.addAttribute("commentLaughsCount", commentLaughsCount);
+
         model.addAttribute("request", new PostUpdateRequest());
+        model.addAttribute("commentRequest", new CommentUpdateRequest());
+
 
 
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
+//        System.out.println(usersNotFriendsWithLoggedInUser);
 
         return "users/home";
     }
+
 
     @GetMapping("/about-us")
     public String showAbout(Model model) {
@@ -202,19 +237,29 @@ public class HomeController {
     }
 
 
-
-
     // Helper method to calculate the counts of each type of reaction for all posts
-    private List<Integer> getReactionCounts(List<Post> posts, String reactionId) {
+    private List<Integer> getReactionCounts(List<Post> posts, String reactionType) {
         List<Integer> counts = new ArrayList<>();
         for (Post post : posts) {
             int count = (int) post.getReactions().stream()
-                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionId))
+                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
                     .count();
             counts.add(count);
         }
         return counts;
     }
+
+
+//    private List<Integer> getCommentReactionCounts(List<Comments> comments, String reactionType) {
+//        List<Integer> counts = new ArrayList<>();
+//        for (Comments comment : comments) {
+//            int count = (int) comment.getReactions().stream()
+//                    .filter(reaction -> reaction.getReaction().equalsIgnoreCase(reactionType))
+//                    .count();
+//            counts.add(count);
+//        }
+//        return counts;
+//    }
 
 }
 

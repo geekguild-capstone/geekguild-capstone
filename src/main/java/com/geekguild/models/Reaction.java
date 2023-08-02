@@ -1,5 +1,6 @@
 package com.geekguild.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,30 +36,18 @@ public class Reaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("reactions") // Add this annotation to avoid circular references
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    @JsonIgnoreProperties("reactions") // Add this annotation to avoid circular references
+    private Post post;
 
-    // Add the many-to-many relationship with post
-    @ManyToMany
-    @JoinTable(
-        name = "post_reactions",
-        joinColumns = @JoinColumn(name = "reaction_id"),
-        inverseJoinColumns = @JoinColumn(name = "post_id")
-    )
-    private List<Post> posts;
-
-    // Add the many-to-many relationship with comments
-    @ManyToMany
-    @JoinTable(
-            name = "comment_reactions",
-            joinColumns = @JoinColumn(name = "reaction_id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id")
-    )
-    private List<Comments> comments;
-
-
-//        @ManyToMany(mappedBy = "language")
-//        private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "comment_id")
+    @JsonIgnoreProperties("reactions") // Add this annotation to avoid circular references
+    private Comments comment;
 
 
 }

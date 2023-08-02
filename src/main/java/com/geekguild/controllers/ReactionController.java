@@ -1,52 +1,64 @@
-//package com.geekguild.controllers;
-//
-//import com.geekguild.models.Post;
-//import com.geekguild.models.Reaction;
-//import jakarta.persistence.EntityNotFoundException;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//public class ReactionController {
-//
-//    // ...
-//
-//    public void addPostReaction(Long postId, Reaction reaction) {
-//        Post post = postRepository.findById(postId).orElse(null);
-//        if (post == null) {
-//            throw new EntityNotFoundException("Post not found");
-//        }
-//
-//        User user = userService.getUserById(reaction.getUser().getId());
-//        if (user == null) {
-//            throw new EntityNotFoundException("User not found");
-//        }
-//
-//        // Add the user and post to the reaction
-//        reaction.getUsers().add(user);
-//        reaction.getPosts().add(post);
-//
-//        // Save the reaction
-//        reactionRepository.save(reaction);
-//    }
-//
-//    public void addCommentReaction(Long commentId, Reaction reaction) {
-//        Comment comment = commentRepository.findById(commentId).orElse(null);
-//        if (comment == null) {
-//            throw new EntityNotFoundException("Comment not found");
-//        }
-//
-//        User user = userService.getUserById(reaction.getUser().getId());
-//        if (user == null) {
-//            throw new EntityNotFoundException("User not found");
-//        }
-//
-//        // Add the user and comment to the reaction
-//        reaction.getUsers().add(user);
-//        reaction.getComments().add(comment);
-//
-//        // Save the reaction
-//        reactionRepository.save(reaction);
-//    }
-//
-//    // ...
-//}
+package com.geekguild.controllers;
+
+import com.geekguild.models.Reaction;
+import com.geekguild.models.User;
+import com.geekguild.repositories.CommentRepository;
+import com.geekguild.repositories.PostRepository;
+import com.geekguild.repositories.ReactionRepository;
+import com.geekguild.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class ReactionController {
+
+    private final ReactionRepository reactionDao;
+    private final PostRepository postDao;
+    private final UserRepository userDao;
+    private final CommentRepository commentDao;
+
+    @Autowired
+    public ReactionController(ReactionRepository reactionDao, PostRepository postDao, UserRepository userDao, CommentRepository commentDao) {
+        this.reactionDao = reactionDao;
+        this.postDao = postDao;
+        this.userDao = userDao;
+        this.commentDao = commentDao;
+    }
+
+    @PostMapping("/reaction/post/submit")
+    public String submitReaction(
+            @RequestParam("postId") Long postId,
+            @RequestParam("reaction") String reaction) {
+        System.out.println("postId: " + postId);
+        System.out.println("reaction: " + reaction);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        Reaction newReaction = new Reaction();
+        newReaction.setReaction(reaction);
+        newReaction.setPost(postDao.getReferenceById(postId));
+        newReaction.setUser(user);
+        reactionDao.save(newReaction);
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/reaction/comment/submit")
+    public String submitCommentReaction(
+            @RequestParam("commentId") Long commentId,
+            @RequestParam("reaction") String reaction) {
+        System.out.println("commentId: " + commentId);
+        System.out.println("reaction: " + reaction);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        Reaction newReaction = new Reaction();
+        newReaction.setReaction(reaction);
+        newReaction.setComment(commentDao.getReferenceById(commentId));
+        newReaction.setUser(user);
+        reactionDao.save(newReaction);
+
+        return "redirect:/home";
+    }
+
+}

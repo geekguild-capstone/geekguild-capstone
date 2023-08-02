@@ -7,15 +7,20 @@
     <!--CUSTOM CSS -->
     <link rel="stylesheet" href="/css/postCard.css">
     <link rel="stylesheet" href="/css/create-group-modal.css">
+    <link rel="stylesheet" href="/css/groups.css">
 </head>
 <body>
 <main>
     <div class="top-bar">
-        <h4 class="group-heading">Your Groups
-            <!--CREATE GROUP BUTTON-->
-            <button data-bs-toggle="modal" data-bs-target="#createGroupModal" class="btn btn-primary"
+        <h4 class="group-heading">
+            Your Groups
+            <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#createGroupModal"
+                    class="btn btn-primary"
                     id="createGroupBtn"
-                    data-bs-placement="bottom" title="Create Group">
+                    data-bs-placement="bottom"
+                    title="Create Group">
                 <i class="fas fa-plus"></i>
             </button>
         </h4>
@@ -57,24 +62,31 @@
             </div>
         </div>
         <!-- END OF CREATE GROUP MODAL -->
-
-
     </div>
+
     <div th:each="group : ${loggedInUserGroups}">
         <div class="post-card">
+
+<!--            <div class="user-profile">-->
+<!--                <img src="/img/javaphoto" alt="User Profile Image">-->
+<!--                <div>-->
             <div class="user-profile">
                 <img th:src="${group.image}"
                      alt="User Profile Image">
                 <div>
                     <a th:href="@{'/group/' + ${group.id}}" class="groupname" th:text="${group.groupname}"></a>
+                    <br>
                     <span th:text=" 'Number of Members: ' + ${groupMembersCount[group.id]}" class="members"></span>
                     <form th:action="@{/group/{groupId}/leave(groupId=${group.id})}" method="post">
-                        <button type="submit">Leave Group</button>
+                        <button type="submit" class="leave-button">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
 </main>
 

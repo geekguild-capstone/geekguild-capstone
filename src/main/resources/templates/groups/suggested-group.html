@@ -17,26 +17,23 @@
 
     <div class="card-container">
         <!--BANNER-->
-        <!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
-        <!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
+                <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />
+                <img th:IF="${user.banner == null or user.banner == ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />
 
-        <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+<!--        <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">-->
 
         <!--PROFILE PIC-->
-        <img th:if="${group.image != null and user.image != ''}" th:src="${group.image}"
+        <img width="30%"  th:if="${group.image != null and group.image != ''}" th:src="${group.image}"
              alt="Profile Picture" class="profile-img"/>
-        <img th:unless="${group.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg"
+        <img width="30%" th:if="${group.image == null or group.image == ''}" src="/img/logo-no-txt.jpeg"
              alt="Default Profile Picture" class="profile-img"/>
 
-        <!--        <img th:src="${user.image}" alt="Profile Picture" class="profile-img">-->
 
-        <!--USER NAME-->
+        <!--GROUP NAME-->
         <div class="name">
             <h3 th:text="${group.groupname}"></h3>
         </div>
 
-        <!--TITLE-->
-        <div class="headline">Software Engineer</div>
         <!-- CONNECT BUTTON -->
         <form th:action="@{/group/{groupId}/join(groupId=${group.getId()})}" method="post">
             <button class="connect-btn">

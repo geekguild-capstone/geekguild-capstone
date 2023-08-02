@@ -9,16 +9,16 @@ body {
 
 .post-card {
     position: relative;
-    background-color: rgba(142, 9, 231, 0.3) !important;
+    background-color:rgb(139,33,214, 0.3) !important;
     border-radius: 8px;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    box-shadow: 0 2px 4px rgba(142, 9, 231, 0.3) !important;
+    box-shadow: 0 2px 4px rgb(139,33,214, 0.3) !important;
     margin-bottom: 5px;
     padding: 16px;
 }
 
 .post-content-container {
-    background-color: rgba(142, 9, 231, 0.4) !important;
+    background-color: rgb(139,33,214, 0.4) !important;
     border: 2px solid #8fd93f;
     padding: 10px;
     margin-bottom: 20px;
@@ -45,6 +45,7 @@ body {
     font-size: 14px;
     font-weight: 600;
     color: white;
+
 }
 
 .post-image {
@@ -71,6 +72,15 @@ body {
     padding-top: 8px;
 }
 
+.comment-interactions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #e1e5ea;
+    padding-top: 8px;
+}
+
 .interactions button {
     background: none;
     border: none;
@@ -82,6 +92,20 @@ body {
     margin-right: 24px;
     padding: 4px;
     transition: color 0.2s;
+}
+
+.comment-interactions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    margin-right: 24px;
+    padding: 4px;
+    transition: color 0.2s;
+
 }
 
 .interactions button i {
@@ -247,6 +271,49 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1; /* Ensure the emojis appear above the post-card container */
 }
+
+.interaction-container {
+    display: none;
+}
+
+.interaction-container.show {
+    display: block;
+}
+
+.comment-like-emojis {
+    /*position: absolute;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 30px; /* Adjust this value to position the emojis under the like button */
+    left: 0; /* Set left to 0 to align with the left edge of the like button */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure the emojis appear above the post-card container */
+}
+/*Style for emoji display for comments*/
+.comment-like-emojis.count-display {
+    /* ... Your styles for the like-emojis count-display ... */
+    /*position: absolute;*/
+    bottom: 0; /* Position the counts at the bottom of the comment-interactions container */
+    right: 0; /* Position the counts at the right side of the comment-interactions container */
+    display: flex;
+    align-items: center;
+}
+
+/* Reduce the spacing between emoji icons and counters */
+.comment-like-emojis.count-display .like-emoji {
+    margin-right: 2px; /* Adjust as needed */
+}
+
+/* Style for the emoji counters */
+.comment-like-emojis.count-display .emoji-counter {
+    margin-right: 5px; /* Add some spacing between the emoji icons and counters */
+}
+
 
 
 /* Style for individual emojis */
