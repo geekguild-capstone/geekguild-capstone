@@ -208,6 +208,11 @@ public class HomeController {
             return "redirect:/home"; // Redirect to your home page
         }
 
+        // Check if the snippet field is empty (empty string) and set it to null
+        if (newComment.getSnippet() != null && newComment.getSnippet().trim().isEmpty()) {
+            newComment.setSnippet(null);
+        }
+
         // Set the user and post for the new comment
         newComment.setUser(loggedInUser);
         newComment.setPost(post);
