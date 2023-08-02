@@ -32,36 +32,56 @@ public class HomeController {
 
     @GetMapping("/home")
     public String landingPage(Model model) {
+        //Get logged in user
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
-
-        model.addAttribute("comment", new Comments());
+        model.addAttribute("user", user);
 
         // add dynamic title page
         model.addAttribute("title", "GeekGuild");
 
+        //Get friend requests
         List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
         model.addAttribute("requests", friendRequests);
 
-        model.addAttribute("user", user);
+        //Get ready for new objects
         model.addAttribute("post", new Post());
+        model.addAttribute("comment", new Comments());
+        model.addAttribute("request", new PostUpdateRequest());
+        model.addAttribute("commentRequest", new CommentUpdateRequest());
 
-        // Fetch only the posts where groupId is null
+        // Fetch only the posts where groupId is null and add it to the model
         List<Post> posts = postDao.findByGroupIdIsNull();
         model.addAttribute("posts", posts);
 
         // Add the reactions to the model, so they can be accessed within the view
         model.addAttribute("reactions", getReactions(posts));
 
-        // Calculate and add the counts of each type of reaction to the model
-        List<Integer> likesCounts = getReactionCounts(posts, "like");
-        List<Integer> lovesCounts = getReactionCounts(posts, "love");
-        List<Integer> laughsCounts = getReactionCounts(posts, "laugh");
+        List<Object[]> postReactionsCounts = reactionDao.countReactionsForPosts(posts);
 
-        model.addAttribute("likesCount", likesCounts);
-        model.addAttribute("lovesCount", lovesCounts);
-        model.addAttribute("laughsCount", laughsCounts);
+        // Calculate and add the counts of each type of reaction for each post to the model
+        Map<Long, Integer> postLikesCount = new HashMap<>();
+        Map<Long, Integer> postLovesCount = new HashMap<>();
+        Map<Long, Integer> postLaughsCount = new HashMap<>();
 
+        for (Object[] row : postReactionsCounts) {
+            long postId = (Long) row[0];
+            String reactionType = (String) row[1];
+            int count = ((Number) row[2]).intValue();
+
+            if ("like".equalsIgnoreCase(reactionType)) {
+                postLikesCount.put(postId, count);
+            } else if ("love".equalsIgnoreCase(reactionType)) {
+                postLovesCount.put(postId, count);
+            } else if ("laugh".equalsIgnoreCase(reactionType)) {
+                postLaughsCount.put(postId, count);
+            }
+        }
+
+       // Add the post reaction counts to the model
+        model.addAttribute("postLikesCount", postLikesCount);
+        model.addAttribute("postLovesCount", postLovesCount);
+        model.addAttribute("postLaughsCount", postLaughsCount);
 
 
         model.addAttribute("users", userDao.findAll());
@@ -103,19 +123,14 @@ public class HomeController {
             }
         }
 
-// Add the comment reaction counts to the model
+        // Add the comment reaction counts to the model
         model.addAttribute("commentLikesCount", commentLikesCount);
         model.addAttribute("commentLovesCount", commentLovesCount);
         model.addAttribute("commentLaughsCount", commentLaughsCount);
 
-        model.addAttribute("request", new PostUpdateRequest());
-        model.addAttribute("commentRequest", new CommentUpdateRequest());
-
-
-
+        // List of users not friend with logged in user
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
-//        System.out.println(usersNotFriendsWithLoggedInUser);
 
         return "users/home";
     }
@@ -217,6 +232,15 @@ public class HomeController {
             reactions.add(post.getReactions());
         }
         return reactions;
+    }
+
+    private Map<Long, List<Reaction>> getPostReactions(List<Post> posts) {
+        Map<Long, List<Reaction>> postReactionsMap = new HashMap<>();
+        for (Post post : posts) {
+            List<Reaction> reactions = reactionDao.findByPost(post);
+            postReactionsMap.put(post.getId(), reactions);
+        }
+        return postReactionsMap;
     }
 
 
