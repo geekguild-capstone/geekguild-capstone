@@ -43,6 +43,11 @@
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
 
     <div class="middle-section">
+        <div class="middle-top-bar">
+            <h2 class="group-heading">
+                News Feed
+            </h2>
+            </div>
         <div class="create-post-container">
 
             <div class="profile-picture"
@@ -88,6 +93,11 @@
 
     <div class="right-section">
         <div class="top-right-section">
+            <div class="top-bar">
+                <h5 class="group-heading">
+                    News
+                </h5>
+            </div>
             <!-- Text Input -->
             <form id="searchForm">
                 <input type="text" id="searchInput" placeholder="Search...">
@@ -99,7 +109,11 @@
             </div>
         </div>
         <div class="bottom-right-section">
-            <h2>Suggested Friends</h2>
+            <div class="bottom-top-bar">
+                <h5 class="group-heading">
+                    Suggested Friends
+                </h5>
+            </div>
             <div th:include="partials/suggested-friend">
             </div>
         </div>
