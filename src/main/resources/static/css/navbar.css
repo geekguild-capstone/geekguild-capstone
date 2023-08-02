@@ -119,13 +119,14 @@
 
 /* NEW FRIEND REQUEST MODAL BUTTON Styles */
 #newFriendRequestBtn {
+    /*height: 50%;*/
     margin-right: 15px;
-    background-color: #64c757 !important;
-    border-color: #ee8631 !important;
+    /*background-color: #64c757 !important;*/
+    /*border-color: #ee8631 !important;*/
 }
 
 #newFriendRequestBtn:hover {
-    border-color: #aefc4f !important;
+    border-color: #05062d !important;
     color: #8E09E7 !important;
 }
 
@@ -259,7 +260,7 @@
     justify-content: center;
     line-height: 1em;
     max-width: 100%;
-    min-width: 140px;
+    /*min-width: 140px;*/
     padding: 3px;
     text-decoration: none;
     user-select: none;
@@ -293,51 +294,86 @@
 }
 
 /*Fancy request btn*/
+/*.btn-request {*/
+/*    padding: 1.3em 3em;*/
+/*    font-size: 12px;*/
+/*    text-transform: uppercase;*/
+/*    letter-spacing: 2.5px;*/
+/*    font-weight: 500;*/
+/*    color: #000;*/
+/*    background-color: #000;*/
+/*    border: none;*/
+/*    border-radius: 45px;*/
+/*    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);*/
+/*    transition: all 0.3s ease 0s;*/
+/*    cursor: pointer;*/
+/*    outline: none;*/
+/*}*/
+/*.btn-request {*/
+/*    height: 30px;*/
+/*    width: 30px;*/
+/*    display: grid;*/
+/*    place-items: center;*/
+/*    background: #e3edf7;*/
+/*    padding: 1.4em;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),*/
+/*    -6px -6px 10px -1px rgba(255,255,255,0.7);*/
+/*    border: 1px solid rgba(0,0,0,0);*/
+/*    cursor: pointer;*/
+/*    transition: transform 0.5s;*/
+/*}*/
 .btn-request {
-    --glow-color: rgb(217, 176, 255);
-    --glow-spread-color: rgba(191, 123, 255, 0.781);
-    --enhanced-glow-color: rgb(231, 206, 255);
-    --btn-color: rgb(100, 61, 136);
-    border: .25em solid var(--glow-color);
-    padding: 1em 3em;
-    color: var(--glow-color);
-    font-size: 15px;
-    font-weight: bold;
-    background-color: var(--btn-color);
-    border-radius: 1em;
-    outline: none;
-    box-shadow: 0 0 1em .25em var(--glow-color),
-    0 0 4em 1em var(--glow-spread-color),
-    inset 0 0 .75em .25em var(--glow-color);
-    text-shadow: 0 0 .5em var(--glow-color);
-    position: relative;
-    transition: all 0.3s;
-}
-
-.btn-request::after {
-    pointer-events: none;
-    content: "";
-    position: absolute;
-    top: 120%;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: var(--glow-spread-color);
-    filter: blur(2em);
-    opacity: .7;
-    transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+    position: relative; /* Add this to make the position context for the bubble */
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ee8631;
+    padding: 1.4em;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+    -6px -6px 10px -1px rgba(103, 103, 103, 0.7);
+    border: 1px solid rgba(0,0,0,0);
+    cursor: pointer;
+    transition: transform 0.5s;
 }
 
 .btn-request:hover {
-    color: var(--btn-color);
-    background-color: var(--glow-color);
-    box-shadow: 0 0 1em .25em var(--glow-color),
-    0 0 4em 2em var(--glow-spread-color),
-    inset 0 0 .75em .25em var(--glow-color);
+    /*box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),*/
+    /*inset -4px -4px 6px -1px rgba(255,255,255,0.7),*/
+    /*-0.5px -0.5px 0px rgba(255,255,255,1),*/
+    /*0.5px 0.5px 0px rgba(0,0,0,0.15),*/
+    /*0px 12px 10px -10px rgba(0,0,0,0.05);*/
+    border: 1px solid rgba(0,0,0,0.1);
+    transform: translateY(0.2em);
 }
 
-.btn-request:active {
-    box-shadow: 0 0 0.6em .25em var(--glow-color),
-    0 0 2.5em 2em var(--glow-spread-color),
-    inset 0 0 .5em .25em var(--glow-color);
+.btn-request i {
+    transition: transform 0.5s;
+}
+
+.btn-request:hover i {
+    transform: scale(0.9);
+    fill: #333333;
+}
+
+.badge {
+
+}
+
+.friend-request-bubble {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
