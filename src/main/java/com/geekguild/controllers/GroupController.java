@@ -174,6 +174,10 @@ public class GroupController {
         model.addAttribute("group", group);
         model.addAttribute("groups", groupDao.findAll());
 
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
         // Fetch the comments related to the groupPosts
         List<List<Comments>> groupPostComments = new ArrayList<>();
         for (Post post : groupPosts) {

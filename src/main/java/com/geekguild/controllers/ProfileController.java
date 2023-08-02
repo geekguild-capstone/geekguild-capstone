@@ -1,10 +1,7 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.*;
-import com.geekguild.repositories.LanguageRepository;
-import com.geekguild.repositories.PortfolioRepository;
-import com.geekguild.repositories.UserRepository;
-import com.geekguild.repositories.WorkRepository;
+import com.geekguild.repositories.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,18 +18,26 @@ public class ProfileController {
     private PortfolioRepository portfolioDao;
     private UserRepository userDao;
     private WorkRepository workDao;
-
     private LanguageRepository languageDao;
 
-    public ProfileController(UserRepository userDao, PortfolioRepository portfolioDao, WorkRepository workDao, LanguageRepository languageDao) {
+    private GroupRepository groupDao;
+
+    public ProfileController(UserRepository userDao, PortfolioRepository portfolioDao, WorkRepository workDao, LanguageRepository languageDao, GroupRepository groupDao) {
         this.portfolioDao = portfolioDao;
         this.userDao = userDao;
         this.workDao = workDao;
         this.languageDao = languageDao;
+        this.groupDao = groupDao;
     }
 
     @GetMapping("/profile/{id}")
     public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
+        User loggedInUser = getCurrentLoggedInUser();
+
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
 
         // Retrieve the user with the given userId from the database
         User user = userDao.findById(userId).orElse(null);
@@ -52,6 +57,8 @@ public class ProfileController {
         model.addAttribute("portfolio", portfolio);
         model.addAttribute("work", work);
 
+
+
         return "users/profile";
     }
 
@@ -70,6 +77,10 @@ public class ProfileController {
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
         Portfolio portfolio = portfolioDao.findByUserId(loggedInUser.getId());
@@ -89,6 +100,10 @@ public class ProfileController {
     @GetMapping("/profile/{userId}/edit")
     public String editProfileLoad(@PathVariable long userId, Model model) {
         User loggedInUser = getLoggedInUser();
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
         User user = userDao.getReferenceById(loggedInUser.getId());
         Portfolio portfolio = portfolioDao.findByUserId(userId);
         Work work = workDao.findByUserId(userId);
@@ -114,13 +129,17 @@ public class ProfileController {
 
 
     @PostMapping("/profile/{userId}/edit")
-    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds) {
+    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds, Model model) {
+
         // Fetch the existing user from the database
-        User loggedInUser = userDao.findById(userId).orElse(null);
+        User loggedInUser = getCurrentLoggedInUser();
         if (loggedInUser == null) {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
             return "redirect:/error";
         }
+
+//        User loggedInUser = getCurrentLoggedInUser();
+
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
@@ -261,5 +280,8 @@ public class ProfileController {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    private User getCurrentLoggedInUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
 }

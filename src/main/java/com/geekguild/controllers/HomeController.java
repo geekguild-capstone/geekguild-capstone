@@ -17,16 +17,17 @@ public class HomeController {
     private final PostRepository postDao;
     private final FriendRequestRepository friendDao;
     private final CommentRepository commentDao;
-
     private final ReactionRepository reactionDao;
+    private final GroupRepository groupDao;
 
 
-    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao, ReactionRepository reactionDao) {
+    public HomeController(UserRepository userDao, PostRepository postDao, FriendRequestRepository friendDao, CommentRepository commentDao, ReactionRepository reactionDao, GroupRepository groupDao) {
         this.userDao = userDao;
         this.postDao = postDao;
         this.friendDao = friendDao;
         this.commentDao = commentDao;
         this.reactionDao = reactionDao;
+        this.groupDao = groupDao;
     }
 
 
@@ -131,6 +132,12 @@ public class HomeController {
         // List of users not friend with logged in user
         List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
         model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
+
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
+
 
         return "users/home";
     }

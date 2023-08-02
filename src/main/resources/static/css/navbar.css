@@ -18,6 +18,21 @@
     color: #ccc !important;
 }
 
+/* Add a circular shape to the profile picture div */
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Ensure the image inside the circular div covers the whole area */
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 
  /*Navbar Toggler Icon*/

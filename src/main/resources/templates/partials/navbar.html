@@ -9,10 +9,15 @@
         <div class="container-fluid">
 
 
-<!--            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>-->
+            <!--            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>-->
 
+<!--            <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">-->
+<!--                <img width="60" th:src="${user.image}"/>-->
+<!--            </a>-->
             <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
-                <img width="60" th:src="${user.image}" />
+                <div class="profile-picture">
+                    <img width="60" th:src="${user.image}" />
+                </div>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -31,11 +36,40 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/groups">Groups</a></li>
-<!--                            <li><a class="dropdown-item" href="#">Group 2</a></li>-->
-                            <li>
-                                <hr class="dropdown-divider">
+                            <li><hr class="dropdown-divider"></li>
+
+                            <!-- Check if listGroups is empty -->
+                            <li th:if="${#lists.isEmpty(listGroups)}">
+                                <p class="dropdown-item">No groups found</p>
                             </li>
+
+                            <!-- Display the groups if listGroups is not empty -->
+                            <li th:unless="${#lists.isEmpty(listGroups)}" th:each="group : ${listGroups}">
+                                <a class="dropdown-item" th:href="@{/group/{groupId}(groupId=${group.id})}" th:text="${group.groupname}"></a>
+                            </li>
+
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/about-us">About us</a></li>
+
+
+                            <!--                            <li><a class="dropdown-item" href="/groups">Groups</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li th:if="${listGroups}" th:each="group : ${listGroups}"><a class="dropdown-item"-->
+<!--                                                                   th:href="@{/group/{groupId}(groupId=${group.id})}"-->
+<!--                                                                   th:text="${group.groupname}"></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" href="/about-us">About us</a></li>-->
+
+                            <!--                            <li><a class="dropdown-item" href="#">Group 2</a></li>-->
+                            <!--                            <li>-->
+                            <!--                                <hr class="dropdown-divider">-->
+                            <!--                            </li>-->
+                            <!--                            <li><a class="dropdown-item" href="/about-us">About us</a></li>-->
                         </ul>
                     </li>
                 </ul>
@@ -43,11 +77,11 @@
 
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
 
-                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary" id="newFriendRequestBtn" data-bs-placement="bottom" title="New Friend Request">
+                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn btn-primary"
+                        id="newFriendRequestBtn" data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
                     <span id="friendRequestBadge" class="badge badge-pill">0</span>
                 </button>
-
 
 
                 <form th:action="@{/login}" th:method="post" id="logout">
@@ -75,20 +109,22 @@
                                     <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>
                                     <p th:text="${request.status}"></p>
                                     <div class="modal-footer">
-                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post" id="acceptFriendRequest">
-<!--                                            <input type="hidden" name="receiverId" value="1"/>-->
+                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}"
+                                              method="post" id="acceptFriendRequest">
+                                            <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
                                             <button type="submit" class="btn btn-primary">Accept</button>
                                         </form>
-                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post" id="rejectFriendRequest">
-<!--                                            <input type="hidden" name="receiverId" value="1"/>-->
+                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}"
+                                              method="post" id="rejectFriendRequest">
+                                            <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
                                             <button type="submit" class="btn btn-danger">Decline</button>
                                         </form>
-<!--                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
-<!--                                            <button type="submit">Accept</button>-->
-<!--                                        </form>-->
-<!--                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
-<!--                                            <button type="submit" >Reject</button>-->
-<!--                                        </form>-->
+                                        <!--                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+                                        <!--                                            <button type="submit">Accept</button>-->
+                                        <!--                                        </form>-->
+                                        <!--                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+                                        <!--                                            <button type="submit" >Reject</button>-->
+                                        <!--                                        </form>-->
                                     </div>
                                 </div>
                             </div>
@@ -123,8 +159,6 @@
                     <!--                    <button class="btn search-button" type="submit">Search</button>-->
 
 
-
-
                     <script>
                         const link = document.querySelector("#logout-link");
                         if (link !== null) {
@@ -155,7 +189,7 @@
 
                 </div>
 
-        </div>
+            </div>
     </nav>
 </div>
 
