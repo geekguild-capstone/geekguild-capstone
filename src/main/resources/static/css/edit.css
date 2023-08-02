@@ -1,16 +1,13 @@
 body {
     background-color: #333333 !important;
     color: #8e09e7;
-    font-family: Arial, sans-serif;
+    font-family: 'Ubuntu', sans-serif !important;
     margin: 0; /* Reset default margin to avoid extra spacing */
     padding: 0; /* Reset default padding to avoid extra spacing */
 }
 
-
-
-
 h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Ubuntu', sans-serif !important;
     color: #e67e22 !important;
     text-align: center;
 }

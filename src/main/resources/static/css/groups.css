@@ -1,3 +1,7 @@
+bodu{
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
 .middle-section {
     position: relative; /* Ensure relative positioning for child elements */
 }
