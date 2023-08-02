@@ -3,14 +3,13 @@
 <head>
     <title>Suggested Friend Card</title>
     <!--ANIMATION ON SCROLL LIBRARY LINK-->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <link rel="stylesheet" href="/css/suggested-friends.css">
 
 
 </head>
 <body>
 <!--<div >-->
-    <div class="card-container" th:each="user : ${notFriends}" data-aos="fade">
+    <div class="card-container" th:each="user : ${notFriends}">
         <!--BANNER-->
         <!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
         <!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
@@ -46,14 +45,6 @@
 
 
 
-<!--ANIMATION ON SCROLL LIBRARY SCRIPT-->
-<script>
-    AOS.init({
-        duration: 800, // Adjust the animation duration as needed
-        anchorPlacement: 'bottom-bottom', // Control when animations are triggered based on anchor position
-        once: true, // Set to true to trigger animations only once
-        easing: 'ease-in-out', // Specify the easing function for the animations
-    });
-</script>
+
 </body>
 </html>
