@@ -47,9 +47,10 @@
             <h2 class="group-heading">
                 News Feed
             </h2>
-            </div>
-        <div class="create-post-container">
+        </div>
 
+        <div class="post-container">
+        <div class="create-post-container">
             <div class="profile-picture"
                  th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
             </div>
@@ -91,6 +92,7 @@
             <div class="view-post-card-container" th:include="partials/postCard">
             </div>
         </div>
+    </div>
     </div>
 
 
