@@ -47,9 +47,9 @@
 
     <div class="middle-section">
             <div class="middle-top-bar">
-                <h3 class="group-heading">
+                <h2 class="group-heading">
                     Group Post
-                </h3>
+                </h2>
             </div>
         <div class="create-post-container">
             <div class="profile-picture"
@@ -93,9 +93,11 @@
     <div class="right-section">
         <div class="top-right-section">
             <div class="group-top-bar">
-                <h4 class="group-heading" th:text="${group.groupname}"></h4>
+                <h3 class="group-heading" th:text="${group.groupname}"></h3>
+                <hr>
+                <p th:text="${'Number of Members: ' + groupMembersCount}"></p>
             </div>
-            <p th:text="${'Number of Members: ' + groupMembersCount}"></p>
+            <!-- Profile Image -->
             <img width="50%" th:if="${group.image != null and group.image != ''}" th:src="${group.image}"
                  alt="Profile Picture" class="profile-img"/>
         </div>
