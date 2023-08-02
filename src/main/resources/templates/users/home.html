@@ -7,6 +7,8 @@
     <title th:text="${title}"></title>
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
+    <!--ANIMATION ON SCROLL LIBRARY LINK-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <!--    <link rel="stylesheet" href="/css/suggested-friends.css">-->
 
     <head th:include="partials/header :: head">
@@ -108,25 +110,24 @@
             <i>Loading chat...</i>
         </div>
     </div>
+</div>
+<!-- CONFIRMATION MODAL SCRIPT-->
+<script src="/js/confirmationModal.js"></script>
 
-    <!-- CONFIRMATION MODAL SCRIPT-->
-    <script src="/js/confirmationModal.js"></script>
-
-    <!--FILESTACK API SCRIPTS-->
-    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-    <script src="/js/filestack.js"></script>
+<!--FILESTACK API SCRIPTS-->
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script src="/js/filestack.js"></script>
 
     <!--TALK JS SCRIPTS-->
     <script src="/js/talk-js-snippet.js"></script>
     <script src="/js/talk-js.js"></script>
 
-    <!--NEWS API SCRIPTS-->
-    <script src="/js/keys.js"></script>
-    <script src="/js/news.js"></script>
-    <!--    <script src="/js/home.js"></script>-->
+<!--NEWS API SCRIPTS-->
+<script src="/js/keys.js"></script>
+<script src="/js/news.js"></script>
 
 
-    <footer th:replace="partials/footer :: footer"></footer>
+<footer th:replace="partials/footer :: footer"></footer>
 
 </body>
 

@@ -70,10 +70,8 @@ public class PostController {
         }
 
         // Delete associated reactions
-        List<Reaction> reactions = post.getReactions();
-        for (Reaction reaction : reactions) {
-            reactionDao.delete(reaction);
-        }
+        reactionDao.deleteReactionsByPostId(postId);
+
 
         // Check if the logged-in user is the owner of the post
         if (post.getUser().getId() != loggedInUser.getId()) {
@@ -193,6 +191,11 @@ public class PostController {
             // User is not the owner, return an error or handle it as you prefer
             return "redirect:/error"; // For example, redirect to an error page
         }
+
+        // Delete all the reactions associated with the commentId
+        reactionDao.deleteReactionsByCommentId(commentId);
+
+
 
         // Use the custom query method to delete the post by ID
         commentDao.deleteCommentById(commentId);
