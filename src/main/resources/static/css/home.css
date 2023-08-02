@@ -245,8 +245,6 @@ h1 {
     color: #e67e22; /* Change font color if necessary */
     border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
-
-
 }
 
 .top-bar {
@@ -277,7 +275,6 @@ h1 {
     border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
     z-index: 2
-
 }
 
 .view-post-container{
