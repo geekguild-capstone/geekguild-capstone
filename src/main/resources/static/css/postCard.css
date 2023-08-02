@@ -18,10 +18,11 @@ body {
 }
 
 .post-content-container {
-    background-color: rgb(139,33,214, 0.4) !important;
+    background-color: rgba(139, 33, 214, 0.4) !important;
     border: 2px solid #8fd93f;
     padding: 10px;
     margin-bottom: 20px;
+    border-radius: 10px; /* Add rounded edges to the container */
 }
 
 .post-content {
@@ -35,16 +36,19 @@ body {
 }
 
 .user-profile img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 12px;
+    margin-bottom: 25px;
+    border: 1px solid #8fd93f;
 }
 
 .user-profile .username {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
     color: white;
+    margin-bottom: 25px;
 
 }
 
@@ -121,7 +125,10 @@ body {
     margin-top: 16px;
     border-top: 1px solid #e1e5ea;
     padding: 10px;
+    background-color: rgba(139, 33, 214, 0.4) !important;
 }
+
+
 
 
 .comment-card {
@@ -141,8 +148,13 @@ body {
     border-top-right-radius: 5px;
     display: flex;
     align-items: center; /* Vertically center the content */
-
+    justify-content: space-between;
 }
+
+
+    /*height: 70px;*/
+
+
 
 /* Vertically center the first and last names */
 .username-box {
@@ -161,6 +173,7 @@ body {
 .comment-content {
     /*flex: 1;*/
     margin-top: 5px;
+
 }
 
 .comment-text {
@@ -184,6 +197,7 @@ body {
 .comments-section {
     margin-top: 16px;
     display: none;
+
 }
 
 .comments-section hr {
@@ -348,11 +362,7 @@ body {
     white-space: pre-wrap; /* Wrap lines as needed to fit the container */
     word-break: break-all; /* Break long words if necessary */
 }
-.comment-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 
 .comment-icons {
     display: flex;
