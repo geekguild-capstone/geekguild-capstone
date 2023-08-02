@@ -57,7 +57,8 @@
                 <form method="post" th:object="${post}" th:action="@{/post/create}" id="postForm">
                     <!-- Post image upload section -->
                     <div>
-                        <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i></button>
+                        <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
+                        </button>
                     </div>
                     <div class="upload-post-img">
                         <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
@@ -86,7 +87,9 @@
             </div>
         </div>
 
-        <div class="view-post-container" th:include="partials/postCard">
+        <div class="view-post-container">
+            <div class="view-post-card-container" th:include="partials/postCard">
+            </div>
         </div>
     </div>
 
@@ -132,9 +135,9 @@
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="/js/filestack.js"></script>
 
-    <!--TALK JS SCRIPTS-->
-    <script src="/js/talk-js-snippet.js"></script>
-    <script src="/js/talk-js.js"></script>
+<!--TALK JS SCRIPTS-->
+<script src="/js/talk-js-snippet.js"></script>
+<script src="/js/talk-js.js"></script>
 
 <!--NEWS API SCRIPTS-->
 <script src="/js/keys.js"></script>
