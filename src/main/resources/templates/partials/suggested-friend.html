@@ -8,44 +8,58 @@
 
 </head>
 <body>
-<!--<div >-->
-<div class="card-container" th:each="user : ${notFriends}">
+<!--<div class="card-container" th:each="user : ${notFriends}">-->
 
-    <!--BANNER-->
-    <!--        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
-    <!--        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
+<!--    &lt;!&ndash;BANNER&ndash;&gt;-->
+<!--    &lt;!&ndash;        <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />&ndash;&gt;-->
+<!--    &lt;!&ndash;        <img th:unless="${user.banner != null and user.banner != ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />&ndash;&gt;-->
 
-    <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+<!--    <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">-->
 
-    <!--PROFILE PIC-->
-    <div class="profile-img-container"
-         th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
+<!--    &lt;!&ndash;PROFILE PIC&ndash;&gt;-->
+<!--    <div class="profile-img-container"-->
+<!--         th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">-->
 
-    </div>
-    <!--        <div class="profile-img-container">-->
-    <!--        <img th:if="${user.image != null and user.image != ''}" th:src="${user.image}" alt="Profile Picture"-->
-    <!--             class="profile-img"/>-->
-    <!--        <img th:unless="${user.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg"-->
-    <!--             alt="Default Profile Picture" class="profile-img"/>-->
-    <!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;        <div class="profile-img-container">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <img th:if="${user.image != null and user.image != ''}" th:src="${user.image}" alt="Profile Picture"&ndash;&gt;-->
+<!--    &lt;!&ndash;             class="profile-img"/>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <img th:unless="${user.image != null and user.image != ''}" src="/img/logo-no-txt.jpeg"&ndash;&gt;-->
+<!--    &lt;!&ndash;             alt="Default Profile Picture" class="profile-img"/>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
 
-    <!--USER NAME-->
-    <div class="name">
-        <h3 th:text="${user.firstname + ' ' + user.lastname}"></h3>
-    </div>
+<!--    &lt;!&ndash;USER NAME&ndash;&gt;-->
+<!--    <div class="name">-->
+<!--        <h3 th:text="${user.firstname + ' ' + user.lastname}"></h3>-->
+<!--    </div>-->
 
-    <!--TITLE-->
-    <!--        <div class="headline">Software Engineer</div>-->
-    <!-- CONNECT BUTTON -->
-    <button data-bs-toggle="modal" data-bs-target="#confirmationModal"
-            th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"
-            onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
-            class="connect-btn">
-        <i class="icon fas fa-user-plus"></i> Connect
-    </button>
-</div>
-
+<!--    &lt;!&ndash;TITLE&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div class="headline">Software Engineer</div>&ndash;&gt;-->
+<!--    &lt;!&ndash; CONNECT BUTTON &ndash;&gt;-->
+<!--    <button data-bs-toggle="modal" data-bs-target="#confirmationModal"-->
+<!--            th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"-->
+<!--            onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"-->
+<!--            class="connect-btn">-->
+<!--        <i class="icon fas fa-user-plus"></i> Connect-->
+<!--    </button>-->
 <!--</div>-->
+<div class="card-container" th:each="user : ${notFriends}">
+    <div class="card">
+        <div class="card__img">
+                <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+
+        </div>
+        <div class="card__avatar" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
+
+        </div>
+        <div th:text="${user.firstname + ' ' + user.lastname}" class="card__title"></div>
+<!--        <div class="card__subtitle">Web Development</div>-->
+        <div class="card__wrapper">
+            <button class="card__btn">Button</button>
+            <button class="card__btn card__btn-solid">Button</button>
+        </div>
+    </div>
+</div>
 
 
 </body>
