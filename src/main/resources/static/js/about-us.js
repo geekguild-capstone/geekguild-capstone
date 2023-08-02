@@ -21,6 +21,26 @@ btnNavEl.addEventListener("click", function () {
 
 //click event on anchor elements using event delegation
 document.body.addEventListener("click", function (e) {
+    // Check if the clicked element is an anchor element
+    const isAnchorElement = e.target.tagName === "A" || e.target.parentNode.tagName === "A";
+    console.log(isAnchorElement)
+
+    // Check if the href attribute starts with "/"
+    const href = e.target.getAttribute("href") || e.target.parentNode.getAttribute("href");
+    const isHrefStartingWithSlash = href && href.startsWith("/");
+
+    // If it's an anchor element and the href doesn't start with "/", handle the click event
+    if (isAnchorElement && isHrefStartingWithSlash) {
+        // Your custom logic for handling non-anchor links here
+        // For example, if you want to handle the click differently for such links
+        // you can add your own code here.
+
+        // For now, I will just log a message to the console as an example
+        // console.log("Clicked a non-anchor link:", href);
+        return;
+    }
+
+
     e.preventDefault();
     if (
         !e.target.getAttribute("href") &&
