@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/suggested-friends.css">
+    <link rel="stylesheet" href="/css/group.css">
+
 
 
     <head th:include="partials/header :: head">
@@ -88,6 +90,8 @@
         <div class="top-right-section">
             <h1 th:text="${group.groupname}"></h1>
             <p th:text="${'Number of Members: ' + groupMembersCount}"></p>
+            <img width="50%"  th:if="${group.image != null and group.image != ''}" th:src="${group.image}"
+                 alt="Profile Picture" class="profile-img"/>
         </div>
         <div class="bottom-right-section" th:include="groups/suggested-group"></div>
     </div>
