@@ -2,6 +2,11 @@ body, html {
     height: 90%;
     margin: 0;
     background-color: #000000 !important;
+    /*font-family: 'Roboto', sans-serif !important;*/
+    /*font-family: 'Montserrat', sans-serif !important;*/
+    /*font-family: 'Roboto', sans-serif !important;*/
+    /*font-family: 'Roboto Mono', monospace !important;*/
+    font-family: 'Ubuntu', sans-serif !important;
 }
 
 h1 {
@@ -64,6 +69,7 @@ h1 {
     overflow-y: scroll;
     /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
+
 }
 
 .middle-section::-webkit-scrollbar {
@@ -336,7 +342,47 @@ h1 {
     background-color: #ffb74d; /* Thumb color on hover */
 }
 
+.middle-top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* You can change the color here */
+    padding: 10px;
+    margin-bottom: 10px !important;
+    color: #e67e22; /* Change font color if necessary */
+    border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
+}
 
+.top-bar {
+    position: sticky !important;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* You can change the color here */
+    padding: 5px !important;
+    margin-bottom: 10px;
+    color: #e67e22; /* Change font color if necessary */
+    border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
+   z-index: 2;
+}
+
+.bottom-top-bar {
+    position: sticky !important;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* You can change the color here */
+    padding: 5px !important;
+    margin: 10px 10px !important;
+    color: #e67e22; /* Change font color if necessary */
+    border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
+    z-index: 2
+}
 
 /* Optional: Customize the appearance of buttons, icons, etc. */
 /* Modal container styles */
