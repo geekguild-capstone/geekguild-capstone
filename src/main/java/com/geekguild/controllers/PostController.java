@@ -1,10 +1,7 @@
 package com.geekguild.controllers;
 
 import com.geekguild.models.*;
-import com.geekguild.repositories.CommentRepository;
-import com.geekguild.repositories.GroupRepository;
-import com.geekguild.repositories.PostRepository;
-import com.geekguild.repositories.ReactionRepository;
+import com.geekguild.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -137,19 +134,22 @@ public class PostController {
 
     @GetMapping("/post/{postId}")
     @ResponseBody
-    public ResponseEntity<Post> getPostById(@PathVariable long postId) {
+    public ResponseEntity<PostDto> getPostById(@PathVariable long postId) {
         Post post = postDao.findById(postId).orElse(null);
         if (post == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Check if the logged-in user is the owner of the post or has permission to edit it
-        User loggedInUser = getCurrentLoggedInUser();
-        if (post.getUser().getId() == loggedInUser.getId()) {
-            return ResponseEntity.ok(post);
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+        // Convert the Post entity to the PostDto
+        PostDto postDto = new PostDto(
+                post.getId(),
+                post.getImage(),
+                post.getBody(),
+                post.getSnippet()
+                // Set other fields if needed
+        );
+
+        return ResponseEntity.ok(postDto);
     }
 
     //COMMENTS
@@ -187,17 +187,6 @@ public class PostController {
         // Find the comment by ID
         Comments comment = commentDao.getReferenceById(commentId);
 
-//        if (comment == null) {
-//            // Handle post not found
-//            return "redirect:/error";
-//        }
-
-
-        // Delete associated reactions
-//        List<Reaction> reactions = post.getReactions();
-//        for (Reaction reaction : reactions) {
-//            reactionDao.delete(reaction);
-//        }
 
         // Check if the logged-in user is the owner of the post
         if (comment.getUser().getId() != loggedInUser.getId()) {
@@ -211,9 +200,6 @@ public class PostController {
     }
 
 
-//    private User getCurrentLoggedInUser() {
-//        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//    }
 
     private User getCurrentLoggedInUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

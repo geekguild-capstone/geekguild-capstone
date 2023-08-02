@@ -1,6 +1,7 @@
 package com.geekguild.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.geekguild.repositories.PostRepository;
 import jakarta.persistence.*;
@@ -43,13 +44,10 @@ public class Post {
     @JoinColumn (name = "group_id")
     private Group group;
 
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("post") // Add this annotation to avoid circular references
     private List<Comments> comments;
 
-//    // Add the many-to-many relationship with reactions
-//    @ManyToMany(mappedBy = "posts")
-//    private List<Reaction> reactions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Reaction> reactions;

@@ -2,6 +2,8 @@ package com.geekguild.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,17 +29,11 @@ public class Comments {
     @Column(name = "snippet")
     private String snippet;
 
-//    public Comments(long id, String text, String snippet) {
-//        this.id = id;
-//        this.text = text;
-//        this.snippet = snippet;
-//
-//    }
 
     //    Many to One Posts
-    @JsonBackReference
     @ManyToOne
     @JoinColumn (name = "post_id")
+    @JsonIgnoreProperties("comments")
     private Post post;
 
     //    Many to One User
@@ -47,6 +43,7 @@ public class Comments {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+    @JsonIgnore
     private List<Reaction> reactions;
 
 

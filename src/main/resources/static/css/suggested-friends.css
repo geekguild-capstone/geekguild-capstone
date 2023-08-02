@@ -13,6 +13,7 @@
     flex-direction: column; /* Set the flex direction to column */
     align-items: center; /* Center items horizontally */
     position: relative; /* Add this to set a relative position for the container */
+    opacity: 1 !important;
 }
 
 /* Banner Image */
