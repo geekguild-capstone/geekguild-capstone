@@ -136,7 +136,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/about-us")
+    @GetMapping("/")
     public String showAbout(Model model) {
 
         model.addAttribute("title", "GeekGuild - Unite, Collaborate, Geek Out!");
