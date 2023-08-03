@@ -20,73 +20,123 @@
 
 <div class="grid-container">
 
-<!--    <div id="confirmationModal" class="modal" tabindex="-1">-->
-<!--        <div class="modal-dialog modal-dialog-centered">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title">Send Friend Request?</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <p id="friendUsername"></p>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <form th:action="@{/home/add}" method="post" id="friendRequestForm">-->
-<!--                        <input type="hidden" name="receiverId" id="receiverIdInput"/>-->
-<!--                        <button type="submit">Confirm</button>-->
-<!--                    </form>-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                    &lt;!&ndash;                    <button type="button" class="btn btn-primary">Save changes</button>&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div id="confirmationModal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Send Friend Request?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="friendUsername"></p>
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/home/add}" method="post" id="friendRequestForm">
+                        <input type="hidden" name="receiverId" id="receiverIdInput"/>
+                        <button type="submit">Confirm</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="left-section" th:include="partials/friend-card">Left Section</div>
 
+<!--    <div class="middle-section">-->
+<!--            <div class="middle-top-bar">-->
+<!--                <h2 class="group-heading">-->
+<!--                    Group Post-->
+<!--                </h2>-->
+<!--            </div>-->
+<!--        <div class="create-post-container">-->
+<!--            <div class="profile-picture"-->
+<!--                 th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">-->
+
+<!--            </div>-->
+<!--            <div class="post-content">-->
+<!--                <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}">-->
+<!--                    &lt;!&ndash; Post image upload section &ndash;&gt;-->
+<!--                    <div>-->
+<!--                        <button type="button" class="upload-post-image">Upload Post Image</button>-->
+<!--                    </div>-->
+<!--                    <div class="upload-post-img">-->
+<!--                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage"/>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; Post body input section &ndash;&gt;-->
+
+<!--                    <div class="input-group">-->
+<!--                        <div class="input-group mb-3">-->
+<!--                            <span class="input-group-text" id="basic-addon1">Comment</span>-->
+<!--                            <input th:field="*{body}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1" required>-->
+<!--                        </div>-->
+<!--                        <span class="input-group-text">Code</span>-->
+<!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>-->
+<!--                        <button class="submit-comment-btn" type="submit">Submit</button>-->
+
+<!--                    </div>-->
+
+
+<!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+<!--                    <input type="hidden" name="image" id="postImageURLInput"/>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="view-post-container" th:include="groups/groupPosts"></div>-->
+<!--    </div>-->
     <div class="middle-section">
-            <div class="middle-top-bar">
-                <h2 class="group-heading">
-                    Group Post
-                </h2>
-            </div>
+        <div class="middle-top-bar">
+            <h2 class="group-heading">
+                News Feed
+            </h2>
+        </div>
+
         <div class="create-post-container">
             <div class="profile-picture"
                  th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
-
             </div>
             <div class="post-content">
-                <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}">
+                <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}" id="postForm">
                     <!-- Post image upload section -->
                     <div>
-                        <button type="button" class="upload-post-image">Upload Post Image</button>
+                        <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
+                        </button>
                     </div>
                     <div class="upload-post-img">
-                        <img th:src="${post.image}" width="200" height="200" class="post-image" id="uploadedPostImage"/>
+                        <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
                     </div>
 
                     <!-- Post body input section -->
 
                     <div class="input-group">
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Comment</span>
-                            <input th:field="*{body}" type="text" class="form-control" placeholder="Whats on your mind?" aria-label="Username" aria-describedby="basic-addon1" required>
+                            <input th:field="*{body}" type="text" class="form-control create-post-body"
+                                   placeholder="Whats on your mind?"
+                                   aria-label="Username" aria-describedby="basic-addon1" required>
                         </div>
-                        <span class="input-group-text">Code</span>
-                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>
-                        <button class="submit-comment-btn" type="submit">Submit</button>
 
+                        <div class="code-snippet">
+                            <span class="input-group-text">Code =></span>
+                            <textarea class="language-html" th:field="*{snippet}"></textarea>
+                            <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
+                            <button class="submit-comment-btn" type="submit">Submit</button>
+                        </div>
+
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input type="hidden" name="image" id="postImageURLInput"/>
                     </div>
-
-
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                    <input type="hidden" name="image" id="postImageURLInput"/>
                 </form>
             </div>
         </div>
 
-        <div class="view-post-container" th:include="groups/groupPosts"></div>
+        <div class="view-post-container">
+            <div class="view-post-card-container" th:include="groups/groupPosts">
+            </div>
+        </div>
     </div>
 
 

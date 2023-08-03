@@ -2,6 +2,7 @@ package com.geekguild.controllers;
 
 import com.geekguild.models.*;
 import com.geekguild.repositories.*;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,6 +68,84 @@ public ResponseEntity<CommentsDto> getCommentById(@PathVariable long commentId) 
 
     return ResponseEntity.ok(commentDto);
 }
+
+    //Delete comment to a specific post
+    @Transactional
+    @PostMapping("/comment/delete/{commentId}")
+    public String deleteComment(@PathVariable long commentId) {
+        // Get the currently logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
+
+
+        // Find the comment by ID
+        Comments comment = commentDao.getReferenceById(commentId);
+
+
+        // Check if the logged-in user is the owner of the post
+        if (comment.getUser().getId() != loggedInUser.getId()) {
+            // User is not the owner, return an error or handle it as you prefer
+            return "redirect:/error"; // For example, redirect to an error page
+        }
+
+        // Delete all the reactions associated with the commentId
+        reactionDao.deleteReactionsByCommentId(commentId);
+
+
+
+        // Use the custom query method to delete the post by ID
+        commentDao.deleteCommentById(commentId);
+        return "redirect:/home";
+    }
+
+    //Delete comment to a specific post
+    @Transactional
+    @PostMapping("/comment/delete/{commentId}/{groupId}")
+    public String deleteGroupComment(@PathVariable long commentId) {
+        // Get the currently logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
+
+
+        // Find the comment by ID
+        Comments comment = commentDao.getReferenceById(commentId);
+
+
+        // Check if the logged-in user is the owner of the post
+        if (comment.getUser().getId() != loggedInUser.getId()) {
+            // User is not the owner, return an error or handle it as you prefer
+            return "redirect:/error"; // For example, redirect to an error page
+        }
+
+        // Delete all the reactions associated with the commentId
+        reactionDao.deleteReactionsByCommentId(commentId);
+
+
+
+        // Use the custom query method to delete the post by ID
+        commentDao.deleteCommentById(commentId);
+        return "redirect:/group/{groupId}";
+    }
+
+    //Add comment to a specific post
+    @PostMapping("/group/{groupId}/addComment/{postId}")
+    public String addComment(@PathVariable long groupId, @PathVariable long postId, @ModelAttribute Comments comment) {
+        User loggedInUser = getCurrentLoggedInUser();
+        comment.setUser(loggedInUser);
+
+        Post post = postDao.findById(postId).orElse(null);
+        if (post == null || post.getGroup().getId() != groupId) {
+            // Handle invalid post ID or post not belonging to the group
+            return "redirect:/error";
+        }
+
+        comment.setPost(post);
+        post.getComments().add(comment);
+
+        postDao.save(post);
+        return "redirect:/group/{groupId}";
+    }
+
+
+
 
 
     private User getCurrentLoggedInUser() {

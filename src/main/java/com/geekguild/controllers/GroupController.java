@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class GroupController {
@@ -20,13 +21,15 @@ public class GroupController {
     private final FriendRequestRepository friendDao;
     private final PostRepository postDao;
     private final CommentRepository commentDao;
+    private final ReactionRepository reactionDao;
 
-    public GroupController(GroupRepository groupDao, UserRepository userDao, FriendRequestRepository friendDao, PostRepository postDao, CommentRepository commentDao) {
+    public GroupController(GroupRepository groupDao, UserRepository userDao, FriendRequestRepository friendDao, PostRepository postDao, CommentRepository commentDao, ReactionRepository reactionDao) {
         this.groupDao = groupDao;
         this.userDao = userDao;
         this.friendDao = friendDao;
         this.postDao = postDao;
         this.commentDao = commentDao;
+        this.reactionDao = reactionDao;
     }
 
     @GetMapping("/groups")
@@ -56,6 +59,10 @@ public class GroupController {
 
         model.addAttribute("loggedInUserGroups", loggedInUserGroups);
         model.addAttribute("groupMembersCount", groupMembersCount);
+
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroupsNav = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroupsNav);
 
         return "groups/groups";
     }
@@ -153,29 +160,61 @@ public class GroupController {
 
     @GetMapping("/group/{id}")
     public String viewGroup(@PathVariable("id") Long groupId, Model model) {
-        User loggedInUser = getCurrentLoggedInUser();
-        model.addAttribute("comment", new Comments());
+        //Get logged in user
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        model.addAttribute("user", user);
 
+        // add dynamic title page
+        model.addAttribute("title", "GeekGuild");
+
+        //Get friend requests
+        List<FriendRequest> friendRequests = friendDao.findByReceiverAndStatus(loggedInUser, "pending");
+        model.addAttribute("requests", friendRequests);
+
+        //Get ready for new objects
         model.addAttribute("post", new Post());
-        model.addAttribute("user", loggedInUser);
+        model.addAttribute("comment", new Comments());
+        model.addAttribute("request", new PostUpdateRequest());
+        model.addAttribute("commentRequest", new CommentUpdateRequest());
+
+        // Fetch only the posts for the group Id and add it to the model
         List<Post> groupPosts = postDao.findByGroupId(groupId);
-        model.addAttribute("groupPosts", groupPosts);
-        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("posts", groupPosts);
+
+        // Add the reactions to the model, so they can be accessed within the view
+        model.addAttribute("reactions", getReactions(groupPosts));
+
+        List<Object[]> postReactionsCounts = reactionDao.countReactionsForPosts(groupPosts);
+
+        // Calculate and add the counts of each type of reaction for each post to the model
+        Map<Long, Integer> postLikesCount = new HashMap<>();
+        Map<Long, Integer> postLovesCount = new HashMap<>();
+        Map<Long, Integer> postLaughsCount = new HashMap<>();
+
+        for (Object[] row : postReactionsCounts) {
+            long postId = (Long) row[0];
+            String reactionType = (String) row[1];
+            int count = ((Number) row[2]).intValue();
+
+            if ("like".equalsIgnoreCase(reactionType)) {
+                postLikesCount.put(postId, count);
+            } else if ("love".equalsIgnoreCase(reactionType)) {
+                postLovesCount.put(postId, count);
+            } else if ("laugh".equalsIgnoreCase(reactionType)) {
+                postLaughsCount.put(postId, count);
+            }
+        }
+
+        // Add the post reaction counts to the model
+        model.addAttribute("postLikesCount", postLikesCount);
+        model.addAttribute("postLovesCount", postLovesCount);
+        model.addAttribute("postLaughsCount", postLaughsCount);
+
+//        model.addAttribute("users", userDao.findAll());
+        //Get Friends and add it to model
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
         model.addAttribute("sentFriends", friendDao.findBySenderAndStatus(loggedInUser, "accepted"));
-
-        model.addAttribute("title", "GeekGuild - your group");
-
-        List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
-        model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
-
-        Group group = groupDao.findById(groupId).orElse(null);
-        model.addAttribute("group", group);
-        model.addAttribute("groups", groupDao.findAll());
-
-        //Get logged in users groups for the navbar
-        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
-        model.addAttribute("listGroups", loggedInUserGroups);
 
         // Fetch the comments related to the groupPosts
         List<List<Comments>> groupPostComments = new ArrayList<>();
@@ -186,17 +225,61 @@ public class GroupController {
 
         model.addAttribute("groupPostComments", groupPostComments);
 
-        // Add the reactions to the model, so they can be accessed within the view
-        model.addAttribute("reactions", getReactions(groupPosts));
+        // Collect all comments for which we need to fetch reaction counts
+        List<Comments> allComments = groupPostComments.stream().flatMap(List::stream).collect(Collectors.toList());
 
-        // Calculate and add the counts of each type of reaction to the model
-        List<Integer> likesCounts = getReactionCounts(groupPosts, "like");
-        List<Integer> lovesCounts = getReactionCounts(groupPosts, "love");
-        List<Integer> laughsCounts = getReactionCounts(groupPosts, "laugh");
+        // Fetch comment reaction counts in a single query
+        List<Object[]> commentReactionsCounts = reactionDao.countReactionsForComments(allComments);
 
-        model.addAttribute("likesCount", likesCounts);
-        model.addAttribute("lovesCount", lovesCounts);
-        model.addAttribute("laughsCount", laughsCounts);
+        // Calculate and add the counts of each type of reaction for each comment to the model
+        Map<Long, Integer> commentLikesCount = new HashMap<>();
+        Map<Long, Integer> commentLovesCount = new HashMap<>();
+        Map<Long, Integer> commentLaughsCount = new HashMap<>();
+
+        for (Object[] row : commentReactionsCounts) {
+            long commentId = (Long) row[0];
+            String reactionType = (String) row[1];
+            int count = ((Number) row[2]).intValue();
+
+            if ("like".equalsIgnoreCase(reactionType)) {
+                commentLikesCount.put(commentId, count);
+            } else if ("love".equalsIgnoreCase(reactionType)) {
+                commentLovesCount.put(commentId, count);
+            } else if ("laugh".equalsIgnoreCase(reactionType)) {
+                commentLaughsCount.put(commentId, count);
+            }
+        }
+
+        // Add the comment reaction counts to the model
+        model.addAttribute("commentLikesCount", commentLikesCount);
+        model.addAttribute("commentLovesCount", commentLovesCount);
+        model.addAttribute("commentLaughsCount", commentLaughsCount);
+
+
+
+//        List<User> usersNotFriendsWithLoggedInUser = userDao.findUsersNotFriendsWithAndNotPending(loggedInUser.getId());
+//        model.addAttribute("notFriends", usersNotFriendsWithLoggedInUser);
+
+        Group group = groupDao.findById(groupId).orElse(null);
+        model.addAttribute("group", group);
+        model.addAttribute("groups", groupDao.findAll());
+
+        //Get logged in users groups for the navbar
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        model.addAttribute("listGroups", loggedInUserGroups);
+
+
+
+
+
+//        // Calculate and add the counts of each type of reaction to the model
+//        List<Integer> likesCounts = getReactionCounts(groupPosts, "like");
+//        List<Integer> lovesCounts = getReactionCounts(groupPosts, "love");
+//        List<Integer> laughsCounts = getReactionCounts(groupPosts, "laugh");
+//
+//        model.addAttribute("likesCount", likesCounts);
+//        model.addAttribute("lovesCount", lovesCounts);
+//        model.addAttribute("laughsCount", laughsCounts);
 
         if (group == null) {
             return "redirect:/error";

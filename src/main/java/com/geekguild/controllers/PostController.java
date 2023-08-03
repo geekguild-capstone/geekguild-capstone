@@ -42,7 +42,7 @@ public class PostController {
         return "redirect:/home";
     }
 
-    // Delete a Post
+    // Delete a Post on home page
     @Transactional
     @PostMapping("/post/delete/{postId}")
     public String deletePost(@PathVariable long postId) {
@@ -82,6 +82,54 @@ public class PostController {
         // Use the custom query method to delete the post by ID
         postDao.deletePostById(postId);
         return "redirect:/home";
+    }
+
+    // Delete a Post on home page
+    @Transactional
+    @PostMapping("/post/delete/{postId}/{groupId}")
+    public String deleteGroupPost(@PathVariable long postId) {
+//        Group group = groupDao.findById(groupId).orElse(null);
+//        if (group == null) {
+//            // Handle invalid group ID
+//            return "redirect:/error";
+//        }
+
+        // Get the currently logged-in user
+        User loggedInUser = getCurrentLoggedInUser();
+
+
+        // Find the post by ID
+        Post post = postDao.findById(postId).orElse(null);
+
+        if (post == null) {
+            // Handle post not found
+            return "redirect:/error";
+        }
+
+        // Delete associated comments first
+        List<Comments> comments = post.getComments();
+        post.setComments(Collections.emptyList());
+        postDao.save(post); // Save the post without comments
+
+        for (Comments comment : comments) {
+            // Delete each comment
+            // Assuming you have a commentDao/repository to interact with comments
+            commentDao.deleteById(comment.getId());
+        }
+
+        // Delete associated reactions
+        reactionDao.deleteReactionsByPostId(postId);
+
+
+        // Check if the logged-in user is the owner of the post
+        if (post.getUser().getId() != loggedInUser.getId()) {
+            // User is not the owner, return an error or handle it as you prefer
+            return "redirect:/error"; // For example, redirect to an error page
+        }
+
+        // Use the custom query method to delete the post by ID
+        postDao.deletePostById(postId);
+        return "redirect:/group/{groupId}";
     }
 
 
@@ -152,55 +200,11 @@ public class PostController {
 
     //COMMENTS
 
-    //Add comment to a specific post
-    @PostMapping("/group/{groupId}/addComment/{postId}")
-    public String addComment(@PathVariable long groupId, @PathVariable long postId, @ModelAttribute Comments comment) {
-        User loggedInUser = getCurrentLoggedInUser();
-        comment.setUser(loggedInUser);
 
-        Post post = postDao.findById(postId).orElse(null);
-        if (post == null || post.getGroup().getId() != groupId) {
-            // Handle invalid post ID or post not belonging to the group
-            return "redirect:/error";
-        }
-
-        comment.setPost(post);
-        post.getComments().add(comment);
-
-        postDao.save(post);
-        return "redirect:/group/{groupId}";
-    }
 
     //Edit comment to a specific post
 
 
-    //Delete comment to a specific post
-    @Transactional
-    @PostMapping("/comment/delete/{commentId}")
-    public String deleteComment(@PathVariable long commentId) {
-        // Get the currently logged-in user
-        User loggedInUser = getCurrentLoggedInUser();
-
-
-        // Find the comment by ID
-        Comments comment = commentDao.getReferenceById(commentId);
-
-
-        // Check if the logged-in user is the owner of the post
-        if (comment.getUser().getId() != loggedInUser.getId()) {
-            // User is not the owner, return an error or handle it as you prefer
-            return "redirect:/error"; // For example, redirect to an error page
-        }
-
-        // Delete all the reactions associated with the commentId
-        reactionDao.deleteReactionsByCommentId(commentId);
-
-
-
-        // Use the custom query method to delete the post by ID
-        commentDao.deleteCommentById(commentId);
-        return "redirect:/home";
-    }
 
 
 

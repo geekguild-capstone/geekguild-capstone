@@ -44,6 +44,23 @@ public class ReactionController {
         return "redirect:/home";
     }
 
+    @PostMapping("/reaction/post/submit/{groupId}")
+    public String submitGroupReaction(
+            @RequestParam("postId") Long postId,
+            @RequestParam("reaction") String reaction) {
+        System.out.println("postId: " + postId);
+        System.out.println("reaction: " + reaction);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        Reaction newReaction = new Reaction();
+        newReaction.setReaction(reaction);
+        newReaction.setPost(postDao.getReferenceById(postId));
+        newReaction.setUser(user);
+        reactionDao.save(newReaction);
+
+        return "redirect:/group/{groupId}";
+    }
+
     @PostMapping("/reaction/comment/submit")
     public String submitCommentReaction(
             @RequestParam("commentId") Long commentId,
@@ -59,6 +76,23 @@ public class ReactionController {
         reactionDao.save(newReaction);
 
         return "redirect:/home";
+    }
+
+    @PostMapping("/reaction/comment/submit/{groupId}")
+    public String submitGroupCommentReaction(
+            @RequestParam("commentId") Long commentId,
+            @RequestParam("reaction") String reaction) {
+        System.out.println("commentId: " + commentId);
+        System.out.println("reaction: " + reaction);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        Reaction newReaction = new Reaction();
+        newReaction.setReaction(reaction);
+        newReaction.setComment(commentDao.getReferenceById(commentId));
+        newReaction.setUser(user);
+        reactionDao.save(newReaction);
+
+        return "redirect:/group/{groupId}";
     }
 
 }
