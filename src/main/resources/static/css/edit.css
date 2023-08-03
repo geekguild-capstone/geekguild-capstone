@@ -145,7 +145,7 @@ button {
 }
 
 
-.update-cover-icon {
+.upload-banner-icon {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -244,7 +244,9 @@ button {
     color: #8fd93f;
 }
 
-
+/*.banner-logo {*/
+/*    display: none;*/
+/*}*/
 
 
 
