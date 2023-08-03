@@ -92,7 +92,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #8E09E7;
+    border-top: 1px solid #fff;
     padding-top: 8px;
 }
 
@@ -152,7 +152,7 @@ body {
 
 .comment-card {
     border: 3px;
-    background-image: linear-gradient(to top, #772DAB,  #E6E6FA, #E6E6FA);
+    background-image: linear-gradient(to top, #772DAB,  #E6E6FA);
     /*background-image: linear-gradient(to top, #000000,  #8E09E7,  #E6E6FA, #E6E6FA);*/
     /*background-image: linear-gradient(to top, #e67e22 ,  #E6E6FA, #E6E6FA);*/
     /*background-image: linear-gradient(to top, #333333 ,  #E6E6FA, #E6E6FA);*/
@@ -173,7 +173,7 @@ body {
     align-items: center; /* Vertically center the content */
     justify-content: space-between;
     /*border-top: 3px solid #e67e22;*/
-    border-bottom: 1px solid #8E09E7;
+    border-bottom: 1px solid #fff;
     height: 70px;
 }
 
