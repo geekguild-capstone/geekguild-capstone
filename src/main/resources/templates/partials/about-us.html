@@ -1,135 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <head th:include="partials/header :: head">
+    <head>
+        <head th:include="partials/header :: head">
+        </head>
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+
+        <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+
+        <script defer src="/js/about-us.js"></script>
+
+        <!--    <title>GeekGuild &mdash; Unite, Collaborate, Geek Out!</title>-->
+        <title th:text="${title}"></title>
+
+        <link rel="stylesheet" href="/css/about-general.css"/>
+        <link rel="stylesheet" href="/css/about-style.css"/>
+        <link rel="stylesheet" href="/css/about-queries.css"/>
+
     </head>
 
+    <body>
+        <header class="header">
+            <a href="#">
+                <img
+                        class="logo"
+                        alt="GeekGuild logo"
+                        src="/img/gglogo.png"
+                />
+            </a>
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li><a class="main-nav-link" href="#how">How it works</a></li>
+                    <li><a class="main-nav-link" href="#testimonials">Testimonials</a></li>
+                    <li><a class="main-nav-link" href="#about">About us</a></li>
+                    <li><a class="main-nav-link nav-cta" href="/register">Register/Login</a></li>
+                </ul>
+            </nav>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-    />
+            <button class="btn-mobile-nav">
+                <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+                <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+            </button>
+        </header>
 
-    <script
-            type="module"
-            src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-            nomodule=""
-            src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-    ></script>
+    <main>
+        <section class="section-hero">
+            <div class="hero">
+                <div class="hero-text-box">
+                    <h1 class="heading-primary">
+                        Unite
+                    </h1>
 
-    <script
-            defer
-            src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
-    ></script>
-
-    <script defer src="/js/about-us.js"></script>
-
-    <!--    <title>GeekGuild &mdash; Unite, Collaborate, Geek Out!</title>-->
-    <title th:text="${title}"></title>
-
-    <link rel="stylesheet" href="/css/about-general.css"/>
-    <link rel="stylesheet" href="/css/about-style.css"/>
-    <link rel="stylesheet" href="/css/about-queries.css"/>
-</head>
-<body>
-<header class="header">
-    <a href="#">
-        <img
-                class="logo"
-                alt="GeekGuild logo"
-                src="/img/gglogo.png"
-        />
-    </a>
-    <nav class="main-nav">
-        <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="#how">How it works</a></li>
-            <li><a class="main-nav-link" href="#testimonials">Testimonials</a></li>
-            <li><a class="main-nav-link" href="#about">About us</a></li>
-            <li><a class="main-nav-link nav-cta" href="/register">Register/Login</a></li>
-        </ul>
-    </nav>
-
-    <button class="btn-mobile-nav">
-        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-    </button>
-</header>
-
-<main>
-    <section class="section-hero">
-        <div class="hero">
-            <div class="hero-text-box">
-                <h1 class="heading-primary">
-                    Unite
-                </h1>
-
-                <h1 class="heading-primary">
-                    Collaborate
-                </h1>
-                <h1 class="heading-primary">
-                    Geek Out
-                </h1>
-                <p class="hero-description">
-                    Join the Ultimate Tech Enthusiast Community. Geek Guild: The revolutionary app blending Stack
-                    Overflow and Facebook for tech enthusiasts and professionals. Connect, collaborate, and grow in a
-                    vibrant online community.
-                </p>
-                <a href="#cta" class="btn btn--full margin-right-sm"
-                >Start connecting</a
-                >
-                <a href="#how" class="btn btn--outline">Learn more &darr; </a>
-                <div class="delivered-meals">
-                    <div class="delivered-imgs">
-                        <img
-                                src="content/img/customers/customer-1.jpg"
-                                alt="Customer photo"
-                        />
-                        <img
-                                src="content/img/customers/customer-2.jpg"
-                                alt="Customer photo"
-                        />
-                        <img
-                                src="content/img/customers/customer-3.jpg"
-                                alt="Customer photo"
-                        />
-                        <img
-                                src="content/img/customers/customer-4.jpg"
-                                alt="Customer photo"
-                        />
-                        <img
-                                src="content/img/customers/customer-5.jpg"
-                                alt="Customer photo"
-                        />
-                        <img
-                                src="content/img/customers/customer-6.jpg"
-                                alt="Customer photo"
-                        />
-                    </div>
-                    <p class="delivered-text">
-                        <span>10</span> users created in the last year!
+                    <h1 class="heading-primary">
+                        Collaborate
+                    </h1>
+                    <h1 class="heading-primary">
+                        Geek Out
+                    </h1>
+                    <p class="hero-description">
+                        Join the Ultimate Tech Enthusiast Community. Geek Guild: The revolutionary app blending Stack
+                        Overflow and Facebook for tech enthusiasts and professionals. Connect, collaborate, and grow in a
+                        vibrant online community.
                     </p>
+                    <a href="#cta" class="btn btn--full margin-right-sm"
+                    >Start connecting</a
+                    >
+                    <a href="#how" class="btn btn--outline">Learn more &darr; </a>
+                    <div class="delivered-meals">
+                        <div class="delivered-imgs">
+                            <img
+                                    src="/img/customers/44.jpg"
+                                    alt="Customer photo"
+                            />
+                            <img
+                                    src="/img/customers/46.jpg"
+                                    alt="Customer photo"
+                            />
+                            <img
+                                    src="/img/customers/1.jpg"
+                                    alt="Customer photo"
+                            />
+                            <img
+                                    src="/img/customers/8.jpg"
+                                    alt="Customer photo"
+                            />
+                            <img
+                                    src="/img/customers/12.jpg"
+                                    alt="Customer photo"
+                            />
+                            <img
+                                    src="/img/customers/16.jpg"
+                                    alt="Customer photo"
+                            />
+                        </div>
+                        <p class="delivered-text">
+                            <span>10</span> users created in the last year!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hero-img-box">
+                    <picture>
+                        <!--                    <source srcset="/img/profile.png" type="image/png"/>-->
+                        <!--                    <source srcset="/img/groups.png" type="image/png"/>-->
+                        <img
+                                src="/img/gglogo.png"
+                                class="hero-image"
+                                alt="images of the GeekGuild App"
+                        />
+                    </picture>
                 </div>
             </div>
-
-            <div class="hero-img-box">
-                <picture>
-                    <!--                    <source srcset="/img/profile.png" type="image/png"/>-->
-                    <!--                    <source srcset="/img/groups.png" type="image/png"/>-->
-                    <img
-                            src="/img/gglogo.png"
-                            class="hero-image"
-                            alt="images of the GeekGuild App"
-                    />
-                </picture>
-            </div>
-        </div>
-    </section>
+        </section>
     <!--    <section class="section-featured">-->
     <!--        <div class="container">-->
     <!--            <h2 class="heading-featured-in">As featured in</h2>-->
@@ -148,370 +138,366 @@
     <!--            </div>-->
     <!--        </div>-->
     <!--    </section>-->
-    <section class="section-how" id="how">
-        <div class="container">
-            <span class="subheading">How it works</span>
-            <h2 class="heading-secondary">
-                Begin connecting with other Geeks!
-            </h2>
-        </div>
-
-        <div class="container grid grid--2-cols grid--center-v">
-            <!-- STEP 01 -->
-            <div class="step-text-box">
-                <p class="step-number">01</p>
-
-                <h3 class="heading-tertiary">
-                    Personalize Your Presence
-                </h3>
-                <p class="step-description">
-                    Geek Guild allows you to customize your profile, making it uniquely yours. Add a professional bio,
-                    showcase your tech stack, and upload a captivating avatar to leave a lasting impression on the
-                    community.
-                </p>
+        <section class="section-how" id="how">
+            <div class="container">
+                <span class="subheading">How it works</span>
+                <h2 class="heading-secondary">
+                    Begin connecting with other Geeks!
+                </h2>
             </div>
 
-            <div class="step-img-box">
-                <img
-                        src="content/img/app/app-screen-1.png"
-                        class="step-img"
-                        alt="iPhone app preferences selection screen"
-                />
-            </div>
+            <div class="container grid grid--2-cols grid--center-v">
+                <!-- STEP 01 -->
+                <div class="step-text-box">
+                    <p class="step-number">01</p>
 
-            <!-- STEP 02 -->
-            <div class="step-img-box">
-                <img
-                        src="content/img/app/app-screen-2.png"
-                        class="step-img"
-                        alt="iPhone app meal approving plan screen"
-                />
-            </div>
+                    <h3 class="heading-tertiary">
+                        Personalize Your Presence
+                    </h3>
+                    <p class="step-description">
+                        Geek Guild allows you to customize your profile, making it uniquely yours. Add a professional bio,
+                        showcase your tech stack, and upload a captivating avatar to leave a lasting impression on the
+                        community.
+                    </p>
+                </div>
 
-            <div class="step-text-box">
-                <p class="step-number">02</p>
-
-                <h3 class="heading-tertiary">Connect with others</h3>
-                <p class="step-description">
-                    Geek Guild provides a platform to connect with a diverse and thriving community of tech enthusiasts.
-                    Find new friends, discover mentors, and collaborate with like-minded individuals to broaden your
-                    professional network.
-                </p>
-            </div>
-
-            <!-- STEP 03 -->
-            <div class="step-text-box">
-                <p class="step-number">03</p>
-
-                <h3 class="heading-tertiary">Forge your own guilds</h3>
-                <p class="step-description">
-                    Bring together individuals who are passionate about the same tech topics as you. Allowing you to
-                    foster a tight-knit community where members can collaborate, share insights, and support each
-                    other's growth.
-                </p>
-            </div>
-
-            <div class="step-img-box">
-                <img
-                        src="content/img/app/app-screen-3.png"
-                        class="step-img"
-                        alt="iPhone app delivery screen"
-                />
-            </div>
-        </div>
-    </section>
-
-<!-- TESTIMONIALS -->
-
-    <section class="section-testimonials" id="testimonials">
-        <div class="testimonials-container">
-            <span class="subheading">Testimonials</span>
-            <h2 class="heading-secondary">Hear from our Geeks</h2>
-            <div class="testimonials">
-                <!-- Testimonial 1 -->
-                <figure class="testimonial">
+                <div class="step-img-box">
                     <img
-                            class="testimonial-img"
-                            src="/img/DocRob.jpg"
-                            alt="photo of Doc Rob"
+                            src="content/img/app/app-screen-1.png"
+                            class="step-img"
+                            alt="iPhone app preferences selection screen"
                     />
-                    <blockquote class="testimonial-text">
-                        Inexpensive, healthy and great-tasting meals, without even
-                        having to order manually! It feels truly magical.
-                    </blockquote>
-                    <p class="testimonial-name">&mdash; Doc Rob</p>
-                </figure>
+                </div>
 
-                <!-- Testimonial 2 -->
-
-                <figure class="testimonial">
+                <!-- STEP 02 -->
+                <div class="step-img-box">
                     <img
-                            class="testimonial-img"
-                            src="/img/Lola.jpg"
-                            alt="photo of Lola"
+                            src="content/img/app/app-screen-2.png"
+                            class="step-img"
+                            alt="iPhone app meal approving plan screen"
                     />
-                    <blockquote class="testimonial-text">
-                        The AI algorithm is crazy good, it chooses the right meals for
-                        me every time. It's amazing not to worry about food anymore!
-                    </blockquote>
-                    <p class="testimonial-name">&mdash; Lola Castillo</p>
-                </figure>
+                </div>
 
-                <!-- Testimonial 3 -->
+                <div class="step-text-box">
+                    <p class="step-number">02</p>
 
-                <figure class="testimonial">
+                    <h3 class="heading-tertiary">Connect with others</h3>
+                    <p class="step-description">
+                        Geek Guild provides a platform to connect with a diverse and thriving community of tech enthusiasts.
+                        Find new friends, discover mentors, and collaborate with like-minded individuals to broaden your
+                        professional network.
+                    </p>
+                </div>
+
+                <!-- STEP 03 -->
+                <div class="step-text-box">
+                    <p class="step-number">03</p>
+
+                    <h3 class="heading-tertiary">Forge your own guilds</h3>
+                    <p class="step-description">
+                        Bring together individuals who are passionate about the same tech topics as you. Allowing you to
+                        foster a tight-knit community where members can collaborate, share insights, and support each
+                        other's growth.
+                    </p>
+                </div>
+
+                <div class="step-img-box">
                     <img
-                            class="testimonial-img"
-                            src="/img/Josh.jpg"
-                            alt="photo of Joshua Rooks"
+                            src="content/img/app/app-screen-3.png"
+                            class="step-img"
+                            alt="iPhone app delivery screen"
                     />
-                    <blockquote class="testimonial-text">
-                        Omnifood is a life saver! I just started a company, so there's
-                        no time for cooking. I couldn't live without my daily meals now!
-                    </blockquote>
-                    <p class="testimonial-name">&mdash; Joshua Rooks</p>
-                </figure>
-
-                <!-- Testimonial 4 -->
-
-                <figure class="testimonial">
-                    <img
-                            class="testimonial-img"
-                            src="/img/trevor.jpg"
-                            alt="photo of Trevor"
-                    />
-                    <blockquote class="testimonial-text">
-                        I got Omnifood for the whole family, and it frees up so much
-                        time! Plus, everything is organic and vegan and without plastic.
-                    </blockquote>
-                    <p class="testimonial-name">&mdash; Trevor Mullis</p>
-                </figure>
-            </div>
-        </div>
-
-
-<!-- COHORT PHOTOS -->
-
-        <div class="gallery">
-            <figure class="gallery-item">
-                <img
-                        src="/img/Liam.jpeg"
-                        alt="Photo of Liam"
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/Tyresz.jpg"
-                        alt="Photo of Tyresz"
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/theo.jpg"
-                        alt="Photo of ...."
-                />
-            </figure>
-            <figure class="gallery-item">
-                <img
-                        src="/img/Jakira.jpeg"
-                        alt="Photo of ...."
-                />
-                <!-- <figcaption>Caption</figcaption> -->
-            </figure>
-        </div>
-    </section>
-
-    <section class="section-meals" id="about">
-        <div class="container center-text">
-            <span class="subheading">Meet the team</span>
-            <h2 class="heading-secondary">
-                Brought to you by the GeekSquad </h2>
-        </div>
-        <div class="container grid grid--4-cols margin-bottom-md">
-            <div class="meal">
-                <img
-                        src="/img/theo.jpg"
-                        class="meal-img"
-                        alt="Photo of Theo"
-                />
-                <div class="meal-content">
-                    <div class="meal-tags">
-                        <span class="tag tag--vegetarian">Front-End</span>
-                    </div>
-
-                    <p class="meal-title">Theodoric Graham</p>
-                    <ul class="meal-attributes">
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
-                            <span><strong>LinkedIn: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon
-                                    class="meal-icon"
-                                    name="restaurant-outline"
-                            ></ion-icon
-                            >
-                            <span><strong>Student Portal: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="star-outline"></ion-icon>
-                            <span><strong>Github: </strong>link</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
-            <div class="meal">
-                <img
-                        src="/img/Ray.png"
-                        class="meal-img"
-                        alt="Photo of Ray"
-                />
-                <div class="meal-content">
-                    <div class="meal-tags">
-                        <span class="tag tag--vegetarian">Front-End</span>
-                    </div>
+        </section>
 
-                    <p class="meal-title">Raymond Glass</p>
-                    <ul class="meal-attributes">
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
-                            <span><strong>LinkedIn: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon
-                                    class="meal-icon"
-                                    name="restaurant-outline"
-                            ></ion-icon
-                            >
-                            <span><strong>Student Portal: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="star-outline"></ion-icon>
-                            <span><strong>Github: </strong>link</span>
-                        </li>
-                    </ul>
+    <!-- TESTIMONIALS -->
+
+        <section class="section-testimonials" id="testimonials">
+            <div class="testimonials-container">
+                <span class="subheading">Testimonials</span>
+                <h2 class="heading-secondary">Hear from our Geeks</h2>
+                <div class="testimonials">
+                    <!-- Testimonial 1 -->
+                    <figure class="testimonial">
+                        <img
+                                class="testimonial-img"
+                                src="/img/instructors/DocRob.jpg"
+                                alt="photo of Doc Rob"
+                        />
+                        <blockquote class="testimonial-text">
+                            "Geek Guild is my go-to virtual home for tech enthusiasts. It blends Stack Overflow and Facebook seamlessly, providing a vibrant community to connect, collaborate, and grow. I've learned so much and found new career opportunities here!"
+                        </blockquote>
+                        <p class="testimonial-name">&mdash; Doc Rob</p>
+                    </figure>
+
+                    <!-- Testimonial 2 -->
+
+                    <figure class="testimonial">
+                        <img
+                                class="testimonial-img"
+                                src="/img/instructors/Lola.jpg"
+                                alt="photo of Lola"
+                        />
+                        <blockquote class="testimonial-text">
+                            "Geek Guild transformed my tech interactions. Q&A and social networking in one place make it easy to find answers and network with tech enthusiasts. Highly recommend!"
+                        </blockquote>
+                        <p class="testimonial-name">&mdash; Lola Castillo</p>
+                    </figure>
+
+                    <!-- Testimonial 3 -->
+
+                    <figure class="testimonial">
+                        <img
+                                class="testimonial-img"
+                                src="/img/instructors/Josh.jpg"
+                                alt="photo of Joshua Rooks"
+                        />
+                        <blockquote class="testimonial-text">
+                            "Geek Guild enriches my tech journey. The vibrant community fosters collaboration and networking. Found my job here! Truly revolutionary!"
+                        </blockquote>
+                        <p class="testimonial-name">&mdash; Joshua Rooks</p>
+                    </figure>
+
+                    <!-- Testimonial 4 -->
+
+                    <figure class="testimonial">
+                        <img
+                                class="testimonial-img"
+                                src="/img/instructors/trevor.jpg"
+                                alt="photo of Trevor"
+                        />
+                        <blockquote class="testimonial-text">
+                            "Geek Guild redefines online tech communities. Expertise meets social engagement, creating an unparalleled learning environment. Join now!"
+                        </blockquote>
+                        <p class="testimonial-name">&mdash; Trevor Mullis</p>
+                    </figure>
                 </div>
             </div>
 
-            <div class="meal">
-                <img
-                        src="/img/theo.jpg"
-                        class="meal-img"
-                        alt="Japanese Gyozas"
-                />
-                <div class="meal-content">
-                    <div class="meal-tags">
-                        <span class="tag tag--vegetarian">Front-End</span>
-                    </div>
 
-                    <p class="meal-title">Theodoric Graham</p>
-                    <ul class="meal-attributes">
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
-                            <span><strong>LinkedIn: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon
-                                    class="meal-icon"
-                                    name="restaurant-outline"
-                            ></ion-icon
-                            >
-                            <span><strong>Student Portal: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="star-outline"></ion-icon>
-                            <span><strong>Github: </strong>link</span>
-                        </li>
-                    </ul>
-                </div>
+    <!-- COHORT PHOTOS -->
+
+            <div class="gallery">
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/Liam.jpeg"
+                            alt="Photo of Liam"
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/Tyresz.jpg"
+                            alt="Photo of Tyresz"
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/Jakira.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot2.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot3.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot4.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot5.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot6.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot7.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot8.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot9.jpeg"
+                            alt="Photo of ...."
+                    />
+                </figure>
+                <figure class="gallery-item">
+                    <img
+                            src="/img/cohort/random/hshot1.jpg"
+                            alt="Photo of ...."
+                    />
+                    <!-- <figcaption>Caption</figcaption> -->
+                </figure>
             </div>
-            <div class="meal">
-                <img
-                        src="/img/theo.jpg"
-                        class="meal-img"
-                        alt="Japanese Gyozas"
-                />
-                <div class="meal-content">
-                    <div class="meal-tags">
-                        <span class="tag tag--vegetarian">Front-End</span>
-                    </div>
+        </section>
 
-                    <p class="meal-title">Theodoric Graham</p>
-                    <ul class="meal-attributes">
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
-                            <span><strong>LinkedIn: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon
-                                    class="meal-icon"
-                                    name="restaurant-outline"
-                            ></ion-icon
-                            >
-                            <span><strong>Student Portal: </strong>link</span>
-                        </li>
-                        <li class="meal-attribute">
-                            <ion-icon class="meal-icon" name="star-outline"></ion-icon>
-                            <span><strong>Github: </strong>link</span>
-                        </li>
-                    </ul>
+<!-- MEET THE TEAM -->
+    <div class="container center-text">
+        <span class="subheading">Meet the team</span>
+        <h2 class="heading-secondary">
+            Brought to you by the GeekSquad </h2>
+    </div>
+    <div class="container grid grid--4-cols margin-bottom-md">
+        <div class="meal">
+            <img
+                    src="/img/geeksquad/theo.jpg"
+                    class="meal-img"
+                    alt="Photo of Theo"
+            />
+            <div class="meal-content">
+                <div class="meal-tags">
+                    <span class="tag tag--vegetarian">Front-End</span>
                 </div>
+
+                <p class="meal-title">Theodoric Graham</p>
+                <ul class="meal-attributes">
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                        <span><strong>LinkedIn: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon
+                                class="meal-icon"
+                                name="restaurant-outline"
+                        ></ion-icon
+                        >
+                        <span><strong>Student Portal: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="star-outline"></ion-icon>
+                        <span><strong>Github: </strong>link</span>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!--        <div class="container all-recipes">-->
-        <!--            <a href="#" class="link"> See all recipes &rarr; </a>-->
-        <!--        </div>-->
-    </section>
 
-<!--    <section class="section-pricing" id="features">-->
+        <div class="meal">
+            <img
+                    src="/img/geeksquad/luis.jpeg"
+                    class="meal-img"
+                    alt="Luis Oliverez"
+            />
+            <div class="meal-content">
+                <div class="meal-tags">
+                    <span class="tag tag--vegetarian">Front-End</span>
+                </div>
+
+                <p class="meal-title">Luis Oliverez</p>
+                <ul class="meal-attributes">
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                        <span><strong>LinkedIn: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon
+                                class="meal-icon"
+                                name="restaurant-outline"
+                        ></ion-icon
+                        >
+                        <span><strong>Student Portal: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="star-outline"></ion-icon>
+                        <span><strong>Github: </strong>link</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal">
+            <img
+                    src="/img/geeksquad/theo.jpg"
+                    class="meal-img"
+                    alt="Consuella Moore"
+            />
+            <div class="meal-content">
+                <div class="meal-tags">
+                    <span class="tag tag--vegetarian">Front-End</span>
+                </div>
+
+                <p class="meal-title">Consuella Moore</p>
+                <ul class="meal-attributes">
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                        <span><strong>LinkedIn: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon
+                                class="meal-icon"
+                                name="restaurant-outline"
+                        ></ion-icon
+                        >
+                        <span><strong>Student Portal: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="star-outline"></ion-icon>
+                        <span><strong>Github: </strong>link</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal">
+            <img
+                    src="/img/geeksquad/Ray.png"
+                    class="meal-img"
+                    alt="Ray Glass"
+            />
+            <div class="meal-content">
+                <div class="meal-tags">
+                    <span class="tag tag--vegetarian">Back-End</span>
+                </div>
+
+                <p class="meal-title">Raymond Glass</p>
+                <ul class="meal-attributes">
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                        <span><strong>LinkedIn: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon
+                                class="meal-icon"
+                                name="restaurant-outline"
+                        ></ion-icon
+                        >
+                        <span><strong>Student Portal: </strong>link</span>
+                    </li>
+                    <li class="meal-attribute">
+                        <ion-icon class="meal-icon" name="star-outline"></ion-icon>
+                        <span><strong>Github: </strong>link</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!--        <div class="container all-recipes">-->
+            <!--            <a href="#" class="link"> See all recipes &rarr; </a>-->
+            <!--        </div>-->
+
+            <!--    <section class="section-pricing" id="features">-->
 <!--        <div class="container">-->
 <!--            <span class="subheading">Pricing</span>-->
 <!--            <h2 class="heading-secondary">-->
