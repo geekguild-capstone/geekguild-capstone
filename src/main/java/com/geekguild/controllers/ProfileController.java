@@ -142,7 +142,7 @@ public class ProfileController {
 
 
     @PostMapping("/profile/{userId}/edit")
-    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds, Model model, @RequestParam("fileURLBanner") String banner) {
+    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds, Model model, @RequestParam("fileURLBanner") String banner, @RequestParam("fileURLImage") String image) {
         System.out.println(banner);
         // Fetch the existing user from the database
         User loggedIn = getCurrentLoggedInUser();
@@ -155,6 +155,7 @@ public class ProfileController {
 //        User loggedInUser = getCurrentLoggedInUser();
 
         loggedInUser.setBanner(banner);
+        loggedInUser.setImage(image);
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();

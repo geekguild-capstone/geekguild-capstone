@@ -1,7 +1,6 @@
 const bannerImageButton = document.querySelector('.upload-banner-icon');
 const bannerImage = document.querySelector('.banner-logo');
 const bannerImageURLInput = document.querySelector('#fileURLInputBanner');
-// const postBodyTextarea = document.querySelector('#postBodyTextarea');
 const submitButton = document.querySelector('#save-profile-btn');
 const form = document.querySelector(".inline-form")
 
@@ -13,7 +12,7 @@ bannerImageButton.addEventListener('click', () => {
     const options = {
         onFileUploadStarted: () => {
             // This callback is triggered when the user selects a file and clicks the "Upload" button.
-            showUploadedImage();
+            // showUploadedImage();
         },
         onUploadDone: (uploadResponse) => {
             console.log('onUploadDone', uploadResponse);
@@ -26,11 +25,11 @@ bannerImageButton.addEventListener('click', () => {
     client.picker(options).open();
 });
 
-function showUploadedImage() {
-    // Show the container by removing the "display: none" CSS property.
-    const uploadPostImgContainer = document.querySelector('.banner-logo');
-    uploadPostImgContainer.style.display = 'block';
-}
+// function showUploadedImage() {
+//     // Show the container by removing the "display: none" CSS property.
+//     const uploadPostImgContainer = document.querySelector('.banner-logo');
+//     uploadPostImgContainer.style.display = 'block';
+// }
 
 submitButton.addEventListener('click', () => {
     console.log("clicked")
