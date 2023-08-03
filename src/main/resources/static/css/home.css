@@ -126,29 +126,30 @@ h1 {
 
 
 /*VIEW POST SECTION*/
-.post-container{
-    position: sticky;
-    top: 55px;
-    z-index: 5;
-    overflow-y: hidden;
-}
+/*.post-container{*/
+/*    position: sticky;*/
+/*    top: 55px;*/
+/*    z-index: 5;*/
+/*    overflow-y: hidden;*/
+/*}*/
 
 
 .view-post-container {
     /* Add position: sticky and top: 50px */
     display: flex;
     flex-direction: column;
-    height: 58%;
+    position: relative;
+    height: 100%;/*58% fits perfect*/
     border-radius: 8px;
     background-color: #444444;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
     padding: 10px 20px 5px 20px;
     gap: 20px;
     margin: 0; /* top, right, bottom, left */
-    position: sticky;
-    top: 55px;
-    z-index: 5;
-    overflow-y: hidden;
+    /*position: sticky;*/
+    /*top: 55px;*/
+    /*z-index: 5;*/
+    /*overflow-y: hidden;*/
 }
 
 
