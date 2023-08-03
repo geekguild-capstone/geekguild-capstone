@@ -211,16 +211,19 @@
 
                 <br>
 
-                <div class="button-group">
-                    <!-- Save Profile Button -->
-                    <button type="submit" id="save-profile-btn">Save Profile</button>
+                <!-- Add the buttons container -->
+                <div class="buttons-container">
+                    <div class="button-group">
+                        <!-- Save Profile Button -->
+                        <button type="submit" id="save-profile-btn">Save Profile</button>
 
-                    <!-- Delete Profile Button -->
-                    <form id="delete-user-form" class="inline-form"
-                          th:action="@{/profile/{id}/delete(id=${profileFormWrapper.user.getId()})}"
-                          th:method="post">
-                        <button id="delete-btn" class="purple-button">Delete Profile</button>
-                    </form>
+                        <!-- Delete Profile Button -->
+                        <form id="delete-user-form" class="inline-form"
+                              th:action="@{/profile/{id}/delete(id=${profileFormWrapper.user.getId()})}"
+                              th:method="post">
+                            <button id="delete-btn" class="purple-button">Delete Profile</button>
+                        </form>
+                    </div>
                 </div>
             </form>
         </div>

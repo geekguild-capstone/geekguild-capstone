@@ -68,15 +68,49 @@ input[type="url"] {
 }
 
 
+.buttons-container {
+    /* Create a row layout for the buttons container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.button-group {
+    /* Create a row layout for the buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px; /* Add margin to create space between the buttons */
+}
+
+/* Style the buttons as needed */
 button {
-    background-color: #ee8631;
-    color: #fff;
     padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#save-profile-btn {
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
+    background-color: #e67e22;
+    color: #fff;
+    margin: 5px; /* Add margin to create space between the buttons */
+}
+
+#delete-btn {
+    border: none;
+    border-radius: 5px;
+    background-color: #8e09e7;
+    color: #fff;
+    margin: 5px; /* Add margin to create space between the buttons */
+}
+
+button:hover {
+    background-color: #aefc4f;
 }
 
 
@@ -106,16 +140,7 @@ button {
     position: relative;
 }
 
-.purple-button {
-    background-color: #8e09e7;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-}
+
 
 /* Add styles for the cover photo and update icon */
 .profile-header-container {
@@ -166,21 +191,6 @@ button {
     align-items: center;
 }
 
-/* Add new style for the .logo-container */
-.logo-container {
-    position: relative;
-    max-width: 100%; /* Increase the max-width value to make it wider */
-    margin: 0 auto; /* Center the logo within the container */
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-}
-
-.button-group button {
-    margin: 0 5px; /* Reduce the space between the buttons */
-}
 /* Styles for the Skills section using CSS Grid layout */
 .skills-container {
     display: grid;
@@ -221,7 +231,7 @@ button {
 }
 
 .skills-checkbox:checked ~ .checkmark {
-    background-color: #8fd93f /* Change the checkmark background color when checked */
+    background-color: #8fd93f; /* Change the checkmark background color when checked */
 }
 
 .skill-content {
@@ -233,15 +243,11 @@ button {
     margin-right: 10px; /* Adjust the spacing between the checkmark and icon */
 }
 
-.skill-name {
-    white-space: nowrap; /* Prevent the skill name from wrapping to a new line */
+.skill-icon:before {
+    font-size: 5em !important; /* Adjust the font size to make the icons larger */
 }
 
-
-
-
-
-
-
-
-
+.skill-name {
+    white-space: nowrap; /* Prevent the skill name from wrapping to a new line */
+    margin-left: 10px; /* Add space between the icon and the skill name */
+}
