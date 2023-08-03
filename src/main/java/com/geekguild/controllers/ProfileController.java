@@ -154,8 +154,18 @@ public class ProfileController {
 
 //        User loggedInUser = getCurrentLoggedInUser();
 
-        loggedInUser.setBanner(banner);
-        loggedInUser.setImage(image);
+        // Check if the request parameter is neither null nor empty
+        if (banner != null &&  !banner.isEmpty()) {
+            // Set the banner and image only if the request parameter is not null or empty
+            loggedInUser.setBanner(banner);
+
+        }
+
+        // Check if the request parameter is neither null nor empty
+        if (requestParam != null && !requestParam.isEmpty()) {
+            // Set the banner and image only if the request parameter is not null or empty
+            loggedInUser.setImage(image);
+        }
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
@@ -168,6 +178,13 @@ public class ProfileController {
         if (formUser.getEmail() != null) {
             loggedInUser.setEmail(formUser.getEmail());
         }
+        if (formUser.getImage() != null) {
+            loggedInUser.setImage(formUser.getImage());
+        }
+        if (formUser.getBanner() != null) {
+            loggedInUser.setBanner(formUser.getBanner());
+        }
+
 
         // Save the updated user back to the database
         userDao.save(loggedInUser);
