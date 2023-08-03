@@ -63,15 +63,28 @@ public class ProfileController {
     }
 
 
-    @PostMapping("/profile/upload")
+    @PostMapping("/profile/upload/image")
     @ResponseBody
     public ResponseEntity<String> uploadImage(@RequestParam("fileURL") String fileURL) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         user.setImage(fileURL);
+
         userDao.save(user);
 
         return ResponseEntity.ok("Image URL saved successfully.");
+    }
+
+    @PostMapping("/profile/upload/banner")
+    @ResponseBody
+    public ResponseEntity<String> uploadBanner(@RequestParam("fileURLBanner") String fileURLBanner) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+        user.setBanner(fileURLBanner);
+
+        userDao.save(user);
+
+        return ResponseEntity.ok("Banner URL saved successfully.");
     }
 
     @GetMapping("/profile")
@@ -129,10 +142,11 @@ public class ProfileController {
 
 
     @PostMapping("/profile/{userId}/edit")
-    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds, Model model) {
-
+    public String editProfile(@PathVariable long userId, @ModelAttribute("profileFormWrapper") ProfileFormWrapper profileFormWrapper, @RequestParam(value = "selectedLanguages", required = false) List<Long> selectedLanguageIds, Model model, @RequestParam("fileURLBanner") String banner) {
+        System.out.println(banner);
         // Fetch the existing user from the database
-        User loggedInUser = getCurrentLoggedInUser();
+        User loggedIn = getCurrentLoggedInUser();
+        User loggedInUser = userDao.getReferenceById(loggedIn.getId());
         if (loggedInUser == null) {
             // Handle the case when the user doesn't exist (you can show an error page or redirect to a different page)
             return "redirect:/error";
@@ -140,6 +154,7 @@ public class ProfileController {
 
 //        User loggedInUser = getCurrentLoggedInUser();
 
+        loggedInUser.setBanner(banner);
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
