@@ -82,8 +82,10 @@ body {
     align-items: center;
     border-top: 1px solid #fff;
     padding-top: 8px;
-
+    justify-content: center;
 }
+
+
 
 .comment-interactions {
     position: relative;
@@ -150,7 +152,9 @@ body {
 
 .comment-card {
     border: 3px;
-    background-image: linear-gradient(to top, #772DAB,  #E6E6FA);
+    background-image: linear-gradient(to top, #772DAB,  #E6E6FA, #E6E6FA);
+    /*background-image: linear-gradient(to top, #e67e22 ,  #E6E6FA, #E6E6FA);*/
+    /*background-image: linear-gradient(to top, #333333 ,  #E6E6FA, #E6E6FA);*/
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 10px;
@@ -402,4 +406,8 @@ body {
     background-color: #e67e22;
     color: #fff;
    margin-bottom: 3px;
+}
+
+.comment-icons button:first-child {
+    border: none;
 }
