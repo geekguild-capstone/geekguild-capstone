@@ -46,7 +46,8 @@
 <div class="card-container" th:each="user : ${notFriends}">
     <div class="card">
         <div class="card__img">
-                <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">
+                <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Banner" class="banner-img">
+            <img th:if="${user.banner == null or user.banner == ''}" src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg" alt="Profile Banner" class="banner-img">
 
         </div>
         <div class="card__avatar" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
