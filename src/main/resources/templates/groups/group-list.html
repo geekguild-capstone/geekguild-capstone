@@ -41,17 +41,22 @@
                                 <input th:field="*{groupname}" type="text" class="form-control" id="groupName" placeholder="Enter group name">
                             </div>
                             <div class="form-group">
-                                <label for="groupBanner">Add Group Banner</label>
-                                <input th:field="*{banner}" type="file" class="form-control" id="groupBanner">
+                                <button type="button" class="upload-group-banner">Choose Banner</button>
+<!--                                <form>-->
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                    <label for="groupBanner">Add Group Banner</label>
+                                    <input class="form-control group-banner" id="groupBanner">
+                                    <input type="hidden" name="fileURLGroupBanner" id="fileURLInputGroupBanner"/>
+<!--                                </form>-->
                             </div>
                             <div class="form-group">
                                 <button type="button" class="upload-group-icon">Choose Photo</button>
-                                <form>
+<!--                                <form>-->
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                                     <label for="groupPhoto">Add Group Photo</label>
                                     <input class="form-control group-logo" id="groupPhoto">
                                     <input type="hidden" name="fileURLGroupImage" id="fileURLInputGroupImage"/>
-                                </form>
+<!--                                </form>-->
                             </div>
                             <div class="form-group">
                                 <label for="groupDescription">Group Description</label>
@@ -94,7 +99,10 @@
 
 
 </main>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="/js/filestackGroupImage.js"></script>
+<script src="/js/filestackGroupBanner.js"></script>
+
 
 <script src="/js/friend-request-modal.js"></script>
 </body>
