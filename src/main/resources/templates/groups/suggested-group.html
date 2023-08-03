@@ -17,35 +17,56 @@
     </h5>
 </div>
 
-<div th:each="group : ${suggestedGroups}">
+<div class="card-container" th:each="group : ${suggestedGroups}">
+    <div class="card">
+        <div class="card__img">
+            <img th:if="${group.banner != null and group.banner != ''}" th:src="${group.banner}" alt="Profile Banner" class="banner-img">
+            <img th:if="${group.banner == null or group.banner == ''}" src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg" alt="Profile Banner" class="banner-img">
 
-    <div class="card-container">
-        <!--BANNER-->
-                <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />
-                <img th:IF="${user.banner == null or user.banner == ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />
-
-<!--        <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">-->
-
-        <!--PROFILE PIC-->
-        <img width="30%"  th:if="${group.image != null and group.image != ''}" th:src="${group.image}"
-             alt="Profile Picture" class="profile-img"/>
-        <img width="30%" th:if="${group.image == null or group.image == ''}" src="/img/logo-no-txt.jpeg"
-             alt="Default Profile Picture" class="profile-img"/>
-
-
-        <!--GROUP NAME-->
-        <div class="name">
-            <h3 th:text="${group.groupname}"></h3>
         </div>
+        <div class="card__avatar" th:style="'background-image: url(' + ${group.image} + '); background-size: cover;'">
 
-        <!-- CONNECT BUTTON -->
-        <form th:action="@{/group/{groupId}/join(groupId=${group.getId()})}" method="post">
-            <button class="connect-btn">
-                <i class="icon fas fa-user-plus"></i> Connect
-            </button>
-        </form>
-
+        </div>
+        <div th:text="${group.groupname}" class="card__title"></div>
+<!--                <div class="card__subtitle">Web Development</div>-->
+        <div class="card__wrapper">
+<!--            <button class="card__btn">Button</button>-->
+<!--            <button class="card__btn card__btn-solid">Button</button>-->
+            <!-- CONNECT BUTTON -->
+            <form th:action="@{/group/{groupId}/join(groupId=${group.getId()})}" method="post">
+                <button class="connect-btn">
+                    <i class="icon fas fa-user-plus"></i> Connect
+                </button>
+            </form>
+        </div>
     </div>
+<!--    <div class="card-container">-->
+<!--        &lt;!&ndash;BANNER&ndash;&gt;-->
+<!--                <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Picture" class="banner-img" />-->
+<!--                <img th:IF="${user.banner == null or user.banner == ''}" src="/img/coderain.gif" alt="Default Profile Picture" class="banner-img" />-->
+
+<!--&lt;!&ndash;        <img src="/img/coderain.gif" alt="Profile Banner" class="banner-img">&ndash;&gt;-->
+
+<!--        &lt;!&ndash;PROFILE PIC&ndash;&gt;-->
+<!--        <img width="30%"  th:if="${group.image != null and group.image != ''}" th:src="${group.image}"-->
+<!--             alt="Profile Picture" class="profile-img"/>-->
+<!--        <img width="30%" th:if="${group.image == null or group.image == ''}" src="/img/logo-no-txt.jpeg"-->
+<!--             alt="Default Profile Picture" class="profile-img"/>-->
+
+
+<!--        &lt;!&ndash;GROUP NAME&ndash;&gt;-->
+<!--        <div class="name">-->
+<!--            <h3 th:text="${group.groupname}"></h3>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; CONNECT BUTTON &ndash;&gt;-->
+<!--        <form th:action="@{/group/{groupId}/join(groupId=${group.getId()})}" method="post">-->
+<!--            <button class="connect-btn">-->
+<!--                <i class="icon fas fa-user-plus"></i> Connect-->
+<!--            </button>-->
+<!--        </form>-->
+
+<!--    </div>-->
 </div>
 
 

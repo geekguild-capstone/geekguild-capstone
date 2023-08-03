@@ -84,7 +84,7 @@
 /* Connect Button */
 .connect-btn {
     display: block;
-    width: 90%;
+    /*width: 90%;*/
     margin: 0 5px 5px 5px; /* top, right, bottom, left */
     text-align: center;
     background-color: #8e09e7; /* Text Purple */

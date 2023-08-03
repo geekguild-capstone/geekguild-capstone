@@ -1,3 +1,4 @@
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -10,75 +11,131 @@
 <!--</head>-->
 
 <!--<body>-->
-<!--<div th:each="post, postIndex : ${groupPosts}">-->
+<!--<div th:each="post, postIndex : ${groupPosts}" class="post-card" id="post-${postIndex.index}">-->
 <!--    <div class="post-card">-->
-
 <!--        <div class="edit-icons">-->
-<!--            <i class="far fa-edit edit-icon" onclick="editPost(event)"></i>-->
-<!--            <i class="far fa-times-circle delete-icon" onclick="deletePost(event)"></i>-->
+<!--            <i class="edit-button  fas fa-pencil-alt" onclick="editPost(event)"></i>-->
+<!--            <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>-->
 <!--        </div>-->
-
 
 <!--        <div class="user-profile">-->
 <!--            <img th:src="${post.user.image}" alt="User Profile Image">-->
 <!--            <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>-->
 <!--        </div>-->
+
 <!--        <div class="post-content-container">-->
 <!--            <div class="post-content">-->
 <!--                <p th:text="${post.body}"></p>-->
+<!--                <div th:if="${post.snippet}">-->
+<!--                    <button class="show-code-btn">Show Code</button>-->
+<!--                    &lt;!&ndash; Add a container to hold the code snippet &ndash;&gt;-->
+<!--                    <pre class="code-container" style="display: none;">-->
+<!--                        <code class="language-html" th:text="${post.snippet}"></code>-->
+<!--                    </pre>-->
+<!--                </div>-->
+
 
 <!--                &lt;!&ndash; Move the .post-image div here, within .post-content &ndash;&gt;-->
-<!--                <div class="post-image">-->
+<!--                <div class="post-image" th:if="${!post.image.equals('')}">-->
 <!--                    <img width="100%" th:src="${post.image}">-->
 <!--                </div>-->
 <!--            </div>-->
-
 <!--            <div class="interactions">-->
-<!--                <button onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">-->
+<!--                <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">-->
 <!--                    <i class="far fa-thumbs-up"></i>Like-->
 <!--                </button>-->
 <!--                <div class="like-emojis" style="display: none;">-->
-<!--                    <span class="like-emoji" onclick="likeAction('👍')">👍</span>-->
-<!--                    <span class="like-emoji" onclick="likeAction('❤️')">❤️</span>-->
-<!--                    <span class="like-emoji" onclick="likeAction('😂')">😂</span>-->
+<!--                    <span class="like-emoji"><i>👍</i></span>-->
+<!--                    <span class="emoji-counter">0</span>-->
+<!--                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>-->
+<!--                    <span class="emoji-counter">0</span>-->
+<!--                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>-->
+<!--                    <span class="emoji-counter">0</span>-->
 <!--                </div>-->
-
 <!--                <button class="comment-button" onclick="toggleCommentBox(this)">-->
-<!--                    <i class="far fa-comment-dots"></i>Comment-->
+<!--                    <i class="far fa-comment-dots"></i>Comments-->
 <!--                </button>-->
 <!--                <button class="share-button">-->
-<!--                    <i class="fas fa-envelope"></i>Message &lt;!&ndash; Updated text and icon &ndash;&gt;-->
+<!--                    <i class="fas fa-envelope"></i>Message-->
 <!--                </button>-->
 <!--            </div>-->
-<!--        </div>-->
 
-<!--        <div class="comment-box">-->
-<!--            &lt;!&ndash; Use a <form> element to wrap the comment input and button &ndash;&gt;-->
-<!--            <form th:action="@{/group/{groupId}/comment(groupId=${group.id})}" th:object="${comment}" method="post">-->
-<!--                <input type="hidden" name="post.id" th:value="${post.id}" />-->
-<!--                <input type="hidden" name="user.id" th:value="${user.id}" />-->
-<!--                <input type="text" th:field="*{text}" id="comment-input" placeholder="Add a comment..." />-->
-<!--                <button class="submit-comment-btn" type="submit">Submit</button>-->
-<!--            </form>-->
-<!--        </div>-->
+<!--            <div class="comment-box">-->
+<!--                &lt;!&ndash; Use a <form> element to wrap the comment input and button &ndash;&gt;-->
+<!--                <form th:action="@{/group/{groupId}/comment(groupId=${group.id})}" th:object="${comment}"-->
+<!--                      method="post">-->
+<!--                    <input type="hidden" name="post.id" th:value="${post.id}"/>-->
+<!--                    <input type="hidden" name="user.id" th:value="${user.id}"/>-->
+<!--                    <div class="comment-input-section">-->
 
-<!--        <div class="comments-section" id="comments-section">-->
-<!--            &lt;!&ndash; Display comments here (if available) &ndash;&gt;-->
-<!--            <ul>-->
-<!--                <li th:each="comment : ${groupPostComments[postIndex.index]}">-->
-<!--                    <p th:text="${comment.text}"></p>-->
-<!--                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"></p>-->
-<!--                </li>-->
-<!--            </ul>-->
+<!--                        &lt;!&ndash;                        <input type="text" th:field="*{text}"  placeholder="Add a comment..."/>&ndash;&gt;-->
+<!--                        <div class="input-group">-->
+<!--                            <div class="input-group mb-3">-->
+<!--                                <span class="input-group-text" id="basic-addon1">Comment</span>-->
+<!--                                <input th:field="*{text}" type="text" class="form-control"-->
+<!--                                       placeholder="Whats on your mind?" aria-label="Username"-->
+<!--                                       aria-describedby="basic-addon1">-->
+<!--                            </div>-->
+<!--                            <span class="input-group-text">Code</span>-->
+<!--                            <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>-->
+<!--                            <button class="submit-comment-btn" type="submit">Submit</button>-->
+
+<!--                        </div>-->
+<!--                        &lt;!&ndash;                        <textarea th:field="*{snippet}" id="comment-input"  rows="10" cols="50"></textarea>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </form>-->
+
+<!--            </div>-->
+<!--            <div class="comments-section" id="comments-section">-->
+<!--                &lt;!&ndash; Display comments here (if available) &ndash;&gt;-->
+<!--                <div th:each="comment : ${groupPostComments[postIndex.index]}">-->
+<!--                    &lt;!&ndash;                    <div th:each="comment : ${commentsForPost}">&ndash;&gt;-->
+<!--                    <div class="comment-card">-->
+<!--                        <div class="comment-header">-->
+<!--                            <div class="user-profile">-->
+<!--                                <img th:src="${comment.user.image}" alt="User Profile Image">-->
+<!--                                <div class="username-box">-->
+<!--                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"-->
+<!--                                       class="username"></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="comment-content">-->
+<!--                            <p th:text="${comment.text}" class="comment-text"></p>-->
+<!--                            &lt;!&ndash; Add a button to show/hide the code snippet &ndash;&gt;-->
+<!--                            <div th:if="${comment.snippet}">-->
+<!--                                <button class="show-code-btn">Show Code</button>-->
+<!--                                &lt;!&ndash; Add a container to hold the code snippet &ndash;&gt;-->
+<!--                                <pre class="code-container" style="display: none;">-->
+<!--                        <code class="language-html" th:text="${comment.snippet}"></code>-->
+<!--                    </pre>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
+<!--    <div class="like-emojis count-display">-->
+<!--        <span class="like-emoji"><i>👍</i></span>-->
+<!--        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>-->
+<!--        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>-->
+<!--        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>-->
+<!--    </div>-->
 <!--</div>-->
+
+
+<!--&lt;!&ndash; Load the toggleSnippet.js file &ndash;&gt;-->
+<!--<script th:src="@{/js/toggleSnippet.js}" type="text/javascript"></script>-->
 
 
 <!--<script>-->
 <!--    function toggleCommentBox(button) {-->
 <!--        const postCard = button.closest('.post-card');-->
-<!--        const commentBox = postCard.querySelector('.comment-box');-->
+<!--        const commentBox = postCard.querySelector('.comments-section');-->
 
 <!--        // Toggle the visibility of the comment box-->
 <!--        if (commentBox.style.display === 'none') {-->
@@ -88,72 +145,61 @@
 <!--        }-->
 <!--    }-->
 
-<!--    function submitComment(event) {-->
-<!--        const button = event.target;-->
+<!--    // Function to handle showing the emojis container-->
+<!--    function toggleLikeEmojis(button) {-->
 <!--        const postCard = button.closest('.post-card');-->
-<!--        const commentInput = postCard.querySelector('#comment-input');-->
-<!--        const commentsSection = postCard.querySelector('.comments-section');-->
-
-<!--        const commentText = commentInput.value.trim();-->
-<!--        if (commentText !== '') {-->
-<!--            // Create a new comment element and append it to the comments section-->
-<!--            const newComment = document.createElement('div');-->
-<!--            newComment.classList.add('comment');-->
-
-<!--            // User profile image (replace with actual image source)-->
-<!--            const userProfileImg = document.createElement('img');-->
-<!--            userProfileImg.src = 'https://via.placeholder.com/24';-->
-<!--            userProfileImg.alt = 'User Profile Image';-->
-
-<!--            // User profile username (replace with actual username)-->
-<!--            const userProfileUsername = document.createElement('div');-->
-<!--            userProfileUsername.classList.add('username');-->
-<!--            userProfileUsername.textContent = 'John Doe';-->
-
-<!--            // Comment content-->
-<!--            const commentContent = document.createElement('p');-->
-<!--            commentContent.textContent = commentText;-->
-
-<!--            // Horizontal line to separate comments-->
-<!--            const hr = document.createElement('hr');-->
-
-<!--            // Append the elements to the comment container-->
-<!--            newComment.appendChild(userProfileImg);-->
-<!--            newComment.appendChild(userProfileUsername);-->
-<!--            newComment.appendChild(commentContent);-->
-<!--            newComment.appendChild(hr);-->
-
-<!--            commentsSection.appendChild(newComment);-->
-
-<!--            // Clear the comment input field-->
-<!--            commentInput.value = '';-->
-
-<!--            // Auto-close the comment box after submission-->
-<!--            const commentBox = postCard.querySelector('.comment-box');-->
-<!--            commentBox.style.display = 'none';-->
-<!--        }-->
-
+<!--        const emojisContainer = postCard.querySelector('.like-emojis');-->
+<!--        emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';-->
 <!--    }-->
 
-<!--    function showLikeEmojis(button) {-->
-<!--        const postCard = button.closest('.post-card');-->
-<!--        const likeEmojis = postCard.querySelector('.like-emojis');-->
-<!--        likeEmojis.style.display = 'block';-->
-<!--    }-->
+<!--    // Update the event listeners to handle click on the "like-button"-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const likeButtons = document.querySelectorAll('.like-button');-->
+<!--        likeButtons.forEach(button => {-->
+<!--            button.addEventListener('click', function (event) {-->
+<!--                event.stopPropagation(); // Prevent the click event from bubbling to the document-->
+<!--                toggleLikeEmojis(this);-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
 
-<!--    function hideLikeEmojis(button) {-->
-<!--        const postCard = button.closest('.post-card');-->
-<!--        const likeEmojis = postCard.querySelector('.like-emojis');-->
-<!--        likeEmojis.style.display = 'none';-->
-<!--    }-->
+<!--    // Function to handle emoji click (replace this with your desired action)-->
+<!--    // function handleEmojiClick(emoji) {-->
+<!--    //     console.log('Emoji clicked:', emoji);-->
+<!--    //     // Add your like or other action logic here-->
+<!--    // }-->
+
+<!--    // Update the event listeners to handle mouseleave on the emojis container-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const emojisContainers = document.querySelectorAll('.like-emojis');-->
+<!--        emojisContainers.forEach(container => {-->
+<!--            container.addEventListener('mouseleave', function () {-->
+<!--                this.style.display = 'none';-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+
+
 <!--</script>-->
+
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', () => {-->
+<!--        Prism.highlightAll();-->
+<!--    });-->
+
+
+<!--</script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-html.min.js"></script>-->
+
 <!--</body>-->
 <!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="_csrf" th:content="${_csrf.token}"/>
+
     <title>Post</title>
     <!-- Add the necessary CSS libraries (e.g., Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -162,11 +208,93 @@
 </head>
 
 <body>
-<div th:each="post, postIndex : ${groupPosts}" class="post-card" id="post-${postIndex.index}">
+<!-- Rest of your HTML content -->
+
+<!-- Edit Post Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:object="${request}" method="post" id="editForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editBody" class="form-label">Body</label>
+                        <input th:field="*{body}" type="text" class="form-control" id="editBody" name="body"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSnippet" class="form-label">Snippet</label>
+                        <textarea th:field="*{snippet}" class="form-control" id="editSnippet" name="snippet"
+                                  rows="5" required></textarea>
+                    </div>
+                    <input type="hidden" id="postId" name="postId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitEdit">Save Changes</button>
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+        </form>
+    </div>
+</div>
+
+<!-- Edit Comment Modal -->
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:object="${commentRequest}" method="post" id="editCommentForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editCommentBody" class="form-label">Body</label>
+                        <input th:field="*{text}" type="text" class="form-control comment-text" id="editCommentBody"
+                               name="body"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCommentSnippet" class="form-label">Snippet</label>
+                        <textarea th:field="*{snippet}" class="form-control comment-snippet" id="editCommentSnippet"
+                                  name="snippet"
+                                  rows="5" required></textarea>
+                    </div>
+                    <input type="hidden" id="commentId" name="commentId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitCommentEdit">Save Changes</button>
+                </div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+        </form>
+    </div>
+</div>
+
+<!-- Rest of your HTML content -->
+
+<div th:each="post, postIndex : ${posts}" class="post-card" th:data-post-id="${post.id}" id="post-${postIndex.index}">
+
     <div class="post-card">
-        <div class="edit-icons">
-            <i class="edit-button  fas fa-pencil-alt" onclick="editPost(event)"></i>
-            <i class="delete-button fas fa-trash" onclick="deletePost(event)"></i>
+        <div class="post-icons" th:if="${user.id == post.user.id}">
+            <div class="edit-icon">
+                <button data-bs-toggle="modal" data-bs-target="#editModal" th:attr="data-post-id=${post.id}"
+                        onclick="openEditModal(this.getAttribute('data-post-id'))">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+            </div>
+            <div class="delete-icon">
+                <form method="post" th:action="@{/post/delete/{postId}/{groupId}(postId=${post.id},groupId=${group.id})}">
+                    <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
         </div>
 
         <div class="user-profile">
@@ -176,7 +304,9 @@
 
         <div class="post-content-container">
             <div class="post-content">
-                <p th:text="${post.body}"></p>
+                <br>
+                <p class="post-body" th:text="${post.body}"></p>
+                <hr><br>
                 <div th:if="${post.snippet}">
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
@@ -192,34 +322,54 @@
                 </div>
             </div>
             <div class="interactions">
-                <button class="like-button" onmouseover="showLikeEmojis(this)" onmouseout="hideLikeEmojis(this)">
+                <button class="like-button" onclick="toggleLikeEmojis(this) ">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
                 <div class="like-emojis" style="display: none;">
-                    <span class="like-emoji"><i>👍</i></span>
-                    <span class="emoji-counter">0</span>
-                    <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
-                    <span class="emoji-counter">0</span>
-                    <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
-                    <span class="emoji-counter">0</span>
+                    <!-- Add forms for each icon -->
+                    <form th:action="@{/reaction/post/submit/{groupId}(groupId=${group.id})}" method="post" class="reaction-form"
+                          style="display: inline-block;" th:data-post-id="${post.id}"
+                          onsubmit="submitReaction(event, 'like', this.getAttribute('data-post-id'))">
+                        <button type="submit" class="like-emoji"
+                                style="background: none; border: none; cursor: pointer;">👍
+                        </button>
+                        <!--                        <span class="emoji-counter">0</span>-->
+                    </form>
+                    <form th:action="@{/reaction/post/submit/{groupId}(groupId=${group.id})}" method="post" class="reaction-form"
+                          style="display: inline-block;" th:data-post-id="${post.id}"
+                          onsubmit="submitReaction(event, 'love', this.getAttribute('data-post-id'))">
+                        <button type="submit" class="like-emoji"
+                                style="background: none; border: none; cursor: pointer;">❤️
+                        </button>
+                        <!--                        <span class="emoji-counter">0</span>-->
+                    </form>
+                    <form th:action="@{/reaction/post/submit/{groupId}(groupId=${group.id})}" method="post" class="reaction-form"
+                          style="display: inline-block;" th:data-post-id="${post.id}"
+                          onsubmit="submitReaction(event, 'laugh', this.getAttribute('data-post-id'))">
+                        <button type="submit" class="like-emoji"
+                                style="background: none; border: none; cursor: pointer;">😂
+                        </button>
+                        <!--                        <span class="emoji-counter">0</span>-->
+                    </form>
                 </div>
                 <button class="comment-button" onclick="toggleCommentBox(this)">
                     <i class="far fa-comment-dots"></i>Comments
                 </button>
-                <button class="share-button">
+                <button th:if="${user.id != post.user.id}" class="share-button"
+                        th:attr="data-friend-id=${post.user.id}, data-friend-username=${post.user.email}, data-friend-image=${post.user.image},data-current-user-id=${user.id},
+                        data-current-user-username=${user.email}, data-current-user-image=${user.image}"
+                        onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                     <i class="fas fa-envelope"></i>Message
                 </button>
             </div>
 
             <div class="comment-box">
                 <!-- Use a <form> element to wrap the comment input and button -->
-                <form th:action="@{/group/{groupId}/comment(groupId=${group.id})}" th:object="${comment}"
+                <form th:action="@{/group/{groupId}/addComment/{postId}(groupId=${group.id}, postId=${post.id})}" th:object="${comment}"
                       method="post">
                     <input type="hidden" name="post.id" th:value="${post.id}"/>
                     <input type="hidden" name="user.id" th:value="${user.id}"/>
                     <div class="comment-input-section">
-
-                        <!--                        <input type="text" th:field="*{text}"  placeholder="Add a comment..."/>-->
                         <div class="input-group">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Comment</span>
@@ -228,7 +378,8 @@
                                        aria-describedby="basic-addon1">
                             </div>
                             <span class="input-group-text">Code</span>
-                            <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea"></textarea>
+                            <textarea th:field="*{snippet}" class="form-control language-html"
+                                      aria-label="With textarea"></textarea>
                             <button class="submit-comment-btn" type="submit">Submit</button>
 
                         </div>
@@ -239,43 +390,114 @@
             </div>
             <div class="comments-section" id="comments-section">
                 <!-- Display comments here (if available) -->
-                <div th:each="comment : ${groupPostComments[postIndex.index]}">
-                    <!--                    <div th:each="comment : ${commentsForPost}">-->
-                    <div class="comment-card">
-                        <div class="comment-header">
-                            <div class="user-profile">
-                                <img th:src="${comment.user.image}" alt="User Profile Image">
-                                <div class="username-box">
-                                    <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
-                                       class="username"></p>
-                                </div>
+                <div class="comment-card" th:each="comment : ${groupPostComments[postIndex.index]}"
+                     th:data-comment-id="${comment.id}">
+
+                    <!--                    <div class="comment-card">-->
+                    <div class="comment-header">
+                        <div class="user-profile">
+                            <img th:src="${comment.user.image}" alt="User Profile Image">
+                            <div class="username-box">
+                                <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
+                                   class="username"></p>
                             </div>
+                            <hr>
                         </div>
-                        <div class="comment-content">
-                            <p th:text="${comment.text}" class="comment-text"></p>
-                            <!-- Add a button to show/hide the code snippet -->
-                            <div th:if="${comment.snippet}">
-                                <button class="show-code-btn">Show Code</button>
-                                <!-- Add a container to hold the code snippet -->
-                                <pre class="code-container" style="display: none;">
-                        <code class="language-html" th:text="${comment.snippet}"></code>
-                    </pre>
-                            </div>
+                        <div class="comment-icons" th:if="${user.id == comment.user.id}">
+                            <button data-bs-toggle="modal" data-bs-target="#editCommentModal"
+                                    th:attr="data-comment-id=${comment.id}"
+                                    onclick="openEditCommentModal(this.getAttribute('data-comment-id'))">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <form method="post" th:action="@{/comment/delete/{commentId}/{groupId}(commentId=${comment.id}, groupId=${group.id})}">
+                                <button type="submit" class="comment-delete-button"><i class="fas fa-trash"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    <!--                    </div>-->
+
+                    <div class="comment-content">
+                        <p th:text="${comment.text}" class="comment-text"></p>
+                        <hr>
+                        <!-- Add a button to show/hide the code snippet -->
+                        <div th:if="${comment.snippet}">
+                            <button class="show-code-btn">Show Code</button>
+                            <!-- Add a container to hold the code snippet -->
+                            <pre class="code-container" style="display: none;">
+                        <code class="language-html" th:text="${comment.snippet}"></code>
+                    </pre>
+                        </div>
+                        <div class="comment-interactions">
+                            <button class="comment-like-button" onclick="toggleLikeEmojisComment(this)">
+                                <i class="far fa-thumbs-up"></i>Like
+                            </button>
+                            <div class="comment-like-emojis" style="display: none;">
+                                <!-- Add forms for each icon -->
+                                <form th:action="@{/reaction/comment/submit/{groupId}(groupId=${group.id})}" method="post"
+                                      class="comment-reaction-form" style="display: inline-block;"
+                                      th:data-comment-id="${comment.id}"
+                                      onsubmit="submitCommentReaction(event, 'like', this.getAttribute('data-comment-id'))">
+                                    <button type="submit" class="like-emoji"
+                                            style="background: none; border: none; cursor: pointer;">👍
+                                    </button>
+                                    <!--                        <span class="emoji-counter">0</span>-->
+                                </form>
+                                <form th:action="@{/reaction/comment/submit/{groupId}(groupId=${group.id})}" method="post"
+                                      class="comment-reaction-form" style="display: inline-block;"
+                                      th:data-comment-id="${comment.id}"
+                                      onsubmit="submitCommentReaction(event, 'love', this.getAttribute('data-comment-id'))">
+                                    <button type="submit" class="like-emoji"
+                                            style="background: none; border: none; cursor: pointer;">❤️
+                                    </button>
+                                    <!--                        <span class="emoji-counter">0</span>-->
+                                </form>
+                                <form th:action="@{/reaction/comment/submit/{groupId}(groupId=${group.id})}" method="post"
+                                      class="comment-reaction-form" style="display: inline-block;"
+                                      th:data-comment-id="${comment.id}"
+                                      onsubmit="submitCommentReaction(event, 'laugh', this.getAttribute('data-comment-id'))">
+                                    <button type="submit" class="like-emoji"
+                                            style="background: none; border: none; cursor: pointer;">😂
+                                    </button>
+                                    <!--                        <span class="emoji-counter">0</span>-->
+                                </form>
+                            </div>
+                            <!--                            <button class="share-button">-->
+                            <!--                                <i class="fas fa-envelope"></i>Message-->
+                            <!--                            </button>-->
+                            <button th:if="${user.id != comment.user.id}" class="share-button"
+                                    th:attr="data-friend-id=${comment.user.id}, data-friend-username=${comment.user.email}, data-friend-image=${comment.user.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.email}, data-current-user-image=${user.image}"
+
+                                    onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
+                                <i class="fas fa-envelope"></i>Message
+                            </button>
+                            <!-- Display the comment reaction counts -->
+                            <div class="comment-like-emojis count-display" style="float: right;">
+                                <span class="like-emoji"><i>👍</i></span>
+                                <span th:text="${commentLikesCount[comment.id]}" class="emoji-counter"></span>
+                                <span class="like-emoji">❤️</span>
+                                <span th:text="${commentLovesCount[comment.id]}" class="emoji-counter"></span>
+                                <span class="like-emoji">😂</span>
+                                <span th:text="${commentLaughsCount[comment.id]}" class="emoji-counter"></span>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+                <!--                </div>-->
             </div>
         </div>
     </div>
+    <!--    <div class="like-emojis count-display">-->
     <div class="like-emojis count-display">
         <span class="like-emoji"><i>👍</i></span>
-        <span th:text="${likesCount[postIndex.index]}" class="emoji-counter"></span>
-        <span class="like-emoji" onclick="handleEmojiClick('❤️')">❤️</span>
-        <span th:text="${lovesCount[postIndex.index]}" class="emoji-counter"></span>
-        <span class="like-emoji" onclick="handleEmojiClick('😂')">😂</span>
-        <span th:text="${laughsCount[postIndex.index]}" class="emoji-counter"></span>
+        <span th:text="${postLikesCount[post.id]}" class="emoji-counter"></span>
+        <span class="like-emoji">❤️</span>
+        <span th:text="${postLovesCount[post.id]}" class="emoji-counter"></span>
+        <span class="like-emoji">😂</span>
+        <span th:text="${postLaughsCount[post.id]}" class="emoji-counter"></span>
     </div>
+
 </div>
 
 
@@ -296,39 +518,60 @@
         }
     }
 
-    // Function to handle showing the emojis container
+
     function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
         const emojisContainer = postCard.querySelector('.like-emojis');
         emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Update the event listeners to handle click on the "like-button"
-    document.addEventListener('DOMContentLoaded', function () {
-        const likeButtons = document.querySelectorAll('.like-button');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.stopPropagation(); // Prevent the click event from bubbling to the document
-                toggleLikeEmojis(this);
-            });
-        });
-    });
+    function toggleLikeEmojisComment(button) {
+        const postCard = button.closest('.comment-card');
+        const commentEmojisContainer = postCard.querySelector('.comment-like-emojis');
+        commentEmojisContainer.style.display = commentEmojisContainer.style.display === 'block' ? 'none' : 'block';
 
-    // Function to handle emoji click (replace this with your desired action)
-    // function handleEmojiClick(emoji) {
-    //     console.log('Emoji clicked:', emoji);
-    //     // Add your like or other action logic here
-    // }
+    }
 
-    // Update the event listeners to handle mouseleave on the emojis container
-    document.addEventListener('DOMContentLoaded', function () {
-        const emojisContainers = document.querySelectorAll('.like-emojis');
-        emojisContainers.forEach(container => {
-            container.addEventListener('mouseleave', function () {
-                this.style.display = 'none';
-            });
-        });
-    });
+
+    function submitReaction(event, reaction, postId) {
+        event.preventDefault();
+        const form = event.target;
+        const reactionField = document.createElement('input');
+        const postIdField = document.createElement('input');
+
+        reactionField.setAttribute('type', 'hidden');
+        reactionField.setAttribute('name', 'reaction');
+        reactionField.setAttribute('value', reaction);
+        form.appendChild(reactionField);
+
+        postIdField.setAttribute('type', 'hidden');
+        postIdField.setAttribute('name', 'postId');
+        postIdField.setAttribute('value', postId);
+        form.appendChild(postIdField);
+
+
+        form.submit();
+    }
+
+    function submitCommentReaction(event, reaction, commentId) {
+        event.preventDefault();
+        const form = event.target;
+        const reactionField = document.createElement('input');
+        const commentIdField = document.createElement('input');
+
+        reactionField.setAttribute('type', 'hidden');
+        reactionField.setAttribute('name', 'reaction');
+        reactionField.setAttribute('value', reaction);
+        form.appendChild(reactionField);
+
+        commentIdField.setAttribute('type', 'hidden');
+        commentIdField.setAttribute('name', 'commentId');
+        commentIdField.setAttribute('value', commentId);
+        form.appendChild(commentIdField);
+
+
+        form.submit();
+    }
 
 
 </script>
@@ -343,6 +586,172 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-html.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function openEditModal(postId) {
+        fetch(`/post/${postId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Set the values of the form fields in the modal with the fetched data
+                $('#editBody').val(data.body);
+                $('#editSnippet').val(data.snippet);
+                $('#postId').val(data.id); // Use data.id from the DTO
+
+                // Show the modal
+                $('#editModal').modal('show');
+            })
+            .catch(error => {
+                console.error('Error fetching post data:', error);
+            });
+    }
+
+    // Function to handle form submission asynchronously
+    function submitEditForm() {
+
+        event.preventDefault(); // Prevent default form submission behavior
+
+
+        const postId = $('#postId').val();
+        const body = $('#editBody').val();
+        const snippet = $('#editSnippet').val();
+        console.log(postId)
+        console.log(body)
+        console.log(snippet)
+
+        // Get the CSRF token from the hidden input field
+        const csrfToken = $('[name="_csrf"]').val();
+
+        // Make an AJAX request to submit the form data
+        $.ajax({
+            type: 'POST',
+            url: `/post/${postId}/update`,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                body: body,
+                snippet: snippet
+            }),
+            success: function (response) {
+                // Handle the response if needed (e.g., show a success message)
+                console.log('Post updated successfully');
+                // Update the post content on the page without reloading
+                const postCard = $(`[data-post-id="${postId}"]`);
+                postCard.find('.post-body').text(body);
+                postCard.find('.code-container code').text(snippet);
+
+                // Close the modal after successful update
+                $('#editModal').modal('hide');
+            },
+            error: function (error) {
+                // Handle errors if needed
+                console.error('Error updating post:', error);
+            }
+        });
+    }
+
+
+    // Attach click event to the "Save Changes" button in the modal
+    $(document).on('click', '#submitEdit', function () {
+        submitEditForm();
+    });
+
+
+</script>
+<script>
+    // Function to open the edit Comment modal and pre-fill the form
+    function openEditCommentModal(commentId) {
+        fetch(`/comment/${commentId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Set the values of the form fields in the modal with the fetched data
+                $('#editCommentBody').val(data.text);
+                $('#editCommentSnippet').val(data.snippet);
+                $('#commentId').val(data.id); // Use data.id from the DTO
+
+                // Show the modal
+                $('#editCommentModal').modal('show');
+            })
+            .catch(error => {
+                console.error('Error fetching comment data:', error);
+            });
+    }
+
+    // Function to handle form submission asynchronously
+    function submitEditCommentForm() {
+
+        event.preventDefault(); // Prevent default form submission behavior
+
+
+        const commentId = $('#commentId').val();
+        const body = $('#editCommentBody').val();
+        const snippet = $('#editCommentSnippet').val();
+        console.log(commentId)
+        console.log(body)
+        console.log(snippet)
+
+        // Get the CSRF token from the hidden input field
+        const csrfToken = $('[name="_csrf"]').val();
+
+        // Make an AJAX request to submit the form data
+        $.ajax({
+            type: 'POST',
+            url: `/comment/${commentId}/update`,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                text: body,
+                snippet: snippet
+            }),
+            success: function (response) {
+                // Handle the response if needed (e.g., show a success message)
+                console.log('Post updated successfully');
+                // Update the comment content on the page without reloading
+                // const commentCard = $(`[data-comment-id="${data.id}"]`);
+                const commentCard = $(`[data-comment-id="${commentId}"]`);
+
+                commentCard.find('.comment-text').text(body);
+                commentCard.find('.comment-snippet').text(snippet);
+                // const postCard = $(`[data-comment-id="${commentId}"]`);
+                // postCard.find('.post-body').text(body);
+                // postCard.find('.code-container code').text(snippet);
+
+                // Close the modal after successful update
+                $('#editCommentModal').modal('hide');
+            },
+            error: function (error) {
+                // Handle errors if needed
+                console.error('Error updating comment:', error);
+            }
+        });
+    }
+
+
+    // Attach click event to the "Save Changes" button in the modal
+    $(document).on('click', '#submitCommentEdit', function () {
+        submitEditCommentForm();
+    });
+
+
+</script>
+
 
 </body>
 </html>
