@@ -1,8 +1,8 @@
-const imageButton = document.querySelector('.upload-icon');
-const image = document.querySelector('.logo');
-const imageURLInput = document.querySelector('#fileURLInputImage');
+const bannerButton = document.querySelector('.upload-group-banner');
+const banner = document.querySelector('.group-banner');
+const bannerURLInput = document.querySelector('#fileURLInputGroupBanner');
 
-imageButton.addEventListener('click', () => {
+bannerButton.addEventListener('click', () => {
     const apiKey = 'AkB0xPD0qS7OWG1qTtSu5z';
     // const apiKey = 'APaRx6LcnR9W7kXg7lQw2z';
 
@@ -14,10 +14,12 @@ imageButton.addEventListener('click', () => {
         // },
         onUploadDone: (uploadResponse) => {
             console.log('onUploadDone', uploadResponse);
-            const imageURL = uploadResponse.filesUploaded[0].url;
-            image.setAttribute('src', imageURL);
-            imageURLInput.value = imageURL; // Store the postImageURL in the hidden input field.
+            const bannerURL = uploadResponse.filesUploaded[0].url;
+            banner.setAttribute('value', bannerURL);
+            bannerURLInput.value = bannerURL; // Store the postImageURL in the hidden input field.
             // enableSubmitButton();
+            console.log(bannerURLInput.value)
+
         }
     };
     client.picker(options).open();

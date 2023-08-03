@@ -62,13 +62,14 @@ public class GroupController {
 
 
     @PostMapping("/group/create")
-    public String createGroup(@ModelAttribute Group group, @RequestParam("fileURLGroupImage") String image) {
+    public String createGroup(@ModelAttribute Group group,@RequestParam("fileURLGroupBanner") String banner, @RequestParam("fileURLGroupImage") String image ) {
         User loggedInUser = getCurrentLoggedInUser();
         Group newGroup = new Group();
+        System.out.println(banner);
 
         newGroup.setGroupname(group.getGroupname()); // Set other properties if required
         newGroup.setImage(image);
-        newGroup.setBanner(group.getBanner());
+        newGroup.setBanner(banner);
         newGroup.setDescription(group.getDescription());
         newGroup.setAdminId(loggedInUser.getId());
 
