@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-<!--    <title>Profile</title>-->
+    <!--    <title>Profile</title>-->
     <title th:text="${title}"></title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -16,111 +16,122 @@
 <div th:replace="partials/navbar :: navbar"></div>
 
 <div class="page-container">
-<div class="edit-icon">
-    <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
-        <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5"
-             stroke="limegreen" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
-        </svg>
-    </a>
-</div>
-<div class="container">
-    <div class="profile-header-container">
-        <!-- Cover Photo Container -->
-        <div class="cover-photo">
-            Cover Photo Placeholder
+    <div class="edit-icon">
+        <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+            <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="limegreen" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+            </svg>
+        </a>
+    </div>
+    <div class="container">
+        <div class="profile-header-container">
+            <!-- Cover Photo Container -->
+            <div class="cover-photo">
+                Cover Photo Placeholder
+            </div>
+            <!-- Profile Picture Container -->
+            <img th:src="${user.image}" alt="Profile Picture" class="profile-picture-profile">
+            <div class="profile-info">
+                <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
+                <!--            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>-->
+                <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
+            </div>
         </div>
-        <!-- Profile Picture Container -->
-        <img th:src="${user.image}" alt="Profile Picture" class="profile-picture-profile">
-        <div class="profile-info">
-            <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
-<!--            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>-->
-            <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
+
+        <hr>
+
+        <div class="icon-container">
+            <a th:href="${portfolio.linkedin ?: ''}" class="icon-link">
+                <i class="fab fa-linkedin"></i>
+                <span class="icon-text"></span>
+            </a>
+            <a th:href="${portfolio.github ?: ''}" class="icon-link">
+                <i class="fab fa-github"></i>
+                <span class="icon-text"></span>
+            </a>
+            <a th:href="${portfolio.facebook ?: ''}" class="icon-link">
+                <i class="fab fa-facebook"></i>
+                <span class="icon-text"></span>
+            </a>
+            <a th:href="${portfolio.misclink ?: ''}" class="icon-link">
+                <i class="fas fa-globe"></i>
+                <span class="icon-text"></span>
+            </a>
+        </div>
+
+        <hr>
+
+        <div class="about-me-container">
+            <h2 class="section-header">About Me</h2>
+            <p th:text="${portfolio.about ?: ''}"></p>
+        </div>
+
+        <hr>
+
+        <div class="section-container">
+            <h2 class="section-header">Skills</h2>
+            <div th:each="languages : ${userLanguages}" class="profile-skills">
+                <p th:text="${languages.languageName}"></p>
+                <!--            <i class="fab fa-java skill-icon"></i> &lt;!&ndash; Font Awesome icon for Java &ndash;&gt;-->
+                <!--            <i class="fab fa-cuttlefish skill-icon"></i> &lt;!&ndash; Font Awesome icon for C++ &ndash;&gt;-->
+                <!--            <i class="fab fa-python skill-icon"></i> &lt;!&ndash; Font Awesome icon for Python &ndash;&gt;-->
+                <!--            <i class="fab fa-html5 skill-icon"></i> &lt;!&ndash; Font Awesome icon for HTML &ndash;&gt;-->
+                <!--            <i class="fab fa-css3-alt skill-icon"></i> &lt;!&ndash; Font Awesome icon for CSS &ndash;&gt;-->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="section-container">
+            <h2 class="section-header">Work</h2>
+            <p>Working on: <span th:text="${work.working ?: ''}"></span></p>
+            <p>Ask me: <span th:text="${work.ask ?: ''}"></span></p>
+            <p>I am currently learning: <span th:text="${work.learn ?: ''}"></span></p>
+            <p>Fun fact: <span th:text="${work.fact ?: ''}"></span></p>
+            <p>I need help with: <span th:text="${work.help ?: ''}"></span></p>
+        </div>
+
+        <hr>
+
+        <div class="section-container">
+            <h2 class="section-header projects">Projects</h2>
+            <ul>
+                <li>
+                    <a th:href="${portfolio.proj1link ?: ''}" class="project-link">
+                        <span th:text="${portfolio.proj1 ?: ''}" class="project-title"></span>
+                    </a>
+                </li>
+                <li class="project-description">Description:<br>
+                    <span th:text="${portfolio.proj1desc ?: ''}">
+                    </span>
+                </li>
+                <br>
+                <hr>
+                <li>
+                    <a th:href="${portfolio.proj2link ?: ''}" class="project-link">
+                        <span th:text="${portfolio.proj2 ?: ''}" class="project-title"></span>
+                    </a>
+                </li>
+                <li class="project-description">Description:<br>
+                    <span th:text="${portfolio.proj2desc ?: ''}"></span>
+                </li>
+                <br>
+                <hr>
+                <li>
+                    <a th:href="${portfolio.proj3link ?: ''}" class="project-link">
+                        <span th:text="${portfolio.proj3 ?: ''}" class="project-title" title="Project 3"></span>
+                    </a>
+                </li>
+                <li class="project-description">Description: <br>
+                    <span th:text="${portfolio.proj3desc ?: ''}" class="project-description"></span></li>
+                <!-- Add more projects here if needed -->
+            </ul>
         </div>
     </div>
-
-    <hr>
-
-    <div class="icon-container">
-        <a th:href="${portfolio.linkedin ?: ''}" class="icon-link">
-            <i class="fab fa-linkedin"></i>
-            <span class="icon-text"></span>
-        </a>
-        <a th:href="${portfolio.github ?: ''}" class="icon-link">
-            <i class="fab fa-github"></i>
-            <span class="icon-text"></span>
-        </a>
-        <a th:href="${portfolio.facebook ?: ''}" class="icon-link">
-            <i class="fab fa-facebook"></i>
-            <span class="icon-text"></span>
-        </a>
-        <a th:href="${portfolio.misclink ?: ''}" class="icon-link">
-            <i class="fas fa-globe"></i>
-            <span class="icon-text"></span>
-        </a>
-    </div>
-
-    <hr>
-
-    <div class="about-me-container">
-        <h2 class="section-header">About Me</h2>
-        <p th:text="${portfolio.about ?: ''}"></p>
-    </div>
-
-    <hr>
-
-    <div class="section-container">
-        <h2 class="section-header">Skills</h2>
-        <div th:each="languages : ${userLanguages}" class="profile-skills">
-          <p th:text="${languages.languageName}"></p>
-<!--            <i class="fab fa-java skill-icon"></i> &lt;!&ndash; Font Awesome icon for Java &ndash;&gt;-->
-<!--            <i class="fab fa-cuttlefish skill-icon"></i> &lt;!&ndash; Font Awesome icon for C++ &ndash;&gt;-->
-<!--            <i class="fab fa-python skill-icon"></i> &lt;!&ndash; Font Awesome icon for Python &ndash;&gt;-->
-<!--            <i class="fab fa-html5 skill-icon"></i> &lt;!&ndash; Font Awesome icon for HTML &ndash;&gt;-->
-<!--            <i class="fab fa-css3-alt skill-icon"></i> &lt;!&ndash; Font Awesome icon for CSS &ndash;&gt;-->
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="section-container">
-        <h2 class="section-header">Work</h2>
-        <p>Working on: <span th:text="${work.working ?: ''}"></span></p>
-        <p>Ask me: <span th:text="${work.ask ?: ''}"></span></p>
-        <p>I am currently learning: <span th:text="${work.learn ?: ''}"></span></p>
-        <p>Fun fact: <span th:text="${work.fact ?: ''}"></span></p>
-        <p>I need help with: <span th:text="${work.help ?: ''}"></span></p>
-    </div>
-
-    <hr>
-
-    <div class="section-container">
-        <h2 class="section-header">Projects</h2>
-        <ul>
-            <li><a th:href="${portfolio.proj1 ?: ''}" class="project-title">Project 1</a></li>
-            <li><a th:href="${portfolio.proj1desc ?: ''}" class="project-description">Project 1</a></li>
-            <li><a th:href="${portfolio.proj1link ?: ''}" class="project-link">Project 1 </a></li>
-
-            <br>
-            <hr>
-            <li><a th:href="${portfolio.proj2 ?: ''}" class="project-title">Project 2</a></li>
-            <li><a th:href="${portfolio.proj2desc ?: ''}" class="project-description">Project 2</a></li>
-            <li><a th:href="${portfolio.proj2link ?: ''}" class="project-link">Project 2</a></li>
-
-            <br>
-            <hr>
-
-            <li><a th:href="${portfolio.proj3 ?: ''}" class="project-title">Project 3</a></li>
-            <li><a th:href="${portfolio.proj3desc ?: ''}" class="project-description">Project 3</a></li>
-            <li><a th:href="${portfolio.proj3link ?: ''}" class="project-link">Project 3</a></li>
-
-            <!-- Add more projects here if needed -->
-        </ul>
-    </div>
-</div>
-<footer th:replace="partials/footer :: footer"></footer>
+    <footer th:replace="partials/footer :: footer"></footer>
 </div>
 </body>
 

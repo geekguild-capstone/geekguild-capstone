@@ -239,11 +239,29 @@ public class ProfileController {
             if (formPortfolio.getProj1() != null) {
                 existingPortfolio.setProj1(formPortfolio.getProj1());
             }
+            if (formPortfolio.getProj1desc() != null) {
+                existingPortfolio.setProj1desc(formPortfolio.getProj1desc());
+            }
+            if (formPortfolio.getProj1link() != null) {
+                existingPortfolio.setProj1link(formPortfolio.getProj1link());
+            }
             if (formPortfolio.getProj2() != null) {
                 existingPortfolio.setProj2(formPortfolio.getProj2());
             }
+            if (formPortfolio.getProj2desc() != null) {
+                existingPortfolio.setProj2desc(formPortfolio.getProj2desc());
+            }
+            if (formPortfolio.getProj2link() != null) {
+                existingPortfolio.setProj2link(formPortfolio.getProj2link());
+            }
             if (formPortfolio.getProj3() != null) {
                 existingPortfolio.setProj3(formPortfolio.getProj3());
+            }
+            if (formPortfolio.getProj3desc() != null) {
+                existingPortfolio.setProj3desc(formPortfolio.getProj3desc());
+            }
+            if (formPortfolio.getProj3link() != null) {
+                existingPortfolio.setProj3link(formPortfolio.getProj3link());
             }
             if (formPortfolio.getLinkedin() != null) {
                 existingPortfolio.setLinkedin(formPortfolio.getLinkedin());

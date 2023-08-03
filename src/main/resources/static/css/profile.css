@@ -36,7 +36,7 @@ body {
     z-index: 1; /* You can set it back to 1 as it's not necessary to change it here */
 }
 
-profile-picture {
+.profile-picture {
     width: 150px !important;
     height: 150px !important;
     border-radius: 50%;
@@ -238,10 +238,29 @@ profile-picture {
 .project-link{
     color: #e67e22;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.project-link:hover{
+    color: #aefc4f;
+}
+
+.project-description{
+    color: #e67e22;
 }
 
 .profile-link:hover{
-    color: #8fd93f;
+    color: #e67e22;
+}
+
+.section-container ul {
+    list-style: none;
+    color: #e67e22;
+}
+
+.project-description span{
+    color: #fff;
 }
 
 
