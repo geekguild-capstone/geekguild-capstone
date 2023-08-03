@@ -64,7 +64,7 @@
                        th:value="${profileFormWrapper.user.lastname}"/>
                 <br>
                 <label for="headline">Headline:</label>
-                <input th:field="*{portfolio.headline}" id="headline" name="headline" type="text"
+                <input spellcheck="true" th:field="*{portfolio.headline}" id="headline" name="headline" type="text"
                        th:value="${profileFormWrapper.portfolio.headline}"/>
                 <br>
                 <label for="email">Email:</label>
@@ -72,22 +72,22 @@
                        th:value="${profileFormWrapper.user.email ?: ''}"/>
                 <br>
                 <label for="about_me">About Me:</label>
-                <textarea th:field="*{portfolio.about}" id="about_me" name="about_me" rows="4"></textarea>
+                <textarea spellcheck="true" th:field="*{portfolio.about}" id="about_me" name="about_me" rows="4"></textarea>
                 <br>
                 <label>Work:</label>
                 <br>
                 <!-- Input fields for each work value -->
                 <label for="work-ask">Ask Me:</label>
-                <input id="work-ask" name="work.ask" type="text" th:value="${profileFormWrapper.work.ask}"/>
+                <input id="work-ask" name="work.ask" type="text" spellcheck="true" th:value="${profileFormWrapper.work.ask}"/>
 
                 <label for="work-fact">Fun Fact:</label>
-                <input id="work-fact" name="work.fact" type="text" th:value="${profileFormWrapper.work.fact}"/>
+                <input id="work-fact" name="work.fact" type="text" spellcheck="true" th:value="${profileFormWrapper.work.fact}"/>
 
                 <label for="work-help">I need help with...</label>
-                <input id="work-help" name="work.help" type="text" th:value="${profileFormWrapper.work.help}"/>
+                <input id="work-help" name="work.help" type="text" spellcheck="true" th:value="${profileFormWrapper.work.help}"/>
 
                 <label for="work-learning">I am currently learning...</label>
-                <input id="work-learning" name="work.learn" type="text"
+                <input id="work-learning" name="work.learn" type="text" spellcheck="true"
                        th:value="${profileFormWrapper.work.learn}"/>
 
                 <label for="working">I am working on...</label>
@@ -195,18 +195,18 @@
                 <label>Projects:</label>
                 <br>
                 <label for="projects.proj1">Project 1:</label>
-                <input id="projects.proj1" name="portfolio.proj1" type="text" th:value="${profileFormWrapper.portfolio.proj1}"/>
-                <input id="projects.proj1desc" name="portfolio.proj1desc" type="text" th:value="${profileFormWrapper.portfolio.proj1desc}"/>
+                <input id="projects.proj1" name="portfolio.proj1" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1}"/>
+                <input id="projects.proj1desc" name="portfolio.proj1desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1desc}"/>
                 <input id="projects.proj1link" name="portfolio.proj1link" type="url" th:value="${profileFormWrapper.portfolio.proj1link}"/>
 
                 <label for="projects.proj2">Project 2:</label>
-                <input id="projects.proj2" name="portfolio.proj2" type="text" th:value="${profileFormWrapper.portfolio.proj2}"/>
-                <input id="projects.proj2desc" name="portfolio.proj2desc" type="text" th:value="${profileFormWrapper.portfolio.proj2desc}"/>
+                <input id="projects.proj2" name="portfolio.proj2" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2}"/>
+                <input id="projects.proj2desc" name="portfolio.proj2desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2desc}"/>
                 <input id="projects.proj2link" name="portfolio.proj2link" type="url" th:value="${profileFormWrapper.portfolio.proj2link}"/>
 
                 <label for="projects.proj3">Project 3:</label>
-                <input id="projects.proj3" name="portfolio.proj3" type="text" th:value="${profileFormWrapper.portfolio.proj3}"/>
-                <input id="projects.proj3desc" name="portfolio.proj3desc" type="text" th:value="${profileFormWrapper.portfolio.proj3desc}"/>
+                <input id="projects.proj3" name="portfolio.proj3" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3}"/>
+                <input id="projects.proj3desc" name="portfolio.proj3desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3desc}"/>
                 <input id="projects.proj3link" name="portfolio.proj3link" type="url" th:value="${profileFormWrapper.portfolio.proj3link}"/>
 
                 <br>
