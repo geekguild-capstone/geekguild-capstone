@@ -30,10 +30,10 @@ body {
 }
 
 .post-content hr {
-    border: none; /* Remove default border */
-    height: 1px; /* Set the height of the horizontal rule */
-    background-color: #ccc; /* Set the color of the horizontal rule */
-    margin: 5px 0; /* Add some margin above and below the horizontal rule */
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 5px 0;
 }
 
 
@@ -92,7 +92,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #fff;
+    border-top: 1px solid #8E09E7;
     padding-top: 8px;
 }
 
@@ -145,7 +145,7 @@ body {
     /*border: none; !* Remove default border *!*/
      border: 3px;
     height: 1px; /* Set the height of the horizontal rule */
-    background-color: #fff; /* Set the color of the horizontal rule */
+    background-color: #e67e22 !important; /* Set the color of the horizontal rule */
     margin: 5px 0; /* Add some margin above and below the horizontal rule */
 }
 
@@ -153,6 +153,7 @@ body {
 .comment-card {
     border: 3px;
     background-image: linear-gradient(to top, #772DAB,  #E6E6FA, #E6E6FA);
+    /*background-image: linear-gradient(to top, #000000,  #8E09E7,  #E6E6FA, #E6E6FA);*/
     /*background-image: linear-gradient(to top, #e67e22 ,  #E6E6FA, #E6E6FA);*/
     /*background-image: linear-gradient(to top, #333333 ,  #E6E6FA, #E6E6FA);*/
     border-radius: 5px;
@@ -160,11 +161,11 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column; /* Vertically stack the header and content */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
 }
 
 .comment-header {
-    border-color: rgba(139, 33, 214, 0.4) !important;
+    border-color: #fff; !important;
     padding: 1px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -172,14 +173,14 @@ body {
     align-items: center; /* Vertically center the content */
     justify-content: space-between;
     /*border-top: 3px solid #e67e22;*/
-    border-bottom: 3px solid #e67e22;
+    border-bottom: 1px solid #8E09E7;
     height: 70px;
 }
 
 .comment-header hr {
     border: none; /* Remove default border */
     height: 1px; /* Set the height of the horizontal rule */
-    background-color: #fff; /* Set the color of the horizontal rule */
+    background-color:#e67e22 !important; /* Set the color of the horizontal rule */
     margin: 5px 0; /* Add some margin above and below the horizontal rule */
 }
 
@@ -253,7 +254,7 @@ body {
 
 .comment hr {
     border: none;
-    border-top: 1px solid #fff;
+    border-top: 1px solid #e67e22;
     margin: 8px 0;
 }
 
