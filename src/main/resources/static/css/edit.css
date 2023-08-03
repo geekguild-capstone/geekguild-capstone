@@ -46,7 +46,13 @@ h6{
 
 label {
     color: #ee8631;
+    font-size: 1.1em;
 }
+
+.project-head{
+font-size: 1.3em;
+}
+
 
 input[type="text"],
 input[type="email"],
