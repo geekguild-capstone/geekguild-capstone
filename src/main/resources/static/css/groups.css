@@ -1,6 +1,14 @@
-bodu{
+body{
     font-family: 'Ubuntu', sans-serif !important;
 }
+
+h5 {
+    color: white;
+}
+
+/*.form-control-group {*/
+/*    color: white;*/
+/*}*/
 
 .middle-section {
     position: relative; /* Ensure relative positioning for child elements */

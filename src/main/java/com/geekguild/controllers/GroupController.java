@@ -8,10 +8,7 @@ import com.geekguild.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -65,15 +62,16 @@ public class GroupController {
 
 
     @PostMapping("/group/create")
-    public String createGroup(@ModelAttribute Group group) {
+    public String createGroup(@ModelAttribute Group group, @RequestParam("fileURLGroupImage") String image) {
         User loggedInUser = getCurrentLoggedInUser();
         Group newGroup = new Group();
 
         newGroup.setGroupname(group.getGroupname()); // Set other properties if required
-        newGroup.setImage(group.getImage());
+        newGroup.setImage(image);
         newGroup.setBanner(group.getBanner());
         newGroup.setDescription(group.getDescription());
         newGroup.setAdminId(loggedInUser.getId());
+
 
         // Add the logged-in user as a member of the new group
         Set<User> members = new HashSet<>();

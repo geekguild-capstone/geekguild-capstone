@@ -7,6 +7,7 @@
     /*color: #fff;*/
 }
 .create-group-button {
+    color: white;
     background-color: #333333 !important;
     border-color: #ee8631 !important;
 }
@@ -25,10 +26,15 @@
     color: #fff;
 }
 #createGroupModal label {
-    color: #8e09e7;
+    /*color: #8e09e7;*/
 }
 #createGroupModal .form-control {
-    color: #8e09e7;
+    color: #f0f0f0 !important;
     background-color: #333333;
     border: 1px solid #8e09e7;
+}
+
+#createGroupModal .form-control::placeholder {
+    color: #f0f0f0 !important;
+
 }
