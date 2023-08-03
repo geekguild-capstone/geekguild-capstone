@@ -29,6 +29,14 @@ body {
     margin-bottom: 16px;
 }
 
+.post-content hr {
+    border: none; /* Remove default border */
+    height: 1px; /* Set the height of the horizontal rule */
+    background-color: #ccc; /* Set the color of the horizontal rule */
+    margin: 5px 0; /* Add some margin above and below the horizontal rule */
+}
+
+
 .user-profile {
     display: flex;
     align-items: center;
@@ -47,7 +55,7 @@ body {
 .user-profile .username {
     font-size: 18px;
     font-weight: 600;
-    color: white;
+    color: #fff;
     margin-bottom: 25px;
 
 }
@@ -72,8 +80,9 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    border-top: 1px solid #e1e5ea;
+    border-top: 1px solid #fff;
     padding-top: 8px;
+
 }
 
 .comment-interactions {
@@ -81,7 +90,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #e1e5ea;
+    border-top: 1px solid #fff;
     padding-top: 8px;
 }
 
@@ -104,7 +113,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: black;
+    color: #fff;
     font-size: 14px;
     margin-right: 24px;
     padding: 4px;
@@ -114,70 +123,83 @@ body {
 
 .interactions button i {
     margin-right: 8px;
+    /*background-color: #fff;*/
 }
 
 .interactions button:hover {
-    color: #666;
+    color: #e67e22;
+
 }
 
 /*COMMENT STYLING*/
 .comment-box {
     margin-top: 16px;
-    border-top: 1px solid #e1e5ea;
+    border-top: 1px solid rgba(139, 33, 214, 0.4) !important;
     padding: 10px;
-    background-color: rgba(139, 33, 214, 0.4) !important;
+    /*background-color: rgba(139, 33, 214, 0.4) !important;*/
 }
 
-
+.comment-text hr {
+    /*border: none; !* Remove default border *!*/
+     border: 3px;
+    height: 1px; /* Set the height of the horizontal rule */
+    background-color: #fff; /* Set the color of the horizontal rule */
+    margin: 5px 0; /* Add some margin above and below the horizontal rule */
+}
 
 
 .comment-card {
-    border: 1px solid #ddd;
+    border: 1px;
+    background-image: linear-gradient(to top, #772DAB, #772DAB, #E6E6FA, #E6E6FA);
     border-radius: 5px;
     margin-bottom: 10px;
-    background-color: #f8f8f8; /* Grey background for the comment card */
     padding: 10px;
     display: flex;
     flex-direction: column; /* Vertically stack the header and content */
+    box-shadow: inset 0 2px 4px rgba(119, 45, 171, 0.4); /* Add the purple inset shadow box */
 }
 
 .comment-header {
-    background-color: #ebebeb; /* Darker background for the header area */
+    border-color: rgba(139, 33, 214, 0.4) !important;
     padding: 1px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
     align-items: center; /* Vertically center the content */
     justify-content: space-between;
+    /*border-top: 3px solid #e67e22;*/
+    border-bottom: 3px solid #e67e22;
+    height: 70px;
 }
 
-
-    /*height: 70px;*/
-
+.comment-header hr {
+    border: none; /* Remove default border */
+    height: 1px; /* Set the height of the horizontal rule */
+    background-color: #fff; /* Set the color of the horizontal rule */
+    margin: 5px 0; /* Add some margin above and below the horizontal rule */
+}
 
 
 /* Vertically center the first and last names */
 .username-box {
-
     height: 32px; /* Set the height to ensure proper centering */
 }
 
 .username {
     font-weight: bold;
     margin-top: 5px;
-    /*display: flex;*/
-    /*flex-direction: column; !* Vertically stack the first and last name *!*/
-    /*align-items: center; !* Horizontally center the first and last name *!*/
 }
 
 .comment-content {
     /*flex: 1;*/
     margin-top: 5px;
 
+
 }
 
 .comment-text {
     margin-top: 5px;
+    color: #000000;
 }
 
 .submit-comment-btn {
@@ -197,12 +219,11 @@ body {
 .comments-section {
     margin-top: 16px;
     display: none;
-
 }
 
 .comments-section hr {
     border: none;
-    border-top: 1px solid #e67e22 !important;
+    border-top: 1px solid #fff; !important;
     margin: 8px 0;
 }
 
@@ -210,6 +231,7 @@ body {
     width: 24px;
     height: 24px;
     margin-right: 8px;
+    margin-top: 25px;
 }
 
 .username-box p{
@@ -222,12 +244,12 @@ body {
 
 .comment p {
     font-size: 14px;
-    color: #000 !important;
+    color: #000000 !important;
 }
 
 .comment hr {
     border: none;
-    border-top: 1px solid #e1e5ea;
+    border-top: 1px solid #fff;
     margin: 8px 0;
 }
 
@@ -237,6 +259,7 @@ body {
     right: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .edit-icon,
@@ -249,10 +272,11 @@ body {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: #e67e22;
 }
 
-.edit-icon i,
-.delete-icon i {
+.edit-icon button i,
+.delete-icon button i {
     color: #e67e22;
 }
 
@@ -261,11 +285,6 @@ body {
 .delete-icon i:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
 }
-
-
-/*.edit-icons .delete-button {*/
-/*    color: #ff0000; !* Change the color of the delete button to #ff0000 *!*/
-/*}*/
 
 .post-content p {
     color: white !important;
@@ -295,7 +314,6 @@ body {
 }
 
 .comment-like-emojis {
-    /*position: absolute;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -310,8 +328,6 @@ body {
 }
 /*Style for emoji display for comments*/
 .comment-like-emojis.count-display {
-    /* ... Your styles for the like-emojis count-display ... */
-    /*position: absolute;*/
     bottom: 0; /* Position the counts at the bottom of the comment-interactions container */
     right: 0; /* Position the counts at the right side of the comment-interactions container */
     display: flex;
@@ -327,8 +343,6 @@ body {
 .comment-like-emojis.count-display .emoji-counter {
     margin-right: 5px; /* Add some spacing between the emoji icons and counters */
 }
-
-
 
 /* Style for individual emojis */
 .like-emoji {
@@ -375,9 +389,17 @@ body {
     border: none;
     cursor: pointer;
     margin-left: 5px; /* Add some spacing between the buttons */
+    color: #e67e22;
 }
 
-.comment-edit-button i,
-.comment-delete-button i {
-    color: #e67e22;
+.comment-header .fa-pencil-alt,
+.comment-header .fa-trash {
+    color: #e67e22; /* Change the color to your desired color */
+
+}
+
+.show-code-btn{
+    background-color: #e67e22;
+    color: #fff;
+   margin-bottom: 3px;
 }

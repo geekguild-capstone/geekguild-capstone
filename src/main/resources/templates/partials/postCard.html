@@ -107,7 +107,9 @@
 
         <div class="post-content-container">
             <div class="post-content">
+                <br>
                 <p class="post-body" th:text="${post.body}"></p>
+                <hr><br>
                 <div th:if="${post.snippet}">
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
@@ -202,6 +204,7 @@
                                 <p th:text="${comment.user.firstname + ' ' + comment.user.lastname}"
                                    class="username"></p>
                             </div>
+                            <hr>
                         </div>
                         <div class="comment-icons" th:if="${user.id == comment.user.id}">
                             <button data-bs-toggle="modal" data-bs-target="#editCommentModal"
@@ -218,6 +221,7 @@
 
                     <div class="comment-content">
                         <p th:text="${comment.text}" class="comment-text"></p>
+                        <hr>
                         <!-- Add a button to show/hide the code snippet -->
                         <div th:if="${comment.snippet}">
                             <button class="show-code-btn">Show Code</button>
