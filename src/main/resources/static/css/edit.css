@@ -175,78 +175,62 @@ button {
 .button-group button {
     margin: 0 5px; /* Reduce the space between the buttons */
 }
-
-     /* Styles for the Skills section */
+/* Styles for the Skills section using CSS Grid layout */
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    margin-top: 20px;
-    max-width: 400px; /* Adjust the container width as needed */
-}
-
-
-    /* Style the custom checkboxes */
-.skills-checkbox + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #8fd93f;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: border-color 0.3s;
-}
-
-/* Style the custom checkboxes when checked */
-.skills-checkbox:checked + label:before {
-    background-color: #8fd93f;
-    border-color: #8fd93f;
-}
-
-/* Styles for the Skills section */
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5px;
+    grid-template-columns: repeat(4, minmax(100px, 1fr)); /* Adjust the column size as needed */
+    grid-gap: 20px; /* Adjust the spacing between each skill */
     margin-top: 10px;
-    max-width: 400px; /* Adjust the container width as needed */
+    max-width: 800px; /* Adjust the container width as needed */
 }
 
+/* Flexbox item for each skill */
 .skill-item {
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
+/* Move checkmarks to the left of icons and names */
+.checkmark-container {
+    position: relative;
+    padding-left: 25px; /* Adjust the spacing between the checkmark and icon */
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #8fd93f;
+    background-color: #fff;
+}
 
 .skills-checkbox {
-    display: none; /* Hide the default checkboxes */
-    margin-right: 5px;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
-.skills-checkbox + label {
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
+.skills-checkbox:checked ~ .checkmark {
+    background-color: #8fd93f /* Change the checkmark background color when checked */
+}
+
+.skill-content {
+    display: flex;
+    align-items: center;
 }
 
 .skill-icon {
-    margin-top: 5px;
-    font-size: 24px;
+    margin-right: 10px; /* Adjust the spacing between the checkmark and icon */
 }
 
-
-/* Icons using Font Awesome */
-.skill-icon i {
-    color: #8fd93f;
+.skill-name {
+    white-space: nowrap; /* Prevent the skill name from wrapping to a new line */
 }
 
-/*.banner-logo {*/
-/*    display: none;*/
-/*}*/
 
 
 
