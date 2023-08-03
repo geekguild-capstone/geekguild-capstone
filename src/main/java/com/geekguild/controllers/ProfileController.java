@@ -162,10 +162,12 @@ public class ProfileController {
         }
 
         // Check if the request parameter is neither null nor empty
-        if (requestParam != null && !requestParam.isEmpty()) {
-            // Set the banner and image only if the request parameter is not null or empty
-            loggedInUser.setImage(image);
-        }
+//        if (requestParam != null && !requestParam.isEmpty()) {
+//            // Set the banner and image only if the request parameter is not null or empty
+//            loggedInUser.setImage(image);
+//        }
+        loggedInUser.setImage(image);
+        loggedInUser.setBanner(banner);
 
         // Update the user fields if they are not null
         User formUser = profileFormWrapper.getUser();
