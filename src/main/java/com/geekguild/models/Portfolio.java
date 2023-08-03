@@ -17,7 +17,7 @@ public class Portfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "about")
+    @Column(name = "about", length = 64000)
     private String about;
 
     @Column(name = "proj1")
@@ -26,7 +26,7 @@ public class Portfolio {
     @Column(name = "proj1link")
     private String proj1link;
 
-    @Column(name = "proj1desc")
+    @Column(name = "proj1desc", length = 64000)
     private String proj1desc;
 
     @Column(name = "proj2")
@@ -35,7 +35,7 @@ public class Portfolio {
     @Column(name = "proj2link")
     private String proj2link;
 
-    @Column(name = "proj2desc")
+    @Column(name = "proj2desc", length = 64000)
     private String proj2desc;
 
     @Column(name = "proj3")
@@ -44,7 +44,7 @@ public class Portfolio {
     @Column(name = "pro31link")
     private String proj3link;
 
-    @Column(name = "proj3desc")
+    @Column(name = "proj3desc", length = 64000)
     private String proj3desc;
 
     @Column(name = "linkedin")

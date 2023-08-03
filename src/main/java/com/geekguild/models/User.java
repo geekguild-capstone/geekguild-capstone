@@ -39,7 +39,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "banner")
+    @Column(name = "banner", length = 64000)
     private String banner;
 
 
