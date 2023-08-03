@@ -99,7 +99,23 @@
     <div class="section-container">
         <h2 class="section-header">Projects</h2>
         <ul>
-            <li><a th:href="${portfolio.proj1 ?: ''}" class="project-link">Project 1</a></li>
+            <li><a th:href="${portfolio.proj1 ?: ''}" class="project-title">Project 1</a></li>
+            <li><a th:href="${portfolio.proj1desc ?: ''}" class="project-description">Project 1</a></li>
+            <li><a th:href="${portfolio.proj1link ?: ''}" class="project-link">Project 1 </a></li>
+
+            <br>
+            <hr>
+            <li><a th:href="${portfolio.proj2 ?: ''}" class="project-title">Project 2</a></li>
+            <li><a th:href="${portfolio.proj2desc ?: ''}" class="project-description">Project 2</a></li>
+            <li><a th:href="${portfolio.proj2link ?: ''}" class="project-link">Project 2</a></li>
+
+            <br>
+            <hr>
+
+            <li><a th:href="${portfolio.proj3 ?: ''}" class="project-title">Project 3</a></li>
+            <li><a th:href="${portfolio.proj3desc ?: ''}" class="project-description">Project 3</a></li>
+            <li><a th:href="${portfolio.proj3link ?: ''}" class="project-link">Project 3</a></li>
+
             <!-- Add more projects here if needed -->
         </ul>
     </div>
