@@ -98,10 +98,10 @@ body {
 }
 
 .edit-icon {
-    position: fixed;
-    top: 90px; /* Adjust this value based on the height of your navbar */
-    right: 20px;
-    z-index: 1;
+    position: relative;
+    top: 105px; /* Adjust this value based on the height of your navbar */
+    left: 90px;
+    z-index: 9999;
 }
 
 
