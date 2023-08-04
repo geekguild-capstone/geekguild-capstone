@@ -30,7 +30,7 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-    @Column(name = "snippet")
+    @Column(name = "snippet", length = 6000)
     private String snippet;
 
 
