@@ -14,14 +14,14 @@ body {
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
     box-shadow: 0 2px 4px rgb(139,33,214, 0.3) !important;
     margin-bottom: 5px;
-    padding: 16px;
+    padding: 7px;
 }
 
 .post-content-container {
     background-color: rgba(139, 33, 214, 0.4) !important;
     border: 2px solid #8fd93f;
     padding: 10px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     border-radius: 10px; /* Add rounded edges to the container */
 }
 
@@ -38,9 +38,10 @@ body {
 
 
 .user-profile {
+    height: 70px;
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .user-profile img {
@@ -411,4 +412,16 @@ body {
 
 .comment-icons button:first-child {
     border: none;
+}
+
+#snippet-container {
+    display: none;
+}
+
+.language-html {
+    width: 100% !important;
+}
+
+.snippet-wrapper {
+    width: 100% !important;
 }
