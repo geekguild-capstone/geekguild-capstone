@@ -100,6 +100,7 @@
             </div>
         </div>
 
+
         <div class="user-profile">
             <img th:src="${post.user.image}" alt="User Profile Image">
             <div th:text="${post.user.firstname + ' ' + post.user.lastname}" class="username"></div>
@@ -109,7 +110,8 @@
             <div class="post-content">
                 <br>
                 <p class="post-body" th:text="${post.body}"></p>
-                <hr><br>
+                <hr>
+                <br>
                 <div th:if="${post.snippet}">
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
@@ -125,6 +127,7 @@
                 </div>
             </div>
             <div class="interactions">
+
                 <div class="like-emojis count-display">
                     <span class="like-emoji"><i>👍</i></span>
                     <span th:text="${postLikesCount[post.id]}" class="emoji-counter"></span>
@@ -133,45 +136,47 @@
                     <span class="like-emoji">😂</span>
                     <span th:text="${postLaughsCount[post.id]}" class="emoji-counter"></span>
                 </div>
-                <button class="like-button" onclick="toggleLikeEmojis(this) ">
-                    <i class="far fa-thumbs-up"></i>Like
-                </button>
-                <div class="like-emojis" style="display: none;">
-                    <!-- Add forms for each icon -->
-                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
-                          style="display: inline-block;" th:data-post-id="${post.id}"
-                          onsubmit="submitReaction(event, 'like', this.getAttribute('data-post-id'))">
-                        <button type="submit" class="like-emoji"
-                                style="background: none; border: none; cursor: pointer;">👍
-                        </button>
-                        <!--                        <span class="emoji-counter">0</span>-->
-                    </form>
-                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
-                          style="display: inline-block;" th:data-post-id="${post.id}"
-                          onsubmit="submitReaction(event, 'love', this.getAttribute('data-post-id'))">
-                        <button type="submit" class="like-emoji"
-                                style="background: none; border: none; cursor: pointer;">❤️
-                        </button>
-                        <!--                        <span class="emoji-counter">0</span>-->
-                    </form>
-                    <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
-                          style="display: inline-block;" th:data-post-id="${post.id}"
-                          onsubmit="submitReaction(event, 'laugh', this.getAttribute('data-post-id'))">
-                        <button type="submit" class="like-emoji"
-                                style="background: none; border: none; cursor: pointer;">😂
-                        </button>
-                        <!--                        <span class="emoji-counter">0</span>-->
-                    </form>
-                </div>
-                <button class="comment-button" onclick="toggleCommentBox(this)">
-                    <i class="far fa-comment-dots"></i>Comments
-                </button>
-                <button th:if="${user.id != post.user.id}" class="share-button"
-                        th:attr="data-friend-id=${post.user.id}, data-friend-username=${post.user.email}, data-friend-image=${post.user.image},data-current-user-id=${user.id},
+                <div class="interaction-btns">
+                    <button class="like-button" onclick="toggleLikeEmojis(this) ">
+                        <i class="far fa-thumbs-up"></i>Like
+                    </button>
+                    <div class="like-emojis" style="display: none;">
+                        <!-- Add forms for each icon -->
+                        <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
+                              style="display: inline-block;" th:data-post-id="${post.id}"
+                              onsubmit="submitReaction(event, 'like', this.getAttribute('data-post-id'))">
+                            <button type="submit" class="like-emoji"
+                                    style="background: none; border: none; cursor: pointer;">👍
+                            </button>
+                            <!--                        <span class="emoji-counter">0</span>-->
+                        </form>
+                        <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
+                              style="display: inline-block;" th:data-post-id="${post.id}"
+                              onsubmit="submitReaction(event, 'love', this.getAttribute('data-post-id'))">
+                            <button type="submit" class="like-emoji"
+                                    style="background: none; border: none; cursor: pointer;">❤️
+                            </button>
+                            <!--                        <span class="emoji-counter">0</span>-->
+                        </form>
+                        <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
+                              style="display: inline-block;" th:data-post-id="${post.id}"
+                              onsubmit="submitReaction(event, 'laugh', this.getAttribute('data-post-id'))">
+                            <button type="submit" class="like-emoji"
+                                    style="background: none; border: none; cursor: pointer;">😂
+                            </button>
+                            <!--                        <span class="emoji-counter">0</span>-->
+                        </form>
+                    </div>
+                    <button class="comment-button" onclick="toggleCommentBox(this)">
+                        <i class="far fa-comment-dots"></i>Comments
+                    </button>
+                    <button th:if="${user.id != post.user.id}" class="share-button"
+                            th:attr="data-friend-id=${post.user.id}, data-friend-username=${post.user.email}, data-friend-image=${post.user.image},data-current-user-id=${user.id},
                         data-current-user-username=${user.email}, data-current-user-image=${user.image}"
-                        onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
-                    <i class="fas fa-envelope"></i>Message
-                </button>
+                            onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
+                        <i class="fas fa-envelope"></i>Message
+                    </button>
+                </div>
             </div>
 
             <div class="comment-box">
@@ -192,14 +197,13 @@
                             <div class="snippet-wrapper">
                                 <button type="button" id="showInputButton">Add code</button>
                                 <div class="input-group mb-3" id="snippet-container">
-<!--                                    <span class="input-group-text">Code</span>-->
+                                    <!--                                    <span class="input-group-text">Code</span>-->
                                     <textarea th:field="*{snippet}" class="form-control language-html"
                                               aria-label="With textarea"></textarea>
                                 </div>
                                 <button class="submit-comment-btn" type="submit">Submit</button>
 
                             </div>
-
 
 
                         </div>
@@ -237,7 +241,7 @@
                     </div>
 
                     <div class="comment-content">
-                        <p th:text="${comment.text}" class="comment-text"></p>
+                        <p required th:text="${comment.text}" class="comment-text"></p>
                         <hr>
                         <!-- Add a button to show/hide the code snippet -->
                         <div th:if="${comment.snippet}">
@@ -281,9 +285,9 @@
                                     <!--                        <span class="emoji-counter">0</span>-->
                                 </form>
                             </div>
-<!--                            <button class="share-button">-->
-<!--                                <i class="fas fa-envelope"></i>Message-->
-<!--                            </button>-->
+                            <!--                            <button class="share-button">-->
+                            <!--                                <i class="fas fa-envelope"></i>Message-->
+                            <!--                            </button>-->
                             <button th:if="${user.id != comment.user.id}" class="share-button"
                                     th:attr="data-friend-id=${comment.user.id}, data-friend-username=${comment.user.email}, data-friend-image=${comment.user.image},data-current-user-id=${user.id},
             data-current-user-username=${user.email}, data-current-user-image=${user.image}"
@@ -565,7 +569,7 @@
 
 </script>
 <script>
-    document.getElementById('showInputButton').addEventListener('click', function() {
+    document.getElementById('showInputButton').addEventListener('click', function () {
         const inputContainer = document.getElementById('snippet-container');
         if (inputContainer.style.display === 'none') {
             inputContainer.style.display = 'block';

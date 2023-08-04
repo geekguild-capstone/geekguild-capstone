@@ -92,7 +92,7 @@ h1 {
 
 .middle-section {
     background-color: #444444;
-    /*overflow-y: auto;*/
+    overflow-y: auto;
     /*SET GAP FROM BOTTOM OF PAGE*/
     margin: 0 0 15px 0; /* top, right, bottom, left */
     padding: 10px 10px 0 10px; /* top, right, bottom, left */
@@ -159,7 +159,7 @@ h1 {
     /*position: sticky;*/
     /*top: 55px;*/
     /*z-index: 5;*/
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 
 
@@ -340,6 +340,9 @@ h1 {
 }
 
 .middle-top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
 
     display: flex;
     justify-content: center;
@@ -547,6 +550,11 @@ h1 {
     width: 100%; /* Set your desired width */
     transition: width 0.3s ease-in-out;
 
+}
+
+.scrollable {
+    height: calc(100% - 80px); /* Subtract the height of the .middle-top-bar */
+    overflow-y: auto;
 }
 
 /*.middle-section.full-width {*/
