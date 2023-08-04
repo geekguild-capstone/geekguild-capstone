@@ -41,7 +41,7 @@
                          alt="User Logo"/>
                     <form id="imageForm" method="post" action="/profile/upload/image">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-<!--                        <input type="hidden" name="fileURL" id="fileURLInput"/>-->
+                        <!--                        <input type="hidden" name="fileURL" id="fileURLInput"/>-->
                     </form>
                 </div>
             </div>
@@ -72,19 +72,23 @@
                        th:value="${profileFormWrapper.user.email ?: ''}"/>
                 <br>
                 <label for="about_me">About Me:</label>
-                <textarea spellcheck="true" th:field="*{portfolio.about}" id="about_me" name="about_me" rows="4"></textarea>
+                <textarea spellcheck="true" th:field="*{portfolio.about}" id="about_me" name="about_me"
+                          rows="4"></textarea>
                 <br>
                 <label>Work:</label>
                 <br>
                 <!-- Input fields for each work value -->
                 <label for="work-ask">Ask Me:</label>
-                <input id="work-ask" name="work.ask" type="text" spellcheck="true" th:value="${profileFormWrapper.work.ask}"/>
+                <input id="work-ask" name="work.ask" type="text" spellcheck="true"
+                       th:value="${profileFormWrapper.work.ask}"/>
 
                 <label for="work-fact">Fun Fact:</label>
-                <input id="work-fact" name="work.fact" type="text" spellcheck="true" th:value="${profileFormWrapper.work.fact}"/>
+                <input id="work-fact" name="work.fact" type="text" spellcheck="true"
+                       th:value="${profileFormWrapper.work.fact}"/>
 
                 <label for="work-help">I need help with...</label>
-                <input id="work-help" name="work.help" type="text" spellcheck="true" th:value="${profileFormWrapper.work.help}"/>
+                <input id="work-help" name="work.help" type="text" spellcheck="true"
+                       th:value="${profileFormWrapper.work.help}"/>
 
                 <label for="work-learning">I am currently learning...</label>
                 <input id="work-learning" name="work.learn" type="text" spellcheck="true"
@@ -101,7 +105,8 @@
                 <div class="skills-container">
                     <div class="skill-item" th:each="language : ${allLanguages}">
                         <label class="checkmark-container">
-                            <input th:id="${'skill-' + language.id}" name="selectedLanguages" class="skills-checkbox" type="checkbox"
+                            <input th:id="${'skill-' + language.id}" name="selectedLanguages" class="skills-checkbox"
+                                   type="checkbox"
                                    th:checked="${profileFormWrapper.user.languages != null and profileFormWrapper.user.languages.contains(language)}"
                                    th:value="${language.id}"/>
                             <span class="checkmark"></span>
@@ -113,66 +118,66 @@
                     </div>
                 </div>
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-java" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Java' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-java"><span class="skill-icon"><i class="fab fa-java"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-java" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Java' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-java"><span class="skill-icon"><i class="fab fa-java"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-cpp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C++' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-cpp"><span class="skill-icon"><i class="fab fa-cuttlefish"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-cpp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C++' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-cpp"><span class="skill-icon"><i class="fab fa-cuttlefish"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-python" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Python' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-python"><span class="skill-icon"><i class="fab fa-python"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-python" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Python' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-python"><span class="skill-icon"><i class="fab fa-python"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-js" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Javascript' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-js"><span class="skill-icon"><i class="fab fa-js"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-js" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Javascript' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-js"><span class="skill-icon"><i class="fab fa-js"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-react" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.React' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-react"><span class="skill-icon"><i class="fab fa-react"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-react" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.React' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-react"><span class="skill-icon"><i class="fab fa-react"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-ruby" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Ruby' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-ruby"><span class="skill-icon"><i class="fas fa-gem"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-ruby" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Ruby' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-ruby"><span class="skill-icon"><i class="fas fa-gem"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-csharp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C#' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-csharp"><span class="skill-icon"><i class="fab fa-microsoft"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-csharp" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.C#' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-csharp"><span class="skill-icon"><i class="fab fa-microsoft"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-html" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.HTML' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-html"><span class="skill-icon"><i class="fab fa-html5"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-html" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.HTML' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-html"><span class="skill-icon"><i class="fab fa-html5"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-css" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.CSS' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-css"><span class="skill-icon"><i class="fab fa-css3-alt"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-css" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.CSS' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-css"><span class="skill-icon"><i class="fab fa-css3-alt"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-mysql" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.MySQL' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-mysql"><span class="skill-icon"><i class="fas fa-database"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-mysql" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.MySQL' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-mysql"><span class="skill-icon"><i class="fas fa-database"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-nodejs" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Node.js' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-nodejs"><span class="skill-icon"><i class="fab fa-node-js"></i></span></label>-->
-<!--                                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-nodejs" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Node.js' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-nodejs"><span class="skill-icon"><i class="fab fa-node-js"></i></span></label>-->
+                <!--                                </div>-->
 
-<!--                                <div class="skill-item">-->
-<!--                                    <input id="skill-angular" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Angular' ? 'checked' : ''} />-->
-<!--                                    <label for="skill-angular"><span class="skill-icon"><i class="fab fa-angular"></i></span></label>-->
-<!--                                </div>-->
-<!--                </div>-->
+                <!--                                <div class="skill-item">-->
+                <!--                                    <input id="skill-angular" name="skills" class="skills-checkbox" type="checkbox" ${user.language == 'language.Angular' ? 'checked' : ''} />-->
+                <!--                                    <label for="skill-angular"><span class="skill-icon"><i class="fab fa-angular"></i></span></label>-->
+                <!--                                </div>-->
+                <!--                </div>-->
 
 
                 <br>
@@ -181,7 +186,8 @@
                        th:value="${profileFormWrapper.portfolio.linkedin}"/>
                 <br>
                 <label for="social_git">Social Media (Git):</label>
-                <input id="social_git" name="portfolio.github" type="url" th:value="${profileFormWrapper.portfolio.github}"/>
+                <input id="social_git" name="portfolio.github" type="url"
+                       th:value="${profileFormWrapper.portfolio.github}"/>
                 <br>
                 <label for="social_face_book">Social Media (Facebook):</label>
                 <input id="social_face_book" name="portfolio.facebook" type="url"
@@ -195,19 +201,28 @@
                 <label class="project-head">Projects:</label>
                 <br>
                 <label for="projects.proj1">Project 1:</label>
-                <input id="projects.proj1" name="portfolio.proj1" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1}"/>
-                <input id="projects.proj1desc" name="portfolio.proj1desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1desc}"/>
-                <input id="projects.proj1link" name="portfolio.proj1link" type="url" th:value="${profileFormWrapper.portfolio.proj1link}"/>
+                <input placeholder="Enter project name" id="projects.proj1" name="portfolio.proj1" type="text"
+                       spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1}"/>
+                <input placeholder="Enter project description" id="projects.proj1desc" name="portfolio.proj1desc"
+                       type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj1desc}"/>
+                <input placeholder="Enter project link" id="projects.proj1link" name="portfolio.proj1link" type="url"
+                       th:value="${profileFormWrapper.portfolio.proj1link}"/>
 
                 <label for="projects.proj2">Project 2:</label>
-                <input id="projects.proj2" name="portfolio.proj2" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2}"/>
-                <input id="projects.proj2desc" name="portfolio.proj2desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2desc}"/>
-                <input id="projects.proj2link" name="portfolio.proj2link" type="url" th:value="${profileFormWrapper.portfolio.proj2link}"/>
+                <input placeholder="Enter project name" id="projects.proj2" name="portfolio.proj2" type="text"
+                       spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2}"/>
+                <input placeholder="Enter project description" id="projects.proj2desc" name="portfolio.proj2desc"
+                       type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj2desc}"/>
+                <input placeholder="Enter project link" id="projects.proj2link" name="portfolio.proj2link" type="url"
+                       th:value="${profileFormWrapper.portfolio.proj2link}"/>
 
                 <label for="projects.proj3">Project 3:</label>
-                <input id="projects.proj3" name="portfolio.proj3" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3}"/>
-                <input id="projects.proj3desc" name="portfolio.proj3desc" type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3desc}"/>
-                <input id="projects.proj3link" name="portfolio.proj3link" type="url" th:value="${profileFormWrapper.portfolio.proj3link}"/>
+                <input placeholder="Enter project name" id="projects.proj3" name="portfolio.proj3" type="text"
+                       spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3}"/>
+                <input placeholder="Enter project description" id="projects.proj3desc" name="portfolio.proj3desc"
+                       type="text" spellcheck="true" th:value="${profileFormWrapper.portfolio.proj3desc}"/>
+                <input placeholder="Enter project link" id="projects.proj3link" name="portfolio.proj3link" type="url"
+                       th:value="${profileFormWrapper.portfolio.proj3link}"/>
 
                 <br>
 
@@ -230,17 +245,17 @@
     </div>
 </div>
 
-    <!--<script>-->
-    <!--    $(document).ready(function() {-->
-    <!--    $('#delete-btn').on('click', function(event) {-->
-    <!--    event.preventDefault();-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--    $('#delete-btn').on('click', function(event) {-->
+<!--    event.preventDefault();-->
 
-    <!--    if (confirm('Are you sure you want to delete your profile?')) {-->
-    <!--    $('#delete-user-form').submit();-->
-    <!--    }-->
-    <!--    });-->
-    <!--    });-->
-    <!--</script>-->
+<!--    if (confirm('Are you sure you want to delete your profile?')) {-->
+<!--    $('#delete-user-form').submit();-->
+<!--    }-->
+<!--    });-->
+<!--    });-->
+<!--</script>-->
 
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="/js/filestackBanner.js"></script>

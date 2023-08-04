@@ -125,6 +125,14 @@
                 </div>
             </div>
             <div class="interactions">
+                <div class="like-emojis count-display">
+                    <span class="like-emoji"><i>👍</i></span>
+                    <span th:text="${postLikesCount[post.id]}" class="emoji-counter"></span>
+                    <span class="like-emoji">❤️</span>
+                    <span th:text="${postLovesCount[post.id]}" class="emoji-counter"></span>
+                    <span class="like-emoji">😂</span>
+                    <span th:text="${postLaughsCount[post.id]}" class="emoji-counter"></span>
+                </div>
                 <button class="like-button" onclick="toggleLikeEmojis(this) ">
                     <i class="far fa-thumbs-up"></i>Like
                 </button>
@@ -180,10 +188,19 @@
                                        placeholder="Whats on your mind?" aria-label="Username"
                                        aria-describedby="basic-addon1">
                             </div>
-                            <span class="input-group-text">Code</span>
-                            <textarea th:field="*{snippet}" class="form-control language-html"
-                                      aria-label="With textarea"></textarea>
-                            <button class="submit-comment-btn" type="submit">Submit</button>
+                            <!-- Button to show the input field and "Submit" button -->
+                            <div class="snippet-wrapper">
+                                <button type="button" id="showInputButton">Add code</button>
+                                <div class="input-group mb-3" id="snippet-container">
+<!--                                    <span class="input-group-text">Code</span>-->
+                                    <textarea th:field="*{snippet}" class="form-control language-html"
+                                              aria-label="With textarea"></textarea>
+                                </div>
+                                <button class="submit-comment-btn" type="submit">Submit</button>
+
+                            </div>
+
+
 
                         </div>
                         <!--                        <textarea th:field="*{snippet}" id="comment-input"  rows="10" cols="50"></textarea>-->
@@ -292,14 +309,7 @@
         </div>
     </div>
     <!--    <div class="like-emojis count-display">-->
-    <div class="like-emojis count-display">
-        <span class="like-emoji"><i>👍</i></span>
-        <span th:text="${postLikesCount[post.id]}" class="emoji-counter"></span>
-        <span class="like-emoji">❤️</span>
-        <span th:text="${postLovesCount[post.id]}" class="emoji-counter"></span>
-        <span class="like-emoji">😂</span>
-        <span th:text="${postLaughsCount[post.id]}" class="emoji-counter"></span>
-    </div>
+
 
 </div>
 
@@ -553,6 +563,16 @@
     });
 
 
+</script>
+<script>
+    document.getElementById('showInputButton').addEventListener('click', function() {
+        const inputContainer = document.getElementById('snippet-container');
+        if (inputContainer.style.display === 'none') {
+            inputContainer.style.display = 'block';
+        } else {
+            inputContainer.style.display = 'none';
+        }
+    });
 </script>
 
 

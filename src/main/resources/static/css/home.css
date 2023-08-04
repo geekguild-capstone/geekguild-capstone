@@ -26,7 +26,7 @@ h1 {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr; /* Adjust the columns as needed */
+    grid-template-columns: 1fr 2fr 1fr; /* Adjust the columns as needed */
     grid-gap: 10px; /* Adjust the gap between sections as needed */
     position: relative; /* Add relative positioning to the grid container */
     grid-template-rows: 90vh; /* Set the height to be the full height of the viewport */
