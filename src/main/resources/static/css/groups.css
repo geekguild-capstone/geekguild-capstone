@@ -55,10 +55,10 @@ h5 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333; /* You can change the color here */
+    background-color: #333;
     padding: 5px !important;
     margin: 10px 10px !important;
-    color: #e67e22; /* Change font color if necessary */
+    color: #e67e22;
     border-radius: 10px 10px 0 0; /* Add rounded edges only to top */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow box effect */
     z-index: 2
