@@ -11,12 +11,14 @@
 
             <!--            <div class="profile-picture" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'"></div>-->
 
-<!--            <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">-->
-<!--                <img width="60" th:src="${user.image}"/>-->
-<!--            </a>-->
+            <!--            <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">-->
+            <!--                <img width="60" th:src="${user.image}"/>-->
+            <!--            </a>-->
             <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
                 <div class="nav-profile-picture">
-                    <img th:src="${user.image}" />
+                    <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}"/>
+                    <img th:if="${user.image == null || user.image == ''}"
+                         src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"/>
                 </div>
             </a>
 
@@ -36,7 +38,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/groups">Groups</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
 
                             <!-- Check if listGroups is empty -->
                             <li th:if="${#lists.isEmpty(listGroups)}">
@@ -45,25 +49,28 @@
 
                             <!-- Display the groups if listGroups is not empty -->
                             <li th:unless="${#lists.isEmpty(listGroups)}" th:each="group : ${listGroups}">
-                                <a class="dropdown-item" th:href="@{/group/{groupId}(groupId=${group.id})}" th:text="${group.groupname}"></a>
+                                <a class="dropdown-item" th:href="@{/group/{groupId}(groupId=${group.id})}"
+                                   th:text="${group.groupname}"></a>
                             </li>
 
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/">About us</a></li>
 
 
                             <!--                            <li><a class="dropdown-item" href="/groups">Groups</a></li>-->
-<!--                            <li>-->
-<!--                                <hr class="dropdown-divider">-->
-<!--                            </li>-->
-<!--                            <li th:if="${listGroups}" th:each="group : ${listGroups}"><a class="dropdown-item"-->
-<!--                                                                   th:href="@{/group/{groupId}(groupId=${group.id})}"-->
-<!--                                                                   th:text="${group.groupname}"></a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <hr class="dropdown-divider">-->
-<!--                            </li>-->
-<!--                            <li><a class="dropdown-item" href="/about-us">About us</a></li>-->
+                            <!--                            <li>-->
+                            <!--                                <hr class="dropdown-divider">-->
+                            <!--                            </li>-->
+                            <!--                            <li th:if="${listGroups}" th:each="group : ${listGroups}"><a class="dropdown-item"-->
+                            <!--                                                                   th:href="@{/group/{groupId}(groupId=${group.id})}"-->
+                            <!--                                                                   th:text="${group.groupname}"></a>-->
+                            <!--                            </li>-->
+                            <!--                            <li>-->
+                            <!--                                <hr class="dropdown-divider">-->
+                            <!--                            </li>-->
+                            <!--                            <li><a class="dropdown-item" href="/about-us">About us</a></li>-->
 
                             <!--                            <li><a class="dropdown-item" href="#">Group 2</a></li>-->
                             <!--                            <li>-->
@@ -77,10 +84,11 @@
 
                 <!--NEW FRIEND REQUEST MODAL BUTTON  -->
 
-                <button data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn-request"
+
+                <button th:if="${not #lists.isEmpty(requests)}" data-bs-toggle="modal" data-bs-target="#receivedFriendRequestModal" class="btn-request"
                         id="newFriendRequestBtn" data-bs-placement="bottom" title="New Friend Request">
                     <i class="bi bi-person-plus"></i>
-<!--                    <span id="friendRequestBadge" class="badge badge-pill">0</span>-->
+                    <!--                    <span id="friendRequestBadge" class="badge badge-pill">0</span>-->
                     <span class="friend-request-bubble">1</span>
 
                 </button>
@@ -90,9 +98,8 @@
                     <button class="fancy-logout">
                         <span class="text">Logout</span>
                     </button>
-<!--                    <button class="btn logout-button" type="submit">Logout</button>-->
+                    <!--                    <button class="btn logout-button" type="submit">Logout</button>-->
                 </form>
-
 
 
                 <!--NEW FRIEND REQUEST MODAL-->
@@ -107,95 +114,106 @@
                             </div>
                             <div class="modal-body">
                                 <div th:each="request : ${requests}">
-
-                                    <!-- Modal content here -->
-                                    <img th:src="${request.sender.image}" alt="Profile Picture"
-                                         class="profile-img">
-                                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>
-                                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>
-                                    <p th:text="${request.status}"></p>
-                                    <div class="modal-footer">
-                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}"
-                                              method="post" id="acceptFriendRequest">
-                                            <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
-                                            <button type="submit" class="btn btn-primary">Accept</button>
-                                        </form>
-                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}"
-                                              method="post" id="rejectFriendRequest">
-                                            <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
-                                            <button type="submit" class="btn btn-danger">Decline</button>
-                                        </form>
-                                        <!--                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
-                                        <!--                                            <button type="submit">Accept</button>-->
-                                        <!--                                        </form>-->
-                                        <!--                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
-                                        <!--                                            <button type="submit" >Reject</button>-->
-                                        <!--                                        </form>-->
+                                    <div>
+                                        <!-- Modal content here -->
+                                        <div class="nav-profile-picture">
+                                            <img th:if="${user.image != null && user.image != ''}"
+                                                 th:src="${user.image}"/>
+                                            <img th:if="${user.image == null || user.image == ''}"
+                                                 src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"/>
+                                        </div>
+                                        <!--                                    <img th:if="${request.sender.image != null && request.sender.image != ''}" th:src="${request.sender.image}" alt="Profile Picture"-->
+                                        <!--                                         class="profile-img">-->
+                                        <!--                                    <img th:if="${request.sender.image == null || request.sender.image == ''}" src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png" alt="Profile Picture"-->
+                                        <!--                                         class="profile-img">-->
+                                        <div>
+                                            <p>Request from: <span
+                                                    th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></span>
+                                            </p>
+                                            <!--                                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
+                                            <p>Status: <span th:text="${request.status}"></span></p>
+                                            <div class="modal-footer">
+                                                <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}"
+                                                      method="post" id="acceptFriendRequest">
+                                                    <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
+                                                    <button type="submit" class="btn btn-primary">Accept</button>
+                                                </form>
+                                                <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}"
+                                                      method="post" id="rejectFriendRequest">
+                                                    <!--                                            <input type="hidden" name="receiverId" value="1"/>-->
+                                                    <button type="submit" class="btn btn-danger">Decline</button>
+                                                </form>
+                                                <!--                                        <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+                                                <!--                                            <button type="submit">Accept</button>-->
+                                                <!--                                        </form>-->
+                                                <!--                                        <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+                                                <!--                                            <button type="submit" >Reject</button>-->
+                                                <!--                                        </form>-->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!--                <div th:each="request : ${requests}">-->
+                            <!--                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
+                            <!--                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
+                            <!--                    <p th:text="${request.status}"></p>-->
+                            <!--                    <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
+                            <!--                        <button type="submit">Accept</button>-->
+                            <!--                    </form>-->
+                            <!--                    <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
+                            <!--                        <button type="submit" >Reject</button>-->
+                            <!--                    </form>-->
+
+                            <!--                </div>-->
+
+                            <!-- Bootstrap Tooltip JavaScript -->
+                            <!--                <script>-->
+                            <!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
+                            <!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
+                            <!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
+                            <!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
+                            <!--                    });-->
+
+
+                            <!--                <form class="d-flex" role="search">-->
+                            <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                            <!--                    <button class="btn search-button" type="submit">Search</button>-->
+
+
+                            <script>
+                                const link = document.querySelector("#logout-link");
+                                if (link !== null) {
+                                    link.addEventListener("click", function (event) {
+                                        document.getElementById("logout").submit();
+                                    });
+                                }
+
+                            </script>
+
+
+                            <!-- Place this JavaScript code below the existing JavaScript code -->
+
+                            <script>
+                                // This function updates the friend request badge with the provided count
+                                function updateFriendRequestBadge(count) {
+                                    const badge = document.getElementById("friendRequestBadge");
+                                    if (badge) {
+                                        badge.innerText = count.toString();
+                                    }
+                                }
+
+                                // Example usage: Call this function with the actual count of friend requests
+                                const friendRequestCount = 3; // Replace this with the actual count of received friend requests
+                                updateFriendRequestBadge(friendRequestCount);
+                            </script>
+
+
                         </div>
+
                     </div>
-
-
-                    <!--                <div th:each="request : ${requests}">-->
-                    <!--                    <p th:text="${request.sender.firstname + ' ' + request.sender.lastname}"></p>-->
-                    <!--                    <p th:text="${request.receiver.firstname + ' ' + request.receiver.lastname}"></p>-->
-                    <!--                    <p th:text="${request.status}"></p>-->
-                    <!--                    <form th:action="@{/friends/{requestId}/accept(requestId=${request.id})}" method="post">-->
-                    <!--                        <button type="submit">Accept</button>-->
-                    <!--                    </form>-->
-                    <!--                    <form th:action="@{/friends/{requestId}/reject(requestId=${request.id})}" method="post">-->
-                    <!--                        <button type="submit" >Reject</button>-->
-                    <!--                    </form>-->
-
-                    <!--                </div>-->
-
-                    <!-- Bootstrap Tooltip JavaScript -->
-                    <!--                <script>-->
-                    <!--                    &lt;!&ndash;BOOTSTRAP TOOLTIP HOVER(SHOWING THE ELEMENTS TITLE)&ndash;&gt;-->
-                    <!--                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))-->
-                    <!--                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {-->
-                    <!--                        return new bootstrap.Tooltip(tooltipTriggerEl)-->
-                    <!--                    });-->
-
-
-                    <!--                <form class="d-flex" role="search">-->
-                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-                    <!--                    <button class="btn search-button" type="submit">Search</button>-->
-
-
-                    <script>
-                        const link = document.querySelector("#logout-link");
-                        if (link !== null) {
-                            link.addEventListener("click", function (event) {
-                                document.getElementById("logout").submit();
-                            });
-                        }
-
-                    </script>
-
-
-                    <!-- Place this JavaScript code below the existing JavaScript code -->
-
-                    <script>
-                        // This function updates the friend request badge with the provided count
-                        function updateFriendRequestBadge(count) {
-                            const badge = document.getElementById("friendRequestBadge");
-                            if (badge) {
-                                badge.innerText = count.toString();
-                            }
-                        }
-
-                        // Example usage: Call this function with the actual count of friend requests
-                        const friendRequestCount = 3; // Replace this with the actual count of received friend requests
-                        updateFriendRequestBadge(friendRequestCount);
-                    </script>
-
-
-                </div>
-
-            </div>
     </nav>
 </div>
 
