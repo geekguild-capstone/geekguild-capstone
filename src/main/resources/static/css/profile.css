@@ -21,6 +21,9 @@ body {
     border-radius: 20px;
    border: 2px solid #8e09e7;
 }
+.profile-banner {
+    width: 100%;
+}
 
 .profile-picture-profile {
     width: 150px !important;

@@ -117,9 +117,9 @@
                                     <div>
                                         <!-- Modal content here -->
                                         <div class="nav-profile-picture">
-                                            <img th:if="${user.image != null && user.image != ''}"
-                                                 th:src="${user.image}"/>
-                                            <img th:if="${user.image == null || user.image == ''}"
+                                            <img th:if="${request.sender.image != null && request.sender.image != ''}"
+                                                 th:src="${request.sender.image}"/>
+                                            <img th:if="${request.sender.image == null || request.sender.image == ''}"
                                                  src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"/>
                                         </div>
                                         <!--                                    <img th:if="${request.sender.image != null && request.sender.image != ''}" th:src="${request.sender.image}" alt="Profile Picture"-->

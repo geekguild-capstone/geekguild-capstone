@@ -29,12 +29,19 @@
     <div class="container">
         <div class="profile-header-container">
             <!-- Cover Photo Container -->
-            <div class="cover-photo">
-                Cover Photo Placeholder
+            <div class="cover-photo" th:if="${user.banner != null && user.banner != ''}">
+                <img class="profile-banner" th:src="${user.banner}">
+<!--                th:style="'background-image: url(' + ${user.banner} + '); background-size: cover;'"-->
+            </div>
+            <div class="cover-photo" th:if="${user.banner == null || user.banner == ''}" >
+                <img class="profile-banner" src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg">
             </div>
             <!-- Profile Picture Container -->
-            <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}" alt="Profile Picture" class="profile-picture-profile">
-            <img th:if="${user.image == null || user.image == ''}" src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png" alt="Profile Picture" class="profile-picture-profile">
+            <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}" alt="Profile Picture"
+                 class="profile-picture-profile">
+            <img th:if="${user.image == null || user.image == ''}"
+                 src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"
+                 alt="Profile Picture" class="profile-picture-profile">
 
             <div class="profile-info">
                 <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
@@ -42,6 +49,7 @@
                 <h2 th:text="${portfolio.headline}" class="profile-title"></h2>
             </div>
         </div>
+
 
         <hr class="orange-hr">
 

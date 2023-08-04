@@ -20,9 +20,9 @@
                  th:style="'background-image: url(' + ${friend.receiver.image} + '); background-size: cover;'"></div>
             <div class="friend-info">
                 <div class="name-container">
-<!--                    <a th:text="${friend.receiver.firstname + ' ' + friend.receiver.lastname}"-->
-<!--                       th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"-->
-<!--                       class="name"></a>-->
+                    <a th:text="${friend.receiver.firstname + ' ' + friend.receiver.lastname}"
+                       th:href="@{/profile/{id}(id=${friend.receiver.getId()})}"
+                       class="name"></a>
                 </div>
                 <!--                <div class="headline">Software Engineer</div>-->
             </div>
