@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/friend-card.css">
+  <!-- Font Awesome CSS (you need to include this in your project) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="top-bar">
+  <h5 class="group-heading">
+    Group Members
+  </h5>
+
+</div>
+<main>
+
+  <div th:each="groupUser : ${groupMembers}">
+    <div class="connection container-background">
+      <div class="profile-picture-placeholder"
+           th:style="'background-image: url(' + ${groupUser.image} + '); background-size: cover;'"></div>
+      <div class="friend-info">
+        <div class="name-container">
+          <a th:text="${groupUser.firstname + ' ' + groupUser.lastname}"
+             th:href="@{/profile/{id}(id=${groupUser.getId()})}"
+             class="name"></a>
+        </div>
+        <!--                <div class="headline">Software Engineer</div>-->
+      </div>
+      <div class="action-buttons">
+        <button class="message-button"
+                th:attr="data-friend-id=${groupUser.id}, data-friend-username=${groupUser.email}, data-friend-image=${groupUser.image},data-current-user-id=${user.id},
+            data-current-user-username=${user.email}, data-current-user-image=${user.image}"
+
+                onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
+          <i class="fas fa-comment-alt message-icon"></i>
+        </button>
+<!--        <div class="ellipsis" onclick="toggleDropdown(this)">-->
+<!--          <i class="fas fa-ellipsis-h"></i>-->
+<!--          <div class="dropdown-menu">-->
+<!--            <form method="post" th:action="@{/friends/remove}">-->
+<!--              <input type="hidden" name="loggedInUserType" value="sender">-->
+<!--              <input type="hidden" name="friendId" th:value="${groupUser.id}">-->
+<!--              <button type="submit">-->
+<!--                <i class="fas fa-trash trash-icon"></i>-->
+<!--              </button>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  function toggleDropdown(ellipsis) {
+    const dropdownMenu = ellipsis.querySelector(".dropdown-menu");
+    dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
+  }
+</script>
+
+</body>
+</html>

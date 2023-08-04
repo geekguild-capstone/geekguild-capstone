@@ -165,6 +165,11 @@ public class GroupController {
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
 
+        // Fetch the group members and remove the currently signed-in user from the list
+        List<User> groupMembers = groupDao.findGroupMembersById(groupId);
+        groupMembers.remove(user);
+        model.addAttribute("groupMembers", groupMembers);
+
         // add dynamic title page
         model.addAttribute("title", "GeekGuild");
 
