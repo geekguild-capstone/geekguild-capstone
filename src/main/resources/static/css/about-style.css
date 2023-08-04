@@ -15,7 +15,12 @@
 }
 
 .logo {
-    height: 2.2rem;
+    height: 6.2rem;
+}
+
+
+.bottom-logo {
+    height: 13.2rem;
 }
 
 /****************************/
@@ -192,7 +197,7 @@
 /****************************/
 
 .section-how {
-    padding: 9.6rem 0;
+    padding: 1.8rem 0;
 }
 
 .step-number {
@@ -245,7 +250,7 @@
 }
 
 .step-img {
-    width: 35%;
+    width: 75%;
 }
 
 /****************************/
@@ -269,7 +274,7 @@
 }
 
 .meal-content {
-    padding: 3.2rem 4.8rem 4.8rem 4.8rem;
+    padding: 3.2rem 2.4rem 4.8rem 2.4rem;
 }
 
 .meal-tags {
@@ -308,6 +313,7 @@
 }
 
 .meal-attributes {
+    transform: translateX(-24px);
     display: flex;
     list-style: none;
     flex-direction: column;
@@ -329,9 +335,9 @@
 
 .meal-img {
     object-fit: cover;
-    /*width: 100%;*/
+    width: 100%;
     height: 225px;
-    width: 225px;
+    /*width: 225px;*/
 }
 
 .all-recipes {
