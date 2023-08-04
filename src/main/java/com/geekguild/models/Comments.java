@@ -26,7 +26,7 @@ public class Comments {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "snippet")
+    @Column(name = "snippet" , length = 6000)
     private String snippet;
 
 
