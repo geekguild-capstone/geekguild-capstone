@@ -195,7 +195,7 @@
                             </div>
                             <!-- Button to show the input field and "Submit" button -->
                             <div class="snippet-wrapper">
-                                <button type="button" id="showInputButton">Add code</button>
+                                <button type="button" class="showInputButton">Add code</button>
                                 <div class="input-group mb-3" id="snippet-container">
                                     <!--                                    <span class="input-group-text">Code</span>-->
                                     <textarea th:field="*{snippet}" class="form-control language-html"
@@ -568,14 +568,33 @@
 
 </script>
 <script>
-    document.getElementById('showInputButton').addEventListener('click', function () {
-        const inputContainer = document.getElementById('snippet-container');
-        if (inputContainer.style.display === 'none') {
-            inputContainer.style.display = 'block';
-        } else {
-            inputContainer.style.display = 'none';
-        }
+    const showInputButtons = document.querySelectorAll('.showInputButton');
+    console.log(showInputButtons)
+
+    showInputButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation(); // Stop the event from bubbling up the DOM tree
+            console.log("clicked");
+            const inputContainer = button.nextElementSibling;
+            if (inputContainer.style.display === 'none') {
+                inputContainer.style.display = 'block';
+            } else {
+                inputContainer.style.display = 'none';
+            }
+        });
     });
+
+
+   // showInputButtons.addEventListener('click', function () {
+   //      console.log("clicked")
+   //     console.log(showInputButtons)
+   //      const inputContainer = document.getElementById('snippet-container');
+   //      if (inputContainer.style.display === 'none') {
+   //          inputContainer.style.display = 'block';
+   //      } else {
+   //          inputContainer.style.display = 'none';
+   //      }
+   //  });
 </script>
 
 
