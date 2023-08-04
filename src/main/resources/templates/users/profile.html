@@ -50,28 +50,8 @@
             </div>
         </div>
 
-<!--        <div class="profile-header-container" th:if="${user.banner == null || user.banner == ''}"-->
-<!--             style="background-image: url('https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg'); background-size: cover;'">-->
 
-<!--            &lt;!&ndash; Cover Photo Container &ndash;&gt;-->
-<!--            <div class="cover-photo">-->
-<!--                Cover Photo Placeholder-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Profile Picture Container &ndash;&gt;-->
-<!--            <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}" alt="Profile Picture"-->
-<!--                 class="profile-picture-profile">-->
-<!--            <img th:if="${user.image == null || user.image == ''}"-->
-<!--                 src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"-->
-<!--                 alt="Profile Picture" class="profile-picture-profile">-->
-
-<!--            <div class="profile-info">-->
-<!--                <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>-->
-<!--                &lt;!&ndash;            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>&ndash;&gt;-->
-<!--                <h2 th:text="${portfolio.headline}" class="profile-title"></h2>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <hr>
+        <hr class="orange-hr">
 
         <div class="icon-container">
             <a th:href="${portfolio.linkedin ?: ''}" class="icon-link">
@@ -92,28 +72,33 @@
             </a>
         </div>
 
-        <hr>
+        <hr class="orange-hr">
 
         <div class="about-me-container">
             <h2 class="section-header">About Me</h2>
             <p th:text="${portfolio.about ?: ''}"></p>
         </div>
 
-        <hr>
+        <hr class="orange-hr">
 
         <div class="section-container">
             <h2 class="section-header">Skills</h2>
-            <div th:each="languages : ${userLanguages}" class="profile-skills">
-                <p th:text="${languages.languageName}"></p>
-                <!--            <i class="fab fa-java skill-icon"></i> &lt;!&ndash; Font Awesome icon for Java &ndash;&gt;-->
-                <!--            <i class="fab fa-cuttlefish skill-icon"></i> &lt;!&ndash; Font Awesome icon for C++ &ndash;&gt;-->
-                <!--            <i class="fab fa-python skill-icon"></i> &lt;!&ndash; Font Awesome icon for Python &ndash;&gt;-->
-                <!--            <i class="fab fa-html5 skill-icon"></i> &lt;!&ndash; Font Awesome icon for HTML &ndash;&gt;-->
-                <!--            <i class="fab fa-css3-alt skill-icon"></i> &lt;!&ndash; Font Awesome icon for CSS &ndash;&gt;-->
+            <div class="skills-container">
+                <div class="skill-item" th:each="language : ${userLanguages}">
+                    <label class="checkmark-container">
+                        <div class="skill-content">
+                            <div class="skill-icon-container">
+                                <span class="skill-icon" th:class="${'fab fa-' + language.logo}"></span>
+                                <span class="skill-name" th:text="${language.languageName}"></span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
             </div>
-        </div>
+            <div>
 
-        <hr>
+
+                <hr class="orange-hr">
 
         <div class="section-container work">
             <h2 class="section-header">Work</h2>
@@ -124,7 +109,7 @@
             <p>I need help with: <span th:text="${work.help ?: ''}"></span></p>
         </div>
 
-        <hr>
+                <hr class="orange-hr">
 
         <div class="section-container">
             <h2 class="section-header projects">Projects</h2>
@@ -139,7 +124,7 @@
                     </span>
                 </li>
                 <br>
-                <hr>
+                <hr class="orange-hr">
                 <li>
                     <a th:href="${portfolio.proj2link ?: ''}" class="project-link">
                         <span th:text="${portfolio.proj2 ?: ''}" class="project-title"></span>
@@ -149,7 +134,7 @@
                     <span th:text="${portfolio.proj2desc ?: ''}"></span>
                 </li>
                 <br>
-                <hr>
+                <hr class="orange-hr">
                 <li>
                     <a th:href="${portfolio.proj3link ?: ''}" class="project-link">
                         <span th:text="${portfolio.proj3 ?: ''}" class="project-title" title="Project 3"></span>
