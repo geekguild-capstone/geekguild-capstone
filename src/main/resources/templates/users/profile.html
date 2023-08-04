@@ -33,7 +33,9 @@
                 Cover Photo Placeholder
             </div>
             <!-- Profile Picture Container -->
-            <img th:src="${user.image}" alt="Profile Picture" class="profile-picture-profile">
+            <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}" alt="Profile Picture" class="profile-picture-profile">
+            <img th:if="${user.image == null || user.image == ''}" src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png" alt="Profile Picture" class="profile-picture-profile">
+
             <div class="profile-info">
                 <h1 th:text="${user.firstname + ' ' + user.lastname}" class="profile-name"></h1>
                 <!--            <h2 th:text="${user.email ?: ''}" class="profile-email"></h2>-->
