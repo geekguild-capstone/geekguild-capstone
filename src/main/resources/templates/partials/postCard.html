@@ -88,7 +88,7 @@
     <div class="post-card">
         <div class="post-icons" th:if="${user.id == post.user.id}">
             <div class="edit-icon">
-                <button data-bs-toggle="modal" data-bs-target="#editModal" th:attr="data-post-id=${post.id}"
+                <button data-bs-toggle="modal" class="remove-friend-button" data-bs-target="#editModal" th:attr="data-post-id=${post.id}"
                         onclick="openEditModal(this.getAttribute('data-post-id'))">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
@@ -399,7 +399,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-html.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
