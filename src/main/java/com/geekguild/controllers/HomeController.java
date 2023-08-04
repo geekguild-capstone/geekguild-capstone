@@ -53,6 +53,10 @@ public class HomeController {
 
         // Fetch only the posts where groupId is null and add it to the model
         List<Post> posts = postDao.findByGroupIdIsNull();
+
+        // Reverse the list to get the last post first
+        Collections.reverse(posts);
+
         model.addAttribute("posts", posts);
 
         // Add the reactions to the model, so they can be accessed within the view

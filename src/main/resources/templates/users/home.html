@@ -53,74 +53,74 @@
             <button id="collapseRightBtn" class="collapse-btn">&rarr;</button>
 
             <!-- Add a button or arrow for collapsing -->
-<!--            <button id="collapse-btn">Collapse Left and Right Sections</button>-->
+            <!--            <button id="collapse-btn">Collapse Left and Right Sections</button>-->
         </div>
-
-        <div class="create-post-container">
-            <div class="profile-picture"
-                 th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
-            </div>
-            <div class="post-content">
-                <form method="post" th:object="${post}" th:action="@{/post/create}" id="postForm">
-                    <!-- Post image upload section -->
-                    <div>
-                        <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
-                        </button>
-                    </div>
-                    <div class="upload-post-img">
-                        <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
-                    </div>
-
-                    <!-- Post body input section -->
-
-                    <div class="input-group">
-                        <div class="input-group mb-3">
-                            <input th:field="*{body}" type="text" class="form-control create-post-body"
-                                   placeholder="Whats on your mind?"
-                                   aria-label="Username" aria-describedby="basic-addon1" required>
+        <div class="scrollable">
+            <div class="create-post-container">
+                <div class="profile-picture"
+                     th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
+                </div>
+                <div class="post-content">
+                    <form method="post" th:object="${post}" th:action="@{/post/create}" id="postForm">
+                        <!-- Post image upload section -->
+                        <div>
+                            <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
+                            </button>
+                        </div>
+                        <div class="upload-post-img">
+                            <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
                         </div>
 
-                        <div class="code-snippet">
-                            <span class="input-group-text">Code =></span>
-                            <textarea class="language-html" th:field="*{snippet}"></textarea>
-                            <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
-                            <button class="submit-comment-btn" type="submit">Submit</button>
+                        <!-- Post body input section -->
+
+                        <div class="input-group">
+                            <div class="input-group mb-3">
+                                <input th:field="*{body}" type="text" class="form-control create-post-body"
+                                       placeholder="Whats on your mind?"
+                                       aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <div class="code-snippet">
+                                <span class="input-group-text">Code =></span>
+                                <textarea class="language-html" th:field="*{snippet}"></textarea>
+                                <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
+                                <button class="submit-comment-btn" type="submit">Submit</button>
+                            </div>
+
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <input type="hidden" name="image" id="postImageURLInput"/>
                         </div>
-
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <input type="hidden" name="image" id="postImageURLInput"/>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="view-post-container">
-            <div class="view-post-card-container" th:include="partials/postCard">
+            <div class="view-post-container">
+                <div class="view-post-card-container" th:include="partials/postCard">
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
-
 
 
     <div class="right-section">
         <!-- Add a button or arrow for collapsing -->
-<!--        <div class="top-right-section">-->
-<!--            <div class="top-bar">-->
-<!--                <h5 class="group-heading">-->
-<!--                    News-->
-<!--                </h5>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Text Input &ndash;&gt;-->
-<!--            <form id="searchForm">-->
-<!--                <input type="text" id="searchInput" placeholder="Search...">-->
-<!--                <button type="submit">Search</button>-->
-<!--            </form>-->
-<!--            &lt;!&ndash; News Cards Container &ndash;&gt;-->
-<!--            <div class="news-cards-container">-->
-<!--                &lt;!&ndash; News cards will be rendered here &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="top-right-section">-->
+        <!--            <div class="top-bar">-->
+        <!--                <h5 class="group-heading">-->
+        <!--                    News-->
+        <!--                </h5>-->
+        <!--            </div>-->
+        <!--            &lt;!&ndash; Text Input &ndash;&gt;-->
+        <!--            <form id="searchForm">-->
+        <!--                <input type="text" id="searchInput" placeholder="Search...">-->
+        <!--                <button type="submit">Search</button>-->
+        <!--            </form>-->
+        <!--            &lt;!&ndash; News Cards Container &ndash;&gt;-->
+        <!--            <div class="news-cards-container">-->
+        <!--                &lt;!&ndash; News cards will be rendered here &ndash;&gt;-->
+        <!--            </div>-->
+        <!--        </div>-->
         <div class="bottom-right-section">
             <div class="suggested-friends-top-bar">
                 <h5 class="group-heading">
@@ -205,9 +205,6 @@
     });
 
 </script>
-
-
-
 
 
 <footer th:replace="partials/footer :: footer"></footer>
