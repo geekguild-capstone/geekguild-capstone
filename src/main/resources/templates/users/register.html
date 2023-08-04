@@ -282,14 +282,14 @@
 
     <div class="form-group">
         <label for="email">Email</label>
-        <input id="email" type="text" th:field="*{email}"/>
+        <input required id="email" type="email" th:field="*{email}"/>
         <span th:text="${emailError}" class="error"></span>
         <span id="emailError" class="error"></span>
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
-        <input id="password" type="password" th:field="*{password}"/>
+        <input required id="password" type="password" th:field="*{password}"/>
         <span id="passwordError" class="error"></span>
 
     </div>
@@ -363,6 +363,7 @@
         const password = document.getElementById('password').value;
 
 
+
         // Clear previous error messages
         document.getElementById('firstNameError').textContent = '';
         document.getElementById('lastNameError').textContent = '';
@@ -388,7 +389,7 @@
         }
 
         // If there are no errors, you can proceed with the form submission
-        if (firstName.trim() !== '' && lastName.trim() !== '' && password.trim() !== '') {
+        if (firstName.trim() !== '' && lastName.trim() !== '' && password.trim() !== '' && email.trim() !== '')  {
             // Implement form submission logic here
             registrationForm.submit();
             // For example: document.getElementById('signupForm').submit();
