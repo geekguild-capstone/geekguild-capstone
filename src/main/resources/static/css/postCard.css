@@ -154,9 +154,6 @@ body {
 .comment-card {
     border: 3px;
     background-image: linear-gradient(to top, #772DAB,  #E6E6FA);
-    /*background-image: linear-gradient(to top, #000000,  #8E09E7,  #E6E6FA, #E6E6FA);*/
-    /*background-image: linear-gradient(to top, #e67e22 ,  #E6E6FA, #E6E6FA);*/
-    /*background-image: linear-gradient(to top, #333333 ,  #E6E6FA, #E6E6FA);*/
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 10px;
@@ -173,7 +170,6 @@ body {
     display: flex;
     align-items: center; /* Vertically center the content */
     justify-content: space-between;
-    /*border-top: 3px solid #e67e22;*/
     border-bottom: 1px solid #fff;
     height: 70px;
 }
@@ -435,3 +431,24 @@ body {
 .snippet-wrapper {
     width: 100% !important;
 }
+
+.showInputButton {
+    background-color: #ee8631;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.show-code-btn {
+    background-color: #ee8631;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
