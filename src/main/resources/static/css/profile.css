@@ -147,7 +147,7 @@ body {
 }
 
 .section-container p {
-    color: #e67e22;
+    color: #aefc4f;
 }
 
 .profile-header-container {
@@ -227,7 +227,7 @@ body {
 .skill-icon {
     font-size: 25px; /* Adjust the size as needed */
     margin-right: 20px; /* Adjust the spacing between icons */
-    color: #e67e22 /* Change the color to #ffb74d */
+    color: #aefc4f !important;
 }
 
 .profile-email {
@@ -248,7 +248,7 @@ body {
 }
 
 .project-description{
-    color: #e67e22;
+    color: #aefc4f;
 }
 
 .profile-link:hover{
@@ -295,7 +295,7 @@ body {
 }
 
 .skill-name {
-    color: orange;
+    color: #aefc4f;
     white-space: nowrap; /* Prevent the skill name from wrapping to a new line */
     margin-left: 10px; /* Add space between the icon and the skill name */
     font-size: 18px;
@@ -303,7 +303,7 @@ body {
 
 
 .skill-icon-container {
-    color: #e67e22;
+    color: #aefc4f;
     display: flex; /* Use flexbox to display the icon and name side by side */
     align-items: center; /* Center items vertically within the container */
 }
