@@ -35,7 +35,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #8e09e7;
+            color: #8fd93f !important;
         }
 
         input[type="text"],
@@ -157,55 +157,55 @@
             overflow: hidden; /* Clip the rotating images outside the container */
         }
 
-        .rotating-profile-pics {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* This prevents the profile pics from capturing click events */
-        }
+        /*.rotating-profile-pics {*/
+        /*    position: absolute;*/
+        /*    top: 50%;*/
+        /*    left: 50%;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    pointer-events: none; !* This prevents the profile pics from capturing click events *!*/
+        /*}*/
 
-        .rotating-profile-pics img {
-            width: 80px; /* Adjust the width as per your preference */
-            height: auto; /* This will maintain the aspect ratio of the image */
-            border-radius: 50%; /* To make the profile pic circular */
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional shadow effect */
-            position: absolute;
-            animation-timing-function: linear; /* Use linear timing function for a consistent rotation speed */
-        }
+        /*.rotating-profile-pics img {*/
+        /*    width: 80px; !* Adjust the width as per your preference *!*/
+        /*    height: auto; !* This will maintain the aspect ratio of the image *!*/
+        /*    border-radius: 50%; !* To make the profile pic circular *!*/
+        /*    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); !* Optional shadow effect *!*/
+        /*    position: absolute;*/
+        /*    animation-timing-function: linear; !* Use linear timing function for a consistent rotation speed *!*/
+        /*}*/
 
-        /* Keyframes for rotating and circling the images */
-        @keyframes rotateProfile1 {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateY(-50vh) rotate(360deg);
-            }
-        }
+        /*!* Keyframes for rotating and circling the images *!*/
+        /*@keyframes rotateProfile1 {*/
+        /*    0% {*/
+        /*        transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);*/
+        /*    }*/
+        /*    100% {*/
+        /*        transform: translate(-50%, -50%) rotate(360deg) translateY(-50vh) rotate(360deg);*/
+        /*    }*/
+        /*}*/
 
-        @keyframes rotateProfile2 {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(-360deg) translateY(-50vh) rotate(-360deg);
-            }
-        }
+        /*@keyframes rotateProfile2 {*/
+        /*    0% {*/
+        /*        transform: translate(-50%, -50%) rotate(0deg) translateY(-50vh) rotate(0deg);*/
+        /*    }*/
+        /*    100% {*/
+        /*        transform: translate(-50%, -50%) rotate(-360deg) translateY(-50vh) rotate(-360deg);*/
+        /*    }*/
+        /*}*/
 
-        /* Add more keyframes for additional profiles if needed */
+        /*!* Add more keyframes for additional profiles if needed *!*/
 
-        /* Applying animations to the profile pictures */
-        .rotating-profile-pics img:nth-child(1) {
-            animation: rotateProfile1 20s linear infinite; /* Adjust the duration (e.g., 20s) to control the rotation pace */
-        }
+        /*!* Applying animations to the profile pictures *!*/
+        /*.rotating-profile-pics img:nth-child(1) {*/
+        /*    animation: rotateProfile1 20s linear infinite; !* Adjust the duration (e.g., 20s) to control the rotation pace *!*/
+        /*}*/
 
-        .rotating-profile-pics img:nth-child(2) {
-            animation: rotateProfile2 30s linear infinite; /* Adjust the duration (e.g., 30s) to control the rotation pace */
-        }
+        /*.rotating-profile-pics img:nth-child(2) {*/
+        /*    animation: rotateProfile2 30s linear infinite; !* Adjust the duration (e.g., 30s) to control the rotation pace *!*/
+        /*}*/
 
-        /* Add more CSS rules for additional profiles if needed */
+        /*!* Add more CSS rules for additional profiles if needed *!*/
 
         /* Additional styles to ensure the form is accessible */
         form {
@@ -338,13 +338,13 @@
 
 <!--</form>-->
 
-<div class="outer-container">
-    <div class="rotating-profile-pics">
-        <img src="/img/gglogo.png" alt="Profile Picture 1">
-        <img src="/img/gghelp.png" alt="Profile Picture 2">
-        <!-- Add more profile pictures here -->
-    </div>
-</div>
+<!--<div class="outer-container">-->
+<!--    <div class="rotating-profile-pics">-->
+<!--        <img src="/img/gglogo.png" alt="Profile Picture 1">-->
+<!--        <img src="/img/gghelp.png" alt="Profile Picture 2">-->
+<!--        &lt;!&ndash; Add more profile pictures here &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
 
 <script>
     const registrationForm = document.getElementById("signupForm");
