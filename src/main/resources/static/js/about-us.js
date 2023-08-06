@@ -28,6 +28,18 @@ document.body.addEventListener("click", function (e) {
     // Check if the href attribute starts with "/"
     const href = e.target.getAttribute("href") || e.target.parentNode.getAttribute("href");
     const isHrefStartingWithSlash = href && href.startsWith("/");
+    const isHrefStartingWithHttps = href && href.startsWith("h")
+
+    // If it's an anchor element and the href doesn't start with "/", handle the click event
+    if (isAnchorElement && isHrefStartingWithHttps) {
+        // Your custom logic for handling non-anchor links here
+        // For example, if you want to handle the click differently for such links
+        // you can add your own code here.
+
+        // For now, I will just log a message to the console as an example
+        // console.log("Clicked a non-anchor link:", href);
+        return;
+    }
 
     // If it's an anchor element and the href doesn't start with "/", handle the click event
     if (isAnchorElement && isHrefStartingWithSlash) {
