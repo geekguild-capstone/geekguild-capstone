@@ -33,6 +33,7 @@ public class ProfileController {
     @GetMapping("/profile/{id}")
     public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
         User loggedInUser = getCurrentLoggedInUser();
+        model.addAttribute("loggedInUser", loggedInUser);
 
         //Get logged in users groups for the navbar
         List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
@@ -90,12 +91,16 @@ public class ProfileController {
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         //Get logged in users groups for the navbar
         List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
         model.addAttribute("listGroups", loggedInUserGroups);
 
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
+        //For nav bar
+        model.addAttribute("loggedInUser", user);
+
         Portfolio portfolio = portfolioDao.findByUserId(loggedInUser.getId());
         model.addAttribute("portfolio", portfolio);
         Work work = workDao.findByUserId(loggedInUser.getId());
@@ -112,7 +117,12 @@ public class ProfileController {
 
     @GetMapping("/profile/{userId}/edit")
     public String editProfileLoad(@PathVariable long userId, Model model) {
-        User loggedInUser = getLoggedInUser();
+        User loggedInUser = getCurrentLoggedInUser();
+        model.addAttribute("loggedInUser", loggedInUser);
+
+        if(loggedInUser.getId() != userId) {
+            return "redirect:/profile";
+        }
         //Get logged in users groups for the navbar
         List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
         model.addAttribute("listGroups", loggedInUserGroups);

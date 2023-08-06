@@ -17,7 +17,7 @@
 
 <div class="page-container">
     <div class="edit-icon">
-        <a class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
+        <a th:if="${loggedInUser.id == user.id}" class="edit-icon" th:href="@{/profile/{id}/edit(id=${user.getId()})}">
             <svg width="40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke-width="1.5"
                  stroke="limegreen" class="w-6 h-6">

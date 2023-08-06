@@ -16,8 +16,8 @@
             <!--            </a>-->
             <a class="navbar-brand" href="/profile" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
                 <div class="nav-profile-picture">
-                    <img th:if="${user.image != null && user.image != ''}" th:src="${user.image}"/>
-                    <img th:if="${user.image == null || user.image == ''}"
+                    <img th:if="${loggedInUser.image != null && loggedInUser.image != ''}" th:src="${loggedInUser.image}"/>
+                    <img th:if="${loggedInUser.image == null || loggedInUser.image == ''}"
                          src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png"/>
                 </div>
             </a>
