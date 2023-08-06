@@ -52,7 +52,11 @@
 
 /* Navbar Links Text Color */
 .navbar-nav .nav-link {
-    color: #ee8631 !important;
+    color: #f0f0f0 !important;
+    font-weight: 500;
+    font-family: "Rubik", sans-serif;
+    font-size: 1.2rem;
+    transition: all 0.3s;
 }
 
 /* Active Navbar Link Text Color */
