@@ -37,6 +37,8 @@ public class HomeController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
+        //For nav bar
+        model.addAttribute("loggedInUser", user);
 
         // add dynamic title page
         model.addAttribute("title", "GeekGuild");

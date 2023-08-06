@@ -37,6 +37,10 @@ public class GroupController {
         model.addAttribute("group", new Group()); // Add an empty Group object to the model
         User loggedInUser = getCurrentLoggedInUser();
         model.addAttribute("post", new Post());
+
+        //For nav bar
+        model.addAttribute("loggedInUser", loggedInUser);
+
         model.addAttribute("user", loggedInUser);
         model.addAttribute("posts", postDao.findAll());
         model.addAttribute("users", userDao.findAll());
@@ -164,6 +168,9 @@ public class GroupController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getReferenceById(loggedInUser.getId());
         model.addAttribute("user", user);
+
+        //For nav bar
+        model.addAttribute("loggedInUser", user);
 
         // Fetch the group members and remove the currently signed-in user from the list
         List<User> groupMembers = groupDao.findGroupMembersById(groupId);
