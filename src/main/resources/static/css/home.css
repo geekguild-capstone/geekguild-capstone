@@ -578,6 +578,30 @@ h1 {
     display: none;
 }
 
+/* Add this section to style the new section */
+.showInputButton {
+    background-color: #ee8631;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#snippet-container {
+    display: none;
+}
+
+.language-html {
+    width: 100% !important;
+}
+
+.snippet-wrapper {
+    width: 100% !important;
+}
+
+
 
 /*.middle-wrapper {*/
 /*    width: 75%;*/
