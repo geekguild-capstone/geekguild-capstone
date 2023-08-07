@@ -34,17 +34,17 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
-                            Groups
+                            Guilds
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/groups">Groups</a></li>
+                            <li><a class="dropdown-item" href="/groups">Guilds</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
 
                             <!-- Check if listGroups is empty -->
                             <li th:if="${#lists.isEmpty(listGroups)}">
-                                <p class="dropdown-item">No groups found</p>
+                                <p class="dropdown-item">No guilds found</p>
                             </li>
 
                             <!-- Display the groups if listGroups is not empty -->
