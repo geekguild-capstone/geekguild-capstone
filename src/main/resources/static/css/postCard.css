@@ -315,6 +315,18 @@ body {
     z-index: 1; /* Ensure the emojis appear above the post-card container */
 }
 
+.like-emojis-form {
+    position: absolute; /* Set the emojis form to absolute positioning */
+    top: -40px; /* Adjust this value as needed to position the emojis form above the button */
+    left: 120px; /* Adjust this value as needed to position the emojis form horizontally */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1; /* Ensure the emojis form appears above other elements */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
 .interaction-container {
     display: none;
 }
@@ -361,6 +373,7 @@ body {
 }
 
 .like-emojis.count-display {
+    gap: 3px;
     /* ... Your styles for the like-emojis count-display ... */
     /*position: absolute;*/
     bottom: 10px; /* Adjust as needed to position it correctly */

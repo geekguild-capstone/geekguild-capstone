@@ -127,7 +127,6 @@
                 </div>
             </div>
             <div class="interactions">
-
                 <div class="like-emojis count-display">
                     <span class="like-emoji"><i>👍</i></span>
                     <span th:text="${postLikesCount[post.id]}" class="emoji-counter"></span>
@@ -140,7 +139,7 @@
                     <button class="like-button" onclick="toggleLikeEmojis(this) ">
                         <i class="far fa-thumbs-up"></i>Like
                     </button>
-                    <div class="like-emojis" style="display: none;">
+                    <div class="like-emojis-form" style="display: none;">
                         <!-- Add forms for each icon -->
                         <form th:action="@{/reaction/post/submit}" method="post" class="reaction-form"
                               style="display: inline-block;" th:data-post-id="${post.id}"
@@ -338,7 +337,7 @@
 
     function toggleLikeEmojis(button) {
         const postCard = button.closest('.post-card');
-        const emojisContainer = postCard.querySelector('.like-emojis');
+        const emojisContainer = postCard.querySelector('.like-emojis-form');
         emojisContainer.style.display = emojisContainer.style.display === 'block' ? 'none' : 'block';
     }
 
