@@ -214,12 +214,75 @@ h1 {
     flex: 1;
 }
 
+.friend-request-name {
+    margin-bottom: 0;
+}
+
 .code-snippet .submit-comment-btn {
     border-radius: 0 8px 8px 0; /* top-left, top-right, bottom-right, bottom-left */
 }
 
 .post-actions {
     /* Optional: Style your post actions */
+}
+
+/* Custom styles for the first modal */
+#confirmationModal .modal-body {
+    background-color: #333333;
+    color: #fff; /* Set the font color to white for the modal body */
+}
+
+#confirmationModal .modal-body p {
+    padding: 20px;
+    /*border: 1px solid #8E09E7 !important;*/
+}
+
+#confirmationModal .modal-footer {
+    background-color: #333; /* Set the footer background color to #333 */
+    color: #fff; /* Set the font color to white for the modal footer */
+}
+
+#confirmationModal .modal-header {
+    background-color: #ee8631;
+    color: #fff; /* Set the font color to white for the modal header */
+}
+
+#confirmationModal button[type="submit"] {
+    color: white !important;
+    background-color: #333333 !important;
+    border-color: #ee8631 !important;
+}
+
+#confirmationModal button[type="submit"]:hover {
+    border-color: #aefc4f !important;
+    color: #aefc4f !important;
+}
+
+#confirmationModal .btn-secondary {
+    background-color: #ffb74d;
+    border-color: #ffb74d;
+    color: #333333;
+}
+
+#confirmationModal .btn-secondary:hover {
+    background-color: #ee8631;
+    border-color: #ee8631;
+    color: #fff;
+}
+
+#confirmationModal .modal-content label {
+    /* Optionally, you can apply custom label styles here */
+    color: #fff; /* Set the font color to white for labels */
+}
+
+#confirmationModal .modal-content .form-control {
+    color: #fff !important; /* Set the font color to white for input fields */
+    background-color: #333333;
+    border: 1px solid #8e09e7 !important;
+}
+
+#confirmationModal .modal-content .form-control::placeholder {
+    color: #fff !important; /* Set the font color to white for input placeholders */
 }
 
 .modal-dialog {
@@ -270,6 +333,19 @@ h1 {
 .top-right-section .news-cards-container {
     max-height: 70vh; /* Set a maximum height to allow for scrolling */
     /*overflow-y: auto; !* Add a vertical scrollbar if content overflows *!*/
+}
+
+.profile-picture-request {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.request-container {
+    display: flex;
+    align-items: center;
 }
 
 /*.top-right-section::-webkit-scrollbar {*/
@@ -580,6 +656,30 @@ h1 {
 .left-section.collapsed + .middle-section.full-width + .bottom-right-section.collapsed #collapse-right-btn {
     display: none;
 }
+
+/* Add this section to style the new section */
+.showInputButton {
+    background-color: #ee8631;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#snippet-container {
+    display: none;
+}
+
+.language-html {
+    width: 100% !important;
+}
+
+.snippet-wrapper {
+    width: 100% !important;
+}
+
 
 
 /*.middle-wrapper {*/

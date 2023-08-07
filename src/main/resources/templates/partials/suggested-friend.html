@@ -56,8 +56,13 @@
         <div th:text="${user.firstname + ' ' + user.lastname}" class="card__title"></div>
 <!--        <div class="card__subtitle">Web Development</div>-->
         <div class="card__wrapper">
-            <button class="card__btn">Button</button>
-            <button class="card__btn card__btn-solid">Button</button>
+
+            <button data-bs-toggle="modal" data-bs-target="#confirmationModal"
+                th:attr="data-username=${user.firstname + ' ' + user.lastname}, data-userid=${user.id}, data-image=${user.image}"
+                onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'), this.getAttribute('data-image'))"
+                class="connect-btn">
+                <i class="icon fas fa-user-plus"></i> Connect
+            </button>
         </div>
     </div>
 </div>

@@ -119,12 +119,14 @@
                                        aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>
 
-                            <div class="code-snippet">
-                                <span class="input-group-text">Code =></span>
-                                <textarea class="language-html" th:field="*{snippet}"></textarea>
-                                <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
-                                <button class="submit-comment-btn" type="submit">Submit</button>
+
+                        <div class="snippet-wrapper">
+                            <button type="button" class="showInputButton">Add code</button>
+                            <div class="input-group mb-3" id="snippet-container">
+                                <textarea th:field="*{snippet}" class="form-control language-html" aria-label="With textarea"></textarea>
                             </div>
+                            <button class="submit-comment-btn" type="submit">Submit</button>
+                        </div>
 
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                             <input type="hidden" name="image" id="postImageURLInput"/>
@@ -205,6 +207,26 @@
 <!--TALK JS SCRIPTS-->
 <script src="/js/talk-js-snippet.js"></script>
 <script src="/js/talk-js.js"></script>
+
+
+<script>
+    const showInputButtons = document.querySelectorAll('.showInputButton');
+    console.log(showInputButtons)
+
+    showInputButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation(); // Stop the event from bubbling up the DOM tree
+            console.log("clicked");
+            const inputContainer = button.nextElementSibling;
+            if (inputContainer.style.display === 'none') {
+                inputContainer.style.display = 'block';
+            } else {
+                inputContainer.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 
 
 <footer th:replace="partials/footer :: footer"></footer>

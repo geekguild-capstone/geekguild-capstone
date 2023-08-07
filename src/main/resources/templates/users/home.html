@@ -25,7 +25,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="friendUsername"></p>
+                    <div class="request-container">
+                        <img class="profile-picture-request">
+                        <p class="friend-request-name" id="friendUsername"></p>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <form th:action="@{/friends/add}" method="post" id="friendRequestForm">
@@ -80,10 +84,11 @@
                                        aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>
 
-                            <div class="code-snippet">
-                                <span class="input-group-text">Code =></span>
-                                <textarea class="language-html" th:field="*{snippet}"></textarea>
-                                <!--                        <textarea th:field="*{snippet}" class="form-control" aria-label="With textarea" id="snippetTextArea"></textarea>-->
+                            <div class="snippet-wrapper">
+                                <button type="button" class="showInputButton">Add code</button>
+                                <div class="input-group mb-3" id="snippet-container">
+                                    <textarea th:field="*{snippet}" class="form-control language-html" aria-label="With textarea"></textarea>
+                                </div>
                                 <button class="submit-comment-btn" type="submit">Submit</button>
                             </div>
 

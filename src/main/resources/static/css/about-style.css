@@ -415,6 +415,22 @@
 /* PRICING SECTION */
 /****************************/
 
+.about-us-anchor:link,
+.about-us-anchor:visited {
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #f0f0f0;
+    transition: all 0.3s;
+}
+
+.about-us-anchor:hover,
+.about-us-anchor:active {
+    color: #ee8631;
+    text-decoration: underline;
+}
+
+
+
 .section-pricing {
     padding: 9.6rem 0;
 }
