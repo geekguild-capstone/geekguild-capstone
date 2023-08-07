@@ -229,6 +229,64 @@ h1 {
     /* Optional: Style your post actions */
 }
 
+/* Custom styles for the first modal */
+#confirmationModal .modal-body {
+    background-color: #333333;
+    color: #fff; /* Set the font color to white for the modal body */
+}
+
+#confirmationModal .modal-body p {
+    border: 1px solid #8E09E7 !important;
+}
+
+#confirmationModal .modal-footer {
+    background-color: #333; /* Set the footer background color to #333 */
+    color: #fff; /* Set the font color to white for the modal footer */
+}
+
+#confirmationModal .modal-header {
+    background-color: #ee8631;
+    color: #fff; /* Set the font color to white for the modal header */
+}
+
+#confirmationModal button[type="submit"] {
+    color: white !important;
+    background-color: #333333 !important;
+    border-color: #ee8631 !important;
+}
+
+#confirmationModal button[type="submit"]:hover {
+    border-color: #aefc4f !important;
+    color: #aefc4f !important;
+}
+
+#confirmationModal .btn-secondary {
+    background-color: #ffb74d;
+    border-color: #ffb74d;
+    color: #333333;
+}
+
+#confirmationModal .btn-secondary:hover {
+    background-color: #ee8631;
+    border-color: #ee8631;
+    color: #fff;
+}
+
+#confirmationModal .modal-content label {
+    /* Optionally, you can apply custom label styles here */
+    color: #fff; /* Set the font color to white for labels */
+}
+
+#confirmationModal .modal-content .form-control {
+    color: #fff !important; /* Set the font color to white for input fields */
+    background-color: #333333;
+    border: 1px solid #8e09e7 !important;
+}
+
+#confirmationModal .modal-content .form-control::placeholder {
+    color: #fff !important; /* Set the font color to white for input placeholders */
+}
+
 .modal-dialog {
     width: 100rem !important;
 }
