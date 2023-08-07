@@ -1,10 +1,12 @@
-function openConfirmationModal(username, userId) {
+function openConfirmationModal(username, userId, userImage) {
+    const image = document.querySelector('.profile-picture-request')
     const modal = document.getElementById("confirmationModal");
     const friendUsername = document.getElementById("friendUsername");
     // const friendId = document.getElementById("friendId");
     const receiverIdInput = document.getElementById("receiverIdInput");
     receiverIdInput.value = userId;
     friendUsername.textContent = username;
+    image.setAttribute("src", userImage)
     // friendId.textContent = userId;
     modal.style.display = "flex";
 
