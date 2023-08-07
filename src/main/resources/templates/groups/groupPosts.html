@@ -1,4 +1,3 @@
-
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -311,7 +310,7 @@
                     <button class="show-code-btn">Show Code</button>
                     <!-- Add a container to hold the code snippet -->
                     <pre class="code-container" style="display: none;">
-                        <code class="language-html" th:text="${post.snippet}"></code>
+                        <code class="language-js" th:text="${post.snippet}"></code>
                     </pre>
                 </div>
 
@@ -381,7 +380,7 @@
                                 <button type="button" class="showInputButton">Add code</button>
                                 <div class="input-group mb-3" id="snippet-container">
 <!--                                    <span class="input-group-text"></span>-->
-                                    <textarea th:field="*{snippet}" class="form-control language-html" aria-label="With textarea"></textarea>
+                                    <textarea th:field="*{snippet}" class="form-control language-js" aria-label="With textarea"></textarea>
                                 </div>
                                 <button class="submit-comment-btn" type="submit">Submit</button>
                             </div>
@@ -427,7 +426,7 @@
                             <button class="show-code-btn">Show Code</button>
                             <!-- Add a container to hold the code snippet -->
                             <pre class="code-container" style="display: none;">
-                        <code class="language-html" th:text="${comment.snippet}"></code>
+                        <code class="language-js" th:text="${comment.snippet}"></code>
                     </pre>
                         </div>
                         <div class="comment-interactions">
