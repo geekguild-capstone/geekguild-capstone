@@ -39,7 +39,9 @@
                     <i class="fas fa-camera"></i> Upload Image
                 </button>
                 <div class="logo-container">
-                    <img th:src="${profileFormWrapper.user.image}" width="200" height="200" class="logo"
+                    <img th:if="${profileFormWrapper.user.image != null && profileFormWrapper.user.image != ''}" th:src="${profileFormWrapper.user.image}" width="200" height="200" class="logo"
+                         alt="User Logo"/>
+                    <img th:if="${profileFormWrapper.user.image == null || profileFormWrapper.user.image == ''}" src="https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png" width="200" height="200" class="logo"
                          alt="User Logo"/>
                     <form id="imageForm" method="post" action="/profile/upload/image">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
