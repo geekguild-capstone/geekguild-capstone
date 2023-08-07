@@ -29,7 +29,7 @@ h1 {
     grid-template-columns: 1fr 3fr 1fr; /* Adjust the columns as needed */
     grid-gap: 10px; /* Adjust the gap between sections as needed */
     position: relative; /* Add relative positioning to the grid container */
-    grid-template-rows: 92vh; /* Set the height to be the full height of the viewport */
+    grid-template-rows: 89vh; /* Set the height to be the full height of the viewport */
     margin: 15px; /* top, right, bottom, left */
 
 
@@ -600,7 +600,7 @@ h1 {
 }
 
 .scrollable {
-    height: calc(99% - 80px); /* Subtract the height of the .middle-top-bar */
+    height: calc(99% - 70px); /* Subtract the height of the .middle-top-bar */
     overflow-y: auto;
 }
 

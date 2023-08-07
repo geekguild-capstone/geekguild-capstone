@@ -288,8 +288,7 @@
                             <!--                                <i class="fas fa-envelope"></i>Message-->
                             <!--                            </button>-->
                             <button th:if="${user.id != comment.user.id}" class="share-button"
-                                    th:attr="data-friend-id=${comment.user.id}, data-friend-username=${comment.user.email}, data-friend-image=${comment.user.image},data-current-user-id=${user.id},
-            data-current-user-username=${user.email}, data-current-user-image=${user.image}"
+                                    th:attr="data-friend-id=${comment.user.id}, data-friend-username=${comment.user.email}, data-friend-image=${comment.user.image},data-current-user-id=${user.id},data-current-user-username=${user.email}, data-current-user-image=${user.image}"
 
                                     onclick="openTalkJSChat(this.getAttribute('data-friend-id'), this.getAttribute('data-friend-username'), this.getAttribute('data-friend-image'),  this.getAttribute('data-current-user-id'), this.getAttribute('data-current-user-username'), this.getAttribute('data-current-user-image'), event)">
                                 <i class="fas fa-envelope"></i>Message
