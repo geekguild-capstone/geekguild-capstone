@@ -88,35 +88,37 @@
     <!--        <div class="view-post-container" th:include="groups/groupPosts"></div>-->
     <!--    </div>-->
     <div class="middle-section">
-        <div class="middle-top-bar">
+        <div class="group-middle-top-bar">
             <h2 th:text="${group.groupname}" class="group-heading">
-
             </h2>
         </div>
 
-        <div class="create-post-container">
-            <div class="profile-picture"
-                 th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
-            </div>
-            <div class="post-content">
-                <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}" id="postForm">
-                    <!-- Post image upload section -->
-                    <div>
-                        <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
-                        </button>
-                    </div>
-                    <div class="upload-post-img">
-                        <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
-                    </div>
-
-                    <!-- Post body input section -->
-
-                    <div class="input-group">
-                        <div class="input-group mb-3">
-                            <input th:field="*{body}" type="text" class="form-control create-post-body"
-                                   placeholder="Whats on your mind?"
-                                   aria-label="Username" aria-describedby="basic-addon1" required>
+        <div class="group-scrollable">
+            <div class="group-create-post-container">
+                <div class="profile-picture"
+                     th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
+                </div>
+                <div class="post-content">
+                    <form method="post" th:object="${post}" th:action="@{'/post/' + ${group.id} + '/create'}"
+                          id="postForm">
+                        <!-- Post image upload section -->
+                        <div>
+                            <button type="button" class="upload-post-image cam-icon"><i class="fa-solid fa-camera"></i>
+                            </button>
                         </div>
+                        <div class="upload-post-img">
+                            <img th:src="${post.image}" class="post-image" id="uploadedPostImage"/>
+                        </div>
+
+                        <!-- Post body input section -->
+
+                        <div class="input-group">
+                            <div class="input-group mb-3">
+                                <input th:field="*{body}" type="text" class="form-control create-post-body"
+                                       placeholder="Whats on your mind?"
+                                       aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>
+
 
                         <div class="snippet-wrapper">
                             <button type="button" class="showInputButton">Add code</button>
@@ -126,19 +128,20 @@
                             <button class="submit-comment-btn" type="submit">Submit</button>
                         </div>
 
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <input type="hidden" name="image" id="postImageURLInput"/>
-                    </div>
-                </form>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <input type="hidden" name="image" id="postImageURLInput"/>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="view-post-container">
-            <div class="view-post-card-container" th:include="groups/groupPosts">
+
+        <div class="group-view-post-container">
+            <div class="view-group-post-card-container" th:include="groups/groupPosts">
             </div>
         </div>
     </div>
-
+    </div>
 
     <!--    <div class="right-section">-->
     <div class="right-section">
@@ -157,15 +160,31 @@
                          th:style="'background-image: url(' + ${group.image} + '); background-size: cover;'">
 
                     </div>
-<!--                    <div class="card__title"></div>-->
-                                    <div th:text="${group.description}" class="card__subtitle"></div>
+                    <!--                    <div class="card__title"></div>-->
+                    <div th:text="${group.description}" class="card__subtitle"></div>
                     <div class="card__wrapper">
                     </div>
                 </div>
             </div>
         </div>
         <!--    </div>-->
-        <div class="group-bottom-right-section" th:include="partials/groupUsers"></div>
+
+
+        <div class="group-bottom-right-section">
+            <div class="group-top-bar">
+                <h5 class="group-heading">
+                    Group Members
+                </h5>
+            </div>
+            <div class="group-bottom-right-scrollable">
+                <div th:include="partials/groupUsers">
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 
 </div>
