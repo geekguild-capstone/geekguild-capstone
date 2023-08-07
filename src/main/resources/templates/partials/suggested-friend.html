@@ -46,28 +46,18 @@
 <div class="card-container" th:each="user : ${notFriends}">
     <div class="card">
         <div class="card__img">
-            <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Banner"
-                 class="banner-img">
-            <img th:if="${user.banner == null or user.banner == ''}"
-                 src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg"
-                 alt="Profile Banner" class="banner-img">
+                <img th:if="${user.banner != null and user.banner != ''}" th:src="${user.banner}" alt="Profile Banner" class="banner-img">
+            <img th:if="${user.banner == null or user.banner == ''}" src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg" alt="Profile Banner" class="banner-img">
 
         </div>
-        <div th:if="${user.image != null && user.image != ''}" class="card__avatar"
-             th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
-        </div>
-        <div th:if="${user.image == null || user.image == ''}" class="card__avatar"
-             style="background-image: url('https://www.pinclipart.com/picdir/middle/148-1486972_mystery-man-avatar-circle-clipart.png'); background-size: cover;'">
+        <div class="card__avatar" th:style="'background-image: url(' + ${user.image} + '); background-size: cover;'">
+
         </div>
         <div th:text="${user.firstname + ' ' + user.lastname}" class="card__title"></div>
-        <!--        <div class="card__subtitle">Web Development</div>-->
+<!--        <div class="card__subtitle">Web Development</div>-->
         <div class="card__wrapper">
-            <button data-bs-toggle="modal" data-bs-target="#confirmationModal"
-                th:attr="data-username=${user.firstname + '' + user.lastname}, data-userid=${user.id}"
-                onclick="openConfirmationModal(this.getAttribute('data-username'), this.getAttribute('data-userid'))"
-                class="connect-btn">
-                <i class="icon fas fa-user-plus"></i> Connect
-            </button>
+            <button class="card__btn">Button</button>
+            <button class="card__btn card__btn-solid">Button</button>
         </div>
     </div>
 </div>

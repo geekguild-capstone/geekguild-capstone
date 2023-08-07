@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/home.css">
     <!--ANIMATION ON SCROLL LIBRARY LINK-->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-    <!--    <link rel="stylesheet" href="/css/suggested-friends.css">-->
+
+    <link rel="stylesheet" href="/css/suggested-friends.css">
 
     <head th:include="partials/header :: head">
     </head>
@@ -94,16 +94,16 @@
                 </div>
             </div>
 
-            <div class="view-post-container">
+<!--            <div class="view-post-container">-->
                 <div class="view-post-card-container" th:include="partials/postCard">
                 </div>
-            </div>
+<!--            </div>-->
 
         </div>
     </div>
 
 
-    <div class="right-section">
+    <div class="bottom-right-section">
         <!-- Add a button or arrow for collapsing -->
         <!--        <div class="top-right-section">-->
         <!--            <div class="top-bar">-->
@@ -121,13 +121,14 @@
         <!--                &lt;!&ndash; News cards will be rendered here &ndash;&gt;-->
         <!--            </div>-->
         <!--        </div>-->
-        <div class="bottom-right-section">
-            <div class="suggested-friends-top-bar">
-                <h5 class="group-heading">
-                    Suggested Friends
-                </h5>
-            </div>
+        <!--        <div class="bottom-right-section">-->
+        <div class="suggested-friends-top-bar">
+            <h5 class="group-heading">
+                Suggested Friends
+            </h5>
+        </div>
 
+        <div class="scrollable">
             <div th:include="partials/suggested-friend">
             </div>
         </div>
@@ -179,7 +180,7 @@
     // Get references to the elements and buttons
     const gridContainer = document.querySelector('.grid-container');
     const leftSection = document.querySelector('.left-section');
-    const rightSection = document.querySelector('.right-section');
+    const rightSection = document.querySelector('.bottom-right-section');
     const middleSection = document.querySelector('.middle-section');
     const collapseLeftBtn = document.getElementById('collapseLeftBtn');
     const collapseRightBtn = document.getElementById('collapseRightBtn');

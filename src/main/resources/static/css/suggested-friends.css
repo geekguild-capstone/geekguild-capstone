@@ -1,9 +1,8 @@
 /* Card Container */
 .card-container {
-    height: 30%; /* Set the width to 50% of the parent container minus the margin */
+    height: 36%; /* Set the width to 50% of the parent container minus the margin */
     /*margin: 5px; !* Adjust the margin to create a gap between the cards *!*/
     border: 1px solid #333333;
-    border-radius: 8px;
     /*padding: 10px; !* top, right, bottom, left *!*/
     margin: 10px; /* top, right, bottom, left */
     /*width: 100%;*/
@@ -15,14 +14,12 @@
     position: relative; /* Add this to set a relative position for the container */
     opacity: 1 !important;
     border-radius: 25px;
-
 }
 
 .group-card-container {
     /*height: 30%; !* Set the width to 50% of the parent container minus the margin *!*/
     /*margin: 5px; !* Adjust the margin to create a gap between the cards *!*/
-    border: 1px solid #333333;
-    border-radius: 8px;
+    /*border: 1px solid #333333;*/
     /*padding: 10px; !* top, right, bottom, left *!*/
     margin: 10px; /* top, right, bottom, left */
     /*width: 100%;*/
@@ -34,7 +31,7 @@
     position: relative; /* Add this to set a relative position for the container */
     opacity: 1 !important;
     border-radius: 25px;
-
+    top: 8px;
 }
 
 /* Banner Image */
