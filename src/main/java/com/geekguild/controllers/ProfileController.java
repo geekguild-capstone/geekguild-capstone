@@ -32,16 +32,18 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}")
     public String viewUserProfile(@PathVariable("id") Long userId, Model model) {
-        User loggedInUser = getCurrentLoggedInUser();
-        model.addAttribute("loggedInUser", loggedInUser);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+
+        model.addAttribute("loggedInUser", user);
 
         //Get logged in users groups for the navbar
-        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(loggedInUser);
+        List<Group> loggedInUserGroups = groupDao.findByMembersContaining(user);
         model.addAttribute("listGroups", loggedInUserGroups);
 
 
         // Retrieve the user with the given userId from the database
-        User user = userDao.findById(userId).orElse(null);
+        User profileUser = userDao.findById(userId).orElse(null);
 
         // Check if the user exists
         if (user == null) {
@@ -52,9 +54,11 @@ public class ProfileController {
         // Fetch the user's portfolio and work
         Portfolio portfolio = portfolioDao.findByUserId(userId);
         Work work = workDao.findByUserId(userId);
+        List<Language> userLanguages = profileUser.getLanguages();
+        model.addAttribute("userLanguages", userLanguages);
 
         // Add the user, portfolio, and work to the model so they can be accessed in the view
-        model.addAttribute("user", user);
+        model.addAttribute("user", profileUser);
         model.addAttribute("portfolio", portfolio);
         model.addAttribute("work", work);
 

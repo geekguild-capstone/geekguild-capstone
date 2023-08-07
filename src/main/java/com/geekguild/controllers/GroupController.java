@@ -35,13 +35,15 @@ public class GroupController {
     @GetMapping("/groups")
     public String showGroups(Model model) {
         model.addAttribute("group", new Group()); // Add an empty Group object to the model
-        User loggedInUser = getCurrentLoggedInUser();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getReferenceById(loggedInUser.getId());
+
         model.addAttribute("post", new Post());
 
         //For nav bar
-        model.addAttribute("loggedInUser", loggedInUser);
+        model.addAttribute("loggedInUser", user);
 
-        model.addAttribute("user", loggedInUser);
+        model.addAttribute("user", user);
         model.addAttribute("posts", postDao.findAll());
         model.addAttribute("users", userDao.findAll());
         model.addAttribute("receiveFriends", friendDao.findByReceiverAndStatus(loggedInUser, "accepted"));
