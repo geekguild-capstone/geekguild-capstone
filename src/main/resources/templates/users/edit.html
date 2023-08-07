@@ -25,7 +25,9 @@
                 <button class="upload-banner-icon" type="button">
                     <i class="fas fa-camera"></i> Update Cover Photo
                 </button>
-                <img id="uploadedBanner" th:src="${profileFormWrapper.user.banner}" class="banner-logo"
+                <img th:if="${profileFormWrapper.user.banner != null && profileFormWrapper.user.banner != ''}" id="uploadedBanner" th:src="${profileFormWrapper.user.banner}" class="banner-logo"
+                     alt="Banner Logo"/>
+                <img th:if="${profileFormWrapper.user.banner == null || profileFormWrapper.user.banner == ''}" id="uploadedBanner" src="https://t4.ftcdn.net/jpg/04/74/44/85/360_F_474448512_w2NP8jcwfKKX9rIballVuxSqQK4rNRbE.jpg" class="banner-logo"
                      alt="Banner Logo"/>
                 <form id="bannerForm" method="post" action="/profile/upload/banner">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
